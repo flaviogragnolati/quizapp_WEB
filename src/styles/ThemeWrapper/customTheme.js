@@ -27,11 +27,12 @@ function customTheme(themeName = 'light') {
         primary: {
           light: indigo[500],
           main: '#4278f9',
-          dark: indigo[500],
+          dark: 'black',
+          buttons: '#e1e1e1',
         },
         secondary: {
           light: '#0044ff',
-          main: '#fff',
+          main: '#94b3ff',
           dark: pink[500],
         },
       },
@@ -59,6 +60,7 @@ function customTheme(themeName = 'light') {
         type: themeName,
         primary: {
           main: '#ff4400',
+          butons: 'blue',
         },
         secondary: {
           light: '#0066ff',

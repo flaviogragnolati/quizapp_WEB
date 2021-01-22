@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
+import ProductHeroLayout from './InicioBackground';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -37,7 +37,7 @@ function ProductHero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Tu Universida Virtual
+        Tu Universidad Virtual
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
       Estudia Desde cualquier parte del Mundo.

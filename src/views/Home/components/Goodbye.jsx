@@ -18,6 +18,7 @@ const styles = (theme) => ({
     borderRadius: 0,
     height: 'auto',
     padding: theme.spacing(2, 5),
+
   },
   link: {
     marginTop: theme.spacing(3),
@@ -26,6 +27,9 @@ const styles = (theme) => ({
   buoy: {
     width: 60,
   },
+  typography_PSH: {
+    fontWeight: 'bold',
+  }
 });
 
 function ProductSmokingHero(props) {
@@ -34,14 +38,13 @@ function ProductSmokingHero(props) {
   return (
     <Container className={classes.root} component="section">
       <Button className={classes.button}>
-        <Typography variant="h4" component="span">
-          Got any questions? Need help?
+        <Typography  className={classes.typography_PSH} variant="h4" component="span">
+          Tienes preguntas? Necesitas ayuda?
         </Typography>
       </Button>
       <Typography variant="subtitle1" className={classes.link}>
-        We are here to help. Get in touch!
+        Estamos para ayudarte, ponte en contacto!
       </Typography>
-      <img src="/static/themes/onepirate/producBuoy.svg" className={classes.buoy} alt="buoy" />
     </Container>
   );
 }
