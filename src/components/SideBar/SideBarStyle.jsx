@@ -1,17 +1,13 @@
-import styled from 'styled-components'
-import Drawer from '@material-ui/core/Drawer';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Side = ({ className, children, ...props }) => (
-    <Drawer className={className}>
-      {children}
-    </Drawer>
-  );
-
-
-export const Side = styled.div`
-
-
-
-
-`
-
+export const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+  Drawer__paper: {
+    backgroundColor: 'grey',
+  },
+});

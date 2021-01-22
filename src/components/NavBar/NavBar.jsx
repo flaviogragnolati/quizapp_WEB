@@ -13,16 +13,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
+import { SideBarContext } from '../../App';
 
 function NavBar({ toggleTheme }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  let openSideBar = useContext(SideBarContext);
 
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -41,6 +43,9 @@ function NavBar({ toggleTheme }) {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const toggleSideBar = () => {
+    openSideBar = !openSideBar;
   };
 
   const renderMenu = (
@@ -100,7 +105,7 @@ function NavBar({ toggleTheme }) {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
