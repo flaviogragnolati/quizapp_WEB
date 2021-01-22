@@ -21,7 +21,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: '#c15e5e',
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -78,23 +78,14 @@ function ProductCTA(props) {
           <div className={classes.card}>
             <form onSubmit={handleSubmit} className={classes.cardContent}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Receive Ofertas
+                Mas Informacion
               </Typography>
               <Typography variant="h5">
-                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
+              Nos pondremos en contacto para satisfacer tus dudas.
               </Typography>
-              <TextField
-                noBorder
-                className={classes.textField}
-                placeholder="Your email"
-              />
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                className={classes.button}
-              >
-                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx
+              <TextField noBorder className={classes.textField} placeholder="Correo electronico" />
+              <Button type="submit" color="primary.dark" variant="contained" className={classes.button}>
+              Estoy Interesado 
               </Button>
             </form>
           </div>
@@ -103,7 +94,7 @@ function ProductCTA(props) {
           <Hidden smDown>
             <div className={classes.imageDots} />
             <img
-              src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750&q=80"
+              src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
               alt="call to action"
               className={classes.image}
             />
@@ -113,7 +104,7 @@ function ProductCTA(props) {
       <Snackbar
         open={open}
         onClose={handleClose}
-        message="We will send you our best offers, once a week."
+        message="En breve te enviaremos mas informacion."
       />
     </Container>
   );

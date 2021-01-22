@@ -12,6 +12,7 @@ export default withStyles((theme) => ({
     '&:active, &:focus': {
       boxShadow: 'none',
     },
+    backgroundColor: theme.palette.primary.buttons,
   },
   sizeSmall: {
     padding: theme.spacing(1, 3),

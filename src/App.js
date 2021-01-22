@@ -13,6 +13,8 @@ import Footer from 'components/Footer/';
 import UserProfile from './views/UserProfile';
 import SchoolProfile from './views/SchoolProfile'
 import Catalogue from './views/Catalogue'
+import Register from './views/Register/Register'
+
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -50,6 +52,7 @@ function App() {
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path={['/school-profile', '/profile']} component={SchoolProfile} />          
           <Route path={['/catalogue']} component={Catalogue} />

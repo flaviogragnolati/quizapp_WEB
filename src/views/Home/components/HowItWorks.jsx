@@ -5,11 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import CategoryIcon from '@material-ui/icons/Category';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.secondary.main,
     overflow: 'hidden',
   },
   container: {
@@ -49,6 +52,10 @@ const styles = (theme) => ({
   button: {
     marginTop: theme.spacing(8),
   },
+  Icon__Values: {
+    width: '2em',
+    height: '2em',
+  }
 });
 
 function ProductHowItWorks(props) {
@@ -57,63 +64,36 @@ function ProductHowItWorks(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productCurvyLines.png"
-          className={classes.curvyLines}
-          alt="curvy lines"
-        />
-        <Typography
-          variant="h4"
-          marked="center"
-          className={classes.title}
-          component="h2"
-        >
-          Como funciona/De que se trata
+        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+          Como funciona
         </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
-                  alt="suitcase"
-                  className={classes.image}
-                />
-                <Typography variant="h5" align="center">
-                  xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
+                <BorderColorIcon className={classes.Icon__Values}/>
+                <Typography variant="h4" align="center">
+                Crea tu Quizz 
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
-                  alt="graph"
-                  className={classes.image}
-                />
-                <Typography variant="h5" align="center">
-                  xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx
-                  xxxxxxxxxx .
+                <CategoryIcon className={classes.Icon__Values}/>
+                <Typography variant="h4" align="center">
+                Los estudiantes lo completan
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
-                  alt="clock"
-                  className={classes.image}
-                />
-                <Typography variant="h5" align="center">
-                  {
-                    'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '
-                  }
-                  {
-                    'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '
-                  }
+                <DoneAllIcon className={classes.Icon__Values}/>
+                <Typography variant="h4" align="center">
+                  Corrige los resultados
+
                 </Typography>
               </div>
             </Grid>
@@ -127,7 +107,7 @@ function ProductHowItWorks(props) {
           component="a"
           href="/premium-themes/onepirate/sign-up/"
         >
-          Get started
+          Comenzar
         </Button>
       </Container>
     </section>

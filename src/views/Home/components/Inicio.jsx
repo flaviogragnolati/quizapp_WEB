@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
-import { Link } from 'react-router-dom';
+import ProductHeroLayout from './InicioBackground';
+import Link from '@material-ui/core/Link';
+import { useHistory } from 'react-router-dom';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -32,7 +33,7 @@ const styles = (theme) => ({
 
 function ProductHero(props) {
   const { classes } = props;
-
+  const history = useHistory()
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
@@ -42,7 +43,7 @@ function ProductHero(props) {
         alt="increase priority"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Tu Universida Virtual
+        Tu Universidad Virtual
       </Typography>
       <Typography
         color="inherit"
@@ -52,14 +53,14 @@ function ProductHero(props) {
       >
         Estudia Desde cualquier parte del Mundo.
       </Typography>
-      <Link to="/login">
+      <Link to="/register">
         <Button
           color="secondary"
           variant="contained"
           size="large"
           className={classes.button}
           component="a"
-          href="/premium-themes/onepirate/sign-up/"
+          href="/register"
         >
           Registrarse
         </Button>

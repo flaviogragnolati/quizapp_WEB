@@ -1,9 +1,9 @@
 import React from 'react';
-import ProductSmokingHero from './components/ProductSmokingHero';
-import ProductHero from './components/ProductHero';
-import ProductValues from './components/ProductValues';
-import ProductHowItWorks from './components/ProductHowItWorks';
-import ProductCTA from './components/ProductCTA';
+import ProductSmokingHero from './components/Goodbye';
+import ProductHero from './components/Inicio';
+import ProductValues from './components/About';
+import ProductHowItWorks from './components/HowItWorks';
+import ProductCTA from './components/Contact';
 
 function Home() {
   return (
