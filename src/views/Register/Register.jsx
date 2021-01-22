@@ -32,7 +32,7 @@ function Register(props) {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
+  //const { ...rest } = props;
   return (
     <div>
       <div
