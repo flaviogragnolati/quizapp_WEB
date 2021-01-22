@@ -14,23 +14,32 @@ const StyledContainer = styled.div`
   height: 64px;
   border: 1px solid ${(p) => p.theme.palette.divider};
 `;
-
-export const SideBarContext = createContext(false);
+export const SideBarContext = createContext({
+  openSidebar: false,
+  toggleSideBar: () => {},
+});
 
 function App() {
+  //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
-  const [openSideBar, setOpenSideBar] = useState(false);
-
   // let themeMode = theme === 'light' ? customTheme('light') : customTheme('dark');
-
   let themeMode = useMemo(() => customTheme(theme), [theme]);
+  //* ^^^^^^^^^^^ THEME MANAGEMENT ^^^^^^^^^^^
+
+  //* vvvvvvvvvv SIDEBAR MANAGEMENT vvvvvvvvvv
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const toggleSideBar = () => {
+    setOpenSidebar(!openSidebar);
+  };
+  const sidebarCtx = { openSidebar, toggleSideBar };
+  //* ^^^^^^^^^^^ SIDEBAR MANAGEMENT ^^^^^^^^^^^
 
   return (
     <ThemeWrapper theme={themeMode}>
       <div className="App">
-        <SideBarContext.Provider value={false}>
+        <SideBarContext.Provider value={sidebarCtx}>
           <NavBar toggleTheme={toggleTheme} />
-          <SideBar openSideBar={openSideBar} />
+          <SideBar />
         </SideBarContext.Provider>
         <Home/>
       </div>

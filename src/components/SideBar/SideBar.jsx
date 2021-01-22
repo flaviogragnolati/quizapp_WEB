@@ -17,20 +17,8 @@ import { SideBarContext } from '../../App';
 
 function SideBar() {
   const classes = useStyles();
-  const [state, setState] = useState({
-    left: false,
-  });
-  let openSideBar = useContext(SideBarContext);
 
-  const toggleDrawer = (anchor, isOpen) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: isOpen });
-  };
+  const { openSidebar, toggleSideBar } = useContext(SideBarContext);
 
   const list = (anchor) => (
     <div
@@ -38,8 +26,8 @@ function SideBar() {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={() => toggleSideBar()}
+      onKeyDown={() => toggleSideBar()}
     >
       <List>
         <Typography component="h3">Headline</Typography>
@@ -62,13 +50,12 @@ function SideBar() {
   return (
     <div>
       <React.Fragment key={'left'}>
-        <Button onClick={toggleDrawer('left', true)}>{'left'}</Button>
         <Drawer
           classes={{ paper: classes.Drawer__paper }}
           style={{}}
           anchor={'left'}
-          open={openSideBar}
-          onClose={toggleDrawer('left', false)}
+          open={openSidebar}
+          onClose={() => toggleSideBar()}
         >
           {list('left')}
         </Drawer>

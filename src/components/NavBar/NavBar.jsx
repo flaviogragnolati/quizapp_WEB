@@ -22,7 +22,7 @@ import { SideBarContext } from '../../App';
 function NavBar({ toggleTheme }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  let openSideBar = useContext(SideBarContext);
+  const { openSidebar, toggleSideBar } = useContext(SideBarContext);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -44,9 +44,9 @@ function NavBar({ toggleTheme }) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const toggleSideBar = () => {
-    openSideBar = !openSideBar;
-  };
+  // const handleSideBarToggle = () => {
+  //   openSideBar = !openSideBar;
+  // };
 
   const renderMenu = (
     <Menu
