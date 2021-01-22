@@ -70,10 +70,10 @@ function ProductValues(props) {
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <LanguageIcon className={classes.Icon__Values} />
-              <Typography variant="h4" className={classes.title}>
+              <Typography variant="h4"  className={classes.title}>
                 Proyecto
               </Typography>
-              <Typography variant="h5">
+              <Typography color="primary.contrastText" variant="h5">
                 {
                   'xxxxxxxx xxxxxxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'
                 }

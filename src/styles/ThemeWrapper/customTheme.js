@@ -26,14 +26,16 @@ function customTheme(themeName = 'light') {
         type: themeName,
         primary: {
           light: indigo[500],
-          main: '#4278f9',
+          main: '#6a95ff',
           dark: 'black',
           buttons: '#e1e1e1',
+          contrastText: '#000000',
+
         },
         secondary: {
           light: '#0044ff',
           main: '#94b3ff',
-          dark: pink[500],
+          dark: "#c15e5e",
         },
       },
     });
@@ -59,12 +61,14 @@ function customTheme(themeName = 'light') {
       palette: {
         type: themeName,
         primary: {
-          main: '#ff4400',
-          butons: 'blue',
+          main: '#1e004a',
+          buttons: '#777',
+          contrastText: '#f7f7f7'
         },
         secondary: {
           light: '#0066ff',
-          main: '#0044ff',
+          main: '#090046',
+          dark: 'black',
         },
       },
     });
