@@ -4,12 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import store from 'store/index.js';
+import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store}>
+      <SnackbarProvider>
+        <Router>
+          <App />
+        </Router>
+      </SnackbarProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -60,7 +60,7 @@ const styles = (theme) => ({
 
 function ProductCTA(props) {
   const { classes } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -81,11 +81,20 @@ function ProductCTA(props) {
                 Mas Informacion
               </Typography>
               <Typography variant="h5">
-              Nos pondremos en contacto para satisfacer tus dudas.
+                Nos pondremos en contacto para satisfacer tus dudas.
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Correo electronico" />
-              <Button type="submit" color="primary.dark" variant="contained" className={classes.button}>
-              Estoy Interesado 
+              <TextField
+                noBorder
+                className={classes.textField}
+                placeholder="Correo electronico"
+              />
+              <Button
+                type="submit"
+                color="primary.dark"
+                variant="contained"
+                className={classes.button}
+              >
+                Estoy Interesado
               </Button>
             </form>
           </div>

@@ -1,17 +1,19 @@
 import React from 'react';
 import ProductSmokingHero from './components/Goodbye';
-import ProductHero from './components/Inicio';
-import ProductValues from './components/About';
-import ProductHowItWorks from './components/HowItWorks';
-import ProductCTA from './components/Contact';
+import Inicio from './components/Inicio';
+import About from './components/About';
+import HowItWorks from './components/HowItWorks';
+import Contact from './components/Contact';
+import Pricing from 'views/Home/components/Pricing';
 
 function Home() {
   return (
     <>
-      <ProductHero />
-      <ProductValues />
-      <ProductHowItWorks />
-      <ProductCTA />
+      <Inicio />
+      <About />
+      <HowItWorks />
+      <Pricing />
+      <Contact />
       <ProductSmokingHero />
     </>
   );
