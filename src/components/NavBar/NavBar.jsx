@@ -73,7 +73,7 @@ function NavBar({ toggleTheme }) {
     >
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge badgeContent={11} color="primary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -93,7 +93,7 @@ function NavBar({ toggleTheme }) {
     </Menu>
   );
   const _AppBar = styled(AppBar)`
-    background-color: ${({ theme }) => theme.body};
+    background-color: theme.palette.primary.light;
   `;
   return (
     <div className={classes.grow}>
@@ -129,7 +129,7 @@ function NavBar({ toggleTheme }) {
               <ThemeToggler toggleTheme={toggleTheme} />
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={17} color="primary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

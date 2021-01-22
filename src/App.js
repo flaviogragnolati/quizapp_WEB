@@ -3,6 +3,7 @@ import { createContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
+import Home from './views/Home/Index.jsx';
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
@@ -41,7 +42,7 @@ function App() {
           <NavBar toggleTheme={toggleTheme} />
           <SideBar />
         </SideBarContext.Provider>
-        <Login />
+        <Home />
       </div>
     </ThemeWrapper>
   );
