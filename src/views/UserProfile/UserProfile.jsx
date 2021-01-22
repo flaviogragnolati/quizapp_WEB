@@ -11,7 +11,6 @@ import Favorite from '@material-ui/icons/Favorite';
 import Button from 'components/CustomButtons/Button.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
-import HeaderLinks from 'components/Header/HeaderLinks.js';
 import NavPills from 'components/NavPills/NavPills.js';
 import Parallax from 'components/Parallax/Parallax.js';
 
@@ -43,17 +42,6 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
-      <Header
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: 'white',
-        }}
-        {...rest}
-      />
       <Parallax small filter image={require('assets/img/profile-bg.jpg')} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
@@ -207,7 +195,6 @@ export default function ProfilePage(props) {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
