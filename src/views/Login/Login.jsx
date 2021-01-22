@@ -17,7 +17,7 @@ import CardFooter from 'components/Card/CardFooter.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
-
+import image from 'assets/img/bg7.jpg';
 const useStyles = makeStyles(styles);
 
 function Login(props) {
@@ -135,7 +135,6 @@ function Login(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );

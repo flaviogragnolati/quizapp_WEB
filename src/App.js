@@ -9,6 +9,7 @@ import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
 import LoginPage from './views/Login/Login';
+import { Switch, Route } from 'react-router-dom';
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -42,7 +43,10 @@ function App() {
           <NavBar toggleTheme={toggleTheme} />
           <SideBar />
         </SideBarContext.Provider>
-        <Home />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+        </Switch>
       </div>
     </ThemeWrapper>
   );
