@@ -41,7 +41,7 @@ const styles = (theme) => ({
   Icon__Values: {
     width: '2em',
     height: '2em',
-  }
+  },
 });
 
 function ProductValues(props) {
@@ -58,21 +58,29 @@ function ProductValues(props) {
                 Sobre Nosotros
               </Typography>
               <Typography variant="h5">
-                {'xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxx xxxxxxx xxxxxxxxxxxxx'}
-                {'xxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxxx'}
+                {
+                  'xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxx xxxxxxx xxxxxxxxxxxxx'
+                }
+                {
+                  'xxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxxx'
+                }
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-            <LanguageIcon className={classes.Icon__Values} />
+              <LanguageIcon className={classes.Icon__Values} />
               <Typography variant="h4" className={classes.title}>
-              Proyecto
+                Proyecto
               </Typography>
               <Typography variant="h5">
-                {'xxxxxxxx xxxxxxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'}
-                {'xxxxxxxx xxxxxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'}
-              </Typography> 
+                {
+                  'xxxxxxxx xxxxxxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'
+                }
+                {
+                  'xxxxxxxx xxxxxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'
+                }
+              </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -82,8 +90,12 @@ function ProductValues(props) {
                 Contacto
               </Typography>
               <Typography variant="h5">
-                {'xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxx xxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx'}
-                {'xxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx'}
+                {
+                  'xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxx xxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx'
+                }
+                {
+                  'xxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx'
+                }
               </Typography>
             </div>
           </Grid>

@@ -62,7 +62,12 @@ function ProductHowItWorks(props) {
           className={classes.curvyLines}
           alt="curvy lines"
         />
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+        <Typography
+          variant="h4"
+          marked="center"
+          className={classes.title}
+          component="h2"
+        >
           Como funciona/De que se trata
         </Typography>
         <div>
@@ -76,7 +81,7 @@ function ProductHowItWorks(props) {
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
+                  xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
                 </Typography>
               </div>
             </Grid>
@@ -89,7 +94,8 @@ function ProductHowItWorks(props) {
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
+                  xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx
+                  xxxxxxxxxx .
                 </Typography>
               </div>
             </Grid>
@@ -102,8 +108,12 @@ function ProductHowItWorks(props) {
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                  {'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '}
-                  {'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '}
+                  {
+                    'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '
+                  }
+                  {
+                    'xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx '
+                  }
                 </Typography>
               </div>
             </Grid>

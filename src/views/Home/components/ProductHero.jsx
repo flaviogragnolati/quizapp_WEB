@@ -35,12 +35,21 @@ function ProductHero(props) {
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+      <img
+        style={{ display: 'none' }}
+        src={backgroundImage}
+        alt="increase priority"
+      />
       <Typography color="inherit" align="center" variant="h2" marked="center">
         Tu Universida Virtual
       </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-      Estudia Desde cualquier parte del Mundo.
+      <Typography
+        color="inherit"
+        align="center"
+        variant="h5"
+        className={classes.h5}
+      >
+        Estudia Desde cualquier parte del Mundo.
       </Typography>
       <Button
         color="secondary"

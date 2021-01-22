@@ -81,11 +81,20 @@ function ProductCTA(props) {
                 Receive Ofertas
               </Typography>
               <Typography variant="h5">
-              xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
+                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Your email" />
-              <Button type="submit" color="primary" variant="contained" className={classes.button}>
-              xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx 
+              <TextField
+                noBorder
+                className={classes.textField}
+                placeholder="Your email"
+              />
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                className={classes.button}
+              >
+                xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx
               </Button>
             </form>
           </div>
