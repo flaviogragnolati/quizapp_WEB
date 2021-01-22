@@ -5,7 +5,9 @@ import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
-import { useThemeMode } from './styles/useThemeMode';
+import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
+import Login from './views/Login/Login';
+import LoginPage from './views/Login/Login';
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -39,17 +41,7 @@ function App() {
           <NavBar toggleTheme={toggleTheme} />
           <SideBar />
         </SideBarContext.Provider>
-        <StyledContainer>
-          <h1>Test</h1>
-          <h2>Test</h2>
-          <p>Even more Test</p>
-          <Button variant="contained" color="secondary">
-            GOLA
-          </Button>
-          <Button variant="contained" color="primary">
-            adsasd
-          </Button>
-        </StyledContainer>
+        <Login />
       </div>
     </ThemeWrapper>
   );
