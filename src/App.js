@@ -18,6 +18,7 @@ const StyledContainer = styled.div`
   height: 64px;
   border: 1px solid ${(p) => p.theme.palette.divider};
 `;
+
 export const SideBarContext = createContext({
   openSidebar: false,
   toggleSideBar: () => {},
