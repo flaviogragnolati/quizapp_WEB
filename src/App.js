@@ -9,7 +9,8 @@ import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
 import LoginPage from './views/Login/Login';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import NotFound from './views/NotFound';
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -46,6 +47,8 @@ function App() {
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/404" component={NotFound} />
+          <Redirect to="/404" />
         </Switch>
       </div>
     </ThemeWrapper>
