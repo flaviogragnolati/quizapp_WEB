@@ -8,12 +8,11 @@ import InfoIcon from '@material-ui/icons/Info';
 import ContactsIcon from '@material-ui/icons/Contacts';
 import LanguageIcon from '@material-ui/icons/Language';
 
-
 const styles = (theme) => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
-    backgroundColor: '#fff5f8',
+    backgroundColor: theme.palette.primary.main,
   },
   container: {
     marginTop: theme.spacing(15),
@@ -34,6 +33,15 @@ const styles = (theme) => ({
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
   },
+  curvyLines: {
+    pointerEvents: 'none',
+    position: 'absolute',
+    top: -180,
+  },
+  Icon__Values: {
+    width: '2em',
+    height: '2em',
+  }
 });
 
 function ProductValues(props) {
@@ -45,37 +53,37 @@ function ProductValues(props) {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-              <InfoIcon/>
-              <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+              <InfoIcon className={classes.Icon__Values} />
+              <Typography variant="h4" className={classes.title}>
+                Sobre Nosotros
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxx xxxxxxx xxxxxxxxxxxxx'}
+                {'xxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxxx'}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-            <ContactsIcon/>
-              <Typography variant="h6" className={classes.title}>
-                New experiences
+            <LanguageIcon className={classes.Icon__Values} />
+              <Typography variant="h4" className={classes.title}>
+              Proyecto
               </Typography>
               <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
-              </Typography>
+                {'xxxxxxxx xxxxxxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'}
+                {'xxxxxxxx xxxxxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'}
+              </Typography> 
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-              <LanguageIcon/>
-              <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+              <ContactsIcon className={classes.Icon__Values} />
+              <Typography variant="h4" className={classes.title}>
+                Contacto
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxx xxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx'}
+                {'xxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx'}
               </Typography>
             </div>
           </Grid>

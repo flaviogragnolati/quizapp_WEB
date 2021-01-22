@@ -1,5 +1,4 @@
 import React from 'react';
-import ProductCategories from './components/ProductCategories';
 import ProductSmokingHero from './components/ProductSmokingHero';
 import ProductHero from './components/ProductHero';
 import ProductValues from './components/ProductValues';
@@ -13,7 +12,6 @@ function Home() {
     <React.Fragment>
       <ProductHero />
       <ProductValues />
-      <ProductCategories />
       <ProductHowItWorks />
       <ProductCTA />
       <ProductSmokingHero />

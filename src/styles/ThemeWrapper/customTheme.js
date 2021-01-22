@@ -1,20 +1,6 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core';
 import { indigo, pink } from '@material-ui/core/colors';
 
-export const lightTheme = {
-  body: '#E2E2E2',
-  text: '#363537',
-  toggleBorder: '#FFF',
-  gradient: 'linear-gradient(#39598A, #79D7ED)',
-};
-
-export const darkTheme = {
-  body: '#363537',
-  text: '#FAFAFA',
-  toggleBorder: '#6B8096',
-  gradient: 'linear-gradient(#091236, #1E215D)',
-};
-
 function customTheme(themeName = 'light') {
   let theme;
   if (themeName === 'light') {
@@ -39,8 +25,8 @@ function customTheme(themeName = 'light') {
       palette: {
         type: themeName,
         primary: {
-          light: indigo[800],
-          main: indigo[500],
+          light: indigo[500],
+          main: '#4278f9',
           dark: indigo[500],
         },
         secondary: {

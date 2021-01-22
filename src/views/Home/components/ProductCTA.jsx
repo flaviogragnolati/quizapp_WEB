@@ -78,14 +78,14 @@ function ProductCTA(props) {
           <div className={classes.card}>
             <form onSubmit={handleSubmit} className={classes.cardContent}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Receive offers
+                Receive Ofertas
               </Typography>
               <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+              xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx .
               </Typography>
               <TextField noBorder className={classes.textField} placeholder="Your email" />
               <Button type="submit" color="primary" variant="contained" className={classes.button}>
-                Keep me updated
+              xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx 
               </Button>
             </form>
           </div>
