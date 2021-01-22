@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import { createContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
@@ -8,9 +7,9 @@ import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
-import LoginPage from './views/Login/Login';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from './views/NotFound';
+import Footer from 'components/Footer/';
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -47,9 +46,12 @@ function App() {
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
+          <Route path={['/user-profile', '/']} component={Login} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>
+        <hr></hr>
+        <Footer />
       </div>
     </ThemeWrapper>
   );
