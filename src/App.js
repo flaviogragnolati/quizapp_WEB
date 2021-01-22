@@ -3,9 +3,11 @@ import { createContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
+import Home from './views/Home/Index.jsx'
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/useThemeMode';
+
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -30,17 +32,7 @@ function App() {
           <NavBar toggleTheme={toggleTheme} />
           <SideBar openSideBar={openSideBar} />
         </SideBarContext.Provider>
-        <StyledContainer>
-          <h1>Test</h1>
-          <h2>Test</h2>
-          <p>Even more Test</p>
-          <Button variant="contained" color="secondary">
-            GOLA
-          </Button>
-          <Button variant="contained" color="primary">
-            adsasd
-          </Button>
-        </StyledContainer>
+        <Home/>
       </div>
     </ThemeWrapper>
   );
