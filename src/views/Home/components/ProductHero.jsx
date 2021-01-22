@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import { Link } from 'react-router-dom';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -51,16 +52,18 @@ function ProductHero(props) {
       >
         Estudia Desde cualquier parte del Mundo.
       </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Registrarse
-      </Button>
+      <Link to="/login">
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component="a"
+          href="/premium-themes/onepirate/sign-up/"
+        >
+          Registrarse
+        </Button>
+      </Link>
       <Typography variant="body2" color="inherit" className={classes.more}>
         Descubre la Experiencia
       </Typography>

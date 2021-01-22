@@ -17,8 +17,10 @@ import CardFooter from 'components/Card/CardFooter.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
-import image from 'assets/img/bg7.jpg';
+// import image from 'assets/img/bg7.jpg';
 const useStyles = makeStyles(styles);
+const image =
+  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 function Login(props) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
@@ -126,8 +128,11 @@ function Login(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button color="primary" size="lg">
+                      User Login
+                    </Button>{' '}
+                    <Button color="rose" size="lg">
+                      School Login
                     </Button>
                   </CardFooter>
                 </form>
