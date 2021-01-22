@@ -28,11 +28,14 @@ function customTheme(themeName = 'light') {
           light: indigo[500],
           main: '#4278f9',
           dark: indigo[500],
+          contrastText: '#000000'
         },
         secondary: {
           light: '#0044ff',
           main: '#fff',
           dark: pink[500],
+          getContext:'#000000',
+
         },
       },
     });
@@ -59,10 +62,14 @@ function customTheme(themeName = 'light') {
         type: themeName,
         primary: {
           main: '#ff4400',
+          contrastText: '#f7f7f7'
+
         },
         secondary: {
           light: '#0066ff',
           main: '#0044ff',
+          contrastText: '#f7f7f7'
+
         },
       },
     });
