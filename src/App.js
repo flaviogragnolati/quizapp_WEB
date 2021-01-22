@@ -1,19 +1,24 @@
-import { Button } from '@material-ui/core';
 import { createContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
-import Home from './views/Home/Index.jsx'
+import Home from './views/Home/Index.jsx';
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
-import { useThemeMode } from './styles/useThemeMode';
+import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
+import Login from './views/Login/Login';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import NotFound from './views/NotFound';
+import Footer from 'components/Footer/';
+import UserProfile from './views/UserProfile';
 
-
+//*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
   height: 64px;
   border: 1px solid ${(p) => p.theme.palette.divider};
 `;
+
 export const SideBarContext = createContext({
   openSidebar: false,
   toggleSideBar: () => {},
@@ -41,7 +46,15 @@ function App() {
           <NavBar toggleTheme={toggleTheme} />
           <SideBar />
         </SideBarContext.Provider>
-        <Home/>
+        <Switch>
+          <Route exact path={['/', '/home']} component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path={['/user-profile', '/profile']} component={UserProfile} />
+          <Route path="/404" component={NotFound} />
+          <Redirect to="/404" />
+        </Switch>
+        <hr></hr>
+        <Footer />
       </div>
     </ThemeWrapper>
   );

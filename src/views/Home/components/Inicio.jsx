@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
 import ProductHeroLayout from './InicioBackground';
+import Link from '@material-ui/core/Link';
+import { useHistory } from 'react-router-dom';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -31,27 +33,38 @@ const styles = (theme) => ({
 
 function ProductHero(props) {
   const { classes } = props;
-
+  const history = useHistory()
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+      <img
+        style={{ display: 'none' }}
+        src={backgroundImage}
+        alt="increase priority"
+      />
       <Typography color="inherit" align="center" variant="h2" marked="center">
         Tu Universidad Virtual
       </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-      Estudia Desde cualquier parte del Mundo.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
+      <Typography
+        color="inherit"
+        align="center"
+        variant="h5"
+        className={classes.h5}
       >
-        Registrarse
-      </Button>
+        Estudia Desde cualquier parte del Mundo.
+      </Typography>
+      <Link to="/register">
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component="a"
+          href="/register"
+        >
+          Registrarse
+        </Button>
+      </Link>
       <Typography variant="body2" color="inherit" className={classes.more}>
         Descubre la Experiencia
       </Typography>
