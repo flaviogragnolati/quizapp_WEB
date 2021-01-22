@@ -16,6 +16,7 @@ import { useStyles } from './SideBarStyle';
 import { SideBarContext } from '../../App';
 import { Link } from 'react-router-dom';
 
+
 function SideBar() {
   const classes = useStyles();
 

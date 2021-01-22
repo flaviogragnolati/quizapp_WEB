@@ -11,6 +11,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from './views/NotFound';
 import Footer from 'components/Footer/';
 import UserProfile from './views/UserProfile';
+import Register from './views/Register/Register'
 
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
@@ -49,6 +50,7 @@ function App() {
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
