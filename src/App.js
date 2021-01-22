@@ -15,6 +15,9 @@ import SchoolProfile from './views/SchoolProfile'
 import Catalogue from './views/Catalogue'
 import Register from './views/Register/Register'
 import SchoolSubject from './views/SchoolSubject'
+
+import SchoolTeacher from './views/SchoolTeacher'
+import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -56,7 +59,8 @@ function App() {
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path={['/school-profile', '/profile']} component={SchoolProfile} />  
           <Route path={['/school-subject']} component={SchoolSubject} />          
-        
+          <Route path={['/school-teacher']} component={SchoolTeacher} />
+          <Route path={['/school-Quizz']} component={SchoolQuizz} />                            
           <Route path={['/catalogue']} component={Catalogue} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />

@@ -16,6 +16,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import Button from 'components/Home_MUI/Button';
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({ className, customers, columnName, ...rest }) => {
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [columna, setColumna] = useState(false)
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -92,21 +94,14 @@ const Results = ({ className, customers, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Registration date
-                </TableCell>
+                {columnName.map(name =>{
+                  return (
+                    <TableCell>
+                    { name}
+                   </TableCell>
+                  ) 
+                })}
+            
               </TableRow>
             </TableHead>
             <TableBody>
@@ -147,15 +142,31 @@ const Results = ({ className, customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
-                  </TableCell>
+                  {customer.address ? `${customer.address.city}, ${customer.address.state}, ${customer.address.country}` :
+                <Button>
+                Trash
+                </Button>  
+                  }                                         
+                 </TableCell>
                   <TableCell>
-                    {customer.phone}
+                      {customer.phone ? customer.phone : 
+                      <Button>
+                          Edit
+                      </Button>
+                      }
+                
                   </TableCell>
+                  {columnName.length === 4 ?
+                null
+                  : 
                   <TableCell>
-                    {/* {moment(customer.createdAt).format('DD/MM/YYYY')} */}
-                    123
+                     <Button>
+                        Añadir
+                      </Button>
+                      
+                
                   </TableCell>
+                   }
                 </TableRow>
               ))}
             </TableBody>

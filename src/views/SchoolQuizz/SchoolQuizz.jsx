@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Box,
@@ -6,6 +7,7 @@ import {
 } from '@material-ui/core';
 import List from '../../components/List';
 import array from './data';
+import Button from 'components/Home_MUI/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,18 +18,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SchoolSubject = () => {
+const SchoolQuizz = () => {
   const classes = useStyles();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Email', 'Trash','Update', 'Teacher']
+let columnName = ['Name', 'Subject', 'Trash', ' Edit']
   return (
+
       <Container maxWidth={false}>
         <Box mt={3}>
+            <h3>Listado de Quizzes</h3>
           <List customers={customers} columnName={columnName} />
         </Box>
-      </Container>
 
+        <Button>
+          +  Agregar
+        </Button>
+      </Container>
   );
 };
 
-export default SchoolSubject;
+export default SchoolQuizz;
