@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Button } from '@material-ui/core';
 import { useMemo } from 'react';
 import styled from 'styled-components';
@@ -5,6 +6,11 @@ import NavBar from './components/NavBar/NavBar';
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import customTheme from './styles/ThemeWrapper/customTheme';
 import { useThemeMode } from './styles/useThemeMode';
+=======
+import './App.css';
+import  SideBar  from "./components/SideBar/index.jsx";
+import { useState } from 'react';
+>>>>>>> 78258f486e9d394c31a9372291f973a7047eee55
 
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -21,6 +27,7 @@ function App() {
     <ThemeWrapper theme={themeMode}>
       <div className="App">
         <NavBar toggleTheme={toggleTheme} />
+        <SideBar open={toggleSideBar} />
         <StyledContainer>
           <h1>Test</h1>
           <h2>Test</h2>
