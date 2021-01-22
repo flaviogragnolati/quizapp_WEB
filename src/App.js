@@ -14,7 +14,7 @@ import UserProfile from './views/UserProfile';
 import SchoolProfile from './views/SchoolProfile'
 import Catalogue from './views/Catalogue'
 import Register from './views/Register/Register'
-
+import SchoolSubject from './views/SchoolSubject'
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -54,7 +54,9 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
-          <Route path={['/school-profile', '/profile']} component={SchoolProfile} />          
+          <Route path={['/school-profile', '/profile']} component={SchoolProfile} />  
+          <Route path={['/school-subject']} component={SchoolSubject} />          
+        
           <Route path={['/catalogue']} component={Catalogue} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />

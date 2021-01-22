@@ -1,5 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core';
-import { indigo, pink } from '@material-ui/core/colors';
+import { indigo } from '@material-ui/core/colors';
 
 function customTheme(themeName = 'light') {
   let theme;
