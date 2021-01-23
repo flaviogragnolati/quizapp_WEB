@@ -62,7 +62,7 @@ function customTheme(themeName = 'light') {
         type: themeName,
         primary: {
           main: '#1e004a',
-          buttons: '#777',
+          buttons: '#424242',
           contrastText: '#f7f7f7'
         },
         secondary: {

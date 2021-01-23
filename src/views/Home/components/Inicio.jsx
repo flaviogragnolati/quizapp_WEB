@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../components/Home_MUI/Button';
 import Typography from '../../../components/Home_MUI/Typography';
-import ProductHeroLayout from './InicioBackground';
+import InicioBackground from './InicioBackground';
 import Link from '@material-ui/core/Link';
 import { useHistory } from 'react-router-dom';
 
@@ -31,11 +31,11 @@ const styles = (theme) => ({
   },
 });
 
-function ProductHero(props) {
+function Inicio(props) {
   const { classes } = props;
   const history = useHistory()
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
+    <InicioBackground backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
       <img
         style={{ display: 'none' }}
@@ -68,12 +68,12 @@ function ProductHero(props) {
       <Typography variant="body2" color="inherit" className={classes.more}>
         Descubre la Experiencia
       </Typography>
-    </ProductHeroLayout>
+    </InicioBackground>
   );
 }
 
-ProductHero.propTypes = {
+Inicio.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHero);
+export default withStyles(styles)(Inicio);

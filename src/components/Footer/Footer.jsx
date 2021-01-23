@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
+
 export default function Footer(props) {
   const classes = useStyles();
   const { whiteFont } = props;
@@ -26,6 +27,8 @@ export default function Footer(props) {
     [classes.a]: true,
     [classes.footerWhiteFont]: whiteFont,
   });
+
+
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
