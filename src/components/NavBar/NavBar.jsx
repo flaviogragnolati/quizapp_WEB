@@ -18,8 +18,9 @@ import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
+import { PropTypes } from 'prop-types';
 
-function NavBar({ toggleTheme }) {
+function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
@@ -126,7 +127,7 @@ function NavBar({ toggleTheme }) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton>
-              <ThemeToggler toggleTheme={toggleTheme} />
+              <ThemeToggler toggleTheme={toggleTheme} checked={checked} />
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="primary">
@@ -160,4 +161,10 @@ function NavBar({ toggleTheme }) {
     </div>
   );
 }
+
 export default NavBar;
+
+NavBar.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+};
