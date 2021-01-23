@@ -49,7 +49,7 @@ const styles = (theme) => ({
   },
 });
 
-function ProductHeroLayout(props) {
+function InicioBackground(props) {
   const { backgroundClassName, children, classes } = props;
 
   return (
@@ -63,10 +63,10 @@ function ProductHeroLayout(props) {
   );
 }
 
-ProductHeroLayout.propTypes = {
+InicioBackground.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHeroLayout);
+export default withStyles(styles)(InicioBackground);

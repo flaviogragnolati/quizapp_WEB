@@ -18,9 +18,11 @@ import CardBody from 'components/Card/CardBody.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
-
+import { useDispatch } from 'react-redux';
+import { createUser } from './registerSlice'
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
+
 // import image from 'assets/img/bg7.jpg';
 const useStyles = makeStyles(styles);
 const image =
@@ -33,6 +35,22 @@ function Register(props) {
   }, 700);
   const classes = useStyles();
   //const { ...rest } = props;
+  const dispatch = useDispatch()
+
+  const user ={
+    name: 'jorgito', 
+    email: 'jorgito@gmail.com' , 
+    description: 'sssssss',
+    city: 'sssssss', 
+    country: 'sssssss', 
+    logo: 'sssssss' ,
+  } 
+
+
+  const handleSubmit = () => {
+    dispatch(createUser(user))
+  }
+  
   return (
     <div>
       <div
@@ -137,7 +155,6 @@ function Register(props) {
                         ),
                       }}
                     />        
-               
                     <CustomInput
                       id="birth"
                       formControlProps={{
@@ -154,12 +171,9 @@ function Register(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="primary" size="lg">
-                      User Register
+                    <Button onClick={() => handleSubmit()} color="primary" size="lg">
+                       Register
                     </Button>{' '}
-                    <Button color="rose" size="lg">
-                      School
-                    </Button>
                   </CardFooter>
                 </form>
               </Card>

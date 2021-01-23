@@ -57,7 +57,7 @@ const styles = (theme) => ({
   },
 });
 
-function ProductCTA(props) {
+function Contact(props) {
   const { classes } = props;
   const [open, setOpen] = useState(false);
 
@@ -131,8 +131,8 @@ function ProductCTA(props) {
   );
 }
 
-ProductCTA.propTypes = {
+Contact.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductCTA);
+export default withStyles(styles)(Contact);
