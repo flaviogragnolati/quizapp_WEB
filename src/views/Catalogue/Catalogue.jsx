@@ -1,18 +1,8 @@
-// import React from 'react';
-import QuizzCard from '../../components/QuizzCard';
-// import data from './data'
-// function SchoolProfile() {
-//   return <div>
-//     <QuizzCard/>
-//   </div>;
-// }
-
-// export default SchoolProfile;
 import React, { useState } from 'react';
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-// import Page from 'src/components/Page';
-// import Toolbar from './Toolbar';
+import QuizzCard from 'components/QuizzCard';
+
 import data from './data';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,8 +22,7 @@ const Catalogue = () => {
   const [products] = useState(data);
 
   return (
-    <Container maxWidth={false}>
-      {/* <Toolbar /> */}
+    <Container>
       <Box mt={3}>
         <Grid container spacing={3}>
           {products.map((product) => (

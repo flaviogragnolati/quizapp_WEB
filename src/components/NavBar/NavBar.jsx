@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import {
   AppBar,
   Badge,

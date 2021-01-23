@@ -20,6 +20,7 @@ import SchoolSubject from './views/SchoolSubject';
 
 import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
+import Notifier from 'views/Notifier';
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -50,6 +51,7 @@ function App() {
   return (
     <ThemeWrapper theme={themeMode}>
       <div className="App">
+        <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
           <NavBar toggleTheme={toggleTheme} checked={theme} />
           <SideBar />
