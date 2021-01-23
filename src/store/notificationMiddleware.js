@@ -1,9 +1,12 @@
 import { Button } from '@material-ui/core';
-import store from 'store';
 import { closeSnackbar } from 'views/Notifier/notificationSlice';
-
+import { ACTIONS } from './rootReducer';
 //?Array para guardar todas las acciones que requiren de notificacion
-const listenArray = [];
+
+const listenArray = [
+  ACTIONS.favorites.addToFavorites.type,
+  ACTIONS.favorites.removeFromFavorites.type,
+];
 
 const notificationMiddleware = (store) => (next) => (action) => {
   const dispatch = store.dispatch;
@@ -23,10 +26,20 @@ const notificationMiddleware = (store) => (next) => (action) => {
       ),
     },
   };
-
   if (listenArray.includes(action.type)) {
+    console.log('action.type', action.type);
     //Si la accion es alguna de las que estamos esuchando:
+    if (action.type.includes('favorites/add')) {
+      snackbar.message = `Se agrego el curso a favoritos`;
+      snackbar.options.variant = 'success';
+    } else if (action.type.includes('favorites/remove')) {
+      snackbar.message = `Se elimino el curso de favoritos`;
+      snackbar.options.variant = 'warning';
+    }
+    store.dispatch(ACTIONS.notifications.enqueueSnackbar(snackbar));
   }
 
   return next(action);
 };
+
+export default notificationMiddleware;
