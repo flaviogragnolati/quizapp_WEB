@@ -30,7 +30,6 @@ const styles = (theme) => ({
   textField: {
     width: '100%',
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
   },
   button: {
     width: '100%',
@@ -88,6 +87,19 @@ function ProductCTA(props) {
                 className={classes.textField}
                 placeholder="Correo electronico"
               />
+              <TextField
+                noBorder
+                className={classes.textField}
+                placeholder="Nombre de la Institucion"
+              />
+              <TextField
+                noBorder
+                className={classes.textField}
+                placeholder="Pais"
+              />
+              <br/>
+              <br/>
+              <br/>
               <Button
                 type="submit"
                 color="primary.dark"

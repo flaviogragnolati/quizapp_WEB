@@ -1,9 +1,10 @@
 import { Switch } from '@material-ui/core';
 import { func } from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 function ThemeToggler({ toggleTheme }) {
-  return <Switch varian="primary" onClick={toggleTheme} name="themeToggler" />;
+  const {openSidebar} = useContext(SideBarContext)
+  return <Switch checked={openSidebar} varian="primary" onClick={toggleTheme} name="themeToggler" />;
 }
 
 ThemeToggler.propTypes = {

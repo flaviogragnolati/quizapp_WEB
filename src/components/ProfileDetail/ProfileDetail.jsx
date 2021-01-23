@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const ProfileDetails = ({ className, ...rest }) => {
+const ProfileDetails = ({ className,profile, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     firstName: 'Katarina',
@@ -40,7 +40,8 @@ const ProfileDetails = ({ className, ...rest }) => {
     email: 'demo@devias.io',
     phone: '',
     state: 'Alabama',
-    country: 'USA'
+    country: 'USA',
+    address: '742 Evergreen Terrace',
   });
 
   const handleChange = (event) => {
@@ -49,7 +50,7 @@ const ProfileDetails = ({ className, ...rest }) => {
       [event.target.name]: event.target.value
     });
   };
-
+  console.log(profile)
   return (
     <form
       autoComplete="off"
@@ -58,11 +59,13 @@ const ProfileDetails = ({ className, ...rest }) => {
       {...rest}
     >
       <Card>
-        <CardHeader
+        {/* <CardHeader
           subheader="The information can be edited"
           title="Profile"
         />
         <Divider />
+ */}
+        {profile === 'teacher' ?        
         <CardContent>
           <Grid
             container
@@ -75,9 +78,8 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
                 label="First name"
-                name="firstName"
+                name="name"
                 onChange={handleChange}
                 required
                 value={values.firstName}
@@ -89,7 +91,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              <TextField
+            <TextField
                 fullWidth
                 label="Last name"
                 name="lastName"
@@ -127,7 +129,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 type="number"
                 value={values.phone}
                 variant="outlined"
-              />
+              /> 
             </Grid>
             <Grid
               item
@@ -170,8 +172,174 @@ const ProfileDetails = ({ className, ...rest }) => {
                 ))}
               </TextField>
             </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                name="Date"
+                onChange={handleChange}
+                type="date"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Address"
+                name="address"
+                onChange={handleChange}
+                required
+                value={values.address}
+                variant="outlined"
+              />
+            </Grid>
           </Grid>
-        </CardContent>
+        </CardContent> 
+
+        :         // SEPARACION TEACHER -- SCHOOL 
+
+         <CardContent>
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label= 'Name'
+                name="name"
+                onChange={handleChange}
+                required
+                value={values.firstName}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            ><TextField
+              fullWidth
+              label="Email Address"
+              name="email"
+              onChange={handleChange}
+              required
+              value={values.email}
+              variant="outlined"
+            /> 
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >    
+            <TextField
+            fullWidth
+            label="Phone Number"
+            name="phone"
+            onChange={handleChange}
+            type="number"
+            value={values.phone}
+            variant="outlined"
+          />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+              fullWidth
+              label="Secondary Number"
+              name="phone"
+              onChange={handleChange}
+              type="number"
+              value={values.phone}
+              variant="outlined"
+            />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Country"
+                name="country"
+                onChange={handleChange}
+                required
+                value={values.country}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Select State"
+                name="state"
+                onChange={handleChange}
+                required
+                select
+                SelectProps={{ native: true }}
+                value={values.state}
+                variant="outlined"
+              >
+                {states.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                name="Date"
+                onChange={handleChange}
+                type="date"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Address"
+                name="address"
+                onChange={handleChange}
+                required
+                value={values.address}
+                variant="outlined"
+              />
+            </Grid>
+          </Grid>
+        </CardContent>}
         <Divider />
         <Box
           display="flex"
@@ -187,6 +355,7 @@ const ProfileDetails = ({ className, ...rest }) => {
         </Box>
       </Card>
     </form>
+    
   );
 };
 
