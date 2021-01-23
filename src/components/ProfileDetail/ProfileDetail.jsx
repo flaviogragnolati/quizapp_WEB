@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import Teacher from 'components/ProfileDetail/Profiles/Teacher';
+import School from 'components/ProfileDetail/Profiles/School';
+import Quizz from 'components/ProfileDetail/Profiles/Quizz';
 import {
   Box,
   Button,
@@ -13,44 +16,15 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
+
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const ProfileDetails = ({ className,profile, ...rest }) => {
+const ProfileDetails = ({ className, profile, ...rest }) => {
   const classes = useStyles();
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA',
-    address: '742 Evergreen Terrace',
-  });
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
-  console.log(profile)
   return (
     <form
       autoComplete="off"
@@ -59,287 +33,7 @@ const ProfileDetails = ({ className,profile, ...rest }) => {
       {...rest}
     >
       <Card>
-        {/* <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
-        />
-        <Divider />
- */}
-        {profile === 'teacher' ?        
-        <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="First name"
-                name="name"
-                onChange={handleChange}
-                required
-                value={values.firstName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-            <TextField
-                fullWidth
-                label="Last name"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Email Address"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Phone Number"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              /> 
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                name="Date"
-                onChange={handleChange}
-                type="date"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Address"
-                name="address"
-                onChange={handleChange}
-                required
-                value={values.address}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
-        </CardContent> 
-
-        :         // SEPARACION TEACHER -- SCHOOL 
-
-         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label= 'Name'
-                name="name"
-                onChange={handleChange}
-                required
-                value={values.firstName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            ><TextField
-              fullWidth
-              label="Email Address"
-              name="email"
-              onChange={handleChange}
-              required
-              value={values.email}
-              variant="outlined"
-            /> 
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >    
-            <TextField
-            fullWidth
-            label="Phone Number"
-            name="phone"
-            onChange={handleChange}
-            type="number"
-            value={values.phone}
-            variant="outlined"
-          />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-              fullWidth
-              label="Secondary Number"
-              name="phone"
-              onChange={handleChange}
-              type="number"
-              value={values.phone}
-              variant="outlined"
-            />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                name="Date"
-                onChange={handleChange}
-                type="date"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Address"
-                name="address"
-                onChange={handleChange}
-                required
-                value={values.address}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
-        </CardContent>}
+        {profile === 'teacher' ? <Teacher /> : profile === 'school' ? <School /> : profile === 'quizz' ? <Quizz /> : null}
         <Divider />
         <Box
           display="flex"
@@ -355,7 +49,7 @@ const ProfileDetails = ({ className,profile, ...rest }) => {
         </Box>
       </Card>
     </form>
-    
+
   );
 };
 

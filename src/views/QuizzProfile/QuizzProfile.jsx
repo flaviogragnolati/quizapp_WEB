@@ -42,7 +42,7 @@ const QuizzProfile = () => {
             md={6}
             xs={12}
           >
-            <ProfileDetails profile='teacher' />
+            <ProfileDetails profile='quizz' />
           </Grid>
         </Grid>
 

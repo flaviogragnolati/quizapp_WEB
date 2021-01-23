@@ -17,6 +17,7 @@ import QuizzProfile from './views//QuizzProfile'
 import Catalogue from './views/Catalogue'
 import Register from './views/Register/Register'
 import SchoolSubject from './views/SchoolSubject'
+import About from './views/About/'
 
 import SchoolTeacher from './views/SchoolTeacher'
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
@@ -58,6 +59,7 @@ function App() {
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/about" component={About} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path={['/school-profile', '/profile']} component={SchoolProfile} />  
           <Route path={['/teacher-profile']} component={TeacherProfile} />  

@@ -29,7 +29,7 @@ const quizzEj = {
   subject: 'History of Science',
   category: 'History',
   name: 'Final Test',
-  description: 'If you fail this... Tu vieja'
+  description: 'If you fail this test... Tu vieja'
 };
 
 const useStyles = makeStyles(() => ({

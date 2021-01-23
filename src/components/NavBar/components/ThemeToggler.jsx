@@ -1,6 +1,8 @@
 import { Switch } from '@material-ui/core';
+import { SideBarContext } from 'App';
 import { func } from 'prop-types';
 import React, { useContext } from 'react';
+
 
 function ThemeToggler({ toggleTheme }) {
   const {openSidebar} = useContext(SideBarContext)

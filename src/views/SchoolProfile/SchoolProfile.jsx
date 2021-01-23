@@ -41,7 +41,7 @@ const SchoolProfile = () => {
             md={6}
             xs={12}
           >
-            <ProfileDetails />
+            <ProfileDetails profile='school' />
           </Grid>
         </Grid>
 
