@@ -17,12 +17,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SchoolProfile = () => {
+const QuizzProfile = () => {
   const classes = useStyles();
 
   return (
 
       <Container maxWidth="lg">
+
         <Grid
           container
           spacing={3}
@@ -33,7 +34,7 @@ const SchoolProfile = () => {
             md={6}
             xs={12}
           >
-            <Account />
+            <Account quizz={true} />
           </Grid>
           <Grid
             item
@@ -41,7 +42,7 @@ const SchoolProfile = () => {
             md={6}
             xs={12}
           >
-            <ProfileDetails profile='school' />
+            <ProfileDetails profile='quizz' />
           </Grid>
         </Grid>
 
@@ -50,4 +51,4 @@ const SchoolProfile = () => {
   );
 };
 
-export default SchoolProfile;
+export default QuizzProfile;

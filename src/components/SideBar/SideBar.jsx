@@ -16,7 +16,6 @@ import { useStyles } from './SideBarStyle';
 import { SideBarContext } from '../../App';
 import { Link } from 'react-router-dom';
 
-
 function SideBar() {
   const classes = useStyles();
 
@@ -34,7 +33,7 @@ function SideBar() {
       <List>
         <Typography component="h3">Headline</Typography>
         <Divider />
-        {['Home', 'Profile', 'Subjects', 'Quizzes', 'Dashboard'].map(
+        {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
           (text, index) => (
             <Link to={`/${text.toLowerCase()}`}>
               <ListItem button key={text}>

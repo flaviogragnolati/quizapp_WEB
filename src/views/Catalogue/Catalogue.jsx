@@ -1,19 +1,10 @@
-// import React from 'react';
-import QuizzCard from '../../components/QuizzCard';
-// import data from './data'
-// function SchoolProfile() {
-//   return <div>
-//     <QuizzCard/>
-//   </div>;
-// }
-
-// export default SchoolProfile;
 import React, { useState } from 'react';
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-// import Page from 'src/components/Page';
-// import Toolbar from './Toolbar';
+import QuizzCard from 'components/QuizzCard';
+
 import data from './data';
+import Filter from './components/Filter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,31 +13,33 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
-  productCard: {
+  courseCard: {
     height: '100%',
   },
 }));
 
 const Catalogue = () => {
   const classes = useStyles();
-  const [products] = useState(data);
+  const [courses] = useState(data);
 
   return (
-    <Container maxWidth={false}>
-      {/* <Toolbar /> */}
-      <Box mt={3}>
-        <Grid container spacing={3}>
-          {products.map((product) => (
-            <Grid item key={product.id} lg={4} md={6} xs={12}>
-              <QuizzCard className={classes.productCard} product={product} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-      <Box mt={3} display="flex" justifyContent="center">
-        <Pagination color="primary" count={3} size="small" />
-      </Box>
-    </Container>
+    <Grid>
+      <Filter />
+      <Container>
+        <Box mt={3}>
+          <Grid container spacing={3}>
+            {courses.map((course) => (
+              <Grid item key={course.id} lg={4} md={6} xs={12}>
+                <QuizzCard className={classes.courseCard} item={course} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        <Box mt={3} display="flex" justifyContent="center">
+          <Pagination color="primary" count={3} size="small" />
+        </Box>
+      </Container>
+    </Grid>
   );
 };
 

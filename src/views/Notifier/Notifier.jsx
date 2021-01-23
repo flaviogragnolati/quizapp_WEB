@@ -1,6 +1,7 @@
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { notificationSelector } from 'utils/selectors';
 import { removeSnackbar } from 'views/Notifier/notificationSlice';
 import notificationsStyles from '../../assets/jss/material-kit-react/views/componentsSections/notificationsStyles';
 
@@ -9,8 +10,7 @@ let displayed = [];
 
 function Notifier() {
   const dispatch = useDispatch();
-  //   const notifications = useSelector();
-  const notifications = [];
+  const notifications = useSelector(notificationSelector);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 

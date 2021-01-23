@@ -9,101 +9,93 @@ import {
   Divider,
   Grid,
   Typography,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
+
+import InfoIcon from '@material-ui/icons/Info';
+import PeopleIcon from '@material-ui/icons/People';
+import Bookmark from '../Bookmark';
+import { ACTIONS } from 'store/rootReducer';
+import { useDispatch } from 'react-redux';
+import Badge from '../Badge/Badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+  },
+  img: {
+    maxWidth: '160px',
+    width: '100%',
+    margin: '0 auto',
+    transform: 'translate3d(0, -50%, 0)',
   },
   statsItem: {
     alignItems: 'center',
-    display: 'flex'
+    display: 'flex',
   },
   statsIcon: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
-const QuizzCard = ({ className, product, ...rest }) => {
+const QuizzCard = ({ className, item, ...rest }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleNotifications = (state) => {
+    if (state) {
+      dispatch(ACTIONS.favorites.removeFromFavorites());
+    } else {
+      dispatch(ACTIONS.favorites.addToFavorites());
+    }
+  };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Box
-          display="flex"
-          justifyContent="center"
-          mb={3}
-        >
-          <Avatar
-            alt="Product"
-            src={product.media}
-            variant="square"
-          />
+        <Box display="flex" justifyContent="space-between" mb={3}>
+          <Typography
+            align="center"
+            color="textPrimary"
+            gutterBottom
+            variant="h5"
+          >
+            {item.title}
+          </Typography>
+          <Bookmark action={handleNotifications} />
         </Box>
-        <Typography
-          align="center"
-          color="textPrimary"
-          gutterBottom
-          variant="h4"
-        >
-          {product.title}
+        <Box display="flex" justifyContent="center" mb={3}>
+          <img src={item.media} alt="profile pic" />
+          {/* <Avatar alt="item" src={item.media} variant="square" /> */}
+        </Box>
+        <Typography align="center" color="textPrimary" variant="body1">
+          {item.description}
         </Typography>
-        <Typography
-          align="center"
-          color="textPrimary"
-          variant="body1"
-        >
-          {product.description}
-        </Typography>
+        <br></br>
+        {item.tags.map((tag, idx) => (
+          <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
+            {tag}
+          </Badge>
+        ))}
       </CardContent>
       <Box flexGrow={1} />
       <Divider />
       <Box p={2}>
-        <Grid
-          container
-          justify="space-between"
-          spacing={2}
-        >
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <AccessTimeIcon
-              className={classes.statsIcon}
-              color="action"
-            />
+        <Grid container justify="space-between" spacing={2}>
+          <Grid className={classes.statsItem} item>
+            <InfoIcon className={classes.statsIcon} color="action" />
+            Más información
             <Typography
               color="textSecondary"
               display="inline"
               variant="body2"
-            >
-              Updated 2hr ago
-            </Typography>
+            ></Typography>
           </Grid>
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <GetAppIcon
-              className={classes.statsIcon}
-              color="action"
-            />
-            <Typography
-              color="textSecondary"
-              display="inline"
-              variant="body2"
-            >
-              {product.totalDownloads}
-              {' '}
-              Downloads
+          <Grid className={classes.statsItem} item>
+            <PeopleIcon className={classes.statsIcon} color="action" />
+            <Typography color="textSecondary" display="inline" variant="body2">
+              {item.totalDownloads} Estudiantes
             </Typography>
           </Grid>
         </Grid>
@@ -114,7 +106,7 @@ const QuizzCard = ({ className, product, ...rest }) => {
 
 QuizzCard.propTypes = {
   className: PropTypes.string,
-  product: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
 };
 
 export default QuizzCard;

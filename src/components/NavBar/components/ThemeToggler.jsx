@@ -1,13 +1,22 @@
 import { Switch } from '@material-ui/core';
-import { func } from 'prop-types';
+import { SideBarContext } from 'App';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function ThemeToggler({ toggleTheme }) {
-  return <Switch varian="primary" onClick={toggleTheme} name="themeToggler" />;
+function ThemeToggler({ toggleTheme, checked }) {
+  return (
+    <Switch
+      checked={checked === 'light' ? false : true}
+      color="primary"
+      onChange={() => toggleTheme()}
+      name="themeToggler"
+    />
+  );
 }
 
 ThemeToggler.propTypes = {
-  toggleTheme: func.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+  checked: PropTypes.string.isRequired,
 };
 
 export default ThemeToggler;
