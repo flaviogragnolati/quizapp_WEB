@@ -17,6 +17,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import Bookmark from '../Bookmark';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
+import Badge from '../Badge/Badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuizzCard = ({ className, product, ...rest }) => {
+const QuizzCard = ({ className, item, ...rest }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -60,17 +61,23 @@ const QuizzCard = ({ className, product, ...rest }) => {
             gutterBottom
             variant="h5"
           >
-            {product.title}
+            {item.title}
           </Typography>
           <Bookmark action={handleNotifications} />
         </Box>
         <Box display="flex" justifyContent="center" mb={3}>
-          <img src={product.media} alt="profile pic" />
-          {/* <Avatar alt="Product" src={product.media} variant="square" /> */}
+          <img src={item.media} alt="profile pic" />
+          {/* <Avatar alt="item" src={item.media} variant="square" /> */}
         </Box>
         <Typography align="center" color="textPrimary" variant="body1">
-          {product.description}
+          {item.description}
         </Typography>
+        <br></br>
+        {item.tags.map((tag, idx) => (
+          <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
+            {tag}
+          </Badge>
+        ))}
       </CardContent>
       <Box flexGrow={1} />
       <Divider />
@@ -88,7 +95,7 @@ const QuizzCard = ({ className, product, ...rest }) => {
           <Grid className={classes.statsItem} item>
             <PeopleIcon className={classes.statsIcon} color="action" />
             <Typography color="textSecondary" display="inline" variant="body2">
-              {product.totalDownloads} Estudiantes
+              {item.totalDownloads} Estudiantes
             </Typography>
           </Grid>
         </Grid>
@@ -99,7 +106,7 @@ const QuizzCard = ({ className, product, ...rest }) => {
 
 QuizzCard.propTypes = {
   className: PropTypes.string,
-  product: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default QuizzCard;

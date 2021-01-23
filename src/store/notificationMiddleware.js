@@ -21,9 +21,9 @@ const notificationMiddleware = (store) => (next) => (action) => {
         vertical: 'top',
         horizontal: 'center',
       },
-      action: (key) => (
-        <Button onClick={() => dispatch(closeSnackbar(key))}>X</Button>
-      ),
+      // action: (key) => (
+      //   <Button onClick={() => dispatch(closeSnackbar(key))}>X</Button>
+      // ),
     },
   };
   if (listenArray.includes(action.type)) {

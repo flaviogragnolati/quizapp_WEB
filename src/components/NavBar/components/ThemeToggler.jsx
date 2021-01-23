@@ -16,7 +16,7 @@ function ThemeToggler({ toggleTheme, checked }) {
 
 ThemeToggler.propTypes = {
   toggleTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired,
+  checked: PropTypes.string.isRequired,
 };
 
 export default ThemeToggler;

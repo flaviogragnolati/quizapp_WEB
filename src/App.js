@@ -11,13 +11,13 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from './views/NotFound';
 import Footer from 'components/Footer/';
 import UserProfile from './views/UserProfile';
-import SchoolProfile from './views/SchoolProfile'
-import TeacherProfile from './views//TeacherProfile'
-import QuizzProfile from './views//QuizzProfile'
-import Catalogue from './views/Catalogue'
-import Register from './views/Register/Register'
-import SchoolSubject from './views/SchoolSubject'
-import About from './views/About/'
+import SchoolProfile from './views/SchoolProfile';
+import TeacherProfile from './views//TeacherProfile';
+import QuizzProfile from './views//QuizzProfile';
+import Catalogue from './views/Catalogue';
+import Register from './views/Register/Register';
+import SchoolSubject from './views/SchoolSubject';
+import About from './views/About/';
 
 import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
@@ -63,6 +63,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
+          <Route path={['/catalogue']} component={Catalogue} />
           <Route
             path={['/school-profile', '/profile']}
             component={SchoolProfile}
@@ -72,7 +73,6 @@ function App() {
           <Route path={['/school-subject']} component={SchoolSubject} />
           <Route path={['/school-teacher']} component={SchoolTeacher} />
           <Route path={['/school-Quizz']} component={SchoolQuizz} />
-          <Route path={['/catalogue']} component={Catalogue} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

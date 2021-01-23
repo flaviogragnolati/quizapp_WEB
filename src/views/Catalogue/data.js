@@ -13,6 +13,7 @@ const data = [
     media: profile1,
     title: 'Dropbox',
     totalDownloads: '594',
+    tags: ['Matematica', 'Fisica', 'Quimica', 'Administracion'],
   },
   {
     id: uuid(),
@@ -22,6 +23,7 @@ const data = [
     media: profile2,
     title: 'Medium Corporation',
     totalDownloads: '625',
+    tags: ['Informatica', 'Programacion'],
   },
   {
     id: uuid(),
@@ -31,6 +33,7 @@ const data = [
     media: profile3,
     title: 'Slack',
     totalDownloads: '857',
+    tags: ['Etica', 'Derecho', 'Economia'],
   },
   {
     id: uuid(),
@@ -40,6 +43,7 @@ const data = [
     media: profile1,
     title: 'Lyft',
     totalDownloads: '406',
+    tags: ['Matematica', 'Fisica', 'Quimica', 'Administracion'],
   },
   {
     id: uuid(),
@@ -49,6 +53,7 @@ const data = [
     media: profile2,
     title: 'GitHub',
     totalDownloads: '835',
+    tags: ['Etica', 'Derecho', 'Economia'],
   },
   {
     id: uuid(),
@@ -58,6 +63,7 @@ const data = [
     media: profile3,
     title: 'Squarespace',
     totalDownloads: '835',
+    tags: ['Informatica', 'Programacion'],
   },
 ];
 

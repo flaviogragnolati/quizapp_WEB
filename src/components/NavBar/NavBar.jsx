@@ -167,5 +167,5 @@ export default NavBar;
 
 NavBar.propTypes = {
   toggleTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired,
+  checked: PropTypes.string.isRequired,
 };
