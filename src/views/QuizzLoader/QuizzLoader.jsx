@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: 1000,
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -119,6 +119,9 @@ export default function QuizzLoader() {
                 <Typography variant="subtitle1">
                   La quizz a sido creada, finaliza el proceso agregandole
                   preguntas y respuestas
+                </Typography>
+                <Typography variant="subtitle1">
+                    <Link href='/school-quizz'> Editar el Quizz</Link>
                 </Typography>
               </React.Fragment>
             ) : (

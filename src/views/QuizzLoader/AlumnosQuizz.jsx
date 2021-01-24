@@ -11,17 +11,24 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
+  container:{
+    whidth:'80%',
+    paddingLeft:'0',
+    paddingRight:'0'
+
+  }
 }));
 
 export default function AlumnosQuizz() {
   const [customers] = useState(array);
+  const classes = useStyles();
   let columnName = ["Name", "Email", "Location", "Phone", "Registration Date"];
   return (
     <React.Fragment>
-      <Container >
-        <Box mt={3}>
+      <Container className={classes.container}>
+        <Box mt={3} width={1} >
           <h3>Listado de Alumnos</h3>
-          <List customers={customers} columnName={columnName} />
+          <List customers={customers} columnName={columnName}  />
         </Box>
       </Container>
     </React.Fragment>

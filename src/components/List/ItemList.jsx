@@ -20,13 +20,19 @@ import Button from 'components/Home_MUI/Button';
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    margin:'none'
+  },
   avatar: {
     marginRight: theme.spacing(2)
-  }
+  },
+  Table:{
+    whidth:'auto',
+    margin:'none'
+  },
 }));
 
-const Results = ({ className, customers, columnName, ...rest }) => {
+const Results = ({ className, customers, whidth, columnName, ...rest }) => {
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -79,8 +85,8 @@ const Results = ({ className, customers, columnName, ...rest }) => {
       {...rest}
     >
       {/* <PerfectScrollbar> */}
-        <Box minWidth={1050}>
-          <Table>
+        <Box Width={ whidth ? whidth : 1}>
+          <Table size={'small'} className={classes.Table}>
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
