@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -28,13 +28,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review() {
 
-  const [values, setValues] = useState({
-    name: 'Final test',
-    category: 'History',
-    subject: 'History of Science',
-    description: 'xxxxxxxxxxxx xxxxxx xxxxxx xxxxxx xxxxxx'
-  });
-
+  const values = {
+    name: 'Prueba Final ',
+    category: 'Historia',
+    subject: 'Historia de la Ciencia',
+    description: 'Prueba final donde se evaluaran sus conocimientos adquiridos durante el curso'
+  }
   const classes = useStyles();
 
   return (
@@ -65,7 +64,7 @@ export default function Review() {
             {values.subject}
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} >
           <Typography variant="h6" gutterBottom className={classes.title}>
             {values.description}
           </Typography>
