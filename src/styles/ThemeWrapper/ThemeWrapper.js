@@ -4,16 +4,21 @@ import {
   StylesProvider,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ThemeProvider } from 'styled-components';
+//?Tema Global
 import { GlobalStyle } from './global.js';
 
+import applyTheme from './applyTheme';
+
 function ThemeWrapper({ children, theme }) {
+  const fullTheme = useMemo(() => applyTheme(theme), [theme]);
+
   return (
     <>
       <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={fullTheme}>
+          <MuiThemeProvider theme={fullTheme}>
             <GlobalStyle />
             <CssBaseline />
             {children}
@@ -26,12 +31,12 @@ function ThemeWrapper({ children, theme }) {
 
 ThemeWrapper.defaultProps = {
   children: null,
-  theme: {},
+  theme: 'light',
 };
 
 ThemeWrapper.propTypes = {
-  children: PropTypes.node,
-  theme: PropTypes.object,
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.string.isRequired,
 };
 
 export default ThemeWrapper;
