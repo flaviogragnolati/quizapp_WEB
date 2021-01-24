@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
 import Home from './views/Home/Index.jsx';
 import { ThemeWrapper } from './styles/ThemeWrapper';
-import customTheme from './styles/ThemeWrapper/customTheme';
+import customTheme from './styles/ThemeWrapper/muiTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -42,7 +42,7 @@ function App() {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
   // let themeMode = theme === 'light' ? customTheme('light') : customTheme('dark');
-  let themeMode = useMemo(() => customTheme(theme), [theme]);
+  // let themeMode = useMemo(() => customTheme(theme), [theme]);
   //* ^^^^^^^^^^^ THEME MANAGEMENT ^^^^^^^^^^^
 
   //* vvvvvvvvvv SIDEBAR MANAGEMENT vvvvvvvvvv
@@ -52,9 +52,8 @@ function App() {
   };
   const sidebarCtx = { openSidebar, toggleSideBar };
   //* ^^^^^^^^^^^ SIDEBAR MANAGEMENT ^^^^^^^^^^^
-
   return (
-    <ThemeWrapper theme={themeMode}>
+    <ThemeWrapper theme={theme}>
       <div className="App">
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
@@ -69,13 +68,17 @@ function App() {
           <Route path="/quizz-loader" component={QuizzLoader} />
           <Route path="/questionLoader" component={QuestionLoader} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
-          <Route path={['/catalogue']} component={Catalogue} />
-          <Route path={['/school-profile']} component={SchoolProfile}/>
-          <Route path={['/teacher-profile']} component={TeacherProfile} />
-          <Route path={['/quizz-profile']} component={QuizzProfile} />
-          <Route path={['/school-subject']} component={SchoolSubject} />
-          <Route path={['/school-teacher']} component={SchoolTeacher} />
-          <Route path={['/school-Quizz']} component={SchoolQuizz} />
+          <Route path="/catalogue" component={Catalogue} />
+          <Route
+            path={['/school-profile', '/profile']}
+            component={SchoolProfile}
+          />
+          <Route path="/teacher-profile" component={TeacherProfile} />
+          <Route path="/quizz-profile" component={QuizzProfile} />
+          <Route path="/school-subject" component={SchoolSubject} />
+          <Route path="/school-teacher" component={SchoolTeacher} />
+          <Route path="/school-Quizz" component={SchoolQuizz} />
+          <Route path="/quizz-profile'" component={SchoolQuizz} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>
