@@ -46,7 +46,7 @@ const items = [
     title: 'Pregunta 7'
   },
   {
-    title: 'Pregunta 8'
+    title: 'Pregunta 8  '
   }
 ];
 
