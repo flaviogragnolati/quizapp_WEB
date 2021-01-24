@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {  useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -23,32 +23,6 @@ const quizzEj = {
     description: 'If you fail this test... Tu vieja'
   };
 
-const items = [
-  {
-    title: 'Pregunta 1'
-  },
-  {
-    title: 'Pregunta 2'
-  },
-  {
-    title: 'Pregunta 3'
-  },
-  {
-    title: 'Pregunta 4'
-  },
-  {
-    title: 'Pregunta 5'
-  },
-  {
-    title: 'Pregunta 6'
-  },
-  {
-    title: 'Pregunta 7'
-  },
-  {
-    title: 'Pregunta 8  '
-  }
-];
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -69,6 +43,33 @@ const useStyles = makeStyles(() => ({
 const QuestionSideBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+
+  const [items, setItems] = useState( [
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    },
+    {
+      title: 'Pregunta '
+    }
+  ])
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
