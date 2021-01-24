@@ -18,10 +18,11 @@ import Catalogue from './views/Catalogue';
 import Register from './views/Register/Register';
 import SchoolSubject from './views/SchoolSubject';
 import About from './views/About/';
-
+import QuizzLoader from 'views/QuizzLoader/Index';
 import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
 import Notifier from 'views/Notifier';
+
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
   background: ${(p) => p.theme.palette.background.paper};
@@ -61,6 +62,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
+          <Route path="/quizz-loader" component={QuizzLoader} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path="/catalogue" component={Catalogue} />
           <Route
@@ -72,6 +74,7 @@ function App() {
           <Route path="/school-subject" component={SchoolSubject} />
           <Route path="/school-teacher" component={SchoolTeacher} />
           <Route path="/school-Quizz" component={SchoolQuizz} />
+          <Route path="/quizz-profile'" component={SchoolQuizz} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

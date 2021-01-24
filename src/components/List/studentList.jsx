@@ -20,19 +20,13 @@ import Button from 'components/Home_MUI/Button';
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin:'none'
-  },
+  root: {},
   avatar: {
     marginRight: theme.spacing(2)
-  },
-  Table:{
-    whidth:'auto',
-    margin:'none'
-  },
+  }
 }));
 
-const Results = ({ className, customers, whidth, columnName, ...rest }) => {
+const Results = ({ className, customers, columnName, ...rest }) => {
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -84,9 +78,8 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      {/* <PerfectScrollbar> */}
-        <Box Width={ whidth ? whidth : 1}>
-          <Table size={'small'} className={classes.Table}>
+        <Box >
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
@@ -147,32 +140,6 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
                   <TableCell>
                     {customer.email}
                   </TableCell>
-                  <TableCell>
-                  {customer.address ? `${customer.address.city}, ${customer.address.state}, ${customer.address.country}` :
-                <Button>
-                Trash
-                </Button>  
-                  }                                         
-                 </TableCell>
-                  <TableCell>
-                      {customer.phone ? customer.phone : 
-                      <Button>
-                          Edit
-                      </Button>
-                      }
-                
-                  </TableCell>
-                  {columnName.length === 4 ?
-                null
-                  : 
-                  <TableCell>
-                     <Button>
-                        Añadir
-                      </Button>
-                      
-                
-                  </TableCell>
-                   }
                 </TableRow>
               ))}
             </TableBody>
