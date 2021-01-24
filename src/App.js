@@ -22,6 +22,9 @@ import QuizzLoader from 'views/QuizzLoader/Index';
 import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
 import Notifier from 'views/Notifier';
+import QuestionLoader from 'views/QuestionsLoader';
+import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
+
 
 //*container de prueba para thema MUI / Styled cOmponents
 const StyledContainer = styled.div`
@@ -64,6 +67,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
           <Route path="/quizz-loader" component={QuizzLoader} />
+          <Route path="/questionLoader" component={QuestionLoader} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path={['/catalogue']} component={Catalogue} />
           <Route path={['/school-profile']} component={SchoolProfile}/>
