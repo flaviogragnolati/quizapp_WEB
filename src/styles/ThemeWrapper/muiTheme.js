@@ -22,15 +22,15 @@ export const muiTheme = {
     palette: {
       type: 'light',
       primary: {
-        light: indigo[500],
-        main: '#6a95ff',
-        dark: 'black',
+        light: '#e8dab2',
+        main: '#eaeaea',
+        dark: '#4f6d7a',
         buttons: '#e1e1e1',
-        contrastText: '#000000',
+        contrastText: '#4f6d7a',
       },
       secondary: {
-        light: '#0044ff',
-        main: '#94b3ff',
+        light: '#4f6d7a',
+        main: '#e8dab2',
         dark: '#c15e5e',
       },
     },

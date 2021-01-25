@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import List from '../../components/List';
-import array from './data';
-import Button from 'components/Home_MUI/Button';
+import { fakeUsers } from './data';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -10,22 +10,25 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
+  container: {
+    whidth: '80%',
+    paddingLeft: '0',
+    paddingRight: '0',
+  },
 }));
 
-const SchoolTeacher = () => {
+export default function AlumnosQuiz() {
+  const [students] = useState(fakeUsers);
   const classes = useStyles();
-  const [customers] = useState(array);
   let columnName = ['Name', 'Email', 'Location', 'Phone', 'Registration Date'];
   return (
-    <Container maxWidth={false}>
-      <Box mt={3}>
-        <h3>Listado de Teachers</h3>
-        <List customers={customers} columnName={columnName} />
-      </Box>
-
-      <Button>+ Agregar</Button>
-    </Container>
+    <React.Fragment>
+      <Container className={classes.container}>
+        <Box mt={3} width={1}>
+          <h3>Listado de Alumnos</h3>
+          <List customers={students} columnName={columnName} />
+        </Box>
+      </Container>
+    </React.Fragment>
   );
-};
-
-export default SchoolTeacher;
+}

@@ -8,7 +8,7 @@ import Typography from '../../../components/Home_MUI/Typography';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import CategoryIcon from '@material-ui/icons/Category';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styles = (theme) => ({
   root: {
@@ -56,18 +56,20 @@ const styles = (theme) => ({
   Icon__Values: {
     width: '2em',
     height: '2em',
-  }
+  },
 });
 
 function HowItWorks(props) {
   const { classes } = props;
-  const History = useHistory()
-  const HandleQuizz = ()=>{
-History.push('/quizz-loader')}
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+        <Typography
+          variant="h4"
+          marked="center"
+          className={classes.title}
+          component="h2"
+        >
           Como funciona
         </Typography>
         <div>
@@ -75,28 +77,27 @@ History.push('/quizz-loader')}
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <BorderColorIcon className={classes.Icon__Values}/>
+                <BorderColorIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
-                Crea tu Quizz 
+                  Crea tu Quiz
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <CategoryIcon className={classes.Icon__Values}/>
+                <CategoryIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
-                Los estudiantes lo completan
+                  Los estudiantes lo completan
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <DoneAllIcon className={classes.Icon__Values}/>
+                <DoneAllIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
                   Corrige los resultados
-
                 </Typography>
               </div>
             </Grid>
@@ -107,8 +108,8 @@ History.push('/quizz-loader')}
           size="large"
           variant="contained"
           className={classes.button}
-          
-          onClick={HandleQuizz}
+          component={Link}
+          to='/quiz-loader'
         >
           Comenzar
         </Button>

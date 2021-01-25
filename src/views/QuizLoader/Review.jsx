@@ -6,13 +6,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 
-const products = [
-  { firstName: 'Juan', lastName: 'Perez', },
-  { firstName: 'Martina', lastName: 'Rojo', },  
-  { firstName: 'Miguel', lastName: 'Martinez', },  
-  { firstName: 'Lucia', lastName: 'Schwarzenegger', },
+const students = [
+  { firstName: 'Juan', lastName: 'Perez' },
+  { firstName: 'Martina', lastName: 'Rojo' },
+  { firstName: 'Miguel', lastName: 'Martinez' },
+  { firstName: 'Lucia', lastName: 'Schwarzenegger' },
 ];
-
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -27,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Review() {
-
   const values = {
     name: 'Prueba Final ',
     category: 'Historia',
     subject: 'Historia de la Ciencia',
-    description: 'Prueba final donde se evaluaran sus conocimientos adquiridos durante el curso'
-  }
+    description:
+      'Prueba final donde se evaluaran sus conocimientos adquiridos durante el curso',
+  };
   const classes = useStyles();
 
   return (
@@ -42,9 +41,12 @@ export default function Review() {
         Resumen Quizz
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.lastName}>
-            <ListItemText primary={`${product.firstName} ${product.lastName}`} secondary={product.desc} />
+        {students.map((student) => (
+          <ListItem className={classes.listItem} key={student.lastName}>
+            <ListItemText
+              primary={`${student.firstName} ${student.lastName}`}
+              secondary={student.desc}
+            />
           </ListItem>
         ))}
       </List>
@@ -54,7 +56,7 @@ export default function Review() {
             {values.name}
           </Typography>
         </Grid>
-        <Grid item  xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             {values.category}
           </Typography>
@@ -64,7 +66,7 @@ export default function Review() {
             {values.subject}
           </Typography>
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             {values.description}
           </Typography>

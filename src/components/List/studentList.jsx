@@ -14,7 +14,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 // import Button from 'components/Home_MUI/Button';
 // import getInitials from 'src/utils/getInitials';
@@ -22,8 +22,8 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
-    marginRight: theme.spacing(2)
-  }
+    marginRight: theme.spacing(2),
+  },
 }));
 
 const Results = ({ className, customers, columnName, ...rest }) => {
@@ -50,11 +50,18 @@ const Results = ({ className, customers, columnName, ...rest }) => {
     let newSelectedCustomerIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds,
+        id
+      );
     } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds.slice(1)
+      );
     } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds.slice(0, -1)
+      );
     } else if (selectedIndex > 0) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(
         selectedCustomerIds.slice(0, selectedIndex),
@@ -74,77 +81,58 @@ const Results = ({ className, customers, columnName, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-        <Box >
-          <Table>
-            <TableHead>
-              <TableRow>
+    <Card className={clsx(classes.root, className)} {...rest}>
+      <Box>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={selectedCustomerIds.length === customers.length}
+                  color="primary"
+                  indeterminate={
+                    selectedCustomerIds.length > 0 &&
+                    selectedCustomerIds.length < customers.length
+                  }
+                  onChange={handleSelectAll}
+                />
+              </TableCell>
+              {columnName.map((name) => {
+                return <TableCell>{name}</TableCell>;
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {customers.slice(0, limit).map((customer) => (
+              <TableRow
+                hover
+                key={customer.id}
+                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+              >
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
+                    checked={selectedCustomerIds.indexOf(customer.id) !== -1}
+                    onChange={(event) => handleSelectOne(event, customer.id)}
+                    value="true"
                   />
                 </TableCell>
-                {columnName.map(name =>{
-                  return (
-                    <TableCell>
-                    { name}
-                   </TableCell>
-                  ) 
-                })}
-            
+                <TableCell>
+                  <Box alignItems="center" display="flex">
+                    <Avatar className={classes.avatar} src={customer.avatarUrl}>
+                      {/* {getInitials(customer.name)} */}
+                      {customer.name}
+                    </Avatar>
+                    <Typography color="textPrimary" variant="body1">
+                      {customer.name}
+                    </Typography>
+                  </Box>
+                </TableCell>
+                <TableCell>{customer.email}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {customers.slice(0, limit).map((customer) => (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      alignItems="center"
-                      display="flex"
-                    >
-                      <Avatar
-                        className={classes.avatar}
-                        src={customer.avatarUrl}
-                      >
-                        {/* {getInitials(customer.name)} */}
-                        {customer.name}
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-                        {customer.name}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
       {/* </PerfectScrollbar> */}
       <TablePagination
         component="div"
@@ -161,7 +149,7 @@ const Results = ({ className, customers, columnName, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  customers: PropTypes.array.isRequired,
 };
 
 export default Results;

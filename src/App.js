@@ -1,26 +1,24 @@
-import { createContext,  useState } from 'react';
-// import styled from 'styled-components';
+import { createContext, useState } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+//Utils
+import { ThemeWrapper } from './styles/ThemeWrapper';
+import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
+//Componentes
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
 import Home from './views/Home/Index.jsx';
-import { ThemeWrapper } from './styles/ThemeWrapper';
-// import customTheme from './styles/ThemeWrapper/muiTheme';
-import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFound from './views/NotFound';
 import Footer from 'components/Footer/';
 import UserProfile from './views/UserProfile';
 import SchoolProfile from './views/SchoolProfile';
-import TeacherProfile from './views//TeacherProfile';
-import QuizzProfile from './views//QuizzProfile';
+import QuizProfile from './views/QuizProfile';
 import Catalogue from './views/Catalogue';
 import Register from './views/Register/Register';
 import SchoolSubject from './views/SchoolSubject';
 import About from './views/About/';
-import QuizzLoader from 'views/QuizzLoader/Index';
 import SchoolTeacher from './views/SchoolTeacher';
-import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
+import SchoolQuiz from 'views/SchoolQuiz';
 import Notifier from 'views/Notifier';
 import QuestionLoader from 'views/QuestionsLoader';
 // import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
@@ -32,6 +30,8 @@ import QuestionLoader from 'views/QuestionsLoader';
 //   height: 64px;
 //   border: 1px solid ${(p) => p.theme.palette.divider};
 // `;
+import TeacherProfile from 'views/TeacherProfile/index';
+import QuizLoader from './views/QuizLoader';
 
 export const SideBarContext = createContext({
   openSidebar: false,
@@ -41,8 +41,6 @@ export const SideBarContext = createContext({
 function App() {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
-  // let themeMode = theme === 'light' ? customTheme('light') : customTheme('dark');
-  // let themeMode = useMemo(() => customTheme(theme), [theme]);
   //* ^^^^^^^^^^^ THEME MANAGEMENT ^^^^^^^^^^^
 
   //* vvvvvvvvvv SIDEBAR MANAGEMENT vvvvvvvvvv
@@ -52,6 +50,10 @@ function App() {
   };
   const sidebarCtx = { openSidebar, toggleSideBar };
   //* ^^^^^^^^^^^ SIDEBAR MANAGEMENT ^^^^^^^^^^^
+
+  //* vvvvvvvvvv AUTH MANAGEMENT vvvvvvvvvv
+  //* ^^^^^^^^^^^ AUTH MANAGEMENT ^^^^^^^^^^^
+
   return (
     <ThemeWrapper theme={theme}>
       <div className="App">
@@ -65,7 +67,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
-          <Route path="/quizz-loader" component={QuizzLoader} />
+          <Route path="/quiz-loader" component={QuizLoader} />
           <Route path="/questionLoader" component={QuestionLoader} />
           <Route path={['/user-profile', '/profile']} component={UserProfile} />
           <Route path="/catalogue" component={Catalogue} />
@@ -74,11 +76,10 @@ function App() {
             component={SchoolProfile}
           />
           <Route path="/teacher-profile" component={TeacherProfile} />
-          <Route path="/quizz-profile" component={QuizzProfile} />
+          <Route path="/quiz-profile" component={QuizProfile} />
           <Route path="/school-subject" component={SchoolSubject} />
           <Route path="/school-teacher" component={SchoolTeacher} />
-          <Route path="/school-Quizz" component={SchoolQuizz} />
-          <Route path="/quizz-profile'" component={SchoolQuizz} />
+          <Route path="/school-Quiz" component={SchoolQuiz} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

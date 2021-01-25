@@ -2,6 +2,7 @@
 import {
   AppBar,
   Badge,
+  Button,
   IconButton,
   InputBase,
   Menu,
@@ -20,7 +21,7 @@ import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -31,7 +32,7 @@ function NavBar({ toggleTheme, checked }) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const History = useHistory()
+  const History = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,7 +46,7 @@ function NavBar({ toggleTheme, checked }) {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-  
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -69,9 +70,9 @@ function NavBar({ toggleTheme, checked }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      position='fixed'
+      position="fixed"
     >
-      <MenuItem onClick={handleMenuProfile} >Profile</MenuItem>
+      <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
@@ -84,7 +85,7 @@ function NavBar({ toggleTheme, checked }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-      position='fixed'
+      position="fixed"
     >
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -123,10 +124,12 @@ function NavBar({ toggleTheme, checked }) {
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
           {/* <Button component='a' href='/'> */}
+            <Button component={Link} to='/'>
 
           <Typography className={classes.title} variant="h6" noWrap onClick={handleMenuHome}>
             Material-UI
           </Typography>
+            </Button>
           {/* </Button> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
