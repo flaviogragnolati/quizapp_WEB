@@ -20,6 +20,7 @@ import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -109,9 +110,11 @@ function NavBar({ toggleTheme, checked }) {
           >
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
+          <Link to="/">
+            <Typography className={classes.title} variant="h6" noWrap>
+              Quiz App
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

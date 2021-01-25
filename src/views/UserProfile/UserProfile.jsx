@@ -10,9 +10,9 @@ import Favorite from '@material-ui/icons/Favorite';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 // core components
 import Button from 'components/CustomButtons/Button.js';
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import NavPills from 'components/NavPills/NavPills.js';
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
+import NavPills from 'components/NavPills/NavPills.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
 
 import profile from 'assets/img/faces/christian.jpg';

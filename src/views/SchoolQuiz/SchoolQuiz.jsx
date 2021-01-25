@@ -3,6 +3,7 @@ import { Box, Container, makeStyles } from '@material-ui/core';
 import List from '../../components/List';
 import array from './data';
 import Button from 'components/Home_MUI/Button';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -12,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SchoolTeacher = () => {
+const SchoolQuiz = () => {
   const classes = useStyles();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Email', 'Location', 'Phone', 'Registration Date'];
+  let columnName = ['Name', 'Subject', 'Trash', ' Edit'];
   return (
     <Container maxWidth={false}>
       <Box mt={3}>
-        <h3>Listado de Teachers</h3>
+        <h3>Listado de Quizzes</h3>
         <List customers={customers} columnName={columnName} />
       </Box>
 
@@ -28,4 +29,4 @@ const SchoolTeacher = () => {
   );
 };
 
-export default SchoolTeacher;
+export default SchoolQuiz;

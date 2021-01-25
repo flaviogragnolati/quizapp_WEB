@@ -10,8 +10,8 @@ import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
 import Button from 'components/CustomButtons/Button.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
@@ -19,7 +19,7 @@ import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import { useDispatch } from 'react-redux';
-import { createUser } from './registerSlice'
+import { createUser } from './registerSlice';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 
@@ -35,22 +35,21 @@ function Register(props) {
   }, 700);
   const classes = useStyles();
   //const { ...rest } = props;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const user ={
-    name: 'jorgito', 
-    email: 'jorgito@gmail.com' , 
+  const user = {
+    name: 'jorgito',
+    email: 'jorgito@gmail.com',
     description: 'sssssss',
-    city: 'sssssss', 
-    country: 'sssssss', 
-    logo: 'sssssss' ,
-  } 
-
+    city: 'sssssss',
+    country: 'sssssss',
+    logo: 'sssssss',
+  };
 
   const handleSubmit = () => {
-    dispatch(createUser(user))
-  }
-  
+    dispatch(createUser(user));
+  };
+
   return (
     <div>
       <div
@@ -69,20 +68,41 @@ function Register(props) {
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Register with:</h4>
                     <div className={classes.socialLine}>
-                      <Button justIcon href="#pablo" target="_blank" color="transparent" onClick={(e) => e.preventDefault()} >
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
                         <i className={'fab fa-twitter'} />
                       </Button>
-                      <Button justIcon href="#pablo" target="_blank" color="transparent" onClick={(e) => e.preventDefault()} >
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
                         <i className={'fab fa-facebook'} />
                       </Button>
-                      <Button justIcon href="#pablo" target="_blank" color="transparent" onClick={(e) => e.preventDefault()} >
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
                         <i className={'fab fa-google-plus-g'} />
                       </Button>
                     </div>
                   </CardHeader>
                   <p className={classes.divider}>Or Be Classical</p>
                   <CardBody>
-                    <CustomInput labelText="First Name..." id="first" formControlProps={{ fullWidth: true, }}
+                    <CustomInput
+                      labelText="First Name..."
+                      id="first"
+                      formControlProps={{ fullWidth: true }}
                       inputProps={{
                         type: 'text',
                         endAdornment: (
@@ -102,11 +122,13 @@ function Register(props) {
                         type: 'text',
                         endAdornment: (
                           <InputAdornment position="end">
-                            <SupervisorAccountIcon className={classes.inputIconsColor} />
+                            <SupervisorAccountIcon
+                              className={classes.inputIconsColor}
+                            />
                           </InputAdornment>
                         ),
                       }}
-                    />   
+                    />
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -150,11 +172,13 @@ function Register(props) {
                         type: 'tel',
                         endAdornment: (
                           <InputAdornment position="end">
-                            <PhoneAndroidIcon className={classes.inputIconsColor} />
+                            <PhoneAndroidIcon
+                              className={classes.inputIconsColor}
+                            />
                           </InputAdornment>
                         ),
                       }}
-                    />        
+                    />
                     <CustomInput
                       id="birth"
                       formControlProps={{
@@ -164,15 +188,21 @@ function Register(props) {
                         type: 'date',
                         endAdornment: (
                           <InputAdornment position="end">
-                            <DateRangeIcon className={classes.inputIconsColor} />
+                            <DateRangeIcon
+                              className={classes.inputIconsColor}
+                            />
                           </InputAdornment>
                         ),
                       }}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button onClick={() => handleSubmit()} color="primary" size="lg">
-                       Register
+                    <Button
+                      onClick={() => handleSubmit()}
+                      color="primary"
+                      size="lg"
+                    >
+                      Register
                     </Button>{' '}
                   </CardFooter>
                 </form>
