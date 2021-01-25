@@ -20,10 +20,10 @@ import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
 
 const SidebarDiv = styled.div`
-  background-color: gray;
-  border-width: 5px;
+  /* background-color: gray; */
+  /* border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: gray; */
   align-items: center;
 `;
 
@@ -100,6 +100,22 @@ function FilterSidebar() {
         <FilterGroup title="Quiz Filter">
           <QuizFilterDetail />
         </FilterGroup>
+        <Divider />
+      </>
+      <>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Button color="primary" variant="contained" size="large">
+            CLEAR
+          </Button>
+          <Button color="secondary" variant="contained" size="large">
+            FIND!
+          </Button>
+        </Box>
       </>
     </SidebarDiv>
   );

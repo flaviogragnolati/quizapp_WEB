@@ -101,7 +101,7 @@ const QuizzCard = ({ className, item, ...rest }) => {
           <Box className={classes.statsItem} item>
             <PeopleIcon className={classes.statsIcon} color="action" />
             <Typography color="textSecondary" display="inline" variant="body2">
-              {item.totalDownloads} Estudiantes
+              {item.totalStudents} Estudiantes
             </Typography>
           </Box>
         </Grid>
