@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Teacher from 'components/ProfileDetail/Profiles/Teacher';
@@ -8,11 +8,7 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
-  CardHeader,
   Divider,
-  Grid,
-  TextField,
   makeStyles
 } from '@material-ui/core';
 

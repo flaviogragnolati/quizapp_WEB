@@ -6,14 +6,13 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import DatosQuiz from './DatosQuiz';
 import AlumnosQuiz from './AlumnosQuiz';
 import Review from './Review';
-import { quizModel } from './quizLoderHelpers';
-import { Formik, Form, useFormikContext } from 'formik';
-import { useState } from 'react';
+// import { quizModel } from './quizLoderHelpers';
+import { Formik, Form} from 'formik';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -69,8 +68,8 @@ function getStepContent(step) {
 
 export default function QuizLoader() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
-
+  const [activeStep, setActiveStep] = React.useState(0);
+  const History = useHistory()
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -105,7 +104,10 @@ export default function QuizLoader() {
                   preguntas y respuestas
                 </Typography>
                 <Typography variant="subtitle1">
-                  <Link href="/school-quiz"> Editar el Quiz</Link>
+                  <Button component={Link} to='/school-quiz'>
+
+                     Editar el Quizz
+                  </Button>
                 </Typography>
               </React.Fragment>
             ) : (

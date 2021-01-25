@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
 import {
-  Box,
   Button,
-  Card,
   CardContent,
   CardHeader,
   Divider,
   Grid,
   TextField,
-  makeStyles,
+  //   makeStyles,
 } from "@material-ui/core";
+import QuestionInfo from "components/Questions/QuestionInfo";
+import QuestionMulti from "components/Questions/QuestionMulti";
+import QuestionTF from "components/Questions/QuestionTF";
 
-const useStyles = makeStyles(() => ({
-  root: {},
-}));
+// const useStyles = makeStyles(() => ({
+//   root: {},
+// }));
 
 const Questions = () => {
   const handleChange = (event) => {
@@ -29,84 +28,46 @@ const Questions = () => {
     title: "Pregunta 1",
     description: "xxxxxxxxxxxx xxxxxx xxxxxx xxxxxx xxxxxx",
     answers: [
-      {
-        text: "opcion1",
-        correct: true,
-      },
-      {
-        text: "opcion2",
-        correct: false,
-      },
-      {
-        text: "opcion3",
-        correct: false,
-      },
-      {
-        text: "opcion4",
-        correct: true,
-      },
-      {
-        text: "opcion5",
-        correct: false,
-      },
+      { text: "verdadero", correct: true },
+      { text: "falso", correct: false },
+      { text: "opcion3", correct: false },
+      { text: "opcion4", correct: true },
+      { text: "opcion5", correct: false },
+    ],
+    answersTF: [
+      { text: "verdadero", correct: true },
+      { text: "falso", correct: false },
     ],
   });
+
+
+
+  const [multi, setmulti] = useState();
+  
+  let aPasar = {
+    title: values.title,
+    description: values.description,
+    setmulti,
+  }
+
   return (
+
     <>
       <CardHeader subheader="The information can be edited" title="Quizz" />
       <Divider />
       <CardContent>
         <Grid container spacing={3}>
-          <Grid item md={6} xs={12}>
-            <TextField
-              fullWidth
-              label="Title"
-              name="title"
-              onChange={handleChange}
-              required
-              value={values.title}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item md={6}></Grid>
-          <Grid item md={12} xs={12}>
-            <TextField
-              fullWidth
-              label="Description"
-              name="description"
-              onChange={handleChange}
-              required
-              value={values.description}
-              variant="outlined"
-            />
-          </Grid>
-          {values.answers.map((answer, i) => {
-            return (
-              <>
-                <Grid item md={8} xs={12}>
-                  <TextField
-                    fullWidth
-                    label={`Answer ${i}`}
-                    name={`answer ${i}`}
-                    onChange={handleChange}
-                    required
-                    value={answer.text}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={1} xs={12}>
-                  <Button color="primary" variant="contained">
-                    {answer.correct ? "Correcta" : "Incorrecta"}
-                  </Button>
-                </Grid>
-                <Grid item md={1} xs={12}>
-                  <Button color="primary" variant="contained">
-                    Eliminar Pregunta
-                  </Button>
-                </Grid>
-              </>
-            );
-          })}
+          <QuestionInfo info={aPasar} />
+
+
+          {
+          multi === undefined ? null : 
+          multi === 1 ? values.answers.map((info, i) => {
+            return <QuestionMulti answer={{ info: info, i: i }} />;
+          })  : 
+          multi === 2 ? <QuestionTF answer={values.answersTF} /> : null
+}
+
           <Grid item md={12} xs={12}>
             <Button color="primary" variant="contained">
               Agregar respuesta
@@ -117,5 +78,4 @@ const Questions = () => {
     </>
   );
 };
-
 export default Questions;

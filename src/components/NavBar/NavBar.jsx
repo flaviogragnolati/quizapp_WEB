@@ -2,6 +2,7 @@
 import {
   AppBar,
   Badge,
+  Button,
   IconButton,
   InputBase,
   Menu,
@@ -14,14 +15,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import Snackbar from 'components/Home_MUI/Snackbar';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -31,7 +32,7 @@ function NavBar({ toggleTheme, checked }) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const [notifier, setNotifier] = useState(false);
   const History = useHistory();
 
   const handleProfileMenuOpen = (event) => {
@@ -58,6 +59,25 @@ function NavBar({ toggleTheme, checked }) {
     handleMenuClose();
   };
 
+  const handleMenuHome = () => {
+    History.push(`/`);
+    handleMenuClose();
+  };
+  const handleMenuLogout = () => {
+    History.push(`/`);
+    handleMenuClose();
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    History.push('/catalogue');
+    document.getElementById('Search').value = '';
+    setNotifier(true);
+  };
+
+  const handleClose = () => {
+    setNotifier(false);
+  };
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -69,7 +89,7 @@ function NavBar({ toggleTheme, checked }) {
       position="fixed"
     >
       <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -124,8 +144,9 @@ function NavBar({ toggleTheme, checked }) {
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+            </Button>
             <InputBase
+            id='Search'
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -168,6 +189,11 @@ function NavBar({ toggleTheme, checked }) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Snackbar
+        open={notifier}
+        onClose={handleClose}
+        message="No hay cursos relacionados a la busqueda."
+      />
     </div>
   );
 }

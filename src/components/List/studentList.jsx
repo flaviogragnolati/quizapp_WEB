@@ -16,6 +16,7 @@ import {
   Typography,
   makeStyles,
 } from '@material-ui/core';
+// import Button from 'components/Home_MUI/Button';
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,7 @@ const Results = ({ className, customers, columnName, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [columna, setColumna] = useState(false);
+  // const [columna, setColumna] = useState(false)
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;

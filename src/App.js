@@ -21,6 +21,15 @@ import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuiz from 'views/SchoolQuiz';
 import Notifier from 'views/Notifier';
 import QuestionLoader from 'views/QuestionsLoader';
+// import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
+
+
+//*container de prueba para thema MUI / Styled cOmponents
+// const StyledContainer = styled.div`
+//   background: ${(p) => p.theme.palette.background.paper};
+//   height: 64px;
+//   border: 1px solid ${(p) => p.theme.palette.divider};
+// `;
 import TeacherProfile from 'views/TeacherProfile/index';
 import QuizLoader from './views/QuizLoader';
 
@@ -28,6 +37,8 @@ export const SideBarContext = createContext({
   openSidebar: false,
   toggleSideBar: () => {},
 });
+
+
 
 function App() {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
@@ -53,6 +64,7 @@ function App() {
           <NavBar toggleTheme={toggleTheme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
+        <div Style="margin-top: 65px;min-height: 82vh;">
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
@@ -74,6 +86,7 @@ function App() {
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>
+        </div>
         <hr></hr>
         <Footer />
       </div>
