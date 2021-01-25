@@ -8,6 +8,7 @@ import Typography from '../../../components/Home_MUI/Typography';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import CategoryIcon from '@material-ui/icons/Category';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import { Link } from 'react-router-dom';
 
 const styles = (theme) => ({
   root: {
@@ -60,7 +61,6 @@ const styles = (theme) => ({
 
 function HowItWorks(props) {
   const { classes } = props;
-
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
@@ -108,8 +108,8 @@ function HowItWorks(props) {
           size="large"
           variant="contained"
           className={classes.button}
-          component="a"
-          href="/quizz-loader"
+          component={Link}
+          to='/quiz-loader'
         >
           Comenzar
         </Button>

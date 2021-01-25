@@ -1,5 +1,4 @@
 import { Switch } from '@material-ui/core';
-import { SideBarContext } from 'App';
 import PropTypes from 'prop-types';
 import React from 'react';
 

@@ -84,7 +84,7 @@ function FilterSidebar() {
       </Container>
       <Container>
         <Box mt={5}>
-          <Title>filter school</Title>
+          <Title>Schools</Title>
         </Box>
         <Divider />
         <Box mt={5}>filter subject</Box>

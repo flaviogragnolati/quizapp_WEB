@@ -21,6 +21,15 @@ import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuiz from 'views/SchoolQuiz';
 import Notifier from 'views/Notifier';
 import QuestionLoader from 'views/QuestionsLoader';
+// import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
+
+
+//*container de prueba para thema MUI / Styled cOmponents
+// const StyledContainer = styled.div`
+//   background: ${(p) => p.theme.palette.background.paper};
+//   height: 64px;
+//   border: 1px solid ${(p) => p.theme.palette.divider};
+// `;
 import TeacherProfile from 'views/TeacherProfile/index';
 import QuizLoader from './views/QuizLoader';
 

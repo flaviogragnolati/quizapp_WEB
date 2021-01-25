@@ -8,7 +8,7 @@ import React, { useMemo } from 'react';
 import { ThemeProvider } from 'styled-components';
 //?Tema Global
 import { GlobalStyle } from './global.js';
-
+//?func para aplicar el tema correspondiente
 import applyTheme from './applyTheme';
 
 function ThemeWrapper({ children, theme }) {

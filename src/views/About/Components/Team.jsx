@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Typography from '../../../components/Home_MUI/Typography';
 import profile from 'assets/img/faces/christian.jpg'
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -78,7 +77,7 @@ function ProductValues(props) {
         <Grid container spacing={5}>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -91,7 +90,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -104,7 +103,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -117,7 +116,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -130,7 +129,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={2}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -143,7 +142,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -156,7 +155,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={2}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -169,7 +168,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={3}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>
@@ -182,7 +181,7 @@ function ProductValues(props) {
           </Grid>
           <Grid item xs={12} md={2}>
             <div className={classes.item}>
-            <img  className={classes.image} src={profile}/>
+            <img  className={classes.image} src={profile} alt='Logo'/>
             <div >
                 <a className={classes.Team_a} href="https://www.linkedin.com">
                 <LinkedInIcon/>

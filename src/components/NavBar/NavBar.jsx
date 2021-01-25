@@ -2,6 +2,7 @@
 import {
   AppBar,
   Badge,
+  Button,
   IconButton,
   InputBase,
   Menu,
@@ -14,14 +15,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -51,13 +51,17 @@ function NavBar({ toggleTheme, checked }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   // const handleSideBarToggle = () => {
-  //   openSideBar = !openSideBar;
-  // };
-  const handleMenuProfile = () => {
-    History.push(`/profile`);
-    handleMenuClose();
-  };
+    //   openSideBar = !openSideBar;
+    // };
+    const handleMenuProfile = ()=>{
+    History.push(`/profile`)
+    handleMenuClose()
+  }
 
+  const handleMenuHome = ()=>{
+    History.push(`/`)
+
+  }
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -104,12 +108,9 @@ function NavBar({ toggleTheme, checked }) {
       </MenuItem>
     </Menu>
   );
-  const _AppBar = styled(AppBar)`
-    background-color: theme.palette.primary.light;
-  `;
   return (
-    <div className={classes.grow}>
-      <_AppBar position="fixed">
+    <div>
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"
@@ -119,11 +120,14 @@ function NavBar({ toggleTheme, checked }) {
           >
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
-          <Link to="/">
-            <Typography className={classes.title} variant="h6" noWrap>
-              Quiz App
-            </Typography>
-          </Link>
+          {/* <Button component='a' href='/'> */}
+            <Button component={Link} to='/'>
+
+          <Typography className={classes.title} variant="h6" noWrap onClick={handleMenuHome}>
+            Material-UI
+          </Typography>
+            </Button>
+          {/* </Button> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -168,7 +172,7 @@ function NavBar({ toggleTheme, checked }) {
             </IconButton>
           </div>
         </Toolbar>
-      </_AppBar>
+      </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>
