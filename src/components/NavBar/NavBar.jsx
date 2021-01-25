@@ -108,12 +108,9 @@ function NavBar({ toggleTheme, checked }) {
       </MenuItem>
     </Menu>
   );
-  const _AppBar = styled(AppBar)`
-    background-color: theme.palette.primary.light;
-  `;
   return (
-    <div className={classes.grow}>
-      <_AppBar position="fixed">
+    <div>
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"
@@ -175,7 +172,7 @@ function NavBar({ toggleTheme, checked }) {
             </IconButton>
           </div>
         </Toolbar>
-      </_AppBar>
+      </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>

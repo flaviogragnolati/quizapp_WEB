@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   grow: {
@@ -16,10 +16,10 @@ export const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
-    // '&:hover': {
-    //   backgroundColor: fade(theme.palette.common.white, 0.25),
-    // },
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
