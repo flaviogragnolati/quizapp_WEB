@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '../../../components/Home_MUI/Button';
+// import Button from '../../../components/Home_MUI/Button';
+import { Button } from '@material-ui/core';
 import Typography from '../../../components/Home_MUI/Typography';
 import InicioBackground from './InicioBackground';
-import Link from '@material-ui/core/Link';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem';
+import { Grid, Box } from '@material-ui/core';
+import styled from 'styled-components';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -31,9 +35,37 @@ const styles = (theme) => ({
   },
 });
 
+const HeroButton = styled(Button)`
+  background-color: ${(p) => p.theme.main};
+  color: ${(p) => p.theme.palette.primary.light};
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  position: relative;
+  padding: 20px 40px;
+  margin: 0.3125rem 1px;
+  cursor: pointer;
+  :hover {
+    color: #ffffff;
+    background-color: gray;
+    box-shadow: 0 14px 26px -12px rgba(153, 153, 153, 0.42),
+      0 4px 23px 0px rgba(0, 0, 0, 0.12),
+      0 8px 10px -5px rgba(153, 153, 153, 0.2);
+  }
+  min-height: auto;
+  min-width: auto;
+  width: 100%;
+  will-change: box-shadow, transform;
+`;
+
 function Inicio(props) {
   const { classes } = props;
-  const history = useHistory()
+  const history = useHistory();
+
   return (
     <InicioBackground backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
@@ -42,30 +74,43 @@ function Inicio(props) {
         src={backgroundImage}
         alt="increase priority"
       />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
+      <Typography color="inherit" variant="h2">
         Tu Universidad Virtual
       </Typography>
-      <Typography
-        color="inherit"
-        align="center"
-        variant="h5"
-        className={classes.h5}
-      >
+      <Typography color="inherit" variant="h4" className={classes.h5}>
         Estudia Desde cualquier parte del Mundo.
       </Typography>
-      <Link to="/register">
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component="a"
-          href="/register"
-        >
-          Registrarse
-        </Button>
-      </Link>
-      <Typography variant="body2" color="inherit" className={classes.more}>
+      <Grid
+        container
+        spacing={10}
+        direction="row"
+        justify="center"
+        alignItems="space-between"
+      >
+        <Grid item xs={3}>
+          <HeroButton
+            color="primary"
+            variant="contained"
+            size="large"
+            component={Link}
+            to="/register"
+          >
+            Registrarse
+          </HeroButton>
+        </Grid>
+        <Grid item xs={3}>
+          <HeroButton
+            color="secondary"
+            variant="contained"
+            size="large"
+            component={Link}
+            to="/catalogue"
+          >
+            Ver Catalogo
+          </HeroButton>
+        </Grid>
+      </Grid>
+      <Typography variant="h6" color="inherit" className={classes.more}>
         Descubre la Experiencia
       </Typography>
     </InicioBackground>

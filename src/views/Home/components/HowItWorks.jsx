@@ -55,7 +55,7 @@ const styles = (theme) => ({
   Icon__Values: {
     width: '2em',
     height: '2em',
-  }
+  },
 });
 
 function HowItWorks(props) {
@@ -64,7 +64,12 @@ function HowItWorks(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+        <Typography
+          variant="h4"
+          marked="center"
+          className={classes.title}
+          component="h2"
+        >
           Como funciona
         </Typography>
         <div>
@@ -72,28 +77,27 @@ function HowItWorks(props) {
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <BorderColorIcon className={classes.Icon__Values}/>
+                <BorderColorIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
-                Crea tu Quizz 
+                  Crea tu Quiz
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <CategoryIcon className={classes.Icon__Values}/>
+                <CategoryIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
-                Los estudiantes lo completan
+                  Los estudiantes lo completan
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <DoneAllIcon className={classes.Icon__Values}/>
+                <DoneAllIcon className={classes.Icon__Values} />
                 <Typography variant="h4" align="center">
                   Corrige los resultados
-
                 </Typography>
               </div>
             </Grid>
@@ -105,7 +109,7 @@ function HowItWorks(props) {
           variant="contained"
           className={classes.button}
           component="a"
-          href="/premium-themes/onepirate/sign-up/"
+          href="/quizz-loader"
         >
           Comenzar
         </Button>

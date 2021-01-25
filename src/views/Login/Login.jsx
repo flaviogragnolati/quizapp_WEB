@@ -7,8 +7,8 @@ import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 import People from '@material-ui/icons/People';
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
 import Button from 'components/CustomButtons/Button.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';

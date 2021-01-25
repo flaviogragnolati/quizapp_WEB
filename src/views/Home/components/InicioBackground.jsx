@@ -15,6 +15,8 @@ const styles = (theme) => ({
       minHeight: 500,
       maxHeight: 1000,
     },
+    paddingTop:'5rem',
+    marginTop:'3rem'
   },
   container: {
     marginTop: theme.spacing(3),
