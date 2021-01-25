@@ -8,6 +8,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 
+import DeleteIcon from "@material-ui/icons/Delete";
+
 const useStyles = makeStyles((theme) => ({
   item: {
     display: 'flex',
@@ -49,6 +51,7 @@ const NavItem = ({
   const classes = useStyles();
 
   return (
+  <>
     <ListItem
       className={clsx(classes.item, className)}
       disableGutters
@@ -68,7 +71,9 @@ const NavItem = ({
           {title}
         </span>
       </Button>
+      <Button><DeleteIcon/></Button>
     </ListItem>
+    </>
   );
 };
 
