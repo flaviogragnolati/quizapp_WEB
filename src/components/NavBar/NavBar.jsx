@@ -22,6 +22,7 @@ import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
+import Snackbar from 'components/Home_MUI/Snackbar';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -31,7 +32,7 @@ function NavBar({ toggleTheme, checked }) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const [notifier, setNotifier] = useState(false)
   const History = useHistory();
 
   const handleProfileMenuOpen = (event) => {
@@ -60,8 +61,26 @@ function NavBar({ toggleTheme, checked }) {
 
   const handleMenuHome = ()=>{
     History.push(`/`)
+    handleMenuClose()
 
   }
+  const handleMenuLogout = ()=>{
+    History.push(`/`)
+    handleMenuClose()
+
+  }
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    History.push('/catalogue')
+    document.getElementById('Search').value = ''
+    setNotifier(true)
+
+  }
+
+  const handleClose = ()=>{
+    setNotifier(false)
+  }
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -73,7 +92,7 @@ function NavBar({ toggleTheme, checked }) {
       position="fixed"
     >
       <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -112,12 +131,14 @@ function NavBar({ toggleTheme, checked }) {
     <div>
       <AppBar position="fixed">
         <Toolbar>
+
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
+
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
           {/* <Button component='a' href='/'> */}
@@ -128,11 +149,12 @@ function NavBar({ toggleTheme, checked }) {
           </Typography>
             </Button>
           {/* </Button> */}
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <form onSubmit={handleSubmit}  className={classes.search}>
+            <Button className={classes.searchIcon} >
               <SearchIcon />
-            </div>
+            </Button>
             <InputBase
+            id='Search'
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -140,7 +162,7 @@ function NavBar({ toggleTheme, checked }) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </form>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton>
@@ -175,7 +197,13 @@ function NavBar({ toggleTheme, checked }) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Snackbar
+        open={notifier}
+        onClose={handleClose}
+        message="No hay cursos relacionados a la busqueda."
+      />
     </div>
+    
   );
 }
 
