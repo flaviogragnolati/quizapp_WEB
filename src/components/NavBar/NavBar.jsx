@@ -20,6 +20,7 @@ import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
 import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function NavBar({ toggleTheme, checked }) {
   const classes = useStyles();
@@ -30,6 +31,8 @@ function NavBar({ toggleTheme, checked }) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const History = useHistory()
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,17 +41,21 @@ function NavBar({ toggleTheme, checked }) {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (e) => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
+  
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   // const handleSideBarToggle = () => {
-  //   openSideBar = !openSideBar;
-  // };
+    //   openSideBar = !openSideBar;
+    // };
+    const handleMenuProfile = ()=>{
+    History.push(`/profile`)
+handleMenuClose()
+  }
 
   const renderMenu = (
     <Menu
@@ -58,9 +65,10 @@ function NavBar({ toggleTheme, checked }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      position='fixed'
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuProfile} >Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -72,6 +80,7 @@ function NavBar({ toggleTheme, checked }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      position='fixed'
     >
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -99,7 +108,7 @@ function NavBar({ toggleTheme, checked }) {
   `;
   return (
     <div className={classes.grow}>
-      <_AppBar position="static">
+      <_AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"
