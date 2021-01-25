@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
 import { useStyles } from './NavBarStyles';
@@ -54,9 +54,13 @@ function NavBar({ toggleTheme, checked }) {
     // };
     const handleMenuProfile = ()=>{
     History.push(`/profile`)
-handleMenuClose()
+    handleMenuClose()
   }
 
+  const handleMenuHome = ()=>{
+    History.push(`/`)
+
+  }
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -118,9 +122,12 @@ handleMenuClose()
           >
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          {/* <Button component='a' href='/'> */}
+
+          <Typography className={classes.title} variant="h6" noWrap onClick={handleMenuHome}>
             Material-UI
           </Typography>
+          {/* </Button> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

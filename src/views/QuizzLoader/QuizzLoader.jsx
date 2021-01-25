@@ -11,8 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import DatosQuizz from "./DatosQuizz";
 import AlumnosQuizz from "./AlumnosQuizz";
 import Review from "./Review";
-import { initialState_Checkout } from './checkoutHelpers';
-import { Formik, Form, useFormikContext } from 'formik';
+// import { initialState_Checkout } from './checkoutHelpers';
+import { Formik, Form } from 'formik';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -86,7 +87,7 @@ function getStepContent(step) {
 export default function QuizzLoader() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const History = useHistory()
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -121,7 +122,10 @@ export default function QuizzLoader() {
                   preguntas y respuestas
                 </Typography>
                 <Typography variant="subtitle1">
-                    <Link href='/school-quizz'> Editar el Quizz</Link>
+                  <Button onClick={ ()=>History.push('/school-quizz')}>
+
+                     Editar el Quizz
+                  </Button>
                 </Typography>
               </React.Fragment>
             ) : (

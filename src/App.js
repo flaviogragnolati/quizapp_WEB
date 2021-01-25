@@ -1,10 +1,10 @@
-import { createContext, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { createContext,  useState } from 'react';
+// import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
 import Home from './views/Home/Index.jsx';
 import { ThemeWrapper } from './styles/ThemeWrapper';
-import customTheme from './styles/ThemeWrapper/muiTheme';
+// import customTheme from './styles/ThemeWrapper/muiTheme';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 import Login from './views/Login/Login';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -23,15 +23,15 @@ import SchoolTeacher from './views/SchoolTeacher';
 import SchoolQuizz from 'views/SchoolQuizz/SchoolQuizz';
 import Notifier from 'views/Notifier';
 import QuestionLoader from 'views/QuestionsLoader';
-import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
+// import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
 
 
 //*container de prueba para thema MUI / Styled cOmponents
-const StyledContainer = styled.div`
-  background: ${(p) => p.theme.palette.background.paper};
-  height: 64px;
-  border: 1px solid ${(p) => p.theme.palette.divider};
-`;
+// const StyledContainer = styled.div`
+//   background: ${(p) => p.theme.palette.background.paper};
+//   height: 64px;
+//   border: 1px solid ${(p) => p.theme.palette.divider};
+// `;
 
 export const SideBarContext = createContext({
   openSidebar: false,

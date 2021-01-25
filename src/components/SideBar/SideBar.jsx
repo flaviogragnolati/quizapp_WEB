@@ -6,12 +6,11 @@ import {
   ListItemText,
   Drawer,
 } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import clsx from 'clsx';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import { useStyles } from './SideBarStyle';
 import { SideBarContext } from '../../App';
 import { Link } from 'react-router-dom';

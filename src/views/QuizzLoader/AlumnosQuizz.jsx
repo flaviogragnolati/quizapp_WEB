@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Box, Container, makeStyles } from "@material-ui/core";
 import List from "../../components/List";
 import array from "./data";
-import Button from "components/Home_MUI/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
