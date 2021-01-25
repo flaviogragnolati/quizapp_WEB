@@ -58,12 +58,7 @@ function About(props) {
                 Sobre Nosotros
               </Typography>
               <Typography variant="h5">
-                {
-                  'xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxx xxxxxxx xxxxxxxxxxxxx'
-                }
-                {
-                  'xxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxxx'
-                }
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus facilis ad eum. Repellat ad ipsum dicta ullam, suscipit ut saepe ex consectetur non repudiandae aperiam harum voluptate minima vitae quisquam!
               </Typography>
             </div>
           </Grid>
@@ -74,12 +69,7 @@ function About(props) {
                 Proyecto
               </Typography>
               <Typography color="primary.contrastText" variant="h5">
-                {
-                  'xxxxxxxx xxxxxxxxxxx xxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'
-                }
-                {
-                  'xxxxxxxx xxxxxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxx'
-                }
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, quo perspiciatis at velit fugiat magni quidem quia accusantium saepe voluptas assumenda quaerat amet, a fugit. Similique ad tempora repellat recusandae.
               </Typography>
             </div>
           </Grid>
@@ -90,12 +80,8 @@ function About(props) {
                 Contacto
               </Typography>
               <Typography variant="h5">
-                {
-                  'xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxx xxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx'
-                }
-                {
-                  'xxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx'
-                }
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate eos obcaecati at possimus enim architecto fugit nostrum! Rerum provident magnam, quod cum a architecto quae facere laudantium excepturi voluptatum tenetur!
+
               </Typography>
             </div>
           </Grid>
