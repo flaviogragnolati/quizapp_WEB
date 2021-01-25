@@ -17,6 +17,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import Button from 'components/Home_MUI/Button';
+import { Link } from 'react-router-dom';
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
@@ -143,7 +144,7 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
                   )}
                 </TableCell>
                 <TableCell>
-                  {customer.phone ? customer.phone : <Button>Edit</Button>}
+                  {customer.phone ? customer.phone : <Button component={Link} to='/questionLoader'>Edit</Button>}
                 </TableCell>
                 {columnName.length === 4 ? null : (
                   <TableCell>
