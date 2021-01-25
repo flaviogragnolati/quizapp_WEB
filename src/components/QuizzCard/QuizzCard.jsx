@@ -10,6 +10,7 @@ import {
   Grid,
   Typography,
   makeStyles,
+  Button,
 } from '@material-ui/core';
 
 import InfoIcon from '@material-ui/icons/Info';
@@ -18,6 +19,7 @@ import Bookmark from '../Bookmark';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
 import Badge from '../Badge/Badge';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,29 +47,32 @@ const QuizzCard = ({ className, item, ...rest }) => {
 
   const handleNotifications = (state) => {
     if (state) {
-      dispatch(ACTIONS.favorites.removeFromFavorites());
-    } else {
       dispatch(ACTIONS.favorites.addToFavorites());
+    } else {
+      dispatch(ACTIONS.favorites.removeFromFavorites());
     }
   };
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Box display="flex" justifyContent="space-between" mb={3}>
+        <Box display="flex" justifyContent="space-between">
           <Typography
             align="center"
             color="textPrimary"
             gutterBottom
             variant="h5"
           >
-            {item.title}
+            {item.quizName}
           </Typography>
           <Bookmark action={handleNotifications} />
         </Box>
+        <Box display="flex" justifyContent="space-between">
+          <p>{item.schoolName}</p>
+          <p>{item.subjectName}</p>
+        </Box>
         <Box display="flex" justifyContent="center" mb={3}>
           <img src={item.media} alt="profile pic" />
-          {/* <Avatar alt="item" src={item.media} variant="square" /> */}
         </Box>
         <Typography align="center" color="textPrimary" variant="body1">
           {item.description}
@@ -83,21 +88,23 @@ const QuizzCard = ({ className, item, ...rest }) => {
       <Divider />
       <Box p={2}>
         <Grid container justify="space-between" spacing={2}>
-          <Grid className={classes.statsItem} item>
-            <InfoIcon className={classes.statsIcon} color="action" />
-            Más información
-            <Typography
-              color="textSecondary"
-              display="inline"
-              variant="body2"
-            ></Typography>
-          </Grid>
-          <Grid className={classes.statsItem} item>
+          <Box className={classes.statsItem} item>
+            <Button component={Link} to={`/school/:quizId`}>
+              <InfoIcon className={classes.statsIcon} color="action" />
+              Más información
+              <Typography
+                color="textSecondary"
+                display="inline"
+                variant="body2"
+              ></Typography>
+            </Button>
+          </Box>
+          <Box className={classes.statsItem} item>
             <PeopleIcon className={classes.statsIcon} color="action" />
             <Typography color="textSecondary" display="inline" variant="body2">
               {item.totalDownloads} Estudiantes
             </Typography>
-          </Grid>
+          </Box>
         </Grid>
       </Box>
     </Card>

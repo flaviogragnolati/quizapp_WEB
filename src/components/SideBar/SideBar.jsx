@@ -1,3 +1,6 @@
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+//?Material UI
 import {
   Divider,
   List,
@@ -5,16 +8,27 @@ import {
   ListItemIcon,
   ListItemText,
   Drawer,
+  Box,
+  IconButton,
+  Typography,
 } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
-import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+//?Custom Styles and Context
 import { useStyles } from './SideBarStyle';
 import { SideBarContext } from '../../App';
-import { Link } from 'react-router-dom';
+
+const HeaderBox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-top: 2rem;
+`;
 
 function SideBar() {
   const classes = useStyles();
@@ -31,7 +45,12 @@ function SideBar() {
       onKeyDown={() => toggleSideBar()}
     >
       <List>
-        <Typography component="h3">Headline</Typography>
+        <HeaderBox>
+          <Typography component="h3">QuizApp?</Typography>
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </HeaderBox>
         <Divider />
         {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
           (text, index) => (
@@ -45,8 +64,15 @@ function SideBar() {
             </Link>
           )
         )}
+        <Divider />
+        <ListItem button>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+        <Divider />
       </List>
-      <Divider />
     </div>
   );
 

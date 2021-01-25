@@ -121,7 +121,7 @@ function NavBar({ toggleTheme, checked }) {
               Quiz App
             </Typography>
           </Link>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -133,7 +133,7 @@ function NavBar({ toggleTheme, checked }) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton>

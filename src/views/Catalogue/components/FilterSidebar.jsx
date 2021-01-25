@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Divider,
@@ -6,9 +6,18 @@ import {
   Box,
   InputBase,
   fade,
+  Button,
+  IconButton,
 } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
+import FilterGroup from './FilterGroup';
+import SchoolFilterDetail from './SchoolFilterDetail';
+import SubjectFilterDetail from './SubjectFilterDetail';
+import QuizFilterDetail from './QuizFilterDetail';
 
 const SidebarDiv = styled.div`
   background-color: gray;
@@ -16,9 +25,6 @@ const SidebarDiv = styled.div`
   border-style: solid;
   border-color: green;
   align-items: center;
-`;
-const Title = styled.h2`
-  color: ${(props) => props.theme.main};
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +71,7 @@ function FilterSidebar() {
   const c = useStyles();
   return (
     <SidebarDiv>
-      <Container>
+      <>
         <Box mt={3}>
           <div className={c.search}>
             <div className={c.searchIcon}>
@@ -81,17 +87,20 @@ function FilterSidebar() {
             />
           </div>
         </Box>
-      </Container>
-      <Container>
-        <Box mt={5}>
-          <Title>Schools</Title>
-        </Box>
+      </>
+      <>
+        <FilterGroup title="School Filter">
+          <SchoolFilterDetail />
+        </FilterGroup>
         <Divider />
-        <Box mt={5}>filter subject</Box>
+        <FilterGroup title="Subject Filter">
+          <SubjectFilterDetail />
+        </FilterGroup>
         <Divider />
-        <Box mt={5}>filter quiz</Box>
-        <Divider />
-      </Container>
+        <FilterGroup title="Quiz Filter">
+          <QuizFilterDetail />
+        </FilterGroup>
+      </>
     </SidebarDiv>
   );
 }
