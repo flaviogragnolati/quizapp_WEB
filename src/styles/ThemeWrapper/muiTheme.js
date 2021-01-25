@@ -1,5 +1,3 @@
-import { indigo } from '@material-ui/core/colors';
-
 export const muiTheme = {
   light: {
     themeName: 'custom light',
