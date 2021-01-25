@@ -38,6 +38,8 @@ export const SideBarContext = createContext({
   toggleSideBar: () => {},
 });
 
+
+
 function App() {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
@@ -62,6 +64,7 @@ function App() {
           <NavBar toggleTheme={toggleTheme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
+        <div Style="margin-top: 65px;min-height: 82vh;">
         <Switch>
           <Route exact path={['/', '/home']} component={Home} />
           <Route path="/login" component={Login} />
@@ -83,6 +86,7 @@ function App() {
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>
+        </div>
         <hr></hr>
         <Footer />
       </div>

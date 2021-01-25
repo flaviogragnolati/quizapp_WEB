@@ -7,11 +7,13 @@ import Questions from "components/Questions/Questions";
 
 const useStyles = makeStyles(() => ({
     div_Questions: {
-        marginLeft: '256px',
+        marginLeft: 280,
     }
   }));
 
 function QuestionLoader() {
+
+    
 const classes = useStyles();
   return (
     <>

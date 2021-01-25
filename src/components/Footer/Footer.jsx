@@ -13,8 +13,10 @@ import Favorite from '@material-ui/icons/Favorite';
 import styles from 'assets/jss/material-kit-react/components/footerStyle.js';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(styles);
+// const useStyles = makeStyles((styles) => ({
 
+// }));
+const useStyles = makeStyles(styles);
 
 export default function Footer(props) {
   const classes = useStyles();
