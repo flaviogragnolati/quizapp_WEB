@@ -12,7 +12,7 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#FFFBEB',
   },
   container: {
     marginTop: theme.spacing(15),
@@ -58,7 +58,10 @@ function About(props) {
                 Sobre Nosotros
               </Typography>
               <Typography variant="h5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus facilis ad eum. Repellat ad ipsum dicta ullam, suscipit ut saepe ex consectetur non repudiandae aperiam harum voluptate minima vitae quisquam!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus facilis ad eum. Repellat ad ipsum dicta ullam,
+                suscipit ut saepe ex consectetur non repudiandae aperiam harum
+                voluptate minima vitae quisquam!
               </Typography>
             </div>
           </Grid>
@@ -69,7 +72,10 @@ function About(props) {
                 Proyecto
               </Typography>
               <Typography color="primary.contrastText" variant="h5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, quo perspiciatis at velit fugiat magni quidem quia accusantium saepe voluptas assumenda quaerat amet, a fugit. Similique ad tempora repellat recusandae.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Laudantium, quo perspiciatis at velit fugiat magni quidem quia
+                accusantium saepe voluptas assumenda quaerat amet, a fugit.
+                Similique ad tempora repellat recusandae.
               </Typography>
             </div>
           </Grid>
@@ -80,8 +86,10 @@ function About(props) {
                 Contacto
               </Typography>
               <Typography variant="h5">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate eos obcaecati at possimus enim architecto fugit nostrum! Rerum provident magnam, quod cum a architecto quae facere laudantium excepturi voluptatum tenetur!
-
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Cupiditate eos obcaecati at possimus enim architecto fugit
+                nostrum! Rerum provident magnam, quod cum a architecto quae
+                facere laudantium excepturi voluptatum tenetur!
               </Typography>
             </div>
           </Grid>

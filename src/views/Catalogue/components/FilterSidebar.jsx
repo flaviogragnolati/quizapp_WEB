@@ -67,6 +67,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const XButton = styled(Button)`
+  background-color: ${(p) => p.theme.palette.secondary.light};
+`;
+
+const ZButton = styled(Button)`
+  background-color: ${(p) => p.theme.palette.primary.light};
+`;
+
 function FilterSidebar() {
   const c = useStyles();
   return (

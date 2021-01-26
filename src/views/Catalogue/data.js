@@ -4,6 +4,11 @@ import profile1 from 'assets/img/faces/christian.jpg';
 import profile2 from 'assets/img/faces/kendall.jpg';
 import profile3 from 'assets/img/faces/marc.jpg';
 
+import quiz1 from 'assets/img/quiz/quiz1.jpg';
+import quiz2 from 'assets/img/quiz/quiz2.jpg';
+import quiz3 from 'assets/img/quiz/quiz3.jpg';
+import quiz4 from 'assets/img/quiz/quiz4.jpg';
+
 const data = [
   {
     id: uuid(),
@@ -12,7 +17,7 @@ const data = [
       'Dropbox is a file hosting service that offers cloud storage, file synchronization, a personal cloud.',
     schoolName: 'UBA',
     subjectName: 'Analisis Mamatico I',
-    media: profile1,
+    media: quiz1,
     quizName: 'Matematica Inicial',
     totalStudents: '594',
     tags: ['Matematica', 'Fisica', 'Quimica', 'Administracion'],
@@ -24,7 +29,7 @@ const data = [
       'Medium is an online publishing platform developed by Evan Williams, and launched in August 2012.',
     schoolName: 'Colegio San Jose',
     subjectName: 'Fisica 1°B',
-    media: profile2,
+    media: quiz2,
     quizName: 'Fisica 2ndo parcial',
     totalStudents: '625',
     tags: ['Informatica', 'Programacion'],
@@ -36,7 +41,7 @@ const data = [
       'Slack is a cloud-based set of team collaboration tools and services, founded by Stewart Butterfield.',
     schoolName: 'UTN FRTDF',
     subjectName: 'Quimica Organica',
-    media: profile3,
+    media: quiz3,
     quizName: 'Practica Qca. Organica II',
     totalStudents: '857',
     tags: ['Etica', 'Derecho', 'Economia'],
@@ -48,7 +53,7 @@ const data = [
       'Lyft is an on-demand transportation company based in San Francisco, California.',
     schoolName: 'UNTDF',
     subjectName: 'Estadistica y Administracion',
-    media: profile1,
+    media: quiz4,
     quizName: 'Estadistica examen',
     totalStudents: '406',
     tags: ['Matematica', 'Fisica', 'Quimica', 'Administracion'],
@@ -60,7 +65,7 @@ const data = [
       'GitHub is a web-based hosting service for version control of code using Git.',
     schoolName: 'UTNLP',
     subjectName: 'Analisis Mametico II',
-    media: profile2,
+    media: profile3,
     quizName: 'Integracion 2nda parte',
     totalStudents: '835',
     tags: ['Etica', 'Derecho', 'Economia'],
@@ -72,7 +77,7 @@ const data = [
       'Squarespace provides software as a service for website building and hosting. Headquartered in NYC.',
     schoolName: 'some school',
     subjectName: 'some subject',
-    media: profile3,
+    media: profile2,
     quizName: 'Born-Habber',
     totalStudents: '835',
     tags: ['Informatica', 'Programacion'],

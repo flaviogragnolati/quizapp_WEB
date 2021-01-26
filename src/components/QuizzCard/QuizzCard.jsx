@@ -19,6 +19,9 @@ import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
 import Badge from '../Badge/Badge';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { quizDetail } from '../../views/Catalogue/quizDetail';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
 }));
+
+const ImgCardContainer = styled.img`
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+`;
 
 const QuizzCard = ({ className, item, ...rest }) => {
   const classes = useStyles();
@@ -71,7 +80,7 @@ const QuizzCard = ({ className, item, ...rest }) => {
           <p>{item.subjectName}</p>
         </Box>
         <Box display="flex" justifyContent="center" mb={3}>
-          <img src={item.media} alt="profile pic" />
+          <ImgCardContainer src={item.media} alt="quiz detail picture" />
         </Box>
         <Typography align="center" color="textPrimary" variant="body1">
           {item.description}
@@ -88,7 +97,15 @@ const QuizzCard = ({ className, item, ...rest }) => {
       <Box p={2}>
         <Grid container justify="space-between" spacing={2}>
           <Box className={classes.statsItem} item>
-            <Button component={Link} to={`/school/:quizId`}>
+            <Button
+              component={Link}
+              to={{
+                pathname: '/quiz-detail/1',
+                state: {
+                  quizDetail,
+                },
+              }}
+            >
               <InfoIcon className={classes.statsIcon} color="action" />
               Más información
               <Typography

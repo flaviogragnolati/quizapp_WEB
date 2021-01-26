@@ -1,9 +1,9 @@
 const appTheme = {
   light: {
-    main: 'mediumseagreen',
+    main: '#FFFBEB',
   },
   dark: {
-    main: 'palevioletred',
+    main: '#0C090B',
   },
 };
 

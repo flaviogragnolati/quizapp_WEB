@@ -7,13 +7,14 @@ import data from './data';
 import FilterSidebar from 'views/Catalogue/components/FilterSidebar';
 import styled from 'styled-components';
 
+// root: {
+//   backgroundColor: theme.palette.background.dark,
+//   minHeight: '100%',
+//   paddingBottom: theme.spacing(3),
+//   paddingTop: theme.spacing(3),
+// },
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.dark,
-    minHeight: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3),
-  },
   courseCard: {
     height: '100%',
   },
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CatalogueSection = styled.section`
   margin-top: 5rem;
+  /* background-color: ${(p) => p.theme.main}; */
 `;
 
 const Catalogue = () => {

@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.main,
     overflow: 'hidden',
   },
   container: {
@@ -109,7 +109,7 @@ function HowItWorks(props) {
           variant="contained"
           className={classes.button}
           component={Link}
-          to='/quiz-loader'
+          to="/quiz-loader"
         >
           Comenzar
         </Button>
