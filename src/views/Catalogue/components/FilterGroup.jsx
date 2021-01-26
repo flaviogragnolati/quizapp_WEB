@@ -21,7 +21,7 @@ const ContentBox = styled(Box)`
 `;
 
 const Title = styled.h2`
-  color: ${(props) => props.theme.palette.primary.light};
+  color: ${(props) => props.theme.palette.primary.dark};
 `;
 
 function FilterGroup({ title, children }) {

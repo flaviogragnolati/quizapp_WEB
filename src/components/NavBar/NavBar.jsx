@@ -23,8 +23,11 @@ import { SideBarContext } from '../../App';
 import { PropTypes } from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import Snackbar from 'components/Home_MUI/Snackbar';
+import logoLight from 'assets/img/logo/logoLight.png';
+import logoDark from 'assets/img/logo/logoDark.png';
+import { Box } from '@material-ui/core';
 
-function NavBar({ toggleTheme, checked }) {
+function NavBar({ toggleTheme, checked, theme }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
@@ -78,6 +81,24 @@ function NavBar({ toggleTheme, checked }) {
     setNotifier(false);
   };
 
+  const LogoContainer = styled.img`
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: contain;
+    margin-right: 0.5rem;
+  `;
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+      text-decoration: none;
+    }
+  `;
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -126,7 +147,7 @@ function NavBar({ toggleTheme, checked }) {
   );
   return (
     <div>
-      <AppBar position="fixed">
+      <AppBar position="fixed" color="secondary">
         <Toolbar>
           <IconButton
             edge="start"
@@ -136,26 +157,27 @@ function NavBar({ toggleTheme, checked }) {
           >
             <MenuIcon onClick={() => toggleSideBar()} />
           </IconButton>
-          <Link to="/">
-            <Typography className={classes.title} variant="h6" noWrap>
-              Quiz App
-            </Typography>
-          </Link>
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </Button>
-            <InputBase
-            id='Search'
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
+          <Button component={Link} to="/" color="inherit" variant="text">
+            <Box display="flex" flexDirection="row" justifyContent="flex-begin">
+              <LogoContainer
+                src={theme === 'light' ? logoLight : logoDark}
+                alt="logo"
+              />
+              <Typography className={classes.title} variant="h6" noWrap>
+                Quiz App
+              </Typography>
+            </Box>
+          </Button>
           <div className={classes.grow} />
+          <Button
+            variant="outlined"
+            color="primary"
+            size="Large"
+            component={Link}
+            to="/login"
+          >
+            LOG IN
+          </Button>
           <div className={classes.sectionDesktop}>
             <IconButton>
               <ThemeToggler toggleTheme={toggleTheme} checked={checked} />

@@ -1,6 +1,6 @@
 export const muiTheme = {
   light: {
-    themeName: 'custom light',
+    themeName: 'light',
     typography: {
       useNextVariants: true,
       fontFamily: [
@@ -20,7 +20,9 @@ export const muiTheme = {
     palette: {
       type: 'light',
       primary: {
-        main: '#28464B',
+        main: '#cfd8dc',
+        light: '#ffffff',
+        dark: '#9ea7aa',
         // dark: '#1A6035',
         // light: '#536B6F',
         // light: '#e8dab2',
@@ -30,7 +32,9 @@ export const muiTheme = {
         // contrastText: '#4f6d7a',
       },
       secondary: {
-        main: '#d5d5d5',
+        main: '#00838f',
+        light: '#4fb3bf',
+        dark: '#005662',
         // dark: '#aca9bb',
         // light: '#4f6d7a',
         // main: '#e8dab2',

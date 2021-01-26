@@ -30,13 +30,18 @@ const HeaderBox = styled(Box)`
   margin-top: 2rem;
 `;
 
+const SidebarContainer = styled.div`
+  background-color: ${(p) => p.theme.main};
+  height: 100%;
+`;
+
 function SideBar() {
   const classes = useStyles();
 
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
 
   const list = (anchor) => (
-    <div
+    <SidebarContainer
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
@@ -54,14 +59,17 @@ function SideBar() {
         <Divider />
         {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
           (text, index) => (
-            <Link to={`/${text.toLowerCase()}`}>
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index === 0 ? <InboxIcon /> : <LocalLibraryIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            </Link>
+            <ListItem
+              button
+              key={text}
+              component={Link}
+              to={`/${text.toLowerCase()}`}
+            >
+              <ListItemIcon>
+                {index === 0 ? <InboxIcon /> : <LocalLibraryIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
           )
         )}
         <Divider />
@@ -73,15 +81,14 @@ function SideBar() {
         </ListItem>
         <Divider />
       </List>
-    </div>
+    </SidebarContainer>
   );
 
   return (
     <div>
       <React.Fragment key={'left'}>
         <Drawer
-          classes={{ paper: classes.Drawer__paper }}
-          style={{}}
+          // classes={{ paper: classes.Drawer__paper }}
           anchor={'left'}
           open={openSidebar}
           onClose={() => toggleSideBar()}

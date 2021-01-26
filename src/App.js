@@ -58,7 +58,7 @@ function App() {
       <div className="App">
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
-          <NavBar toggleTheme={toggleTheme} checked={theme} />
+          <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
         <div Style="margin-top: 65px;min-height: 82vh;">
@@ -69,15 +69,9 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/quiz-loader" component={QuizLoader} />
             <Route path="/questionLoader" component={QuestionLoader} />
-            <Route
-              path={['/user-profile', '/profile']}
-              component={UserProfile}
-            />
+            <Route path="/user-profile/:id" component={UserProfile} />
             <Route path="/catalogue" component={Catalogue} />
-            <Route
-              path={['/school-profile', '/profile']}
-              component={SchoolProfile}
-            />
+            <Route path="/school-profile/:id" component={SchoolProfile} />
             <Route path="/teacher-profile" component={TeacherProfile} />
             <Route path="/quiz-detail/:id" component={QuizProfile} />
             <Route path="/school-subject" component={SchoolSubject} />
