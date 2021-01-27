@@ -1,19 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
-
 // @material-ui/core
-import {
-  Box,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
-  Tooltip,
-  Typography,
-} from '@material-ui/core/';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,16 +11,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from 'components/CustomButtons/Button.js';
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
-import NavPills from 'components/NavPills/NavPills.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
 import fakeUser from './fakeUser';
 import EditIcon from '@material-ui/icons/Edit';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 
-import { fakeUsers } from '../QuizLoader/data';
-import { Link } from 'react-router-dom';
 import ProfileTabs from './ProfileTabs';
+import { capitalize } from 'utils/helpers';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -43,7 +30,7 @@ const {
   img,
   social,
   name,
-  type,
+  role,
   bio,
   courses,
   favourites,
@@ -81,7 +68,9 @@ export default function ProfilePage(props) {
                   <div className={classes.name}>
                     <h1 className={classes.title}>{name}</h1>
                     <h5 className={classes.subtitle}>{`#${id}`}</h5>
-                    <h3 className={classes.subtitle}>{`Role: ${type}`}</h3>
+                    <h3 className={classes.subtitle}>{`Role: ${capitalize(
+                      role
+                    )}`}</h3>
                     <Button
                       justIcon
                       link
@@ -125,6 +114,7 @@ export default function ProfilePage(props) {
                   courses={courses}
                   favourites={favourites}
                   teacherIn={teacherIn}
+                  role={role}
                 />
               </GridItem>
             </GridContainer>

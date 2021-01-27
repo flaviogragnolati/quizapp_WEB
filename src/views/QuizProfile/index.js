@@ -1,3 +1,3 @@
-import QuizProfile from './__QuizProfile';
+import QuizProfile from './QuizProfile';
 
 export default QuizProfile;

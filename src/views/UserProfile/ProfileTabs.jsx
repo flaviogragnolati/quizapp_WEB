@@ -19,6 +19,7 @@ import GridItem from 'components/Grid/GridItem.jsx';
 import NavPills from 'components/NavPills/NavPills.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
 import EditIcon from '@material-ui/icons/Edit';
+import SchoolIcon from '@material-ui/icons/School';
 // @material-ui/icons
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -35,7 +36,14 @@ import WarningIcon from '@material-ui/icons/Warning';
 import fakeUser from './fakeUser';
 import { Link } from 'react-router-dom';
 
-function ProfileTabs({ activity, courses, favourites, ...props }) {
+function ProfileTabs({
+  activity,
+  courses,
+  favourites,
+  teacherIn,
+  role,
+  ...props
+}) {
   const tabs = [
     {
       tabButton: 'Actividad',
@@ -139,6 +147,39 @@ function ProfileTabs({ activity, courses, favourites, ...props }) {
       ),
     },
   ];
+  if (role === 'teacher') {
+    tabs.push({
+      tabButton: 'Teacher In',
+      tabIcon: SchoolIcon,
+      tabContent: (
+        <GridContainer justify="center">
+          <List>
+            {teacherIn.map((fav, idx) => {
+              return (
+                <ListItem button key={idx} component={Link} to="/quiz-detail/1">
+                  <ListItemIcon>
+                    <DescriptionIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={fav.title} />
+                  <ListItemSecondaryAction>
+                    <Tooltip
+                      disableFocusListener
+                      placement="right"
+                      title="EL curso todavia no ha comenzado"
+                    >
+                      <IconButton edge="end" aria-label="more info">
+                        <InfoIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+          </List>
+        </GridContainer>
+      ),
+    });
+  }
 
   return <NavPills alignCenter color="info" tabs={tabs} {...props} />;
 }
