@@ -32,7 +32,7 @@ const Catalogue = () => {
     <CatalogueSection>
       <Grid
         container
-        spacing={2}
+        spacing={8}
         direction="row"
         justify="center"
         alignItems="flex-start"
@@ -40,21 +40,19 @@ const Catalogue = () => {
         <Grid item sm={3}>
           <FilterSidebar />
         </Grid>
-        <Grid item sm={7}>
-          <Container>
-            <Box mt={3}>
-              <Grid container spacing={3}>
-                {data.map((course) => (
-                  <Grid item key={course.id} lg={4} md={6} xs={12}>
-                    <QuizzCard className={classes.courseCard} item={course} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-            <Box mt={3} display="flex" justifyContent="center">
-              <Pagination color="primary" count={3} size="small" />
-            </Box>
-          </Container>
+        <Grid container item sm={7}>
+          <Box mt={3}>
+            <Grid container spacing={3}>
+              {data.map((course) => (
+                <Grid item key={course.id} lg={4} md={6} xs={12}>
+                  <QuizzCard className={classes.courseCard} item={course} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+          <Box mt={3} display="flex" justifyContent="center">
+            <Pagination color="primary" count={5} size="small" />
+          </Box>
         </Grid>
       </Grid>
     </CatalogueSection>
