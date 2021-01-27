@@ -4,23 +4,21 @@ import { Link } from 'react-router-dom';
 import {
   Divider,
   List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Drawer,
   Box,
   IconButton,
   Typography,
 } from '@material-ui/core';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CloseIcon from '@material-ui/icons/Close';
-import clsx from 'clsx';
 import styled from 'styled-components';
 //?Custom Styles and Context
-import { useStyles } from './SideBarStyle';
 import { SideBarContext } from '../../App';
+import SidebarItem from './components/SidebarItem';
 
 const HeaderBox = styled(Box)`
   display: flex;
@@ -34,18 +32,14 @@ const HeaderBox = styled(Box)`
 const SidebarContainer = styled.div`
   background-color: ${(p) => p.theme.main};
   height: 100%;
+  width: 15vw;
 `;
 
 function SideBar() {
-  const classes = useStyles();
-
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
 
-  const list = (anchor) => (
+  const SidebarContent = (
     <SidebarContainer
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
       role="presentation"
       onClick={() => toggleSideBar()}
       onKeyDown={() => toggleSideBar()}
@@ -58,48 +52,25 @@ function SideBar() {
           </IconButton>
         </HeaderBox>
         <Divider />
-        {/* {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
-          (text, index) => (
-            <ListItem
-              button
-              key={text}
-              component={Link}
-              to={`/${text.toLowerCase()}`}
-            >
-              <ListItemIcon>
-                {index === 0 ? <InboxIcon /> : <LocalLibraryIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )} */}
-          <ListItem  button   key={'Home'} component={Link} to={`/`}  >
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Home'} />
-          </ListItem>
-          <ListItem  button   key={'Catalogue'} component={Link} to={`/catalogue`}  >
-              <ListItemIcon>
-              <LocalLibraryIcon />          
-                  </ListItemIcon>
-              <ListItemText primary={'Catalogue'} />
-          </ListItem>
-              <ListItem  button   key={'Quizzes'} component={Link} to={`/school-Quiz`}  >
-              <ListItemIcon>
-              <InboxIcon />
-                  </ListItemIcon>
-              <ListItemText primary={'Quizzes'} />
-          </ListItem>
-
+        <SidebarItem
+          label="Account"
+          link="/profile/1"
+          icon={<AccountBoxIcon />}
+        />
         <Divider />
-        <ListItem button>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
+        <SidebarItem label="Home" link="/" icon={<HomeIcon />} />
+        <SidebarItem
+          label="Catalogue"
+          link="/catalogue"
+          icon={<LocalLibraryIcon />}
+        />
+        <SidebarItem
+          label="Create Quiz"
+          link="/quiz-loader"
+          icon={<FormatListNumberedIcon />}
+        />
         <Divider />
+        <SidebarItem label="Logout" link="/logout" icon={<ExitToAppIcon />} />
       </List>
     </SidebarContainer>
   );
@@ -108,12 +79,11 @@ function SideBar() {
     <div>
       <React.Fragment key={'left'}>
         <Drawer
-          // classes={{ paper: classes.Drawer__paper }}
           anchor={'left'}
           open={openSidebar}
           onClose={() => toggleSideBar()}
         >
-          {list('left')}
+          {SidebarContent}
         </Drawer>
       </React.Fragment>
     </div>

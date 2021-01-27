@@ -17,6 +17,7 @@ import CardFooter from 'components/Card/CardFooter.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
+import BackdropLoading from 'components/Loading/BackdropLoading';
 // import image from 'assets/img/bg7.jpg';
 const useStyles = makeStyles(styles);
 const image =
@@ -27,8 +28,15 @@ function Login(props) {
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
+
   const classes = useStyles();
-  const { ...rest } = props;
+
+  const handleUserLogin = () => {
+    setTimeout(() => {
+      return <BackdropLoading />;
+    }, 500);
+  };
+
   return (
     <div>
       <div
@@ -128,7 +136,7 @@ function Login(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="primary" size="lg">
+                    <Button color="primary" size="lg" onClick={handleUserLogin}>
                       User Login
                     </Button>{' '}
                     <Button color="rose" size="lg">

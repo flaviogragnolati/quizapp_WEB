@@ -60,7 +60,7 @@ function App(props) {
       <div className="App">
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
-          <div id="top-anchor" ></div>
+          <div id="top-anchor"></div>
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
@@ -72,10 +72,10 @@ function App(props) {
             <Route path="/about" component={About} />
             <Route path="/quiz-loader" component={QuizLoader} />
             <Route path="/questionLoader" component={QuestionLoader} />
-            <Route path="/user-profile/:id" component={UserProfile} />
+            <Route path="/profile/:id" component={UserProfile} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path="/school-profile/:id" component={SchoolProfile} />
-            <Route path="/teacher-profile" component={TeacherProfile} />
+            {/* <Route path="/teacher-profile" component={TeacherProfile} /> */}
             <Route path="/quiz-detail/:id" component={QuizProfile} />
             <Route path="/school-subject" component={SchoolSubject} />
             <Route path="/school-teacher" component={SchoolTeacher} />

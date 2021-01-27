@@ -36,8 +36,8 @@ const styles = (theme) => ({
 });
 
 const HeroButton = styled(Button)`
-  background-color: ${(p) => p.theme.main};
-  color: ${(p) => p.theme.palette.primary.light};
+  background-color: ${(p) => p.theme.palette.secondary.dark};
+  color: ${(p) => p.theme.palette.primary.main};
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0;
