@@ -58,7 +58,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   //   openSideBar = !openSideBar;
   // };
   const handleMenuProfile = () => {
-    History.push(`/profile`);
+    History.push('/user-profile/1');
     handleMenuClose();
   };
 

@@ -21,7 +21,7 @@ const profilePageStyle = {
     fontSize: '1rem',
   },
   name: {
-    marginTop: '-80px',
+    marginTop: '0px',
   },
   ...imagesStyle,
   main: {

@@ -22,10 +22,12 @@ import GridItem from 'components/Grid/GridItem.jsx';
 import NavPills from 'components/NavPills/NavPills.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
 import fakeUser from './fakeUser';
+import EditIcon from '@material-ui/icons/Edit';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 
 import {
+  Box,
   IconButton,
   List,
   ListItem,
@@ -63,6 +65,7 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  
 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
@@ -76,8 +79,15 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
+
                     <img src={img} alt="..." className={imageClasses} />
+             
                   </div>
+                  <Button color='secondary' >
+
+              <EditIcon></EditIcon>
+              Editar perfil
+                  </Button>
                   <div className={classes.name}>
                     <h1 className={classes.title}>{name}</h1>
                     <h5 className={classes.subtitle}>{`#${id}`}</h5>
