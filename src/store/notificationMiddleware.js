@@ -4,6 +4,7 @@ import { ACTIONS } from './rootReducer';
 const listenArray = [
   ACTIONS.favorites.addToFavorites.type,
   ACTIONS.favorites.removeFromFavorites.type,
+  ACTIONS.actions.enroll.type,
 ];
 
 const notificationMiddleware = (store) => (next) => (action) => {
@@ -33,6 +34,9 @@ const notificationMiddleware = (store) => (next) => (action) => {
     } else if (action.type.includes('favorites/remove')) {
       snackbar.message = `Se elimino el curso de favoritos`;
       snackbar.options.variant = 'warning';
+    } else if (action.type.includes('actions/enroll')) {
+      snackbar.message = `Te pedido ha sido enviado, recibiras una notificacion`;
+      snackbar.options.variant = 'info';
     }
     store.dispatch(ACTIONS.notifications.enqueueSnackbar(snackbar));
   }

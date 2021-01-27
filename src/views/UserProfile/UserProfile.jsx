@@ -30,7 +30,7 @@ const {
   img,
   social,
   name,
-  role,
+  role: propRole,
   bio,
   courses,
   favourites,
@@ -40,6 +40,11 @@ const {
 
 export default function ProfilePage(props) {
   const classes = useStyles();
+  let showDetails =
+    props.location && props.location.state && props.location.state.owner;
+  let role =
+    (props.location && props.location.state && props.location.state.role) ||
+    propRole;
 
   const imageClasses = classNames(
     classes.imgRaised,
@@ -109,13 +114,15 @@ export default function ProfilePage(props) {
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                <ProfileTabs
-                  activity={activity}
-                  courses={courses}
-                  favourites={favourites}
-                  teacherIn={teacherIn}
-                  role={role}
-                />
+                {showDetails && (
+                  <ProfileTabs
+                    activity={activity}
+                    courses={courses}
+                    favourites={favourites}
+                    teacherIn={teacherIn}
+                    role={role}
+                  />
+                )}
               </GridItem>
             </GridContainer>
           </div>

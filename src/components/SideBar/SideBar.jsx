@@ -53,8 +53,25 @@ function SideBar() {
         </HeaderBox>
         <Divider />
         <SidebarItem
-          label="Account"
-          link="/profile/1"
+          label="Teacher Account"
+          link={{
+            pathname: '/profile/1',
+            state: {
+              owner: true,
+              role: 'teacher',
+            },
+          }}
+          icon={<AccountBoxIcon />}
+        />
+        <SidebarItem
+          label="Student Account"
+          link={{
+            pathname: '/profile/1',
+            state: {
+              owner: true,
+              role: 'student',
+            },
+          }}
           icon={<AccountBoxIcon />}
         />
         <Divider />

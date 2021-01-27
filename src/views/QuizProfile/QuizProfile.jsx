@@ -17,6 +17,8 @@ import { Rating } from '@material-ui/lab';
 import Badge from 'components/Badge/Badge';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
+import { ACTIONS } from 'store/rootReducer';
+import { useDispatch } from 'react-redux';
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -236,6 +238,12 @@ const handleClick = () => {
 
 function QuizProfile(props) {
   //   const { quizDetail } = props.location.state;
+  const dispatch = useDispatch();
+
+  const handleEnroll = () => {
+    dispatch(ACTIONS.actions.enroll());
+  };
+
   const {
     img,
     schoolName,
@@ -291,9 +299,18 @@ function QuizProfile(props) {
           <Box>
             {teachers.map((teacher, idx) => {
               return (
-                <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
-                  {teacher.name}
-                </Badge>
+                <Link
+                  to={{
+                    pathname: '/profile/1',
+                    state: {
+                      owner: false,
+                    },
+                  }}
+                >
+                  <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
+                    {teacher.name}
+                  </Badge>
+                </Link>
               );
             })}
           </Box>
@@ -346,7 +363,14 @@ function QuizProfile(props) {
             <Grid item>
               <Typography variant="body1">
                 Student:{' '}
-                <Link to="/user-profile/1">
+                <Link
+                  to={{
+                    pathname: '/profile/1',
+                    state: {
+                      owner: false,
+                    },
+                  }}
+                >
                   <Chip
                     label={quizReviews[0].user}
                     variant="outlined"
@@ -410,7 +434,12 @@ function QuizProfile(props) {
             {/* <Button color="info" variant="contained" size="large">
               Contact
             </Button> */}
-            <Button color="primary" variant="contained" size="large">
+            <Button
+              color="primary"
+              variant="contained"
+              size="large"
+              onClick={handleEnroll}
+            >
               Enroll
             </Button>
           </Box>
