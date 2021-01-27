@@ -28,6 +28,7 @@ const HeaderBox = styled(Box)`
   justify-content: space-between;
   flex-grow: 1;
   margin-top: 2rem;
+  align-self: end;
 `;
 
 const SidebarContainer = styled.div`

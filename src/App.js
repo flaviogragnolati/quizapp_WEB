@@ -31,13 +31,15 @@ import QuestionLoader from 'views/QuestionsLoader';
 // `;
 import TeacherProfile from 'views/TeacherProfile';
 import QuizLoader from './views/QuizLoader';
+import FloatingBack from './components/FloatingButtons/FloatingBack';
+import FloatingTop from './components/FloatingButtons/FloatingTop';
 
 export const SideBarContext = createContext({
   openSidebar: false,
   toggleSideBar: () => {},
 });
 
-function App() {
+function App(props) {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
   //* ^^^^^^^^^^^ THEME MANAGEMENT ^^^^^^^^^^^
@@ -56,6 +58,8 @@ function App() {
   return (
     <ThemeWrapper theme={theme}>
       <div className="App">
+        <FloatingBack />
+        <FloatingTop {...props} />
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />

@@ -2,7 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Parallax from 'components/Parallax/Parallax.js';
 import styled from 'styled-components';
-import { Button, Typography, Box, Grid, Chip } from '@material-ui/core';
+import {
+  Button,
+  Typography,
+  Box,
+  Grid,
+  Chip,
+  Tooltip,
+  Zoom,
+} from '@material-ui/core';
 import PeopleIcon from '@material-ui/icons/People';
 import SchoolIcon from '@material-ui/icons/School';
 import { Rating } from '@material-ui/lab';
@@ -54,9 +62,9 @@ const MainContainer = styled.div`
       0.25fr
     );
   grid-template-rows:
-    minmax(50px, 0.25fr) minmax(150px, 0.25fr) minmax(150px, 0.25fr) minmax(
-      150px,
-      0.25fr
+    minmax(5rem, 0.25fr) minmax(7rem, 0.25fr) minmax(7rem, 0.2fr) minmax(
+      12rem,
+      auto
     )
     auto auto;
   grid-gap: 0.2rem;
@@ -67,11 +75,13 @@ const MainContainer = styled.div`
     'picture description contactinfo'
     'reviews  . .'
     'reviews  . actions';
+  /* align-items: stretch;
+  justify-items: stretch; */
   /* justify-content: stretch;
-  align-content: start; */
+  align-content: end; */
   position: relative;
   z-index: auto;
-  margin: -10vh 5vw 0;
+  margin: 0vh 5vw 0;
   padding: 2rem;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
@@ -118,7 +128,7 @@ const QuizName = styled.div`
 const School = styled.div`
   grid-area: school;
   align-self: center;
-  justify-self: center;
+  justify-self: left;
   height: 100%;
   width: 100%;
 `;
@@ -139,14 +149,16 @@ const Description = styled.div`
   justify-self: center;
   height: 100%;
   width: 100%;
+  padding: 0.2rem;
+  overflow: scroll;
 `;
-const Subject = styled.div`
-  grid-area: subject;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
+// const Subject = styled.div`
+//   grid-area: subject;
+//   align-self: center;
+//   justify-self: center;
+//   height: 100%;
+//   width: 100%;
+// `;
 
 const Teacher = styled.div`
   grid-area: teacher;
@@ -157,10 +169,8 @@ const Teacher = styled.div`
 `;
 const DateOpen = styled.div`
   grid-area: date;
+  justify-self: end;
   align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
 `;
 const ContactInfo = styled.div`
   grid-area: contactinfo;
@@ -178,12 +188,17 @@ const Actions = styled.div`
 `;
 
 const CBox = styled(Box)`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-self: center;
   flex-grow: 1;
-  background-color: gray;
+  background-color: gray; */
+  margin: 1rem;
+  padding: 0.2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px -8px rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
 const StudentBadge = styled(Chip)`
@@ -199,6 +214,20 @@ const StudentBadge = styled(Chip)`
   white-space: nowrap;
   vertical-align: baseline;
   display: inline-block;
+`;
+
+const CleanLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  &:hover {
+    color: ${(p) => p.theme.palette.primary.main};
+  }
 `;
 
 const handleClick = () => {
@@ -240,17 +269,20 @@ function QuizProfile(props) {
           </CBox>
         </QuizName>
         <School>
-          <Box display="flex" flexDirection="row" justifyContent="center">
-            <Link to="/school-profile/1">
-              <Typography variant="h2" color="secondary">
-                <SchoolIcon color="secondary" />
-                {schoolName}
-              </Typography>
-              {/* <Badge color="info"></Badge> */}
-              {/* <Typography variant="h6" align="left" color="secondary">
-                {schoolName}
-              </Typography> */}
-            </Link>
+          <Box display="flex" flexDirection="row" justifyContent="left">
+            <Typography
+              variant="h2"
+              color="textSecondary"
+              gutterBottom
+              paragraph
+              component={CleanLink}
+              to="/school-profile/1"
+            >
+              <Box marginLeft="0.1rem" marginRight="1rem" display="inline-flex">
+                <SchoolIcon color="secondary" fontSize="large" />
+              </Box>
+              {schoolName}
+            </Typography>
           </Box>
         </School>
         <Teacher>
@@ -279,10 +311,24 @@ function QuizProfile(props) {
               justifyContent="left"
               padding="0.2rem"
             >
-              <PeopleIcon color="secondary" />
-              <Typography color="secondary" display="inline" variant="body2">
-                {totalStudents}
-              </Typography>
+              <Tooltip
+                TransitionComponent={Zoom}
+                title="Students Enrolled"
+                placement="left"
+              >
+                <span>
+                  <Button disabled>
+                    <PeopleIcon color="secondary" />
+                    <Typography
+                      color="secondary"
+                      display="inline"
+                      variant="body2"
+                    >
+                      {totalStudents}
+                    </Typography>
+                  </Button>
+                </span>
+              </Tooltip>
             </Box>
             <Box
               display="flex"
@@ -321,7 +367,24 @@ function QuizProfile(props) {
         </Description>
         {/* <Subject>{subjectName}</Subject> */}
         <DateOpen>
-          Avialable from: {openDate} to: {closeDate}
+          <Box display="flex" flexDirection="row" justifySelf="center">
+            <Typography variant="body1">
+              Avialable from:{' '}
+              <Chip
+                label={openDate}
+                variant="outlined"
+                color="info"
+                size="small"
+              />{' '}
+              to:{' '}
+              <Chip
+                label={closeDate}
+                variant="outlined"
+                color="warning"
+                size="small"
+              />
+            </Typography>
+          </Box>
         </DateOpen>
         <ContactInfo>
           <Typography variant="subtitle1" align="center">

@@ -147,7 +147,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   );
   return (
     <div>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" color="secondary" id="top-anchor">
         <Toolbar>
           <IconButton
             edge="start"
