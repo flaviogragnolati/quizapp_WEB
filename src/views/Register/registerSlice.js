@@ -14,7 +14,7 @@ const initialState_user = {
   };
   
   export const createUser = createAsyncThunk('user/register', async (payload) => {
-    const user_response = await axios.post('http://localhost:3000/org', payload);
+    const user_response = await axios.post('http://localhost:3000/auth/register', payload);
     // const { token } = user_response.data;
     // const resPayload = {
     //   userRegister_response: user_response.data,

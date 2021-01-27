@@ -60,11 +60,11 @@ function App(props) {
       <div className="App">
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
-          <div id="top-anchor">x</div>
+          <div id="top-anchor" ></div>
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div>
+        <div Style="padding-top: 64px;">
           <Switch>
             <Route exact path={['/', '/home']} component={Home} />
             <Route path="/login" component={Login} />

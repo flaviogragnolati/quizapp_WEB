@@ -56,14 +56,13 @@ function Register(props) {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "",
-    birthDate: "",
+    cellphone: "",
+    birthdate: "",
   };
 
   const handleSubmit = (data, formik) => {
     console.log(data);
-    console.log(formik);
-    dispatch(createUser(user));
+    dispatch(createUser(data));
   };
 
   return (
@@ -121,20 +120,6 @@ function Register(props) {
                       <p className={classes.divider}>Or Be Classical</p>
 
                       <CardBody>
-                        {/* <Field
-                          label="First Name..."
-                          name="firstName"
-                          formControlProps={{ fullWidth: true }}
-                          component={TextField}
-                          // inputProps={{
-                          //   type: "text",
-                          //   endAdornment: (
-                          //     <InputAdornment position="end">
-                          //       <People className={classes.inputIconsColor} />
-                          //     </InputAdornment>
-                          //   ),
-                          // }}
-                        /> */}
                         <Field
                           component={TextField}
                           name="firstName"
@@ -199,7 +184,7 @@ function Register(props) {
                         <Field
                           component={TextField}
                           label="Phone Number"
-                          name="phoneNumber"
+                          name="cellphone"
                           fullWidth
                           InputProps={{
                             type: "tel",
@@ -214,7 +199,7 @@ function Register(props) {
                         />
                         <Field
                           component={TextField}
-                          name="birthDate"
+                          name="birthdate"
                           fullWidth
                           InputProps={{
                             type: "date",
