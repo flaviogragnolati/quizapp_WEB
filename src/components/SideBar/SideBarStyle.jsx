@@ -8,6 +8,6 @@ export const useStyles = makeStyles({
     width: 'auto',
   },
   Drawer__paper: {
-    backgroundColor: 'theme.palette.primary.main',
+    backgroundColor: 'theme.palette.secondary.main',
   },
 });

@@ -1,6 +1,6 @@
 const appTheme = {
   light: {
-    main: '#FFFBEB',
+    main: '#fafafa',
   },
   dark: {
     main: '#0C090B',

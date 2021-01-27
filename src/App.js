@@ -31,13 +31,15 @@ import QuestionLoader from 'views/QuestionsLoader';
 // `;
 import TeacherProfile from 'views/TeacherProfile';
 import QuizLoader from './views/QuizLoader';
+import FloatingBack from './components/FloatingButtons/FloatingBack';
+import FloatingTop from './components/FloatingButtons/FloatingTop';
 
 export const SideBarContext = createContext({
   openSidebar: false,
   toggleSideBar: () => {},
 });
 
-function App() {
+function App(props) {
   //* vvvvvvvvvv THEME MANAGEMENT vvvvvvvvvv
   const [theme, toggleTheme] = useThemeMode();
   //* ^^^^^^^^^^^ THEME MANAGEMENT ^^^^^^^^^^^
@@ -58,10 +60,11 @@ function App() {
       <div className="App">
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
-          <NavBar toggleTheme={toggleTheme} checked={theme} />
+          <div id="top-anchor">x</div>
+          <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div Style="margin-top: 65px;min-height: 82vh;">
+        <div>
           <Switch>
             <Route exact path={['/', '/home']} component={Home} />
             <Route path="/login" component={Login} />
@@ -69,15 +72,9 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/quiz-loader" component={QuizLoader} />
             <Route path="/questionLoader" component={QuestionLoader} />
-            <Route
-              path={['/user-profile', '/profile']}
-              component={UserProfile}
-            />
+            <Route path="/user-profile/:id" component={UserProfile} />
             <Route path="/catalogue" component={Catalogue} />
-            <Route
-              path={['/school-profile', '/profile']}
-              component={SchoolProfile}
-            />
+            <Route path="/school-profile/:id" component={SchoolProfile} />
             <Route path="/teacher-profile" component={TeacherProfile} />
             <Route path="/quiz-detail/:id" component={QuizProfile} />
             <Route path="/school-subject" component={SchoolSubject} />
@@ -89,6 +86,8 @@ function App() {
         </div>
         <hr></hr>
         <Footer />
+        <FloatingBack />
+        <FloatingTop {...props} />
       </div>
     </ThemeWrapper>
   );

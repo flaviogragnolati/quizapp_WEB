@@ -1,8 +1,12 @@
 import React from 'react';
-import Parallax from 'components/Parallax/Parallax.js';
 import styled from 'styled-components';
-import { Button, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+//Material UI
+import { Box, Grid, Typography } from '@material-ui/core';
 import PeopleIcon from '@material-ui/icons/People';
+import SchoolIcon from '@material-ui/icons/School';
+//Custom Component
+import Parallax from 'components/Parallax/Parallax';
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -33,116 +37,52 @@ const quizDetail = {
 };
 
 const MainContainer = styled.div`
-  display: grid;
-  grid-template-columns: 0.25fr 0.25fr 1fr auto;
-  grid-template-rows: 12vh 10vh 0.3fr 0.3fr auto;
-  grid-gap: 10px;
-  grid-template-areas:
-    'picture picture quiz school'
-    'picture picture description school'
-    'picture picture description subject'
-    'reviews reviews  description date'
-    'contactinfo contactinfo actions actions';
-  /* justify-content: stretch;
-  align-content: start; */
   position: relative;
   z-index: 3;
   margin: -10vh 5vw 0;
+  padding-bottom: 2rem;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
     0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
-const Box = styled.div`
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  font-size: 150%;
-  height: 100%;
-  width: 100%;
+const Picture = styled.div`
+  object-fit: cover;
+  /* height: 20rem;
+  width: 20rem; */
+  /* display: flex;
+  flex-grow: 1;
+  object-fit: cover; */
+  /* background: url(${quizDetail.img}) no-repeat;
+  background-size: contain;
+  background-position: center; */
+  margin-left: 5rem;
+  margin-bottom: 5rem;
+  background-color: blue;
 `;
 
-const Picture = styled.div`
-  grid-area: picture;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-  /* object-fit: cover; */
-  background: url(${quizDetail.img}) no-repeat;
-  background-size: contain;
-  background-position: center;
-`;
 const RaisedImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
     0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
-const QuizName = styled.div`
-  grid-area: quiz;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
+const C2 = styled.div`
+  background-color: gray;
+  /* height: 100%;
+  width: 100%; */
 `;
-
-const School = styled.div`
-  grid-area: school;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
-const Reviews = styled.div`
-  grid-area: reviews;
-  /* align-self: center;
-  justify-self: center; */
-  height: 100%;
-  width: 100%;
-  border-color: red;
-  border-width: 5px;
-  border-style: solid;
-  background-color: ${(p) => p.theme.main};
-`;
-const Description = styled.div`
-  grid-area: description;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
-const Subject = styled.div`
-  grid-area: subject;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
-const DateOpen = styled.div`
-  grid-area: date;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
-const ContactInfo = styled.div`
-  grid-area: contactinfo;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
-const Actions = styled.div`
-  grid-area: actions;
-  align-self: flex-end;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
+const C3 = styled.div`
+  background-color: lightcoral;
+  /* height: 100%;
+  width: 100%; */
 `;
 
 function QuizProfile(props) {
   //   const { quizDetail } = props.location.state;
+
   const {
     img,
     schoolName,
@@ -155,57 +95,127 @@ function QuizProfile(props) {
     quizReviews,
     schoolContactInfo,
   } = quizDetail;
+
   return (
     <div>
       <Parallax small filter image={schoolImg} />
       <MainContainer>
-        <Picture>
-          {/* <RaisedImg src={img} alt="quiz profile pic" /> */}
-
-          {/* <Box>Picture</Box> */}
-        </Picture>
-        <QuizName>
-          <Typography variant="h3" color="secondary">
-            {quizName}
-          </Typography>
-          <>
-            <PeopleIcon color="secondary" />
-            <Typography color="secondary" display="inline" variant="body2">
-              {totalStudents}
-            </Typography>
-          </>
-        </QuizName>
-        <School>{schoolName}</School>
-        <Reviews>
-          {/* {quizReviews.map((item) => (
-            <>
-              <p>{`Student ${item.user}`}</p>
-              <p>{`Score ${item.score}`}</p>
-              <p>{`Review ${item.text}`}</p>
-            </>
-          ))} */}
-          some random tet
-        </Reviews>
-        <Description>{quizDescription}</Description>
-        <Subject>{subjectName}</Subject>
-        <DateOpen>
-          Avialable from: {openDate} to: {closeDate}
-        </DateOpen>
-        <ContactInfo>
-          <p>{schoolContactInfo.phone}</p>
-          <p>{schoolContactInfo.email}</p>
-        </ContactInfo>
-        <Actions>
-          <Button color="info" variant="contained">
-            Contact
-          </Button>
-          <Button color="primary" variant="contained">
-            Enroll
-          </Button>
-        </Actions>
+        <Grid container spacing={3}>
+          <Grid item xs={8} sm={4}>
+            <Picture>
+              <RaisedImg src={quizDetail.img} />
+            </Picture>
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <C2>
+              <Grid item container xs={12}>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="h3" color="secondary">
+                      {quizName}
+                    </Typography>
+                    <PeopleIcon color="secondary" />
+                    <Typography
+                      color="secondary"
+                      display="inline"
+                      variant="body2"
+                    >
+                      {totalStudents}
+                    </Typography>
+                    <Typography variant="subtitle1">{subjectName}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Box display="flex" flexDirection="row" paddingRight="1rem">
+                    <SchoolIcon color="secondary" />
+                    <Link to="/school-profile/1">
+                      <Typography variant="h6" align="left" color="secondary">
+                        {schoolName}
+                      </Typography>
+                    </Link>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid item>asdasda</Grid>
+            </C2>
+          </Grid>
+        </Grid>
       </MainContainer>
     </div>
   );
 }
 
 export default QuizProfile;
+
+// import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
+// import ButtonBase from '@material-ui/core/ButtonBase';
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     padding: theme.spacing(2),
+//     margin: 'auto',
+//     maxWidth: 500,
+//   },
+//   image: {
+//     width: 128,
+//     height: 128,
+//   },
+//   img: {
+//     margin: 'auto',
+//     display: 'block',
+//     maxWidth: '100%',
+//     maxHeight: '100%',
+//   },
+// }));
+
+// export default function ComplexGrid() {
+//   const classes = useStyles();
+
+//   return (
+//     <div className={classes.root}>
+//       <Paper className={classes.paper}>
+//         <Grid container spacing={2}>
+//           <Grid item>
+//             <ButtonBase className={classes.image}>
+//               <img
+//                 className={classes.img}
+//                 alt="complex"
+//                 src="/static/images/grid/complex.jpg"
+//               />
+//             </ButtonBase>
+//           </Grid>
+//           <Grid item xs={12} sm container>
+//             <Grid item xs container direction="column" spacing={2}>
+//               <Grid item xs>
+//                 <Typography gutterBottom variant="subtitle1">
+//                   Standard license
+//                 </Typography>
+//                 <Typography variant="body2" gutterBottom>
+//                   Full resolution 1920x1080 • JPEG
+//                 </Typography>
+//                 <Typography variant="body2" color="textSecondary">
+//                   ID: 1030114
+//                 </Typography>
+//               </Grid>
+//               <Grid item>
+//                 <Typography variant="body2" style={{ cursor: 'pointer' }}>
+//                   Remove
+//                 </Typography>
+//               </Grid>
+//             </Grid>
+//             <Grid item>
+//               <Typography variant="subtitle1">$19.00</Typography>
+//             </Grid>
+//           </Grid>
+//         </Grid>
+//       </Paper>
+//     </div>
+//   );
+// }
