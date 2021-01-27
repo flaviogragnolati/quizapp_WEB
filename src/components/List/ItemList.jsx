@@ -144,7 +144,13 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
                   )}
                 </TableCell>
                 <TableCell>
-                  {customer.phone ? customer.phone : <Button component={Link} to='/questionLoader'>Edit</Button>}
+                  {customer.phone ? (
+                    customer.phone
+                  ) : (
+                    <Button component={Link} to="/questionLoader">
+                      Edit
+                    </Button>
+                  )}
                 </TableCell>
                 {columnName.length === 4 ? null : (
                   <TableCell>

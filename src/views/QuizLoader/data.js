@@ -142,3 +142,13 @@ export const fakeUsers = [
     phone: '801-301-7894',
   },
 ];
+
+export let studentList = [
+  { label: 'Ava Gregoraci' },
+  { label: 'Merrile Burgett' },
+  { label: 'Kwak Seong-Min' },
+  { label: 'Juan Perez' },
+  { label: 'Ernesto Garcia' },
+  { label: 'Esteban Andamio' },
+  { label: 'Tomas Tenpa' },
+];

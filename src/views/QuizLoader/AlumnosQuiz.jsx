@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Container, makeStyles } from '@material-ui/core';
+import {
+  Box,
+  Container,
+  makeStyles,
+  Button,
+  TextField,
+} from '@material-ui/core';
 import List from '../../components/List';
-import { fakeUsers } from './data';
+import { fakeUsers, studentList } from './data';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +30,31 @@ export default function AlumnosQuiz() {
   let columnName = ['Name', 'Email', 'Location', 'Phone', 'Registration Date'];
   return (
     <React.Fragment>
+      <Container>
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
+          <div className={classes.root}>
+            <Autocomplete
+              multiple
+              limitTags={2}
+              id="multiple-limit-tags"
+              options={studentList}
+              fullWidth
+              getOptionLabel={(option) => option.label}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Buscar"
+                  placeholder="Alumnos"
+                />
+              )}
+            />
+          </div>
+          <Button variant="container" color="primary" size="small">
+            Enrolar seleccionados
+          </Button>
+        </Box>
+      </Container>
       <Container className={classes.container}>
         <Box mt={3} width={1}>
           <h3>Listado de Alumnos</h3>

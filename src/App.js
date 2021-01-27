@@ -75,11 +75,10 @@ function App(props) {
             <Route path="/profile/:id" component={UserProfile} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path="/school-profile/:id" component={SchoolProfile} />
-            {/* <Route path="/teacher-profile" component={TeacherProfile} /> */}
             <Route path="/quiz-detail/:id" component={QuizProfile} />
             <Route path="/school-subject" component={SchoolSubject} />
             <Route path="/school-teacher" component={SchoolTeacher} />
-            <Route path="/school-Quiz" component={SchoolQuiz} />
+            <Route path="/school-quiz" component={SchoolQuiz} />
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />
           </Switch>

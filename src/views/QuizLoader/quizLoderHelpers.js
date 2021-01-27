@@ -10,9 +10,9 @@ export const quizModel = {
     label: 'Descripcion*',
     requiredErrorMsg: 'Descripcion requerida',
   },
-  categoria: {
-    name: 'categoria',
-    label: 'Categoria*',
+  tags: {
+    name: 'tag',
+    label: 'Tags*',
     requiredErrorMsg: 'Debe ingresar una categoria',
   },
   materia: {
@@ -20,27 +20,13 @@ export const quizModel = {
     label: 'Materia*',
     requiredErrorMsg: 'Debe ingresar materia',
   },
-  zip: {
-    name: 'zip',
-    label: 'Codigo Postal*',
-    requiredErrorMsg: 'CP requerido',
-    invalidErrorMsg: 'Codigo postal invalido',
-  },
-  country: {
-    name: 'country',
-    label: 'Pais*',
-    requiredErrorMsg: 'Debe indicar el pais',
-  },
 };
 
-const { nameQuiz, descripcion, categoria, materia, zip, country } = quizModel;
+const { nameQuiz, descripcion, tags, materia } = quizModel;
 
 export const initialState_Quiz = {
-  //?QUIZ INFO FORM
   [nameQuiz.name]: '',
   [descripcion.name]: '',
-  [categoria.name]: '',
+  [tags.name]: '',
   [materia.name]: '',
-  [zip.name]: '',
-  [country.name]: '',
 };

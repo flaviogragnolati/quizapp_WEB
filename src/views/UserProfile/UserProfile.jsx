@@ -66,10 +66,12 @@ export default function ProfilePage(props) {
                   <div>
                     <img src={img} alt="..." className={imageClasses} />
                   </div>
-                  <Button color="secondary">
-                    <EditIcon></EditIcon>
-                    Editar perfil
-                  </Button>
+                  {showDetails && (
+                    <Button color="secondary">
+                      <EditIcon></EditIcon>
+                      Editar perfil
+                    </Button>
+                  )}
                   <div className={classes.name}>
                     <h1 className={classes.title}>{name}</h1>
                     <h5 className={classes.subtitle}>{`#${id}`}</h5>

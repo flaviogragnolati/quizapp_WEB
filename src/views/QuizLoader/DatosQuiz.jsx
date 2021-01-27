@@ -5,7 +5,7 @@ import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { quizModel } from './quizLoderHelpers';
 
-const { nameQuiz, descripcion, categoria, materia } = quizModel;
+const { nameQuiz, descripcion, tags, materia } = quizModel;
 
 export default function DatosQuiz() {
   return (
@@ -33,8 +33,8 @@ export default function DatosQuiz() {
         <Grid item xs={12} sm={6}>
           <Field
             component={TextField}
-            name={categoria.name}
-            label={categoria.label}
+            name={tags.name}
+            label={tags.label}
             fullWidth
           />
         </Grid>

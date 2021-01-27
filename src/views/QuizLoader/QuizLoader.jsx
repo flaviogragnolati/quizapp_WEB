@@ -1,17 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {
+  Typography,
+  StepLabel,
+  Paper,
+  Stepper,
+  Box,
+  Step,
+  Button,
+} from '@material-ui/core';
 import DatosQuiz from './DatosQuiz';
 import AlumnosQuiz from './AlumnosQuiz';
 import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
-import { Formik, Form} from 'formik';
+import { Formik, Form } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +72,6 @@ function getStepContent(step) {
 export default function QuizLoader() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const History = useHistory()
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -103,12 +105,12 @@ export default function QuizLoader() {
                   La quiz a sido creada, finaliza el proceso agregandole
                   preguntas y respuestas
                 </Typography>
-                <Typography variant="subtitle1">
-                  <Button component={Link} to='/school-quiz'>
-
-                     Editar el Quizz
+                <br></br>
+                <Box display="flex" flexDirection="row" justifyContent="center">
+                  <Button component={Link} to="/school-quiz">
+                    Editar el Quizz
                   </Button>
-                </Typography>
+                </Box>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -132,7 +134,7 @@ export default function QuizLoader() {
                           className={classes.button}
                         >
                           {activeStep === steps.length - 1
-                            ? 'Place order'
+                            ? 'Submit Quiz'
                             : 'Next'}
                         </Button>
                       </div>

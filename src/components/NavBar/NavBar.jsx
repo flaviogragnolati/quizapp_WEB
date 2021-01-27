@@ -4,7 +4,6 @@ import {
   Badge,
   Button,
   IconButton,
-  InputBase,
   Menu,
   MenuItem,
   Toolbar,
@@ -58,7 +57,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   //   openSideBar = !openSideBar;
   // };
   const handleMenuProfile = () => {
-    History.push('/user-profile/1');
+    History.push('/profile/1');
     handleMenuClose();
   };
 
