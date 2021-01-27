@@ -15,9 +15,10 @@ const profilePageStyle = {
   },
   description: {
     margin: '1.071rem auto 0',
-    maxWidth: '600px',
+    maxWidth: '800px',
     color: '#999',
     textAlign: 'center !important',
+    fontSize: '1rem',
   },
   name: {
     marginTop: '-80px',
@@ -63,6 +64,9 @@ const profilePageStyle = {
   navWrapper: {
     margin: '20px auto 50px auto',
     textAlign: 'center',
+  },
+  listItem: {
+    color: 'red',
   },
 };
 
