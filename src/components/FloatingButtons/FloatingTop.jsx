@@ -21,10 +21,10 @@ function FloatingTop(props) {
   });
 
   const handleClick = (event) => {
+    console.log('clicking', document.querySelector('#top-anchor'));
     const anchor = (event.target.ownerDocument || document).querySelector(
       '#top-anchor'
     );
-
     if (anchor) {
       anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }

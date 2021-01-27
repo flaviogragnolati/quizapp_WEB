@@ -58,14 +58,13 @@ function App(props) {
   return (
     <ThemeWrapper theme={theme}>
       <div className="App">
-        <FloatingBack />
-        <FloatingTop {...props} />
         <Notifier />
         <SideBarContext.Provider value={sidebarCtx}>
+          <div id="top-anchor">x</div>
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div Style="margin-top: 65px;min-height: 82vh;">
+        <div>
           <Switch>
             <Route exact path={['/', '/home']} component={Home} />
             <Route path="/login" component={Login} />
@@ -87,6 +86,8 @@ function App(props) {
         </div>
         <hr></hr>
         <Footer />
+        <FloatingBack />
+        <FloatingTop {...props} />
       </div>
     </ThemeWrapper>
   );
