@@ -85,9 +85,9 @@ function App(props) {
           </Switch>
         </div>
         <hr></hr>
-        <Footer />
         <FloatingBack />
         <FloatingTop {...props} />
+        <Footer />
       </div>
     </ThemeWrapper>
   );

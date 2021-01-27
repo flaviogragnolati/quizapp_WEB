@@ -407,9 +407,9 @@ function QuizProfile(props) {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <Button color="info" variant="contained" size="large">
+            {/* <Button color="info" variant="contained" size="large">
               Contact
-            </Button>
+            </Button> */}
             <Button color="primary" variant="contained" size="large">
               Enroll
             </Button>

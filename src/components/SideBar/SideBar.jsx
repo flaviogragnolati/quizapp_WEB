@@ -58,7 +58,7 @@ function SideBar() {
           </IconButton>
         </HeaderBox>
         <Divider />
-        {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
+        {/* {['Home', 'Profile', 'Catalogue', 'Quizzes', 'Dashboard'].map(
           (text, index) => (
             <ListItem
               button
@@ -72,7 +72,26 @@ function SideBar() {
               <ListItemText primary={text} />
             </ListItem>
           )
-        )}
+        )} */}
+          <ListItem  button   key={'Home'} component={Link} to={`/`}  >
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Home'} />
+          </ListItem>
+          <ListItem  button   key={'Catalogue'} component={Link} to={`/catalogue`}  >
+              <ListItemIcon>
+              <LocalLibraryIcon />          
+                  </ListItemIcon>
+              <ListItemText primary={'Catalogue'} />
+          </ListItem>
+              <ListItem  button   key={'Quizzes'} component={Link} to={`/school-Quiz`}  >
+              <ListItemIcon>
+              <InboxIcon />
+                  </ListItemIcon>
+              <ListItemText primary={'Quizzes'} />
+          </ListItem>
+
         <Divider />
         <ListItem button>
           <ListItemIcon>
