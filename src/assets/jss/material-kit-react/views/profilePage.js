@@ -2,7 +2,7 @@ import { container, title } from 'assets/jss/material-kit-react.js';
 
 import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.js';
 
-const profilePageStyle = {
+const profilePageStyle = (theme) => ({
   container,
   profile: {
     textAlign: 'center',
@@ -25,7 +25,7 @@ const profilePageStyle = {
   },
   ...imagesStyle,
   main: {
-    background: '#FFFFFF',
+    background: theme.palette.background.default,
     position: 'relative',
     zIndex: '3',
   },
@@ -42,6 +42,7 @@ const profilePageStyle = {
     marginTop: '30px',
     minHeight: '32px',
     textDecoration: 'none',
+    color: theme.palette.primary.contrastText,
   },
   subtitle: {
     position: 'relative',
@@ -68,6 +69,6 @@ const profilePageStyle = {
   listItem: {
     color: 'red',
   },
-};
+});
 
 export default profilePageStyle;

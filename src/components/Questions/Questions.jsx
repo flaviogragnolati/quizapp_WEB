@@ -134,7 +134,7 @@ const Questions = () => {
           <IconButton onClick={handleAnsAdd}>
             <AddCircleOutlineTwoToneIcon
               fontSize="large"
-              style={{ color: 'blue' }}
+              style={{ color: 'lightblue' }}
             />
           </IconButton>
         </Grid>

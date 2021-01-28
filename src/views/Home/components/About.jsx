@@ -12,7 +12,7 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
-    backgroundColor: '#FFFBEB',
+    backgroundColor: theme.palette.background.default,
   },
   container: {
     marginTop: theme.spacing(15),

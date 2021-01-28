@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CatalogueSection = styled.section`
   margin-top: 5rem;
-  background-color: ${(p) => p.theme.main};
+  background-color: ${(p) => p.theme.palette.background.default};
 `;
 
 const Catalogue = () => {

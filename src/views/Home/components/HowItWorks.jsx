@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.main,
+    backgroundColor: theme.palette.background.default,
     overflow: 'hidden',
   },
   container: {
