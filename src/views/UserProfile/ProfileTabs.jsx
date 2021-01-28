@@ -2,7 +2,7 @@ import React from 'react';
 
 //@material-ui/core
 import {
-  Box,
+  // Box,
   IconButton,
   List,
   ListItem,
@@ -10,30 +10,30 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Tooltip,
-  Typography,
+  // Typography,
 } from '@material-ui/core/';
 
-import Button from 'components/CustomButtons/Button.js';
+// import Button from 'components/CustomButtons/Button.js';
 import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
+// import GridItem from 'components/Grid/GridItem.jsx';
 import NavPills from 'components/NavPills/NavPills.jsx';
-import Parallax from 'components/Parallax/Parallax.js';
-import EditIcon from '@material-ui/icons/Edit';
+// import Parallax from 'components/Parallax/Parallax.js';
+// import EditIcon from '@material-ui/icons/Edit';
 import SchoolIcon from '@material-ui/icons/School';
 // @material-ui/icons
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import Palette from '@material-ui/icons/Palette';
+// import Palette from '@material-ui/icons/Palette';
 import Favorite from '@material-ui/icons/Favorite';
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+// import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import DescriptionIcon from '@material-ui/icons/Description';
 import InfoIcon from '@material-ui/icons/Info';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-import ErrorIcon from '@material-ui/icons/Error';
+// import ErrorIcon from '@material-ui/icons/Error';
 import CancelIcon from '@material-ui/icons/Cancel';
 import WarningIcon from '@material-ui/icons/Warning';
 
-import fakeUser from './fakeUser';
+// import fakeUser from './fakeUser';
 import { Link } from 'react-router-dom';
 
 function ProfileTabs({

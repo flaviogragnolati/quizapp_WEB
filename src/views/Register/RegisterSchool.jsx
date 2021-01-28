@@ -5,10 +5,10 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import DescriptionIcon from '@material-ui/icons/Description';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import PublicIcon from '@material-ui/icons/Public';
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -17,9 +17,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-// import CustomInput from "components/CustomInput/CustomInput.js";
-
-
 import { useDispatch } from "react-redux";
 import { createUser } from "./registerSlice";
 
@@ -27,18 +24,12 @@ import { Formik, Form, Field } from "formik";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { TextField } from "formik-material-ui";
-// import { Typography } from "@material-ui/core";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-// import image from 'assets/img/bg7.jpg';
+
 const useStyles = makeStyles(styles);
 const image =
   "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
-const GreyText = styled(Link)`
-  color: ${(p) => p.theme.grey};
-`;
 
-function Register(props) {
+function RegisterSchool(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
@@ -47,22 +38,14 @@ function Register(props) {
   //const { ...rest } = props;
   const dispatch = useDispatch();
 
-  // const user = {
-  //   name: "jorgito",
-  //   email: "jorgito@gmail.com",
-  //   description: "sssssss",
-  //   city: "sssssss",
-  //   country: "sssssss",
-  //   logo: "sssssss",
-  // };
-
   const registerInitialValues = {
-    firstName: "",
-    lastName: "",
+    name: "",
+    city: "",
     email: "",
     password: "",
-    cellphone: "",
-    birthdate: "",
+    country: "",
+    description: "",
+    registerCode: "",
   };
 
   const handleSubmit = (data, formik) => {
@@ -85,8 +68,8 @@ function Register(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <CardHeader color="primary" className={classes.cardHeader}>
-                  <h4>Register with:</h4>
-                  <div className={classes.socialLine}>
+                  <h3>School Register</h3>
+                  {/* <div className={classes.socialLine}>
                     <Button
                       justIcon
                       href="#pablo"
@@ -114,7 +97,7 @@ function Register(props) {
                     >
                       <i className={"fab fa-google-plus-g"} />
                     </Button>
-                  </div>
+                  </div> */}
                 </CardHeader>
                 <Formik
                   onSubmit={handleSubmit}
@@ -122,37 +105,19 @@ function Register(props) {
                 >
                   {(formik) => (
                     <Form className={classes.form}>
-                      <p className={classes.divider}>Or Be Classical</p>
-
+                      {/* <p className={classes.divider}>Or Be Classical</p> */}
                       <CardBody>
                         <Field
                           className={classes.Register__Fields}
                           component={TextField}
-                          name="firstName"
-                          label="firstName"
+                          name="name"
+                          label="Name"
                           fullWidth
                           color="primary"
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Last Name"
-                          name="lastName"
-                          fullWidth
-                          InputProps={{
-                            type: "text",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <SupervisorAccountIcon
-                                  className={classes.inputIconsColor}
-                                />
+                                <VpnKeyIcon className={classes.inputIconsColor} />
                               </InputAdornment>
                             ),
                           }}
@@ -193,14 +158,14 @@ function Register(props) {
                         <Field
                           className={classes.Register__Fields}
                           component={TextField}
-                          label="Phone Number"
-                          name="cellphone"
+                          label="Country"
+                          name="country"
                           fullWidth
                           InputProps={{
                             type: "tel",
                             endAdornment: (
                               <InputAdornment position="end">
-                                <PhoneAndroidIcon
+                                <PublicIcon
                                   className={classes.inputIconsColor}
                                 />
                               </InputAdornment>
@@ -208,15 +173,48 @@ function Register(props) {
                           }}
                         />
                         <Field
-                          className={classes.Register__Date}
+                          className={classes.Register__Fields}
                           component={TextField}
-                          name="birthdate"
+                          label="City"
+                          name="city"
                           fullWidth
                           InputProps={{
-                            type: "date",
+                            type: "text",
                             endAdornment: (
                               <InputAdornment position="end">
-                                <DateRangeIcon
+                                <LocationCityIcon
+                                  className={classes.inputIconsColor}
+                                />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          className={classes.Register__Fields}
+                          component={TextField}
+                          name="description"
+                          label="Description"
+                          fullWidth
+                          color="primary"
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <DescriptionIcon className={classes.inputIconsColor} />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          className={classes.Register__Fields}
+                          component={TextField}
+                          label="Codigo de Registro"
+                          name="registerCode"
+                          fullWidth
+                          InputProps={{
+                            type: "tel",
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <VpnKeyIcon
                                   className={classes.inputIconsColor}
                                 />
                               </InputAdornment>
@@ -225,21 +223,13 @@ function Register(props) {
                         />
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
-                        <Button
-                          type="submit"
-                          // onClick={() => handleSubmit()}
-                          color="primary"
-                          size="lg"
-                        >
-                          Register
+                        <Button type="submit" color="primary" size="lg">
+                          Register School
                         </Button>{" "}
                       </CardFooter>
                     </Form>
                   )}
                 </Formik>
-                <GreyText to="/registerSchool" className={classes.Register__School}>
-                  Registrar como escuela
-                </GreyText>
               </Card>
             </GridItem>
           </GridContainer>
@@ -249,4 +239,4 @@ function Register(props) {
   );
 }
 
-export default Register;
+export default RegisterSchool;

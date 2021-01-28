@@ -114,10 +114,10 @@ const Picture = styled.div`
   border-radius: 4px;
   border-style: solid;
 `;
-const RaisedImg = styled.img`
-  box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
-    0 8px 10px -5px rgba(0, 0, 0, 0.2);
-`;
+// const RaisedImg = styled.img`
+//   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
+//     0 8px 10px -5px rgba(0, 0, 0, 0.2);
+// `;
 
 const QuizName = styled.div`
   grid-area: quiz;
@@ -203,20 +203,20 @@ const CBox = styled(Box)`
     0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
-const StudentBadge = styled(Chip)`
-  margin-right: 3px;
-  border-radius: 12px;
-  padding: 5px 12px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  display: inline-block;
-`;
+// const StudentBadge = styled(Chip)`
+//   margin-right: 3px;
+//   border-radius: 12px;
+//   padding: 5px 12px;
+//   text-transform: uppercase;
+//   font-size: 0.9rem;
+//   font-weight: 500;
+//   line-height: 1;
+//   color: #fff;
+//   text-align: center;
+//   white-space: nowrap;
+//   vertical-align: baseline;
+//   display: inline-block;
+// `;
 
 const CleanLink = styled(Link)`
   text-decoration: none;
@@ -245,7 +245,7 @@ function QuizProfile(props) {
   };
 
   const {
-    img,
+    // img,
     schoolName,
     subjectName,
     quizName,

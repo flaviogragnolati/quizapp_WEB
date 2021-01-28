@@ -8,7 +8,7 @@ const listenArray = [
 ];
 
 const notificationMiddleware = (store) => (next) => (action) => {
-  const dispatch = store.dispatch;
+  // const dispatch = store.dispatch;
 
   const snackbar = {
     message: '',

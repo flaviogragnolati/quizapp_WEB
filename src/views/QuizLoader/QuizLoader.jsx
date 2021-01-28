@@ -15,7 +15,7 @@ import AlumnosQuiz from './AlumnosQuiz';
 import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from 'formik';
-import { Link, useHistory } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
