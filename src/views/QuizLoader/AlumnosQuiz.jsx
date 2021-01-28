@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
 export default function AlumnosQuiz() {
   const [students] = useState(fakeUsers);
   const classes = useStyles();
-  let columnName = ['Name', 'Email', 'Location', 'Phone', 'Registration Date'];
+  let columnName = ['Name', 'Email', 'Location', 'Phone', 'Agregar'];
+  let ButtonName = ['Agregar']
   return (
     <React.Fragment>
       <Container>
@@ -58,7 +59,7 @@ export default function AlumnosQuiz() {
       <Container className={classes.container}>
         <Box mt={3} width={1}>
           <h3>Listado de Alumnos</h3>
-          <List customers={students} columnName={columnName} />
+          <List customers={students} columnName={columnName} ButtonName={ButtonName} />
         </Box>
       </Container>
     </React.Fragment>

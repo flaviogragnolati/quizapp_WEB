@@ -86,6 +86,11 @@ function SideBar() {
           link="/quiz-loader"
           icon={<FormatListNumberedIcon />}
         />
+        <SidebarItem
+          label="Create Questions"
+          link="/question-loader"
+          icon={<FormatListNumberedIcon />}
+        />
         <Divider />
         <SidebarItem label="Logout" link="/logout" icon={<ExitToAppIcon />} />
       </List>

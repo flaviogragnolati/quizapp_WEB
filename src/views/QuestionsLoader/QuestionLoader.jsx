@@ -1,27 +1,38 @@
-import QuestionSideBar from "components/SideBar/QuestionSideBar";
-import React from "react";
-import { makeStyles } from '@material-ui/core';
-import Questions from "components/Questions/Questions";
-
-
+import QuestionSideBar from 'components/SideBar/QuestionSideBar';
+import React from 'react';
+import { makeStyles, Grid } from '@material-ui/core';
+import Questions from 'components/Questions/Questions';
 
 const useStyles = makeStyles(() => ({
-    div_Questions: {
-        marginLeft: 280,
-    }
-  }));
+  div_Questions: {
+    marginTop: '50px',
+  },
+}));
 
 function QuestionLoader() {
-
-    
-const classes = useStyles();
+  const classes = useStyles();
   return (
-    <>
-      <QuestionSideBar />
-      <div className={classes.div_Questions}>
+    <Grid
+      container
+      spacing={5}
+      direction="row"
+      justify="center"
+      alignItems="flex-start"
+    >
+      <Grid item sm={2}>
+        <QuestionSideBar />
+      </Grid>
+      <Grid
+        container
+        item
+        sm={8}
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start"
+      >
         <Questions />
-      </div>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
@@ -11,17 +11,18 @@ import {
   List,
   Typography,
   makeStyles,
-} from "@material-ui/core";
-import BallotIcon from "@material-ui/icons/Ballot";
-import NavItem from "./NavItem";
+} from '@material-ui/core';
+import BallotIcon from '@material-ui/icons/Ballot';
+import QuestionItem from './components/QuestionItem';
+import { NavigateBeforeRounded } from '@material-ui/icons';
 
 const quizzEj = {
   avatar:
-    "https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  subject: "History of Science",
-  category: "History",
-  name: "Final Test",
-  description: "If you fail this test... Tu vieja",
+    'https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+  subject: 'Quantum Entanglement',
+  category: 'Physics',
+  name: 'First Test',
+  description: 'If you fail this test... pathetic...',
 };
 
 const useStyles = makeStyles(() => ({
@@ -31,10 +32,10 @@ const useStyles = makeStyles(() => ({
   desktopDrawer: {
     width: 280,
     top: 64,
-    height: "calc(100% - 64px)",
+    height: 'calc(100% - 64px)',
   },
   avatar: {
-    cursor: "pointer",
+    cursor: 'pointer',
     width: 64,
     height: 64,
   },
@@ -42,50 +43,29 @@ const useStyles = makeStyles(() => ({
 
 const QuestionSideBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
-  const location = useLocation();
 
-  const [items, setItems] = useState([
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
-    {
-      title: "Pregunta ",
-    },
+  const [questions, setQuestions] = useState([
+    { id: 1, title: 'Pregunta ' },
+    { id: 2, title: 'Pregunta ' },
+    { id: 3, title: 'Pregunta ' },
+    { id: 4, title: 'Pregunta ' },
+    { id: 5, title: 'Pregunta ' },
+    { id: 6, title: 'Pregunta ' },
+    { id: 7, title: 'Pregunta ' },
+    { id: 8, title: 'Pregunta ' },
   ]);
 
-  useEffect(() => {
-    if (openMobile && onMobileClose) {
-      onMobileClose();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
-
-  const content = (
+  const handleAddQuestion = () => {
+    setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
+  };
+  const handleQuestionDelete = (id) => {
+    console.log('deleting', id);
+    setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
+  };
+  return (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar
-          className={classes.avatar}
-          src={quizzEj.avatar}
-          to="/app/account"
-        />
+        <Avatar className={classes.avatar} src={quizzEj.avatar} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
           {quizzEj.name}
         </Typography>
@@ -95,50 +75,52 @@ const QuestionSideBar = ({ onMobileClose, openMobile }) => {
       </Box>
       <Divider />
       <Box p={2}>
-        <List component={"ol"}>
-          {items.map((item, i) => (
-              <NavItem
-                key={item.title}
-                title={`${i + 1} ${item.title}`}
-                icon={BallotIcon}
-              />
+        <List component={'ol'}>
+          {questions.map((question, idx) => (
+            <QuestionItem
+              key={question.title}
+              title={`${idx + 1} ${question.title}`}
+              icon={BallotIcon}
+              handleQuestionDelete={handleQuestionDelete}
+              id={question.id}
+            />
           ))}
         </List>
       </Box>
       <Box flexGrow={1} />
       <Box p={2} m={2} bgcolor="background.dark">
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={handleAddQuestion}>
           Añadir pregunta
         </Button>
       </Box>
     </Box>
   );
 
-  return (
-    <>
-      <Hidden lgUp>
-        <Drawer
-          anchor="left"
-          classes={{ paper: classes.mobileDrawer }}
-          onClose={onMobileClose}
-          open={openMobile}
-          variant="temporary"
-        >
-          {content}
-        </Drawer>
-      </Hidden>
-      <Hidden mdDown>
-        <Drawer
-          anchor="left"
-          classes={{ paper: classes.desktopDrawer }}
-          open
-          variant="persistent"
-        >
-          {content}
-        </Drawer>
-      </Hidden>
-    </>
-  );
+  // return (
+  //   <>
+  //     <Hidden lgUp>
+  //       <Drawer
+  //         anchor="left"
+  //         classes={{ paper: classes.mobileDrawer }}
+  //         onClose={onMobileClose}
+  //         open={openMobile}
+  //         variant="temporary"
+  //       >
+  //         {content}
+  //       </Drawer>
+  //     </Hidden>
+  //     <Hidden mdDown>
+  //       <Drawer
+  //         anchor="left"
+  //         classes={{ paper: classes.desktopDrawer }}
+  //         open
+  //         variant="persistent"
+  //       >
+  //         {content}
+  //       </Drawer>
+  //     </Hidden>
+  //   </>
+  // );
 };
 
 QuestionSideBar.propTypes = {

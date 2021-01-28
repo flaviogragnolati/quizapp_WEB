@@ -66,7 +66,7 @@ function App(props) {
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div Style="padding-top: 64px;">
+        <div Style="padding-top: 64px">
           <Switch>
             <Route exact path={['/', '/home']} component={Home} />
             <Route path="/login" component={Login} />
@@ -74,7 +74,7 @@ function App(props) {
             <Route path="/registerSchool" component={RegisterSchool} />
             <Route path="/about" component={About} />
             <Route path="/quiz-loader" component={QuizLoader} />
-            <Route path="/questionLoader" component={QuestionLoader} />
+            <Route path="/question-loader" component={QuestionLoader} />
             <Route path="/profile/:id" component={UserProfile} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path="/school-profile/:id" component={SchoolProfile} />
