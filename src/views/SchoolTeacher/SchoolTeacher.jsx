@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const SchoolTeacher = () => {
   const classes = useStyles();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Email', 'Location', 'Phone', 'Registration Date'];
+  let columnName = ['Name', 'Subject', 'Quiz', 'Review', 'Alumnos' ];
   return (
     <Container maxWidth={false}>
       <Box mt={3}>

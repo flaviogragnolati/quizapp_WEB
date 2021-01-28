@@ -17,7 +17,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +54,7 @@ const Results = ({
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [columna, setColumna] = useState(false);
+  const History =  useHistory()
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -66,6 +67,13 @@ const Results = ({
 
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
+
+  const HandleClick = (e)=>{
+    console.log(e)
+    if(e === 'EDIT QUIZ'){
+      History.push('/question-loader')
+    }
+  }
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
@@ -157,6 +165,12 @@ const Results = ({
                 </TableCell>
                         {customer.subject &&
                 <TableCell>{ customer.subject}</TableCell>}
+                      {customer.quiz &&
+                <TableCell>{ customer.quiz}</TableCell>}
+                      {customer.review &&
+                <TableCell>{ customer.review}</TableCell>}
+                      {customer.alumnos &&
+                <TableCell>{ customer.alumnos}</TableCell>}
 
                 {customer.email && <TableCell>{customer.email}</TableCell>}
                 {customer.address && 
@@ -171,17 +185,17 @@ const Results = ({
 
                 {ButtonName && ButtonName[0] && (
                   <TableCell>
-                    <Button name={ButtonName[0]}>{ButtonName[0]}</Button>
+                    <Button name={ButtonName[0]} onClick={ ()=>HandleClick(ButtonName[0])}>{ButtonName[0]}</Button>
                   </TableCell>
                 )}
                 {ButtonName && ButtonName[1] && (
                   <TableCell>
-                    <Button name={ButtonName[1]}>{ButtonName[1]}</Button>
+                    <Button name={ButtonName[1]} onClick={ ()=>HandleClick(ButtonName[1])}>{ButtonName[1]}</Button>
                   </TableCell>
                 )}
                 {ButtonName && ButtonName[2] && (
                   <TableCell>
-                    <Button name={ButtonName[2]}>{ButtonName[2]}</Button>
+                    <Button name={ButtonName[2]} onClick={ ()=>HandleClick(ButtonName[2])}>{ButtonName[2]}</Button>
                   </TableCell>
                 )}
               </TableRow>

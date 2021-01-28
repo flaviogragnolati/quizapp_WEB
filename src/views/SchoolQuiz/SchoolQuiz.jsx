@@ -27,7 +27,7 @@ const quizzes = [
 const SchoolQuiz = () => {
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'TRASH', ' EDIT'];
-  let ButtonName = ['TRASH', 'EDIT']
+  let ButtonName = ['TRASH', 'EDIT QUIZ']
   return (
     <Container maxWidth={false}>
       <Box mt={3}>
