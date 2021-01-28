@@ -38,7 +38,7 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [columna, setColumna] = useState(false);
+  // const [columna, setColumna] = useState(false);
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;

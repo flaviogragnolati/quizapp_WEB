@@ -1,5 +1,7 @@
 import { container } from 'assets/jss/material-kit-react.js';
 
+
+
 const signupPageStyle = {
   container: {
     ...container,
@@ -85,6 +87,15 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: '#495057',
+  },
+  Register__School: {
+    marginInline: "auto",
+  },
+  Register__Fields: {
+    marginTop: "13px"
+  },
+  Register__Date: {
+    marginTop: "29px"
   },
 };
 

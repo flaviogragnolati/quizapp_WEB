@@ -13,7 +13,7 @@ import { AccountCircle } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import ThemeToggler from './components/ThemeToggler';
@@ -29,6 +29,7 @@ import { Box } from '@material-ui/core';
 function NavBar({ toggleTheme, checked, theme }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -61,20 +62,20 @@ function NavBar({ toggleTheme, checked, theme }) {
     handleMenuClose();
   };
 
-  const handleMenuHome = () => {
-    History.push(`/`);
-    handleMenuClose();
-  };
+  // const handleMenuHome = () => {
+  //   History.push(`/`);
+  //   handleMenuClose();
+  // };
   const handleMenuLogout = () => {
     History.push(`/`);
     handleMenuClose();
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    History.push('/catalogue');
-    document.getElementById('Search').value = '';
-    setNotifier(true);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   History.push('/catalogue');
+  //   document.getElementById('Search').value = '';
+  //   setNotifier(true);
+  // };
 
   const handleClose = () => {
     setNotifier(false);
@@ -86,17 +87,17 @@ function NavBar({ toggleTheme, checked, theme }) {
     object-fit: contain;
     margin-right: 0.5rem;
   `;
-  const StyledLink = styled(Link)`
-    text-decoration: none;
+  // const StyledLink = styled(Link)`
+  //   text-decoration: none;
 
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-      text-decoration: none;
-    }
-  `;
+  //   &:focus,
+  //   &:hover,
+  //   &:visited,
+  //   &:link,
+  //   &:active {
+  //     text-decoration: none;
+  //   }
+  // `;
 
   const renderMenu = (
     <Menu

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SchoolSubject = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [customers] = useState(array);
   let columnName = ['Name', 'Email', 'Trash','Update', 'Teacher']
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import List from '../../components/List';
 import Button from 'components/Home_MUI/Button';
@@ -25,7 +25,6 @@ const quizzes = [
   { id: 6, name: `What Is Life? & Mind and Matter`, subject: 'Filosofia' },
 ];
 const SchoolQuiz = () => {
-  const classes = useStyles();
   let columnName = ['Name', 'Subject', 'School', 'Trash', ' Edit'];
   return (
     <Container maxWidth={false}>
