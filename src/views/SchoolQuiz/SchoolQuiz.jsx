@@ -26,12 +26,13 @@ const quizzes = [
 ];
 const SchoolQuiz = () => {
   const classes = useStyles();
-  let columnName = ['Name', 'Subject', 'School', 'Trash', ' Edit'];
+  let columnName = ['Name of Quiz', 'Subject', 'TRASH', ' EDIT'];
+  let ButtonName = ['TRASH', 'EDIT']
   return (
     <Container maxWidth={false}>
       <Box mt={3}>
         <h3>Listado de Quizzes</h3>
-        <List customers={quizzes} columnName={columnName} />
+        <List customers={quizzes} columnName={columnName} ButtonName={ButtonName} />
       </Box>
 
       <Button>+ Agregar</Button>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
 // import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
@@ -15,27 +15,40 @@ import {
   TableRow,
   Typography,
   makeStyles,
-} from '@material-ui/core';
-import Button from 'components/Home_MUI/Button';
-import { Link } from 'react-router-dom';
+} from "@material-ui/core";
+import Button from "components/Home_MUI/Button";
+import { Link } from "react-router-dom";
 // import getInitials from 'src/utils/getInitials';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: 'none',
+    margin: "none",
   },
   avatar: {
     marginRight: theme.spacing(2),
   },
   Table: {
-    whidth: 'auto',
-    margin: 'none',
+    whidth: "auto",
+    margin: "none",
   },
 }));
 
 // school-quiz,quiz-loader
-/// este componente deberia recibir NOMBRE DE COLUMNAS, ROLE (estudiante,quiz)
-const Results = ({ className, customers, whidth, columnName, ...rest }) => {
+// PUEDE RECIBIR HASTA 3 BOTONES 
+/// este componente deberia recibir NOMBRE DE COLUMNAS COMO ARRAY (columnName)
+/// este componente deberia recibir NOMBRE DE BOTONES COMO ARRAY ( ButtonName)
+/// este componente deberia recibir DATOS COMO ARRAY DE OBJETOS (customers)
+
+const Results = ({
+  className,
+  customers,
+  whidth,
+  columnName,
+  ButtonName,
+  ...rest
+}) => {
+
+
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -93,7 +106,7 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       {/* <PerfectScrollbar> */}
       <Box Width={whidth ? whidth : 1}>
-        <Table size={'small'} className={classes.Table}>
+        <Table size={"small"} className={classes.Table}>
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
@@ -128,29 +141,47 @@ const Results = ({ className, customers, whidth, columnName, ...rest }) => {
                 </TableCell>
                 <TableCell>
                   <Box alignItems="center" display="flex">
-                    <Avatar className={classes.avatar} src={customer.avatarUrl}>
-                      {/* {getInitials(customer.name)} */}
-                      {customer.name}
-                    </Avatar>
+                    {customer.avatarUrl && 
+                      <Avatar
+                        className={classes.avatar}
+                        src={customer.avatarUrl}
+                      >
+                        {/* {getInitials(customer.name)} */}
+                        {customer.name && customer.name}
+                      </Avatar>
+                    }
                     <Typography color="textPrimary" variant="body1">
-                      {customer.name}
+                      {customer.name && customer.name}
                     </Typography>
                   </Box>
                 </TableCell>
-                <TableCell>{customer.email}</TableCell>
-                <TableCell>
-                  {customer.address ? (
-                    `${customer.address.city}, ${customer.address.state}, ${customer.address.country}`
-                  ) : (
-                    <Button>Trash</Button>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {customer.phone ? customer.phone : <Button component={Link} to='/questionLoader'>Edit</Button>}
-                </TableCell>
-                {columnName.length === 4 ? null : (
+                        {customer.subject &&
+                <TableCell>{ customer.subject}</TableCell>}
+
+                {customer.email && <TableCell>{customer.email}</TableCell>}
+                {customer.address && 
                   <TableCell>
-                    <Button>Añadir</Button>
+                    
+                      
+                    {customer.address.city}, {customer.address.state}, {customer.address.country}
+                  </TableCell>
+                }
+
+                {customer.phone && <TableCell>{customer.phone}</TableCell>}
+
+                {ButtonName && ButtonName[0] && (
+                  <TableCell>
+                    <Button name={ButtonName[0]}>{ButtonName[0]}</Button>
+                  </TableCell>
+                )}
+                {ButtonName && ButtonName[1] && (
+                  <TableCell>
+                    <Button name={ButtonName[1]}>{ButtonName[1]}</Button>
+                  </TableCell>
+                )}
+                {ButtonName && ButtonName[2] && (
+                  <TableCell>
+                    <Button name={ButtonName[2]}>{ButtonName[2]}</Button>
                   </TableCell>
                 )}
               </TableRow>
