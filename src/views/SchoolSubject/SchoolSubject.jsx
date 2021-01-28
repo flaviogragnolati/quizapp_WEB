@@ -20,10 +20,11 @@ const SchoolSubject = () => {
   const classes = useStyles();
   const [customers] = useState(array);
   let columnName = ['Name', 'Email', 'Trash','Update', 'Teacher']
+  let ButtonName = ['Trash', 'Update', 'Teacher'];
   return (
       <Container maxWidth={false}>
         <Box mt={3}>
-          <List customers={customers} columnName={columnName} />
+          <List customers={customers} columnName={columnName} ButtonName={ButtonName} />
         </Box>
       </Container>
 

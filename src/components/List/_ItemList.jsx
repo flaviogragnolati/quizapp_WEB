@@ -47,13 +47,7 @@ const Results = ({
   ButtonName,
   ...rest
 }) => {
-  // const [containsButton,setContainsButton] = useState(false)
-  //     if(ButtonName){
-  //         setContainsButton(true)
-  //     }
 
-  // [1,2] length = 2 index = 0,1
-  // [1,2,3,4,5] length = 5 index = 0,1,2,3,4
 
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
