@@ -1,8 +1,6 @@
 import { container } from 'assets/jss/material-kit-react.js';
 
-
-
-const signupPageStyle = {
+const signupPageStyle = (theme) => ({
   container: {
     ...container,
     zIndex: '2',
@@ -89,14 +87,14 @@ const signupPageStyle = {
     color: '#495057',
   },
   Register__School: {
-    marginInline: "auto",
+    marginInline: 'auto',
   },
   Register__Fields: {
-    marginTop: "13px"
+    marginTop: '13px',
   },
   Register__Date: {
-    marginTop: "29px"
+    marginTop: '29px',
   },
-};
+});
 
 export default signupPageStyle;

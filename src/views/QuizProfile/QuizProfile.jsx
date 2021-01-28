@@ -110,9 +110,9 @@ const Picture = styled.div`
   background: url(${quizDetail.img}) no-repeat;
   background-size: contain;
   background-position: center;
-  border-color: red;
+  /* border-color: red;
   border-radius: 4px;
-  border-style: solid;
+  border-style: solid; */
 `;
 // const RaisedImg = styled.img`
 //   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
@@ -133,6 +133,7 @@ const School = styled.div`
   justify-self: left;
   height: 100%;
   width: 100%;
+  color: ${(p) => p.theme.palette.primary.contrastText};
 `;
 const Reviews = styled.div`
   grid-area: reviews;

@@ -1,47 +1,44 @@
-import React from "react";
+import React, { useState } from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import Email from '@material-ui/icons/Email';
+import People from '@material-ui/icons/People';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-// import CustomInput from "components/CustomInput/CustomInput.js";
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardFooter from 'components/Card/CardFooter.js';
 
+import { useDispatch } from 'react-redux';
+import { createUser } from './registerSlice';
 
-import { useDispatch } from "react-redux";
-import { createUser } from "./registerSlice";
+import { Formik, Form, Field } from 'formik';
 
-import { Formik, Form, Field } from "formik";
+import styles from 'assets/jss/material-kit-react/views/loginPage.js';
+import { TextField } from 'formik-material-ui';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import { TextField } from "formik-material-ui";
-// import { Typography } from "@material-ui/core";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-// import image from 'assets/img/bg7.jpg';
 const useStyles = makeStyles(styles);
 const image =
-  "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
+  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 const GreyText = styled(Link)`
   color: ${(p) => p.theme.grey};
 `;
 
 function Register(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   setTimeout(function () {
-    setCardAnimation("");
+    setCardAnimation('');
   }, 700);
   const classes = useStyles();
   //const { ...rest } = props;
@@ -57,12 +54,12 @@ function Register(props) {
   // };
 
   const registerInitialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    cellphone: "",
-    birthdate: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    cellphone: '',
+    birthdate: '',
   };
 
   const handleSubmit = (data, formik) => {
@@ -75,9 +72,9 @@ function Register(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
+          backgroundImage: 'url(' + image + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'top center',
         }}
       >
         <div className={classes.container}>
@@ -94,7 +91,7 @@ function Register(props) {
                       color="transparent"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i className={"fab fa-twitter"} />
+                      <i className={'fab fa-twitter'} />
                     </Button>
                     <Button
                       justIcon
@@ -103,7 +100,7 @@ function Register(props) {
                       color="transparent"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i className={"fab fa-facebook"} />
+                      <i className={'fab fa-facebook'} />
                     </Button>
                     <Button
                       justIcon
@@ -112,7 +109,7 @@ function Register(props) {
                       color="transparent"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i className={"fab fa-google-plus-g"} />
+                      <i className={'fab fa-google-plus-g'} />
                     </Button>
                   </div>
                 </CardHeader>
@@ -131,7 +128,7 @@ function Register(props) {
                           name="firstName"
                           label="firstName"
                           fullWidth
-                          color="primary"
+                          color="secondary"
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
@@ -147,7 +144,7 @@ function Register(props) {
                           name="lastName"
                           fullWidth
                           InputProps={{
-                            type: "text",
+                            type: 'text',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <SupervisorAccountIcon
@@ -164,7 +161,7 @@ function Register(props) {
                           name="email"
                           fullWidth
                           InputProps={{
-                            type: "email",
+                            type: 'email',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <Email className={classes.inputIconsColor} />
@@ -179,7 +176,7 @@ function Register(props) {
                           name="password"
                           fullWidth
                           InputProps={{
-                            type: "password",
+                            type: 'password',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <Icon className={classes.inputIconsColor}>
@@ -187,7 +184,7 @@ function Register(props) {
                                 </Icon>
                               </InputAdornment>
                             ),
-                            autoComplete: "off",
+                            autoComplete: 'off',
                           }}
                         />
                         <Field
@@ -197,7 +194,7 @@ function Register(props) {
                           name="cellphone"
                           fullWidth
                           InputProps={{
-                            type: "tel",
+                            type: 'tel',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <PhoneAndroidIcon
@@ -213,7 +210,7 @@ function Register(props) {
                           name="birthdate"
                           fullWidth
                           InputProps={{
-                            type: "date",
+                            type: 'date',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <DateRangeIcon
@@ -232,12 +229,15 @@ function Register(props) {
                           size="lg"
                         >
                           Register
-                        </Button>{" "}
+                        </Button>{' '}
                       </CardFooter>
                     </Form>
                   )}
                 </Formik>
-                <GreyText to="/registerSchool" className={classes.Register__School}>
+                <GreyText
+                  to="/registerSchool"
+                  className={classes.Register__School}
+                >
                   Registrar como escuela
                 </GreyText>
               </Card>
