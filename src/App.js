@@ -64,7 +64,7 @@ function App(props) {
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div Style="padding-top: 64px;">
+        <div Style="padding-top: 64px">
           <Switch>
             <Route exact path={['/', '/home']} component={Home} />
             <Route path="/login" component={Login} />

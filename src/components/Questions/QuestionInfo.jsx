@@ -1,6 +1,7 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
+  Box,
   Grid,
   TextField,
   FormHelperText,
@@ -8,12 +9,12 @@ import {
   Select,
   MenuItem,
   InputLabel,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    // margin: theme.spacing(1),
+    // minWidth: 120,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -23,55 +24,49 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function QuestionInfo(props) {
-  
+function QuestionInfo({ info: { title, description }, setMulti }) {
   const handleChange = (event) => {
-    if(event.target.value === 1) {
-      props.info.setmulti(1)
-    } else if(event.target.value === 2) {
-      props.info.setmulti(2)
-    } 
+    if (event.target.value === 1) {
+      setMulti(1);
+    } else if (event.target.value === 2) {
+      setMulti(2);
+    }
   };
-
-
 
   const classes = useStyles();
   return (
     <>
-      <Grid item md={6} xs={12}>
+      <Grid item xs={5}>
         <TextField
-
           label="Title"
           name="title"
           required
-          value={props.info.title}
+          value={title}
           variant="outlined"
+          multiline
+          rowsMax={3}
         />
       </Grid>
-      <Grid item md={3} xs={12}>
-        <FormControl className={classes.formControl}>
+      <Grid item xs={3}>
+        <FormControl>
           <InputLabel>Tipo de pregunta</InputLabel>
           <Select
-
             labelId="demo-simple-select-helper-label"
-            //   value={age}
-              onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           >
             <MenuItem value={1}>Multiple Opcion</MenuItem>
             <MenuItem value={2}>Verdadero o Falso</MenuItem>
           </Select>
-          <FormHelperText>
-            Elige el tipo de pregunta que deseas
-          </FormHelperText>
+          <FormHelperText>Elige el tipo de pregunta que deseas</FormHelperText>
         </FormControl>
       </Grid>
-      <Grid item md={11} xs={12}>
+      <Grid xs={12}>
         <TextField
           fullWidth
           label="Description"
           name="description"
           required
-          value={props.info.description}
+          value={description}
           variant="outlined"
         />
       </Grid>
