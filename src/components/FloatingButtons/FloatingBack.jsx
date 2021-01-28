@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 function FloatingBack() {
   const c = useStyles();
   const history = useHistory();
-  console.log('history', history);
 
   const handleClick = () => {
     history.goBack();

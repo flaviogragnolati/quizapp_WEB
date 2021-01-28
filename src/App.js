@@ -6,35 +6,12 @@ import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';
 //Componentes
 import NavBar from './components/NavBar/NavBar';
 import SideBar from './components/SideBar/SideBar.jsx';
-import Home from './views/Home';
-import Login from './views/Login/Login';
-import NotFound from './views/NotFound';
 import Footer from 'components/Footer/';
-import UserProfile from './views/UserProfile';
-import SchoolProfile from './views/SchoolProfile';
-import QuizProfile from './views/QuizProfile';
-import Catalogue from './views/Catalogue';
-import Register from './views/Register/Register';
-import SchoolSubject from './views/SchoolSubject';
-import About from './views/About/';
-import SchoolTeacher from './views/SchoolTeacher';
-import SchoolQuiz from 'views/SchoolQuiz';
 import Notifier from 'views/Notifier';
-import QuestionLoader from 'views/QuestionsLoader';
-import RegisterSchool from './views/Register/RegisterSchool';
-// import QuestionSideBar from 'components/SideBar/QuestionSideBar.jsx';
-
-
-//*container de prueba para thema MUI / Styled cOmponents
-// const StyledContainer = styled.div`
-//   background: ${(p) => p.theme.palette.background.paper};
-//   height: 64px;
-//   border: 1px solid ${(p) => p.theme.palette.divider};
-// // `;
-// import TeacherProfile from 'views/TeacherProfile';
-import QuizLoader from './views/QuizLoader';
 import FloatingBack from './components/FloatingButtons/FloatingBack';
 import FloatingTop from './components/FloatingButtons/FloatingTop';
+//Rutas
+import AppRoutes from 'routes';
 
 export const SideBarContext = createContext({
   openSidebar: false,
@@ -68,21 +45,7 @@ function App(props) {
         </SideBarContext.Provider>
         <div Style="padding-top: 64px">
           <Switch>
-            <Route exact path={['/', '/home']} component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/registerSchool" component={RegisterSchool} />
-            <Route path="/about" component={About} />
-            <Route path="/quiz-loader" component={QuizLoader} />
-            <Route path="/question-loader" component={QuestionLoader} />
-            <Route path="/profile/:id" component={UserProfile} />
-            <Route path="/catalogue" component={Catalogue} />
-            <Route path="/school-profile/:id" component={SchoolProfile} />
-            <Route path="/quiz-detail/:id" component={QuizProfile} />
-            <Route path="/school-subject" component={SchoolSubject} />
-            <Route path="/school-teacher" component={SchoolTeacher} />
-            <Route path="/school-quiz" component={SchoolQuiz} />
-            <Route path="/404" component={NotFound} />
+            <AppRoutes />
             <Redirect to="/404" />
           </Switch>
         </div>
