@@ -18,26 +18,16 @@ import CardBody from 'components/Card/CardBody.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 
-<<<<<<< HEAD
-import { useDispatch } from 'react-redux';
-// import { registerUser } from './registerSlice';
-=======
 import { useDispatch, useSelector } from 'react-redux';
 // import { createUser } from './registerSlice';
->>>>>>> c99c77d5f70f4a5b1e45078b742cadc4f2404047
 import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-import { registerUser } from 'components/Auth/authSlice';
-=======
 import { Link, useHistory } from 'react-router-dom';
-import { createUser } from 'components/Auth/authSlice';
-import {authStatusSelector, userSelector} from '../../utils/selectors'
->>>>>>> c99c77d5f70f4a5b1e45078b742cadc4f2404047
+import { registerUser } from 'components/Auth/authSlice';
+import { authStatusSelector, userSelector } from '../../utils/selectors';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -54,29 +44,17 @@ function Register(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userStatus = useSelector(authStatusSelector);
-  const History = useHistory()
-  const user = useSelector(userSelector)
+  const History = useHistory();
+  const user = useSelector(userSelector);
 
-<<<<<<< HEAD
-=======
-  // const user = {
-  //   name: "jorgito",
-  //   email: "jorgito@gmail.com",
-  //   description: "sssssss",
-  //   city: "sssssss",
-  //   country: "sssssss",
-  //   logo: "sssssss",
-  // };
   useEffect(() => {
-    if(userStatus === 'success'){
-      History.push(`/profile/${user.id}`)
+    if (userStatus === 'success') {
+      History.push(`/profile/${user.id}`);
     }
-  }, [userStatus])
-  
->>>>>>> c99c77d5f70f4a5b1e45078b742cadc4f2404047
+  }, [userStatus]);
+
   const registerInitialValues = {
     firstName: '',
-    lastName: '',
     email: '',
     password: '',
     cellphone: '',
