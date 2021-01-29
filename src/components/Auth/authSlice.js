@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-import { ME_ENDPOINT, LOGIN_ENDPOINT } from 'utils/endpoints';
+import {
+  ME_ENDPOINT,
+  LOGIN_ENDPOINT,
+  REGISTER_ENDPOINT,
+} from 'utils/endpoints';
 
 const initialState_Auth = {
   status: status.idle,
@@ -27,8 +31,10 @@ const fakeAPICall = () =>
     }, 2000);
   });
 
-  export const createUser = createAsyncThunk('user/register', async (payload) => {
-    const user_response = await axios.post('http://localhost:3000/auth/register', payload);
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async (payload) => {
+    const user_response = await axios.post(REGISTER_ENDPOINT, payload);
     // const user_response = await fetch('http://localhost:3000/auth/register',
     //  {method:'POST', body:JSON.stringify(payload),headers:{
     //   'Content-Type': 'application/json'
@@ -41,7 +47,8 @@ const fakeAPICall = () =>
     // //   token,
     // };
     return user_response.data;
-  });
+  }
+);
 
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
@@ -125,15 +132,15 @@ const authSlice = createSlice({
       state.status = status.error;
       state.error = payload;
     },
-    [createUser.pending]: (state, { payload }) => {
+    [registerUser.pending]: (state, { payload }) => {
       state.status = status.pending;
     },
-    [createUser.fulfilled]: (state, { payload }) => {
+    [registerUser.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.user = payload.user;
-      state.token = payload.token
+      state.token = payload.token;
     },
-    [createUser.rejected]: (state, { payload }) => {
+    [registerUser.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

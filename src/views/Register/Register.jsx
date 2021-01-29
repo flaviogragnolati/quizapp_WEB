@@ -19,14 +19,14 @@ import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 
 import { useDispatch } from 'react-redux';
-// import { createUser } from './registerSlice';
+// import { registerUser } from './registerSlice';
 import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { createUser } from 'components/Auth/authSlice';
+import { registerUser } from 'components/Auth/authSlice';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -41,17 +41,7 @@ function Register(props) {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
-  //const { ...rest } = props;
   const dispatch = useDispatch();
-
-  // const user = {
-  //   name: "jorgito",
-  //   email: "jorgito@gmail.com",
-  //   description: "sssssss",
-  //   city: "sssssss",
-  //   country: "sssssss",
-  //   logo: "sssssss",
-  // };
 
   const registerInitialValues = {
     firstName: '',
@@ -64,7 +54,7 @@ function Register(props) {
 
   const handleSubmit = (data, formik) => {
     console.log(data);
-    dispatch(createUser(data));
+    dispatch(registerUser(data));
   };
 
   return (
