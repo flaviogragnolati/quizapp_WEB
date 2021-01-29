@@ -1,22 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-<<<<<<< HEAD
 import {
   ME_ENDPOINT,
   LOGIN_ENDPOINT,
-  REGISTER_ENDPOINT,
+  SCHOOL_REGISTER_ENDPOINT,
+  AUTH_ENDPOINT,
 } from 'utils/endpoints';
-=======
-import { ME_ENDPOINT, LOGIN_ENDPOINT , SCHOOL_REGISTER_ENDPOINT , AUTH_ENDPOINT } from 'utils/endpoints';
->>>>>>> c99c77d5f70f4a5b1e45078b742cadc4f2404047
 
 const initialState_Auth = {
   status: status.idle,
   restore: false,
   error: null,
   user: {},
-  school:{},
+  school: {},
   token: null,
 };
 
@@ -46,12 +43,16 @@ export const registerUser = createAsyncThunk(
     // }});
 
     return user_response.data;
-  });
-  
-  export const registerSchool = createAsyncThunk('school/register', async (payload) => {
+  }
+);
+
+export const registerSchool = createAsyncThunk(
+  'school/register',
+  async (payload) => {
     const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
     return school_response.data;
-  });
+  }
+);
 
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
@@ -153,7 +154,7 @@ const authSlice = createSlice({
     [registerSchool.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.school = payload.user;
-      state.token = payload.token
+      state.token = payload.token;
     },
     [registerSchool.rejected]: (state, { payload }) => {
       state.status = status.error;
