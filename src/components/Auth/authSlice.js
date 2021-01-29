@@ -42,9 +42,9 @@ const fakeAPICall = () =>
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
   async (payload, thunkApi) => {
-    const userData = fakeAPICall();
-    return userData;
-    // await axios.post(LOGIN_ENDPOINT);
+    // const userData = fakeAPICall();
+   const login_response = await axios.post(LOGIN_ENDPOINT);
+    return login_response;
   }
 );
 
