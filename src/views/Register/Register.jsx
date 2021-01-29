@@ -19,14 +19,14 @@ import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 
 import { useDispatch } from 'react-redux';
-import { createUser } from './registerSlice';
-
+// import { createUser } from './registerSlice';
 import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { createUser } from 'components/Auth/authSlice';
 
 const useStyles = makeStyles(styles);
 const image =
