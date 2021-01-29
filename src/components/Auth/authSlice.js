@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-import { ME_ENDPOINT, LOGIN_ENDPOINT } from 'utils/endpoints';
+import { ME_ENDPOINT, LOGIN_ENDPOINT , SCHOOL_REGISTER_ENDPOINT , AUTH_ENDPOINT } from 'utils/endpoints';
 
 const initialState_Auth = {
   status: status.idle,
@@ -28,19 +28,14 @@ const fakeAPICall = () =>
   });
 
   export const createUser = createAsyncThunk('user/register', async (payload) => {
-    const user_response = await axios.post('http://localhost:3000/auth/register', payload);
-    // const user_response = await fetch('http://localhost:3000/auth/register',
-    //  {method:'POST', body:JSON.stringify(payload),headers:{
-    //   'Content-Type': 'application/json'
-    // }});
+    const user_response = await axios.post( AUTH_ENDPOINT , payload);
 
-    // const { token } = user_response.data;
-    // const resPayload = {
-    //   userRegister_response: user_response.data,
-    // //   formik,
-    // //   token,
-    // };
     return user_response.data;
+  });
+  
+  export const createSchool = createAsyncThunk('School/register', async (payload) => {
+    const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
+    return school_response.data;
   });
 
 export const localLogin = createAsyncThunk(
@@ -130,6 +125,18 @@ const authSlice = createSlice({
       state.token = payload.token
     },
     [createUser.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [createSchool.pending]: (state, { payload }) => {
+      state.status = status.pending;
+    },
+    [createSchool.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+      state.user = payload.user;
+      state.token = payload.token
+    },
+    [createSchool.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
