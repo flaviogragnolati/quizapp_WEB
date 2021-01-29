@@ -82,14 +82,18 @@ const authSlice = createSlice({
     deleteToken: (state, { payload }) => {
       state.token = null;
       state.restore = false;
+      state.status = status.reset;
       window.localStorage.removeItem(STORE_TOKEN);
       delete axios.defaults.headers.common.Authorization;
+      window.localStorage.setItem('__logout__', Date.now());
     },
     logout: (state, { payload }) => {
       state.token = null;
       state.restore = false;
+      state.status = status.reset;
       window.localStorage.removeItem(STORE_TOKEN);
       delete axios.defaults.headers.common.Authorization;
+      window.localStorage.setItem('__logout__', Date.now());
     },
   },
   extraReducers: {
@@ -98,8 +102,8 @@ const authSlice = createSlice({
     },
     [restoreSession.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.user = payload;
       state.restore = true;
+      state.user = payload;
     },
     [restoreSession.rejected]: (state, { payload }) => {
       state.status = status.error;
