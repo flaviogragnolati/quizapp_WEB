@@ -26,8 +26,8 @@ import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
-import { createUser } from 'components/Auth/authSlice';
-import {authStatusSelector, userSelector} from '../../utils/selectors'
+import { registerUser } from 'components/Auth/authSlice';
+import { authStatusSelector, userSelector } from '../../utils/selectors';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -42,29 +42,19 @@ function Register(props) {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
-  //const { ...rest } = props;
   const dispatch = useDispatch();
   const userStatus = useSelector(authStatusSelector);
-  const History = useHistory()
-  const user = useSelector(userSelector)
+  const History = useHistory();
+  const user = useSelector(userSelector);
 
-  // const user = {
-  //   name: "jorgito",
-  //   email: "jorgito@gmail.com",
-  //   description: "sssssss",
-  //   city: "sssssss",
-  //   country: "sssssss",
-  //   logo: "sssssss",
-  // };
   useEffect(() => {
-    if(userStatus === 'success'){
-      History.push(`/profile/${user.id}`)
+    if (userStatus === 'success') {
+      History.push(`/profile/${user.id}`);
     }
-  }, [userStatus])
-  
+  }, [userStatus]);
+
   const registerInitialValues = {
     firstName: '',
-    lastName: '',
     email: '',
     password: '',
     cellphone: '',
@@ -73,7 +63,7 @@ function Register(props) {
 
   const handleSubmit = (data, formik) => {
     console.log(data);
-    dispatch(createUser(data));
+    dispatch(registerUser(data));
   };
 
   return (

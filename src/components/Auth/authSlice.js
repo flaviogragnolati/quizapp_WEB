@@ -1,14 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-import { ME_ENDPOINT, LOGIN_ENDPOINT , SCHOOL_REGISTER_ENDPOINT , AUTH_ENDPOINT } from 'utils/endpoints';
+import {
+  ME_ENDPOINT,
+  LOGIN_ENDPOINT,
+  SCHOOL_REGISTER_ENDPOINT,
+  AUTH_ENDPOINT,
+} from 'utils/endpoints';
 
 const initialState_Auth = {
   status: status.idle,
   restore: false,
   error: null,
   user: {},
-  school:{},
+  school: {},
   token: null,
 };
 
@@ -28,16 +33,26 @@ const fakeAPICall = () =>
     }, 2000);
   });
 
-  export const createUser = createAsyncThunk('user/register', async (payload) => {
-    const user_response = await axios.post( AUTH_ENDPOINT , payload);
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async (payload) => {
+    const user_response = await axios.post(USER_REGISTER_ENDPOINT, payload);
+    // const user_response = await fetch('http://localhost:3000/auth/register',
+    //  {method:'POST', body:JSON.stringify(payload),headers:{
+    //   'Content-Type': 'application/json'
+    // }});
 
     return user_response.data;
-  });
-  
-  export const createSchool = createAsyncThunk('School/register', async (payload) => {
+  }
+);
+
+export const registerSchool = createAsyncThunk(
+  'school/register',
+  async (payload) => {
     const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
     return school_response.data;
-  });
+  }
+);
 
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
@@ -94,14 +109,18 @@ const authSlice = createSlice({
     deleteToken: (state, { payload }) => {
       state.token = null;
       state.restore = false;
+      state.status = status.reset;
       window.localStorage.removeItem(STORE_TOKEN);
       delete axios.defaults.headers.common.Authorization;
+      window.localStorage.setItem('__logout__', Date.now());
     },
     logout: (state, { payload }) => {
       state.token = null;
       state.restore = false;
+      state.status = status.reset;
       window.localStorage.removeItem(STORE_TOKEN);
       delete axios.defaults.headers.common.Authorization;
+      window.localStorage.setItem('__logout__', Date.now());
     },
   },
   extraReducers: {
@@ -110,34 +129,34 @@ const authSlice = createSlice({
     },
     [restoreSession.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.user = payload;
       state.restore = true;
+      state.user = payload;
     },
     [restoreSession.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
-    [createUser.pending]: (state, { payload }) => {
+    [registerUser.pending]: (state, { payload }) => {
       state.status = status.pending;
     },
-    [createUser.fulfilled]: (state, { payload }) => {
+    [registerUser.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.user = payload.user;
-      state.token = payload.token
+      state.token = payload.token;
     },
-    [createUser.rejected]: (state, { payload }) => {
+    [registerUser.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
-    [createSchool.pending]: (state, { payload }) => {
+    [registerSchool.pending]: (state, { payload }) => {
       state.status = status.pending;
     },
-    [createSchool.fulfilled]: (state, { payload }) => {
+    [registerSchool.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.school = payload.user;
-      state.token = payload.token
+      state.token = payload.token;
     },
-    [createSchool.rejected]: (state, { payload }) => {
+    [registerSchool.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

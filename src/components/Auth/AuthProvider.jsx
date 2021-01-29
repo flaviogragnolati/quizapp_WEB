@@ -19,6 +19,13 @@ function AuthProvider({ children }) {
   const token = useSelector(tokenSelector);
   const restore = useSelector(restoreSessionSelector);
 
+  //!DESCOMENTAR PARA HABILITAR DESLOGEO DE MULTIPLES TABS
+  // window.addEventListener('storage', (event) => {
+  //   if (event.key === '__logout__') {
+  //     dispatch(ACTIONS.auth.deleteToken());
+  //   }
+  // });
+
   useEffect(() => {
     if (authStatus === 'idle' && !token) {
       dispatch(ACTIONS.auth.restoreToken());

@@ -1,55 +1,55 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
+import Email from '@material-ui/icons/Email';
 import DescriptionIcon from '@material-ui/icons/Description';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import PublicIcon from '@material-ui/icons/Public';
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import { useDispatch } from "react-redux";
-import { Formik, Form, Field } from "formik";
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardFooter from 'components/Card/CardFooter.js';
+import { useDispatch } from 'react-redux';
+import { Formik, Form, Field } from 'formik';
 
-import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import { TextField } from "formik-material-ui";
-import { createUser } from "components/Auth/authSlice";
+import styles from 'assets/jss/material-kit-react/views/loginPage.js';
+import { TextField } from 'formik-material-ui';
+import { registerUser } from 'components/Auth/authSlice';
 
 const useStyles = makeStyles(styles);
 const image =
-  "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
+  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 function RegisterSchool(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(function () {
-    setCardAnimation("");
+    setCardAnimation('');
   }, 700);
   const classes = useStyles();
   //const { ...rest } = props;
   const dispatch = useDispatch();
 
   const registerInitialValues = {
-    name: "",
-    city: "",
-    email: "",
-    password: "",
-    country: "",
-    description: "",
-    registerCode: "",
+    name: '',
+    city: '',
+    email: '',
+    password: '',
+    country: '',
+    description: '',
+    registerCode: '',
   };
 
   const handleSubmit = (data, formik) => {
     console.log(data);
-    dispatch(createUser(data));
+    dispatch(registerUser(data));
   };
 
   return (
@@ -57,9 +57,9 @@ function RegisterSchool(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
+          backgroundImage: 'url(' + image + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'top center',
         }}
       >
         <div className={classes.container}>
@@ -116,7 +116,9 @@ function RegisterSchool(props) {
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <VpnKeyIcon className={classes.inputIconsColor} />
+                                <VpnKeyIcon
+                                  className={classes.inputIconsColor}
+                                />
                               </InputAdornment>
                             ),
                           }}
@@ -128,7 +130,7 @@ function RegisterSchool(props) {
                           name="email"
                           fullWidth
                           InputProps={{
-                            type: "email",
+                            type: 'email',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <Email className={classes.inputIconsColor} />
@@ -143,7 +145,7 @@ function RegisterSchool(props) {
                           name="password"
                           fullWidth
                           InputProps={{
-                            type: "password",
+                            type: 'password',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <Icon className={classes.inputIconsColor}>
@@ -151,7 +153,7 @@ function RegisterSchool(props) {
                                 </Icon>
                               </InputAdornment>
                             ),
-                            autoComplete: "off",
+                            autoComplete: 'off',
                           }}
                         />
                         <Field
@@ -161,7 +163,7 @@ function RegisterSchool(props) {
                           name="country"
                           fullWidth
                           InputProps={{
-                            type: "tel",
+                            type: 'tel',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <PublicIcon
@@ -178,7 +180,7 @@ function RegisterSchool(props) {
                           name="city"
                           fullWidth
                           InputProps={{
-                            type: "text",
+                            type: 'text',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <LocationCityIcon
@@ -198,7 +200,9 @@ function RegisterSchool(props) {
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <DescriptionIcon className={classes.inputIconsColor} />
+                                <DescriptionIcon
+                                  className={classes.inputIconsColor}
+                                />
                               </InputAdornment>
                             ),
                           }}
@@ -210,7 +214,7 @@ function RegisterSchool(props) {
                           name="registerCode"
                           fullWidth
                           InputProps={{
-                            type: "tel",
+                            type: 'tel',
                             endAdornment: (
                               <InputAdornment position="end">
                                 <VpnKeyIcon
@@ -224,7 +228,7 @@ function RegisterSchool(props) {
                       <CardFooter className={classes.cardFooter}>
                         <Button type="submit" color="primary" size="lg">
                           Register School
-                        </Button>{" "}
+                        </Button>{' '}
                       </CardFooter>
                     </Form>
                   )}
