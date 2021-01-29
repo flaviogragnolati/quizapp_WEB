@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -18,15 +18,16 @@ import CardBody from 'components/Card/CardBody.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { createUser } from './registerSlice';
 import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { createUser } from 'components/Auth/authSlice';
+import {authStatusSelector, userSelector} from '../../utils/selectors'
 
 const useStyles = makeStyles(styles);
 const image =
@@ -43,6 +44,9 @@ function Register(props) {
   const classes = useStyles();
   //const { ...rest } = props;
   const dispatch = useDispatch();
+  const userStatus = useSelector(authStatusSelector);
+  const History = useHistory()
+  const user = useSelector(userSelector)
 
   // const user = {
   //   name: "jorgito",
@@ -52,7 +56,12 @@ function Register(props) {
   //   country: "sssssss",
   //   logo: "sssssss",
   // };
-
+  useEffect(() => {
+    if(userStatus === 'success'){
+      History.push(`/profile/${user.id}`)
+    }
+  }, [userStatus])
+  
   const registerInitialValues = {
     firstName: '',
     lastName: '',

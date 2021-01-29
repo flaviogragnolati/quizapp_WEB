@@ -8,6 +8,7 @@ const initialState_Auth = {
   restore: false,
   error: null,
   user: {},
+  school:{},
   token: null,
 };
 
@@ -133,7 +134,7 @@ const authSlice = createSlice({
     },
     [createSchool.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.user = payload.user;
+      state.school = payload.user;
       state.token = payload.token
     },
     [createSchool.rejected]: (state, { payload }) => {
