@@ -27,6 +27,22 @@ const fakeAPICall = () =>
     }, 2000);
   });
 
+  export const createUser = createAsyncThunk('user/register', async (payload) => {
+    const user_response = await axios.post('http://localhost:3000/auth/register', payload);
+    // const user_response = await fetch('http://localhost:3000/auth/register',
+    //  {method:'POST', body:JSON.stringify(payload),headers:{
+    //   'Content-Type': 'application/json'
+    // }});
+
+    // const { token } = user_response.data;
+    // const resPayload = {
+    //   userRegister_response: user_response.data,
+    // //   formik,
+    // //   token,
+    // };
+    return user_response.data;
+  });
+
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
   async (payload, thunkApi) => {
@@ -102,6 +118,18 @@ const authSlice = createSlice({
       state.restore = true;
     },
     [restoreSession.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [createUser.pending]: (state, { payload }) => {
+      state.status = status.pending;
+    },
+    [createUser.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+      state.user = payload.user;
+      state.token = payload.token
+    },
+    [createUser.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

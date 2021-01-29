@@ -18,12 +18,11 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import { useDispatch } from "react-redux";
-import { createUser } from "./registerSlice";
-
 import { Formik, Form, Field } from "formik";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { TextField } from "formik-material-ui";
+import { createUser } from "components/Auth/authSlice";
 
 const useStyles = makeStyles(styles);
 const image =
