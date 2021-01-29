@@ -1,8 +1,8 @@
 import React from 'react';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { Backdrop, CircularProgress } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState, useEffect } from 'react';
+// import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -15,11 +15,12 @@ export default function BackdropLoading({
   action,
   color = 'inherit',
   thickness = 4,
-  size = 100,
+  size = 250,
   ...props
 }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };

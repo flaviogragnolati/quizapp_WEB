@@ -10,6 +10,8 @@ import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem';
 import { Grid, Box } from '@material-ui/core';
 import styled from 'styled-components';
+import BackdropLoading from 'components/Loading/BackdropLoading';
+import { useState } from 'react';
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -64,56 +66,70 @@ const HeroButton = styled(Button)`
 
 function Inicio(props) {
   const { classes } = props;
-  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const handleLoading = () => {
+    setLoading((prev) => !prev);
+  };
 
   return (
-    <InicioBackground backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img
-        style={{ display: 'none' }}
-        src={backgroundImage}
-        alt="increase priority"
-      />
-      <Typography color="inherit" variant="h2">
-        Tu Universidad Virtual
-      </Typography>
-      <Typography color="inherit" variant="h4" className={classes.h5}>
-        Estudia Desde cualquier parte del Mundo.
-      </Typography>
-      <Grid
-        container
-        spacing={10}
-        direction="row"
-        justify="center"
-        alignItems="space-between"
-      >
-        <Grid item xs={3}>
-          <HeroButton
-            color="primary"
-            variant="contained"
-            size="large"
-            component={Link}
-            to="/register"
-          >
-            Registrarse
-          </HeroButton>
+    <>
+      <InicioBackground backgroundClassName={classes.background}>
+        {/* Increase the network loading priority of the background image. */}
+        <img
+          style={{ display: 'none' }}
+          src={backgroundImage}
+          alt="increase priority"
+        />
+        <Typography color="inherit" variant="h2">
+          Tu Universidad Virtual
+        </Typography>
+        <Typography color="inherit" variant="h4" className={classes.h5}>
+          Estudia Desde cualquier parte del Mundo.
+        </Typography>
+        <Grid
+          container
+          spacing={10}
+          direction="row"
+          justify="center"
+          alignItems="space-between"
+        >
+          <Grid item xs={3}>
+            <HeroButton
+              color="primary"
+              variant="contained"
+              size="large"
+              component={Link}
+              to="/register"
+            >
+              Registrarse
+            </HeroButton>
+          </Grid>
+          <Grid item xs={3}>
+            <HeroButton
+              color="secondary"
+              variant="contained"
+              size="large"
+              component={Link}
+              to="/catalogue"
+            >
+              Ver Catalogo
+            </HeroButton>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <HeroButton
-            color="secondary"
-            variant="contained"
-            size="large"
-            component={Link}
-            to="/catalogue"
-          >
-            Ver Catalogo
-          </HeroButton>
-        </Grid>
-      </Grid>
-      <Typography variant="h6" color="inherit" className={classes.more}>
-        Descubre la Experiencia
-      </Typography>
-    </InicioBackground>
+        <Typography variant="h6" color="inherit" className={classes.more}>
+          Descubre la Experiencia
+        </Typography>
+        <HeroButton
+          color="primary"
+          variant="outlined"
+          size="medium"
+          onClick={handleLoading}
+        >
+          LOADING TEST
+        </HeroButton>
+      </InicioBackground>
+      {loading && <BackdropLoading color="secondary" />}
+    </>
   );
 }
 

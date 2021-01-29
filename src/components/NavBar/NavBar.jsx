@@ -25,18 +25,20 @@ import Snackbar from 'components/Home_MUI/Snackbar';
 import logoLight from 'assets/img/logo/logoLight.png';
 import logoDark from 'assets/img/logo/logoDark.png';
 import { Box } from '@material-ui/core';
+import { useAuth } from 'components/Auth/AuthContext';
 
 function NavBar({ toggleTheme, checked, theme }) {
+  const history = useHistory();
   const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = useState(null);
-
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
-
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [notifier, setNotifier] = useState(false);
-  const History = useHistory();
+
+  const user = useAuth();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,28 +56,16 @@ function NavBar({ toggleTheme, checked, theme }) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  // const handleSideBarToggle = () => {
-  //   openSideBar = !openSideBar;
-  // };
+
   const handleMenuProfile = () => {
-    History.push('/profile/1');
+    history.push('/profile/1');
     handleMenuClose();
   };
 
-  // const handleMenuHome = () => {
-  //   History.push(`/`);
-  //   handleMenuClose();
-  // };
   const handleMenuLogout = () => {
-    History.push(`/`);
+    history.push(`/`);
     handleMenuClose();
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   History.push('/catalogue');
-  //   document.getElementById('Search').value = '';
-  //   setNotifier(true);
-  // };
 
   const handleClose = () => {
     setNotifier(false);
@@ -87,17 +77,6 @@ function NavBar({ toggleTheme, checked, theme }) {
     object-fit: contain;
     margin-right: 0.5rem;
   `;
-  // const StyledLink = styled(Link)`
-  //   text-decoration: none;
-
-  //   &:focus,
-  //   &:hover,
-  //   &:visited,
-  //   &:link,
-  //   &:active {
-  //     text-decoration: none;
-  //   }
-  // `;
 
   const renderMenu = (
     <Menu
@@ -110,7 +89,11 @@ function NavBar({ toggleTheme, checked, theme }) {
       position="fixed"
     >
       <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
+      {Boolean(user) ? (
+        <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
+      ) : (
+        <MenuItem onClick={handleMenuLogout}>Login</MenuItem>
+      )}
     </Menu>
   );
 
@@ -124,14 +107,16 @@ function NavBar({ toggleTheme, checked, theme }) {
       onClose={handleMobileMenuClose}
       position="fixed"
     >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="primary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+      {user && (
+        <MenuItem>
+          <IconButton aria-label="show 11 new notifications" color="inherit">
+            <Badge badgeContent={11} color="primary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+      )}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -145,6 +130,7 @@ function NavBar({ toggleTheme, checked, theme }) {
       </MenuItem>
     </Menu>
   );
+
   return (
     <div>
       <AppBar position="fixed" color="secondary">
@@ -182,11 +168,18 @@ function NavBar({ toggleTheme, checked, theme }) {
             <IconButton>
               <ThemeToggler toggleTheme={toggleTheme} checked={checked} />
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="primary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+
+            {user && (
+              <IconButton
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            )}
+
             <IconButton
               edge="end"
               aria-label="account of current user"

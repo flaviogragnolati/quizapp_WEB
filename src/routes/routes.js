@@ -40,14 +40,6 @@ export const createRoutes = (routes) => {
   return routes.map((route, idx) => {
     switch (route.access) {
       case 'guest':
-        console.log(
-          <Route
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            {...route.exact}
-          />
-        );
         return (
           <Route
             key={route.path + idx}
@@ -77,6 +69,7 @@ export const createRoutes = (routes) => {
         );
 
       default:
+        console.error('ACCESS LEVEL NOT DEFINED');
         return (
           <Route
             key={route.path + idx}
