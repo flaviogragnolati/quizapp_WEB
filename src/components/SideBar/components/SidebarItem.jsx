@@ -15,10 +15,7 @@ function SidebarItem({ link, label, icon, itemProps, iconProps, textProps }) {
 export default SidebarItem;
 
 SidebarItem.propTypes = {
-  link: PropTypes.oneOfType(
-    PropTypes.string.isRequired,
-    PropTypes.object.isRequired
-  ),
+  link: PropTypes.oneOfType(PropTypes.string, PropTypes.object),
   label: PropTypes.string.isRequired,
   icon: PropTypes.element.isRequired,
   itemProps: PropTypes.string,
