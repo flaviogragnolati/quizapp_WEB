@@ -9,6 +9,9 @@ export const useAuth = () => {
       'useAuthState fuera de scope, tenes que llamarla dentro del provider'
     );
   }
+  if (Object.keys(user).length === 0 && user.constructor === Object) {
+    return null;
+  }
 
   return user;
 };
