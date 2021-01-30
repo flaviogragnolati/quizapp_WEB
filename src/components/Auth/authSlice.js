@@ -3,10 +3,12 @@ import { status } from 'utils/helpers';
 import axios from 'axios';
 import {
   ME_ENDPOINT,
-  LOGIN_ENDPOINT,
   SCHOOL_REGISTER_ENDPOINT,
   AUTH_ENDPOINT,
-  USER_REGISTER_ENDPOINT
+  USER_REGISTER_ENDPOINT,
+ 
+  RESTORE_ENDPOINT,
+  LOGIN_ENDPOINT,
 } from 'utils/endpoints';
 
 const initialState_Auth = {
@@ -14,7 +16,6 @@ const initialState_Auth = {
   restore: false,
   error: null,
   user: {},
-  school: {},
   token: null,
 };
 
@@ -36,31 +37,33 @@ const fakeAPICall = () =>
 
 export const registerUser = createAsyncThunk(
   'user/register',
-  async (payload) => {
+  async (payload, { dispatch }) => {
     const user_response = await axios.post(USER_REGISTER_ENDPOINT, payload);
-    // const user_response = await fetch('http://localhost:3000/auth/register',
-    //  {method:'POST', body:JSON.stringify(payload),headers:{
-    //   'Content-Type': 'application/json'
-    // }});
-
-    return user_response.data;
+    const { user, token } = user_response.data;
+    dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
+    return user;
   }
 );
 
 export const registerSchool = createAsyncThunk(
   'school/register',
-  async (payload) => {
+  async (payload, { dispatch }) => {
     const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
-    return school_response.data;
+    const { user, token } = school_response.data;
+    dispatch(setToken(token));
+    return user;
   }
 );
 
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
-  async (payload, thunkApi) => {
+  async (payload, { dispatch }) => {
     // const userData = fakeAPICall();
-   const login_response = await axios.post(LOGIN_ENDPOINT);
-    return login_response;
+    // return userData;
+    const login_response = await axios.post(LOGIN_ENDPOINT, payload);
+    const { user, token } = login_response.data;
+    dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
+    return user;
   }
 );
 
@@ -68,17 +71,24 @@ export const getUser = createAsyncThunk(
   'auth/getUser',
   async (payload, thunkApi) => {
     const userData = await axios(ME_ENDPOINT);
-    console.log('userDATA');
     return userData;
   }
 );
 
 export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
-  async (payload, tunkApi) => {
-    // const userData = await axios.get(ME_ENDPOINT);
-    const userData = fakeAPICall();
-    return userData;
+  async (payload, { getState, dispatch }) => {
+    const state = getState();
+    const { auth } = state;
+    const userData = await axios.get(RESTORE_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
+    const { user } = userData;
+    return user;
+    // const userData = fakeAPICall();
+    // return userData;
   },
   {
     condition: (payload, { getState }) => {
@@ -87,8 +97,9 @@ export const restoreSession = createAsyncThunk(
         auth.status === status.pending ||
         auth.status === status.loading ||
         auth.status === status.error ||
-        auth.status === status.succes
+        auth.status === status.success
       ) {
+        console.log('should not run again', auth);
         return false;
       }
     },
@@ -107,17 +118,12 @@ const authSlice = createSlice({
     restoreToken: (state, { payload }) => {
       state.token = window.localStorage.getItem(STORE_TOKEN);
     },
-    deleteToken: (state, { payload }) => {
-      state.token = null;
-      state.restore = false;
-      state.status = status.reset;
-      window.localStorage.removeItem(STORE_TOKEN);
-      delete axios.defaults.headers.common.Authorization;
-      window.localStorage.setItem('__logout__', Date.now());
-    },
+    deleteToken: (state, { payload }) => {},
     logout: (state, { payload }) => {
       state.token = null;
       state.restore = false;
+      state.user = {};
+      state.error = null;
       state.status = status.reset;
       window.localStorage.removeItem(STORE_TOKEN);
       delete axios.defaults.headers.common.Authorization;
@@ -142,8 +148,8 @@ const authSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.user = payload.user;
-      state.token = payload.token;
+      state.user = payload;
+      state.restore = true;
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.status = status.error;
@@ -154,14 +160,28 @@ const authSlice = createSlice({
     },
     [registerSchool.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.school = payload.user;
-      state.token = payload.token;
+      state.user = payload;
+      state.restore = true;
     },
     [registerSchool.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
+    [localLogin.pending]: (state, { payload }) => {
+      state.status = status.pending;
+    },
+    [localLogin.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+      state.user = payload;
+      state.restore = true;
+    },
+    [localLogin.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
   },
 });
+
+export const { setToken } = authSlice.actions;
 
 export default authSlice;

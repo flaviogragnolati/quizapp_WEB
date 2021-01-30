@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -15,7 +16,7 @@ import GridItem from 'components/Grid/GridItem.jsx';
 import Button from 'components/CustomButtons/Button.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
-import CardHeader from 'components/Card/CardHeader.js';
+import RegisterHeader from 'components/Form/RegisterHeader';
 import CardFooter from 'components/Card/CardFooter.js';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,19 +25,38 @@ import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
+import { DatePicker } from 'formik-material-ui-pickers';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { registerUser } from 'components/Auth/authSlice';
-import { authStatusSelector, userSelector } from '../../utils/selectors';
+import { authStatusSelector, userSelector } from 'utils/selectors';
+
+import {
+  registerModel,
+  initialState_Register,
+  registerValidationSchema,
+} from 'utils/forms/register';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 const useStyles = makeStyles(styles);
+
 const image =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
+
 const GreyText = styled(Link)`
   color: ${(p) => p.theme.grey};
 `;
 
 function Register(props) {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    cellphone,
+    birthdate,
+  } = registerModel;
+
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   setTimeout(function () {
     setCardAnimation('');
@@ -44,25 +64,16 @@ function Register(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userStatus = useSelector(authStatusSelector);
-  const History = useHistory();
+  const history = useHistory();
   const user = useSelector(userSelector);
 
   useEffect(() => {
     if (userStatus === 'success') {
-      History.push(`/profile/${user.id}`);
+      history.push(`/profile/${user.id}`);
     }
-  }, [userStatus]);
-
-  const registerInitialValues = {
-    firstName: '',
-    email: '',
-    password: '',
-    cellphone: '',
-    birthdate: '',
-  };
+  }, [userStatus, history, user.id]);
 
   const handleSubmit = (data, formik) => {
-    console.log(data);
     dispatch(registerUser(data));
   };
 
@@ -80,157 +91,119 @@ function Register(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <CardHeader color="primary" className={classes.cardHeader}>
-                  <h4>Register with:</h4>
-                  <div className={classes.socialLine}>
-                    <Button
-                      justIcon
-                      href="#pablo"
-                      target="_blank"
-                      color="transparent"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className={'fab fa-twitter'} />
-                    </Button>
-                    <Button
-                      justIcon
-                      href="#pablo"
-                      target="_blank"
-                      color="transparent"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className={'fab fa-facebook'} />
-                    </Button>
-                    <Button
-                      justIcon
-                      href="#pablo"
-                      target="_blank"
-                      color="transparent"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className={'fab fa-google-plus-g'} />
-                    </Button>
-                  </div>
-                </CardHeader>
+                <RegisterHeader />
                 <Formik
                   onSubmit={handleSubmit}
-                  initialValues={registerInitialValues}
+                  initialValues={initialState_Register}
+                  validationSchema={registerValidationSchema}
                 >
                   {(formik) => (
-                    <Form className={classes.form}>
-                      <p className={classes.divider}>Or Be Classical</p>
-
-                      <CardBody>
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          name="firstName"
-                          label="firstName"
-                          fullWidth
-                          color="secondary"
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Last Name"
-                          name="lastName"
-                          fullWidth
-                          InputProps={{
-                            type: 'text',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <SupervisorAccountIcon
-                                  className={classes.inputIconsColor}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Email..."
-                          name="email"
-                          fullWidth
-                          InputProps={{
-                            type: 'email',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <Email className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Password"
-                          name="password"
-                          fullWidth
-                          InputProps={{
-                            type: 'password',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <Icon className={classes.inputIconsColor}>
-                                  lock_outline
-                                </Icon>
-                              </InputAdornment>
-                            ),
-                            autoComplete: 'off',
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Phone Number"
-                          name="cellphone"
-                          fullWidth
-                          InputProps={{
-                            type: 'tel',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <PhoneAndroidIcon
-                                  className={classes.inputIconsColor}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Date}
-                          component={TextField}
-                          name="birthdate"
-                          fullWidth
-                          InputProps={{
-                            type: 'date',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <DateRangeIcon
-                                  className={classes.inputIconsColor}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </CardBody>
-                      <CardFooter className={classes.cardFooter}>
-                        <Button
-                          type="submit"
-                          // onClick={() => handleSubmit()}
-                          color="primary"
-                          size="lg"
-                        >
-                          Register
-                        </Button>{' '}
-                      </CardFooter>
-                    </Form>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <Form className={classes.form}>
+                        <p className={classes.divider}>Or Be Classical</p>
+                        <CardBody>
+                          <Field
+                            className={classes.Register__Fields}
+                            component={TextField}
+                            name={firstName.name}
+                            label={firstName.label}
+                            fullWidth
+                            color="secondary"
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <People className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            className={classes.Register__Fields}
+                            component={TextField}
+                            name={lastName.name}
+                            label={lastName.label}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <SupervisorAccountIcon
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            className={classes.Register__Fields}
+                            component={TextField}
+                            name={email.name}
+                            label={email.label}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Email className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            className={classes.Register__Fields}
+                            component={TextField}
+                            name={password.name}
+                            label={password.label}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Icon className={classes.inputIconsColor}>
+                                    lock_outline
+                                  </Icon>
+                                </InputAdornment>
+                              ),
+                              autoComplete: 'off',
+                            }}
+                          />
+                          <Field
+                            className={classes.Register__Fields}
+                            component={TextField}
+                            name={cellphone.name}
+                            label={cellphone.label}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <PhoneAndroidIcon
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            className={classes.Register__Date}
+                            component={DatePicker}
+                            name={birthdate.name}
+                            label={birthdate.label}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <DateRangeIcon
+                                    className={classes.inputIconsColor}
+                                  />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </CardBody>
+                        <CardFooter className={classes.cardFooter}>
+                          <Button type="submit" color="primary" size="lg">
+                            Register
+                          </Button>
+                        </CardFooter>
+                      </Form>
+                    </MuiPickersUtilsProvider>
                   )}
                 </Formik>
                 <GreyText

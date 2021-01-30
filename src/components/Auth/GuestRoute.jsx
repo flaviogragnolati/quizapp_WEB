@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { useAuthContext } from './authContext';
+import { useAuth } from 'components/Auth/AuthContext';
 
 function GuestRoute({ component: Component, ...rest }) {
-  const authStatus = useAuthContext();
-  const REDIRECT = '/catalogue';
+  const user = useAuth();
+  const REDIRECT = `/profile/${user.id}`;
   return (
     <Route
       {...rest}
       render={(props) =>
-        !authStatus ? <Component {...props} /> : <Redirect to={REDIRECT} />
+        !Boolean(user) ? <Component {...props} /> : <Redirect to={REDIRECT} />
       }
     />
   );

@@ -26,9 +26,12 @@ import logoLight from 'assets/img/logo/logoLight.png';
 import logoDark from 'assets/img/logo/logoDark.png';
 import { Box } from '@material-ui/core';
 import { useAuth } from 'components/Auth/AuthContext';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from 'store/rootReducer';
 
 function NavBar({ toggleTheme, checked, theme }) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -63,7 +66,8 @@ function NavBar({ toggleTheme, checked, theme }) {
   };
 
   const handleMenuLogout = () => {
-    history.push(`/`);
+    // history.push(`/`);
+    dispatch(ACTIONS.auth.logout());
     handleMenuClose();
   };
 
@@ -92,7 +96,13 @@ function NavBar({ toggleTheme, checked, theme }) {
       {Boolean(user) ? (
         <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
       ) : (
-        <MenuItem onClick={handleMenuLogout}>Login</MenuItem>
+        <MenuItem
+          onClick={() => {
+            history.push('/login');
+          }}
+        >
+          Login
+        </MenuItem>
       )}
     </Menu>
   );
