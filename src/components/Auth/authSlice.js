@@ -6,6 +6,7 @@ import {
   LOGIN_ENDPOINT,
   SCHOOL_REGISTER_ENDPOINT,
   AUTH_ENDPOINT,
+  USER_REGISTER_ENDPOINT
 } from 'utils/endpoints';
 
 const initialState_Auth = {
