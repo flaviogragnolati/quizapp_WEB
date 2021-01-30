@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useContext} from 'react';
 import { Link } from 'react-router-dom';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -19,6 +19,7 @@ import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 
 import ProfileTabs from './ProfileTabs';
 import { capitalize } from 'utils/helpers';
+import { AuthContext } from 'components/Auth/AuthContext';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -39,6 +40,8 @@ const {
 } = fakeUser;
 
 export default function ProfilePage(props) {
+  const user = useContext(AuthContext);
+
   const classes = useStyles();
   let showDetails =
     props.location && props.location.state && props.location.state.owner;

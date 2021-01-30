@@ -121,9 +121,10 @@ function Inicio(props) {
         </Typography>
         <HeroButton
           color="primary"
-          variant="outlined"
+          variant="contained"
           size="medium"
           onClick={handleLoading}
+          b={0}
         >
           LOADING TEST
         </HeroButton>
