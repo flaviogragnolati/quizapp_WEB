@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import QuizzCard from 'components/QuizzCard';
@@ -6,6 +6,8 @@ import QuizzCard from 'components/QuizzCard';
 import data from './data';
 import FilterSidebar from 'views/Catalogue/components/FilterSidebar';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCatalogue } from './catalogueSlice';
 
 // root: {
 //   backgroundColor: theme.palette.background.dark,
@@ -26,7 +28,15 @@ const CatalogueSection = styled.section`
 `;
 
 const Catalogue = () => {
+  const dispatch = useDispatch();
+  const catStatus = useSelector((state) => state.catalogue.status);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (catStatus === 'idle') {
+      dispatch(getCatalogue());
+    }
+  }, [catStatus, dispatch]);
 
   return (
     <CatalogueSection>

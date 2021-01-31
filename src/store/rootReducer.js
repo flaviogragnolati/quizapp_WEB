@@ -1,5 +1,6 @@
 import authSlice from 'components/Auth/authSlice';
 import actionsSlice from 'slices/actionsSlice';
+import catalogueSlice from 'views/Catalogue/catalogueSlice';
 import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
 // import UserRegisterSlice from 'views/Register/registerSlice';
@@ -10,6 +11,7 @@ const rootReducer = {
   actions: actionsSlice.reducer,
   // User: UserRegisterSlice.reducer,
   auth: authSlice.reducer,
+  catalogue: catalogueSlice.reducer,
 };
 
 export default rootReducer;
@@ -19,4 +21,5 @@ export const ACTIONS = {
   notifications: { ...notificationSlice.actions },
   actions: { ...actionsSlice.actions },
   auth: { ...authSlice.actions },
+  catalogue: { ...catalogueSlice.actions },
 };
