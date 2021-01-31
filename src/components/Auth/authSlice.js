@@ -33,6 +33,16 @@ const fakeAPICall = () =>
     }, 2000);
   });
 
+const isRejectedAction = (action) => {
+  return action.type.endsWith('rejected');
+};
+const isPendingAction = (action) => {
+  return action.type.endsWith('pending');
+};
+const isfulfilledAction = (action) => {
+  return action.type.endsWith('fulfilled');
+};
+
 export const registerUser = createAsyncThunk(
   'user/register',
   async (payload, { dispatch }) => {
@@ -56,20 +66,10 @@ export const registerSchool = createAsyncThunk(
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
   async (payload, { dispatch }) => {
-    // const userData = fakeAPICall();
-    // return userData;
     const login_response = await axios.post(LOGIN_ENDPOINT, payload);
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
     return user;
-  }
-);
-
-export const getUser = createAsyncThunk(
-  'auth/getUser',
-  async (payload, thunkApi) => {
-    const userData = await axios(ME_ENDPOINT);
-    return userData;
   }
 );
 
@@ -78,15 +78,13 @@ export const restoreSession = createAsyncThunk(
   async (payload, { getState, dispatch }) => {
     const state = getState();
     const { auth } = state;
-    const userData = await axios.get(RESTORE_ENDPOINT, {
+    const restored_user = await axios.get(RESTORE_ENDPOINT, {
       headers: {
-        Authorization: `Bearer ${auth.token}`,
+        Authorization: auth.token,
       },
     });
-    const { user } = userData;
+    const { user } = restored_user.data;
     return user;
-    // const userData = fakeAPICall();
-    // return userData;
   },
   {
     condition: (payload, { getState }) => {
@@ -128,55 +126,19 @@ const authSlice = createSlice({
       window.localStorage.setItem('__logout__', Date.now());
     },
   },
-  extraReducers: {
-    [restoreSession.pending]: (state, { payload }) => {
+  extraReducers: (builder) => {
+    builder.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;
-    },
-    [restoreSession.fulfilled]: (state, { payload }) => {
+    });
+    builder.addMatcher(isfulfilledAction, (state, { payload }) => {
       state.status = status.success;
       state.restore = true;
       state.user = payload;
-    },
-    [restoreSession.rejected]: (state, { payload }) => {
+    });
+    builder.addMatcher(isRejectedAction, (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
-    },
-    [registerUser.pending]: (state, { payload }) => {
-      state.status = status.pending;
-    },
-    [registerUser.fulfilled]: (state, { payload }) => {
-      state.status = status.success;
-      state.user = payload;
-      state.restore = true;
-    },
-    [registerUser.rejected]: (state, { payload }) => {
-      state.status = status.error;
-      state.error = payload;
-    },
-    [registerSchool.pending]: (state, { payload }) => {
-      state.status = status.pending;
-    },
-    [registerSchool.fulfilled]: (state, { payload }) => {
-      state.status = status.success;
-      state.user = payload;
-      state.restore = true;
-    },
-    [registerSchool.rejected]: (state, { payload }) => {
-      state.status = status.error;
-      state.error = payload;
-    },
-    [localLogin.pending]: (state, { payload }) => {
-      state.status = status.pending;
-    },
-    [localLogin.fulfilled]: (state, { payload }) => {
-      state.status = status.success;
-      state.user = payload;
-      state.restore = true;
-    },
-    [localLogin.rejected]: (state, { payload }) => {
-      state.status = status.error;
-      state.error = payload;
-    },
+    });
   },
 });
 
