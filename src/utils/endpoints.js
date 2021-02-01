@@ -1,4 +1,4 @@
-export const BASE_ENDPOINT = 'http://localhost:3000';
+export const BASE_ENDPOINT = 'https://apiquizzes.herokuapp.com';
 
 export const AUTH_ENDPOINT = BASE_ENDPOINT + '/auth';
 
@@ -13,3 +13,5 @@ export const SCHOOL_REGISTER_ENDPOINT = BASE_ENDPOINT + '/org';
 export const USER_REGISTER_ENDPOINT = AUTH_ENDPOINT + '/register';
 
 export const QUIZ_SCHOOL_ENDPOINT = BASE_ENDPOINT + '/org/';
+
+export const QUIZ_ENDPOINT = BASE_ENDPOINT + '/quiz';
