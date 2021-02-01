@@ -60,6 +60,7 @@ export const localLogin = createAsyncThunk(
   async (payload, { dispatch }) => {
     // const userData = fakeAPICall();
     // return userData;
+    console.log('tu vieja',payload)
     const login_response = await axios.post(LOGIN_ENDPOINT, payload);
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol

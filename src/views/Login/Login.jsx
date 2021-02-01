@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -23,9 +23,11 @@ import {
 } from 'utils/forms/register';
 import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
 import { localLogin } from 'components/Auth/authSlice';
+import { userSelector } from 'utils/selectors';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -35,9 +37,20 @@ function Login(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
+  const user = useSelector(userSelector)
+  const History =   useHistory()
+
+
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
+
+
+  useEffect(()=>{
+    if(user.id){
+      History.push(`/profile/${user.id}`)
+    }
+  },[user])
 
   const classes = useStyles();
 
