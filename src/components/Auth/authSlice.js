@@ -2,11 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
 import {
-  ME_ENDPOINT,
   SCHOOL_REGISTER_ENDPOINT,
-  AUTH_ENDPOINT,
   USER_REGISTER_ENDPOINT,
- 
   RESTORE_ENDPOINT,
   LOGIN_ENDPOINT,
 } from 'utils/endpoints';
@@ -21,19 +18,19 @@ const initialState_Auth = {
 
 const STORE_TOKEN = 'QuizJWT';
 
-const fakeAPICall = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        id: 1,
-        firstName: 'Erwin',
-        lastName: 'Schrödinger',
-        email: 'erwin@quantum.com',
-        birthdate: '12-08-1887',
-        cellphone: '19610104',
-      });
-    }, 2000);
-  });
+// const fakeAPICall = () =>
+//   new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve({
+//         id: 1,
+//         firstName: 'Erwin',
+//         lastName: 'Schrödinger',
+//         email: 'erwin@quantum.com',
+//         birthdate: '12-08-1887',
+//         cellphone: '19610104',
+//       });
+//     }, 2000);
+//   });
 
 const isRejectedAction = (action) => {
   return action.type.endsWith('rejected');

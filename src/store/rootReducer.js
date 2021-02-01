@@ -3,6 +3,7 @@ import actionsSlice from 'slices/actionsSlice';
 import catalogueSlice from 'views/Catalogue/catalogueSlice';
 import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
+import QuizInfoSlice from 'views/SchoolQuiz/QuizInfoSlice';
 // import UserRegisterSlice from 'views/Register/registerSlice';
 
 const rootReducer = {
@@ -11,6 +12,7 @@ const rootReducer = {
   actions: actionsSlice.reducer,
   // User: UserRegisterSlice.reducer,
   auth: authSlice.reducer,
+  QuizInfo: QuizInfoSlice.reducer,
   catalogue: catalogueSlice.reducer,
 };
 
@@ -21,5 +23,6 @@ export const ACTIONS = {
   notifications: { ...notificationSlice.actions },
   actions: { ...actionsSlice.actions },
   auth: { ...authSlice.actions },
+  // QuizInfo: { ...QuizInfoSlice.actions },
   catalogue: { ...catalogueSlice.actions },
 };
