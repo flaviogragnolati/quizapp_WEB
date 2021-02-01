@@ -18,6 +18,7 @@ export const CreateQuiz = createAsyncThunk(
 const initialState_QuizLoader = {
   Quiz: {},
   status: status.idle,
+  materiaStatus: status.idle,
   error:''
 };
 
