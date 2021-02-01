@@ -15,6 +15,8 @@ import RegisterSchool from 'views/Register/RegisterSchool';
 import QuizLoader from 'views/QuizLoader';
 import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
+import SubjectLoader from 'views/SubjectLoader/SubjectLoader';
+
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
   { path: '/login', component: Login, access: 'guest' },
@@ -23,6 +25,7 @@ export const routes = [
   { path: '/about', component: About, access: 'guest' },
   { path: '/registerSchool', component: RegisterSchool, access: 'guest' },
   { path: '/quiz-loader', component: DatosQuiz, access: 'user' },
+  { path: '/subject-loader', component: SubjectLoader, access: 'user' },
   { path: '/question-loader', component: QuestionLoader, access: 'user' },
   { path: '/profile/:id', component: UserProfile, access: 'guest' },
   { path: '/catalogue', component: Catalogue, access: 'guest' },

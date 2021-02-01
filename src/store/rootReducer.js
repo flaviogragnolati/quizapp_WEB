@@ -5,7 +5,12 @@ import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
 import QuizLoaderSlice from 'views/QuizLoader/QuizLoaderSlice';
 import QuizInfoSlice from 'views/SchoolQuiz/QuizInfoSlice';
+import SubjectLoaderSlice from 'views/SubjectLoader/SubjectLoaderSlice';
+
+
 // import UserRegisterSlice from 'views/Register/registerSlice';
+
+
 const rootReducer = {
   notifications: notificationSlice.reducer,
   favorites: favoritesSlice.reducer,
@@ -15,6 +20,7 @@ const rootReducer = {
   QuizInfo: QuizInfoSlice.reducer,
   catalogue: catalogueSlice.reducer,
   QuizLoader: QuizLoaderSlice.reducer,
+  SubjectLoader: SubjectLoaderSlice,
 };
 
 export default rootReducer;

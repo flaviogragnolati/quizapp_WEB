@@ -18,3 +18,4 @@ export const QUIZ_SCHOOL_ENDPOINT = BASE_ENDPOINT + '/org/';
 
 export const QUIZ_ENDPOINT = BASE_ENDPOINT + '/quiz';
 
+export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject'
