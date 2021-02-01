@@ -68,12 +68,6 @@ export const registerSchool = createAsyncThunk(
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
   async (payload, { dispatch }) => {
-<<<<<<< HEAD
-    // const userData = fakeAPICall();
-    // return userData;
-    console.log('tu vieja',payload)
-=======
->>>>>>> 65c14051784007c03c4e29b8a422bdcc36818092
     const login_response = await axios.post(LOGIN_ENDPOINT, payload);
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
