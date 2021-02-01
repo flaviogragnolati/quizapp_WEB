@@ -163,8 +163,8 @@ const Results = ({
                     </Typography>
                   </Box>
                 </TableCell>
-                        {customer.subject &&
-                <TableCell>{ customer.subject}</TableCell>}
+                        {customer.Subject &&
+                <TableCell>{ customer.Subject.name}</TableCell>}
                       {customer.quiz &&
                 <TableCell>{ customer.quiz}</TableCell>}
                       {customer.review &&

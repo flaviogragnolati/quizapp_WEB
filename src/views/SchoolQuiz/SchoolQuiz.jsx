@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import List from '../../components/List';
 import Button from 'components/Home_MUI/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuizData } from './QuizInfoSlice'
+import { QuizSchoolSelector, QuizSchoolStatusSelector } from 'utils/selectors';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
   },
 }));
+
+
 
 const quizzes = [
   {
@@ -24,15 +30,27 @@ const quizzes = [
   { id: 5, name: `Space-Time Structure`, subject: 'Relatividad' },
   { id: 6, name: `What Is Life? & Mind and Matter`, subject: 'Filosofia' },
 ];
+
 const SchoolQuiz = () => {
+  const dispatch = useDispatch()
+  const quizes = useSelector(QuizSchoolSelector)
+  const status = useSelector(QuizSchoolStatusSelector)
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'TRASH', ' EDIT'];
   let ButtonName = ['TRASH', 'EDIT QUIZ']
+
+  console.log(status)
+
+
+  useEffect(() => {
+    dispatch(getQuizData())
+  }, [])
+
   return (
     <Container maxWidth={false}>
       <Box mt={3}>
         <h3>Listado de Quizzes</h3>
-        <List customers={quizzes} columnName={columnName} ButtonName={ButtonName} />
+        {status === 'success' ? <List customers={quizes} columnName={columnName} ButtonName={ButtonName} /> : <h1>Cargando</h1>}
       </Box>
 
       <Button>+ Agregar</Button>
