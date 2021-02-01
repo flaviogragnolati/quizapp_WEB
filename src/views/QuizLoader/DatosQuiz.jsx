@@ -8,6 +8,7 @@ import { quizModel } from './quizLoderHelpers';
 const { nameQuiz, descripcion, tags, materia } = quizModel;
 
 export default function DatosQuiz() {
+  console.log(nameQuiz)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

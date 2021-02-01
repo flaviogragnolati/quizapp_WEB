@@ -16,6 +16,7 @@ import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from 'formik';
 import { Link} from 'react-router-dom';
+import { initialState_Quiz } from './quizLoderHelpers';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -114,7 +115,9 @@ export default function QuizLoader() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Formik>
+                <Formik initialValues={ activeStep === 0 ? initialState_Quiz : null}>
+                
+
                   {(formik) => (
                     <Form>
                       {getStepContent(activeStep)}
