@@ -15,6 +15,12 @@ export const quizModel = {
     label: 'Tags*',
     requiredErrorMsg: 'Debe ingresar una categoria',
   },
+  Logo: {
+    name: 'logo',
+    label: 'logo*',
+    requiredErrorMsg: 'Logo is required',
+    invalidadErrorMsg: 'Enter a valid Logo',
+  },
   materia: {
     name: 'materia',
     label: 'Materia*',
@@ -22,11 +28,12 @@ export const quizModel = {
   },
 };
 
-const { nameQuiz, descripcion, tags, materia } = quizModel;
+const { nameQuiz, descripcion, tags, materia, Logo } = quizModel;
 
 export const initialState_Quiz = {
   [nameQuiz.name]: '',
   [descripcion.name]: '',
   [tags.name]: '',
   [materia.name]: '',
+  [Logo.name]:''
 };

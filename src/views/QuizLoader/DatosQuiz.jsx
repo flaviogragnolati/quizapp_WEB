@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Field } from "formik";
-import { TextField } from "formik-material-ui";
+import { SimpleFileUpload, TextField } from "formik-material-ui";
 import { quizModel } from "./quizLoderHelpers";
 import {
   Typography,
@@ -11,14 +11,30 @@ import {
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from "formik";
 import { initialState_Quiz } from "./quizLoderHelpers";
-const { nameQuiz, descripcion, tags, materia } = quizModel;
+import { useDispatch } from "react-redux";
+import { CreateQuiz } from "./QuizLoaderSlice";
+const { nameQuiz, descripcion, Logo, materia } = quizModel;
 
 export default function DatosQuiz() {
+  const Dispacth= useDispatch()
   const handleSubmit = (values, formik) => {
+   
+    Dispacth(CreateQuiz(values)) 
+
     // aca despachar la accion a la api
     console.log("submit", values);
     // return localStorage.removeItem('form')
   };
+
+
+  // let {
+  //   name,
+  //   description,
+ // URL,
+ //userId,
+  //   SubjectId,
+  //   SchoolId,
+  // } = req.body;
 
   return (
       <Container>
@@ -48,10 +64,16 @@ export default function DatosQuiz() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Field
+                  component={SimpleFileUpload}
+                  name={Logo.name}
+                  label={Logo.label}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Field
                   component={TextField}
-                  name={tags.name}
-                  label={tags.label}
-                  fullWidth
+                  name='logo'
+                  label='URl'
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
