@@ -16,6 +16,7 @@ import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from 'formik';
 import { Link} from 'react-router-dom';
+import { initialState_Quiz } from './quizLoderHelpers';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -54,16 +55,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Datos Quiz', 'Alumnos Quiz', 'Review de Quiz'];
+const steps = ['Datos Quiz', 'Review de Quiz'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <DatosQuiz />;
-    case 1:
-      return <AlumnosQuiz />;
-    case 2:
-      return <Review />;
+    // case 1:
+    //   return <AlumnosQuiz />;
+    // case 1:
+    //   return <Review />;
     default:
       throw new Error('Unknown step');
   }
@@ -79,6 +80,17 @@ export default function QuizLoader() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+  const handleSubmit = (values,formik)=>{
+    if(activeStep === 1){
+      // aca despachar la accion a la api
+      console.log('submit', values)
+      localStorage.setItem('form', JSON.stringify(values))
+      // return localStorage.removeItem('form')
+    }else{
+
+      localStorage.setItem('form', JSON.stringify(values))
+    }
+  }
 
   return (
     <React.Fragment>
@@ -114,7 +126,11 @@ export default function QuizLoader() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Formik>
+                <Formik  
+                onSubmit={handleSubmit} 
+                initialValues={ activeStep === 0 ? initialState_Quiz : null}>
+                
+
                   {(formik) => (
                     <Form>
                       {getStepContent(activeStep)}
@@ -132,6 +148,7 @@ export default function QuizLoader() {
                           color="primary"
                           onClick={handleNext}
                           className={classes.button}
+                          type={activeStep === steps.length - 1 ? 'submit': null}
                         >
                           {activeStep === steps.length - 1
                             ? 'Submit Quiz'

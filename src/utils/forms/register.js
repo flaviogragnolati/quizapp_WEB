@@ -19,6 +19,7 @@ export const registerModel = {
     requiredErrorMsg: 'Email is required',
     invalidadErrorMsg: 'Enter a valid email',
   },
+
   password: {
     name: 'password',
     label: 'Password*',
