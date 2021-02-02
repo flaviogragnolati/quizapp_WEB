@@ -18,7 +18,7 @@ import {
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
-import { DelateSubject } from "views/School/SchoolSlice";
+import { delateSubject } from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
 // import getInitials from 'src/utils/getInitials';
 
@@ -77,7 +77,7 @@ const Results = ({
       console.log('EDIT QUIZ',e.target)
     }
     if (name === "Delate Subject") {
-      dispatch(DelateSubject(e))
+      dispatch(delateSubject(e))
     }
   };
 
@@ -114,7 +114,7 @@ const Results = ({
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-  console.log(customers);
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {/* <PerfectScrollbar> */}

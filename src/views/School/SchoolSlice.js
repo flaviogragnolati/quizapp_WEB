@@ -25,23 +25,23 @@ const isPendingAction = (action) => {
 export const getSchoolQuizList = createAsyncThunk(
   'school/getQuiz',
   async () => {
-    const data = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
-    return data;
+    const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
+    return Quiz;
   }
 );
 
 export const getSchoolSubjectsList = createAsyncThunk(
   "School/getSubject",
   async () => {
-    const data = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
-    return data;
+    const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
+    return Subject;
   }
 );
 
 export const createSubject = createAsyncThunk(
   'school/CreateSubject',
   async (payload) => {
-    payload.schoolId = 1;
+    payload.SchoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
     const { subject } = Subject_response;
     return subject;
@@ -49,10 +49,10 @@ export const createSubject = createAsyncThunk(
 );
 
 export const delateSubject = createAsyncThunk(
-  "School/DelateSubject",
+  "School/delateSubject",
   async (payload) => {
     const Subject_response = await axios.delete(SUBJECT_ENDPOINT + '/' + payload);
-    return Subject_response;
+    return Subject_response.data;
   }
 );
 
@@ -69,16 +69,13 @@ const SchoolSlice = createSlice({
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
     });
-    builder.addCase(CreateSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
-      console.log(payload.data.id)
-      let s = state.SchoolSubjectList.SubjectList.filter((subject) => {
-        console.log(subject)
-      })
-      console.log(s)
+      state.SchoolSubjectList.SubjectList.data = state.SchoolSubjectList.SubjectList.data.filter((subject) => {
+        return subject.id !== payload.id} )
     });
 
     builder.addMatcher(isPendingAction, (state, { payload }) => {
