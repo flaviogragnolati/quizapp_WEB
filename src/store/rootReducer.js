@@ -4,7 +4,7 @@ import catalogueSlice from 'views/Catalogue/catalogueSlice';
 import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
 import QuizLoaderSlice from 'views/QuizLoader/QuizLoaderSlice';
-import QuizInfoSlice from 'views/SchoolQuiz/QuizInfoSlice';
+import SchoolQuizSlice from 'views/SchoolQuiz/SchoolQuizSlice';
 import SubjectLoaderSlice from 'views/SubjectLoader/SubjectLoaderSlice';
 import UserProfileSlice from 'views/UserProfile/UserProfileSlice';
 
@@ -17,7 +17,7 @@ const rootReducer = {
   favorites: favoritesSlice.reducer,
   actions: actionsSlice.reducer,
   auth: authSlice.reducer,
-  QuizInfo: QuizInfoSlice.reducer,
+  QuizInfo: SchoolQuizSlice.reducer,
   catalogue: catalogueSlice.reducer,
   QuizLoader: QuizLoaderSlice.reducer,
   SubjectLoader: SubjectLoaderSlice.reducer,
@@ -31,6 +31,6 @@ export const ACTIONS = {
   notifications: { ...notificationSlice.actions },
   actions: { ...actionsSlice.actions },
   auth: { ...authSlice.actions },
-  // QuizInfo: { ...QuizInfoSlice.actions },
+  // QuizInfo: { ...SchoolQuizSlice.actions },
   catalogue: { ...catalogueSlice.actions },
 };

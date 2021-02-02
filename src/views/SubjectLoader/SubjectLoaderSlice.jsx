@@ -1,36 +1,31 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { SUBJECT_ENDPOINT } from 'utils/endpoints';
-import { status } from 'utils/helpers';
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { SUBJECT_ENDPOINT } from "utils/endpoints";
+import { status } from "utils/helpers";
 
 export const CreateSubject = createAsyncThunk(
-    'Quiz/CreateSubject',
-    async (payload) => {
-      console.log('A enviar',payload)
-      payload.schoolId = 1
-      const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
-      const { subject } = Subject_response;
-      console.log('RESPUESTA',Subject_response)
-      return subject;
-    }
-  );
-  
+  "Subject/CreateSubject",
+  async (payload) => {
+    payload.schoolId = 1;
+    const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
+    const { subject } = Subject_response;
+    return subject;
+  }
+);
 
 const initialState_SubjectLoader = {
   subject: {},
   status: status.idle,
   materiaStatus: status.idle,
-  error:''
+  error: "",
 };
 
 const SubjectLoaderSlice = createSlice({
-  name: 'Quiz',
+  name: "Subject",
   initialState: initialState_SubjectLoader,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: {
-    [CreateSubject.pending]: (state, {payload  }) => {
+    [CreateSubject.pending]: (state, { payload }) => {
       state.status = status.pending;
     },
     [CreateSubject.fulfilled]: (state, { payload }) => {
@@ -42,6 +37,5 @@ const SubjectLoaderSlice = createSlice({
     },
   },
 });
-
 
 export default SubjectLoaderSlice;
