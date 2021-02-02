@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import QuizCard from 'components/QuizzCard';
+import QuizCard from 'components/QuizCard';
 
 import data from './data';
 import FilterSidebar from 'views/Catalogue/components/FilterSidebar';
@@ -9,7 +9,10 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatalogue } from './catalogueSlice';
 import { catalogueStatusSelector } from 'utils/selectors';
-import { allCatalogueSelector } from 'utils/selectors';
+import {
+  allCatalogueEntitiesSelector,
+  allCatalogueResultSelector,
+} from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +29,8 @@ const CatalogueSection = styled.section`
 const Catalogue = () => {
   const dispatch = useDispatch();
   const catStatus = useSelector(catalogueStatusSelector);
-  const cat = useSelector(allCatalogueSelector);
+  const entities = useSelector(allCatalogueEntitiesSelector);
+  const quizList = useSelector(allCatalogueResultSelector);
   const classes = useStyles();
 
   useEffect(() => {
@@ -39,9 +43,12 @@ const Catalogue = () => {
   if (catStatus === 'pending') {
     content = <BackdropLoading />;
   } else if (catStatus === 'success') {
-    content = cat.quizzes.byId.map((quiz, idx) => (
-      <Grid item key={quiz.id} lg={4} md={6} xs={10}>
-        <QuizCard className={classes.courseCard} quiz={quiz} />
+    content = quizList.map((quizId, idx) => (
+      <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
+        <QuizCard
+          className={classes.courseCard}
+          quiz={entities.quizzes[quizId]}
+        />
       </Grid>
     ));
   } else if (catStatus === 'error') {

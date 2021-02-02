@@ -9,7 +9,7 @@ import styles from 'assets/jss/material-kit-react/components/badgeStyle.js';
 
 const useStyles = makeStyles(styles);
 
-export default function Badge(props) {
+function Badge(props) {
   const classes = useStyles();
   const { color, children } = props;
   return (
@@ -33,3 +33,4 @@ Badge.propTypes = {
   ]),
   children: PropTypes.node,
 };
+export default Badge;
