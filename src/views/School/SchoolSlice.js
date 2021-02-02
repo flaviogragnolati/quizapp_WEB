@@ -21,9 +21,10 @@ const isPendingAction = (action) => {
   return action.type.endsWith("pending");
 };
 
+//GETS
 
 export const getSchoolQuizList = createAsyncThunk(
-  'school/getQuiz',
+  'school/Get_Quiz',
   async () => {
     const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
     return Quiz;
@@ -31,15 +32,17 @@ export const getSchoolQuizList = createAsyncThunk(
 );
 
 export const getSchoolSubjectsList = createAsyncThunk(
-  "School/getSubject",
+  "School/Get_Subject",
   async () => {
     const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
     return Subject;
   }
 );
 
+//POSTS
+
 export const createSubject = createAsyncThunk(
-  'school/CreateSubject',
+  'school/Create_Subject',
   async (payload) => {
     payload.SchoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
@@ -48,10 +51,22 @@ export const createSubject = createAsyncThunk(
   }
 );
 
+//DELETE
+
 export const delateSubject = createAsyncThunk(
-  "School/delateSubject",
+  "School/Delate_Subject",
   async (payload) => {
-    const Subject_response = await axios.delete(SUBJECT_ENDPOINT + '/' + payload);
+    const Subject_response = await axios.put(SUBJECT_ENDPOINT + '/' + payload);
+    return Subject_response.data;
+  }
+);
+
+//PUT
+
+export const editSubject = createAsyncThunk(
+  "School/Edit_Subject",
+  async (payload) => {
+    const Subject_response = await axios.put(SUBJECT_ENDPOINT + '/' + payload);
     return Subject_response.data;
   }
 );
@@ -76,6 +91,9 @@ const SchoolSlice = createSlice({
       state.status = status.success;
       state.SchoolSubjectList.SubjectList.data = state.SchoolSubjectList.SubjectList.data.filter((subject) => {
         return subject.id !== payload.id} )
+    });
+    builder.addCase(editSubject.fulfilled, (state, { payload }) => {
+      state.status = status.success;
     });
 
     builder.addMatcher(isPendingAction, (state, { payload }) => {

@@ -46,10 +46,10 @@ export default function ProfilePage(props) {
   const dispatch = useDispatch();
   const profile = useSelector(UserProfileSelector);
   const status = useSelector(UserProfileStatusSelector);
-  const  datos = useParams();
+  const datos = useParams();
+
   useEffect(() => {
     console.log(datos)
-
     dispatch(getProfileData(datos.id))
   }, []);
 

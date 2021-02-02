@@ -18,10 +18,9 @@ import {
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
-import { delateSubject } from "views/School/SchoolSlice";
+import { delateSubject, editSubject } from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
 // import getInitials from 'src/utils/getInitials';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +55,7 @@ const Results = ({
   const [page, setPage] = useState(0);
   const [columna, setColumna] = useState(false);
   const History = useHistory();
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -71,13 +69,22 @@ const Results = ({
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const HandleClick = (e,name) => {
+  const HandleClick = (e, name) => {
+    console.log(name);
     if (name === "EDIT QUIZ") {
       History.push("/question-loader");
-      console.log('EDIT QUIZ',e.target)
+      console.log("EDIT QUIZ", e.target);
     }
     if (name === "Delate Subject") {
-      dispatch(delateSubject(e))
+      dispatch(delateSubject(e));
+    }
+    if (name === "Edit Subject") {
+      History.push({
+        pathname: `/subject-loader/${e}`,
+        state: {
+          edit: true,
+        },
+      });
     }
   };
 
@@ -191,7 +198,7 @@ const Results = ({
                     <Button
                       name={ButtonName[0]}
                       id={customer.id}
-                      onClick={() => HandleClick(customer.id,ButtonName[0])}
+                      onClick={() => HandleClick(customer.id, ButtonName[0])}
                     >
                       {ButtonName[0]}
                     </Button>
@@ -201,7 +208,7 @@ const Results = ({
                   <TableCell>
                     <Button
                       name={ButtonName[1]}
-                      onClick={() => HandleClick(ButtonName[1])}
+                      onClick={() => HandleClick(customer.id, ButtonName[1])}
                     >
                       {ButtonName[1]}
                     </Button>

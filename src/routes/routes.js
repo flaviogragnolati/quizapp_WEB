@@ -24,7 +24,7 @@ export const routes = [
   { path: '/about', component: About, access: 'guest' },
   { path: '/registerSchool', component: RegisterSchool, access: 'guest' },
   { path: '/quiz-loader', component: DatosQuiz, access: 'user' },
-  { path: '/subject-loader', component: SubjectLoader, access: 'guest' },
+  { path: ['/subject-loader','/subject-loader/:id'], component: SubjectLoader, access: 'guest' },
   { path: '/question-loader', component: QuestionLoader, access: 'user' },
   { path: '/profile/:id', component: UserProfile, access: 'guest' },
   { path: '/catalogue', component: Catalogue, access: 'guest' },

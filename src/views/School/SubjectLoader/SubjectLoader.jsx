@@ -9,14 +9,13 @@ import { initialState_Subjects } from "./quizLoderHelpers";
 import { useDispatch } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
-
-
-
+import { useParams } from "react-router-dom";
 
 const { name, description } = subjectModel;
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
+  const datos = useParams();
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -36,10 +35,16 @@ export default function SubjectLoader() {
     },
   }));
 
+  console.log(datos)
+
+
   const handleSubmit = (values, formik) => {
     console.log('submit', values);
     dispatch(createSubject(values));
   };
+
+
+
 
   return (
     <Container>
