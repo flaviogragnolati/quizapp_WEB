@@ -20,7 +20,7 @@ const rootReducer = {
   QuizInfo: QuizInfoSlice.reducer,
   catalogue: catalogueSlice.reducer,
   QuizLoader: QuizLoaderSlice.reducer,
-  SubjectLoader: SubjectLoaderSlice,
+  SubjectLoader: SubjectLoaderSlice.reducer,
 };
 
 export default rootReducer;
