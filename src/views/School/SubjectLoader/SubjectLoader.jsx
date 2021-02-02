@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { Field } from 'formik';
-import { SimpleFileUpload, TextField } from 'formik-material-ui';
-import { subjectModel } from './quizLoderHelpers';
-import { Typography, Button, Container, FormControl } from '@material-ui/core';
-import { Formik, Form } from 'formik';
-import { initialState_Subjects } from './quizLoderHelpers';
-import { useDispatch } from 'react-redux';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-// import { createSubject, CreateSubject } from './SubjectLoaderSlice';
-import { createSubject } from '../SchoolSlice';
+import React, { useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import { Field } from "formik";
+import { SimpleFileUpload, TextField } from "formik-material-ui";
+import { subjectModel } from "./quizLoderHelpers";
+import { Typography, Button, Container, FormControl } from "@material-ui/core";
+import { Formik, Form } from "formik";
+import { initialState_Subjects } from "./quizLoderHelpers";
+import { useDispatch } from "react-redux";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { createSubject } from "../SchoolSlice";
 
-const { name, descripcion } = subjectModel;
+
+
+
+const { name, description } = subjectModel;
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
@@ -59,8 +61,8 @@ export default function SubjectLoader() {
               <Grid item xs={12}>
                 <Field
                   component={TextField}
-                  name={descripcion.name}
-                  label={descripcion.label}
+                  name={description.name}
+                  label={description.label}
                   fullWidth
                 />
               </Grid>

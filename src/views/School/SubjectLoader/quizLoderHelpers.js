@@ -5,16 +5,16 @@ export const subjectModel = {
     requiredErrorMsg: 'Nombre requerido',
     minErrorMsg: 'Nombre debe ser > 2 caracteres',
   },
-  descripcion: {
-    name: 'descripcion',
+  description: {
+    name: 'description',
     label: 'Descripcion*',
     requiredErrorMsg: 'Descripcion requerida',
   },
 };
 
-const { name, descripcion} = subjectModel;
+const { name, description} = subjectModel;
 
 export const initialState_Subjects = {
   [name.name]: '',
-  [descripcion.name]: '',
+  [description.name]: '',
 };

@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
-import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Container,
+  makeStyles
+} from '@material-ui/core';
 import List from '../../../components/List';
 import array from './data';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSchoolSubjectsList } from "../SchoolSlice";
+import { SchoolSubjectListSelector,SchoolSubjectListStatusSelector } from 'utils/selectors';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,21 +21,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const SchoolSubject = () => {
   // const classes = useStyles();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Email', 'Trash', 'Update', 'Teacher'];
-  let ButtonName = ['Trash', 'Update', 'Teacher'];
+  let columnName = ['Name', 'Description', 'Delate Subject','Update', 'Teacher']
+  let ButtonName = ['Delate Subject', 'Update', 'Teacher'];
+  const dispatch = useDispatch()
+  const subjects = useSelector(SchoolSubjectListSelector)
+  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
+
+ 
+ 
+  useEffect(() => {
+dispatch(getSchoolSubjectsList())
+  }, [])
+
   return (
-    <Container maxWidth={false}>
-      <Box mt={3}>
-        <List
-          customers={customers}
-          columnName={columnName}
-          ButtonName={ButtonName}
-        />
-      </Box>
-    </Container>
+      <Container maxWidth={false}>
+        <h1>Lista de Materias de la Escuela</h1>
+        <Box mt={3}>
+          {subjectsStatus === 'success' ? <List customers={subjects} columnName={columnName} ButtonName={ButtonName}/> : null}
+        </Box>
+      </Container>
+
   );
 };
 
