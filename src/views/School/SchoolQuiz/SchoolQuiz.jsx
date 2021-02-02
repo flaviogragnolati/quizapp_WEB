@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
-import List from '../../components/List';
+import List from 'components/List';
 import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSchoolQuizList } from './SchoolQuizSlice'

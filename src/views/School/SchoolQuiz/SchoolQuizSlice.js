@@ -16,7 +16,7 @@ const initialState_Quiz = {
 
 
 export const getSchoolQuizList = createAsyncThunk(
-  'auth/getUser',
+  'SchoolQuiz/getQuiz',
   async () => {
     const data = await axios.get(QUIZ_SCHOOL_ENDPOINT + 1 + '/quizzes');
     return data;
@@ -25,7 +25,7 @@ export const getSchoolQuizList = createAsyncThunk(
 
 
 const SchoolQuizSlice = createSlice({
-  name: 'auth',
+  name: 'SchoolQuiz',
   initialState: initialState_Quiz,
   reducers: {
   },

@@ -4,7 +4,7 @@ import {
   Container,
   makeStyles
 } from '@material-ui/core';
-import List from '../../components/List';
+import List from '../../../components/List';
 import array from './data';
 
 const useStyles = makeStyles((theme) => ({
