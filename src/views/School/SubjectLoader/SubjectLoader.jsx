@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import { initialState_Subjects } from "./quizLoderHelpers";
 import { useDispatch } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { CreateSubject } from "./SubjectLoaderSlice";
+import { CreateSubject } from "../SchoolSlice";
 
 
 

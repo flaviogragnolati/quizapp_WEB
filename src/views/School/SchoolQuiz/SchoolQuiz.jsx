@@ -15,19 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const quizzes = [
-  {
-    id: 1,
-    name: `The interpretation of Quantum Mechanics`,
-    subject: 'Quantum I',
-  },
-  { id: 2, name: `Statistical Thermodynamics`, subject: 'Temodinamica II' },
-  { id: 3, name: `Expanding Universes`, subject: 'Fisica III' },
-  { id: 4, name: `My View of the World`, subject: 'Filosofia' },
-  { id: 5, name: `Space-Time Structure`, subject: 'Relatividad' },
-  { id: 6, name: `What Is Life? & Mind and Matter`, subject: 'Filosofia' },
-];
-
 const SchoolQuiz = () => {
   const dispatch = useDispatch()
   const quizes = useSelector(SchoolQuizListSelector)
