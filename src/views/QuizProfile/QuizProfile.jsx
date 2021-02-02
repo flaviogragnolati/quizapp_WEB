@@ -18,7 +18,7 @@ import Badge from 'components/Badge/Badge';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import { ACTIONS } from 'store/rootReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -89,16 +89,6 @@ const MainContainer = styled.div`
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
     0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
-
-// const Box = styled.div`
-//   background-color: #444;
-//   color: #fff;
-//   border-radius: 5px;
-//   padding: 20px;
-//   font-size: 150%;
-//   height: 100%;
-//   width: 100%;
-// `;
 
 const Picture = styled.div`
   grid-area: picture;
@@ -190,7 +180,7 @@ const Actions = styled.div`
   width: 100%;
 `;
 
-const CBox = styled(Box)`
+const ShadowBox = styled(Box)`
   /* display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -239,12 +229,6 @@ const handleClick = () => {
 
 function QuizProfile(props) {
   //   const { quizDetail } = props.location.state;
-  const dispatch = useDispatch();
-
-  const handleEnroll = () => {
-    dispatch(ACTIONS.actions.enroll());
-  };
-
   const {
     // img,
     schoolName,
@@ -258,24 +242,27 @@ function QuizProfile(props) {
     schoolContactInfo,
     teachers,
   } = quizDetail;
+  const dispatch = useDispatch();
+  // const quizDetailStatus = useSelector(quizDetailStatusSelector)
+
+  const handleEnroll = () => {
+    dispatch(ACTIONS.actions.enroll());
+  };
+
   return (
     <div>
       <Parallax small filter image={schoolImg} />
       <MainContainer>
-        <Picture>
-          {/* <RaisedImg src={img} alt="quiz profile pic" /> */}
-
-          {/* <Box>Picture</Box> */}
-        </Picture>
+        <Picture />
         <QuizName>
-          <CBox>
+          <ShadowBox>
             <Typography variant="h3" color="secondary">
               {quizName}
             </Typography>
             <Typography variant="subtitle1" color="secondary">
               {subjectName}
             </Typography>
-          </CBox>
+          </ShadowBox>
         </QuizName>
         <School>
           <Box display="flex" flexDirection="row" justifyContent="left">

@@ -1,4 +1,3 @@
-import QuizzCard from './QuizzCard';
+import QuizCard from './QuizCard';
 
-
-export default QuizzCard;
+export default QuizCard;
