@@ -12,7 +12,7 @@ import Button from 'components/CustomButtons/Button.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
-import RegisterHeader from 'components/Form/RegisterHeader';
+import LoginHeader from 'components/Form/LoginHeader';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 
@@ -73,7 +73,7 @@ function Login(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <RegisterHeader />
+                <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
                 <Formik
                   onSubmit={handleSubmit}

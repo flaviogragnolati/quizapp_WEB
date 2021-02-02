@@ -91,6 +91,31 @@ function SideBar() {
           link="/question-loader"
           icon={<FormatListNumberedIcon />}
         />
+                <SidebarItem
+          label="Quiz de Escuela"
+          link="/school-quiz"
+          icon={<FormatListNumberedIcon />}
+        />
+                <SidebarItem
+          label="Teacher de Escuela"
+          link="/school-teacher"
+          icon={<FormatListNumberedIcon />}
+        />
+                <SidebarItem
+          label="Materias de Escuela"
+          link="/school-subject"
+          icon={<FormatListNumberedIcon />}
+        />
+                <SidebarItem
+          label="Cargar materias"
+          link="/subject-loader"
+          icon={<FormatListNumberedIcon />}
+        />
+                <SidebarItem
+          label="Cargar Quiz"
+          link="/quiz-loader"
+          icon={<FormatListNumberedIcon />}
+        />
         <Divider />
         <SidebarItem label="Logout" link="/logout" icon={<ExitToAppIcon />} />
       </List>

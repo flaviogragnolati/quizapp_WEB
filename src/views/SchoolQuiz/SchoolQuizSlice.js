@@ -15,7 +15,7 @@ const initialState_Quiz = {
 
 
 
-export const getQuizData = createAsyncThunk(
+export const getSchoolQuizList = createAsyncThunk(
   'auth/getUser',
   async () => {
     const data = await axios.get(QUIZ_SCHOOL_ENDPOINT + 1 + '/quizzes');
@@ -24,20 +24,20 @@ export const getQuizData = createAsyncThunk(
 );
 
 
-const QuizInfoSlice = createSlice({
+const SchoolQuizSlice = createSlice({
   name: 'auth',
   initialState: initialState_Quiz,
   reducers: {
   },
   extraReducers: {
-    [getQuizData.pending]: (state, {  }) => {
+    [getSchoolQuizList.pending]: (state, {  }) => {
       state.status = status.pending;
     },
-    [getQuizData.fulfilled]: (state, { payload }) => {
+    [getSchoolQuizList.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.QuizSchool = payload.data.quizzes.byId;;
     },
-    [getQuizData.rejected]: (state, { payload }) => {
+    [getSchoolQuizList.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
@@ -45,4 +45,4 @@ const QuizInfoSlice = createSlice({
 });
 
 
-export default QuizInfoSlice;
+export default SchoolQuizSlice;
