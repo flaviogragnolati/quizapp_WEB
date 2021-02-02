@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { Field } from "formik";
@@ -12,6 +13,20 @@ import { CreateSubject } from "../SchoolSlice";
 
 
 
+=======
+import React, { useEffect } from 'react';
+import Grid from '@material-ui/core/Grid';
+import { Field } from 'formik';
+import { SimpleFileUpload, TextField } from 'formik-material-ui';
+import { subjectModel } from './quizLoderHelpers';
+import { Typography, Button, Container, FormControl } from '@material-ui/core';
+import { Formik, Form } from 'formik';
+import { initialState_Subjects } from './quizLoderHelpers';
+import { useDispatch } from 'react-redux';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+// import { createSubject, CreateSubject } from './SubjectLoaderSlice';
+import { createSubject } from '../SchoolSlice';
+>>>>>>> 15cc32dc5c0ecaeab4ae26463e9a9f08893afa62
 
 const { name, description } = subjectModel;
 
@@ -25,8 +40,8 @@ export default function SubjectLoader() {
       maxWidth: 300,
     },
     chips: {
-      display: "flex",
-      flexWrap: "wrap",
+      display: 'flex',
+      flexWrap: 'wrap',
     },
     chip: {
       margin: 2,
@@ -37,8 +52,8 @@ export default function SubjectLoader() {
   }));
 
   const handleSubmit = (values, formik) => {
-    console.log("submit", values);
-    dispatch(CreateSubject(values));
+    console.log('submit', values);
+    dispatch(createSubject(values));
   };
 
   return (
@@ -69,8 +84,8 @@ export default function SubjectLoader() {
               <FormControl></FormControl>
             </Grid>
             <Button variant="contained" color="primary" type="submit">
-              {" "}
-              Subir Materia{" "}
+              {' '}
+              Subir Materia{' '}
             </Button>
           </Form>
         )}

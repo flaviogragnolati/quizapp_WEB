@@ -15,7 +15,7 @@ const initialState_School = {
 };
 
 const isRejectedAction = (action) => {
-  return action.type.endsWith("rejected");
+  return action.type.endsWith('rejected');
 };
 const isPendingAction = (action) => {
   return action.type.endsWith("pending");
@@ -23,7 +23,7 @@ const isPendingAction = (action) => {
 
 
 export const getSchoolQuizList = createAsyncThunk(
-  "School/getQuiz",
+  'school/getQuiz',
   async () => {
     const data = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
     return data;
@@ -38,17 +38,17 @@ export const getSchoolSubjectsList = createAsyncThunk(
   }
 );
 
-export const CreateSubject = createAsyncThunk(
-  "School/CreateSubject",
+export const createSubject = createAsyncThunk(
+  'school/CreateSubject',
   async (payload) => {
-    payload.SchoolId = 1;
+    payload.schoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
     const { subject } = Subject_response;
     return subject;
   }
 );
 
-export const DelateSubject = createAsyncThunk(
+export const delateSubject = createAsyncThunk(
   "School/DelateSubject",
   async (payload) => {
     const Subject_response = await axios.delete(SUBJECT_ENDPOINT + '/' + payload);
@@ -57,7 +57,7 @@ export const DelateSubject = createAsyncThunk(
 );
 
 const SchoolSlice = createSlice({
-  name: "School",
+  name: 'school',
   initialState: initialState_School,
   reducers: {},
   extraReducers: (builder) => {
@@ -72,7 +72,7 @@ const SchoolSlice = createSlice({
     builder.addCase(CreateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
-    builder.addCase(DelateSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
       console.log(payload.data.id)
       let s = state.SchoolSubjectList.SubjectList.filter((subject) => {

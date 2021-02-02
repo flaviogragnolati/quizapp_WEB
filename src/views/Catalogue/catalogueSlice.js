@@ -5,7 +5,6 @@ import { status } from 'utils/helpers';
 
 const initialState_Catalogue = {
   status: status.idle,
-  cat: {},
 };
 
 export const getCatalogue = createAsyncThunk(
@@ -40,7 +39,12 @@ const catalogueSlice = createSlice({
     },
     [getCatalogue.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.cat = { ...payload };
+      for (const key in payload) {
+        if (Object.hasOwnProperty.call(payload, key)) {
+          const element = payload[key];
+          state[key] = element;
+        }
+      }
     },
     [getCatalogue.rejected]: (state, { payload }) => {
       state.status = status.error;

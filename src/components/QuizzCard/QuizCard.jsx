@@ -49,7 +49,16 @@ const ImgCardContainer = styled.img`
   object-fit: cover;
 `;
 
-const QuizzCard = ({ className, item, ...rest }) => {
+const QuizCard = ({ className, quiz, ...rest }) => {
+  const {
+    id,
+    quantity,
+    name,
+    description,
+    SubjectId,
+    SchoolId,
+    QuizTags,
+  } = quiz;
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -71,22 +80,22 @@ const QuizzCard = ({ className, item, ...rest }) => {
             gutterBottom
             variant="h5"
           >
-            {item.quizName}
+            {name}
           </Typography>
           <Bookmark action={handleNotifications} />
         </Box>
         <Box display="flex" justifyContent="space-between">
-          <p>{item.schoolName}</p>
-          <p>{item.subjectName}</p>
+          <p>{SchoolId}</p>
+          <p>{SubjectId}</p>
         </Box>
         <Box display="flex" justifyContent="center" mb={3}>
-          <ImgCardContainer src={item.media} alt="quiz detail picture" />
+          <ImgCardContainer src={quiz.media} alt="quiz detail picture" />
         </Box>
         <Typography align="center" color="textPrimary" variant="body1">
-          {item.description}
+          {description}
         </Typography>
         <br></br>
-        {item.tags.map((tag, idx) => (
+        {QuizTags.map((tag, idx) => (
           <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
             {tag}
           </Badge>
@@ -100,9 +109,9 @@ const QuizzCard = ({ className, item, ...rest }) => {
             <Button
               component={Link}
               to={{
-                pathname: '/quiz-detail/1',
+                pathname: `/quiz-detail/${id}`,
                 state: {
-                  quizDetail,
+                  quiz,
                 },
               }}
             >
@@ -118,7 +127,7 @@ const QuizzCard = ({ className, item, ...rest }) => {
           <Box className={classes.statsItem} item>
             <PeopleIcon className={classes.statsIcon} color="action" />
             <Typography color="textSecondary" display="inline" variant="body2">
-              {item.totalStudents} Estudiantes
+              {quantity} Estudiantes
             </Typography>
           </Box>
         </Grid>
@@ -127,9 +136,9 @@ const QuizzCard = ({ className, item, ...rest }) => {
   );
 };
 
-QuizzCard.propTypes = {
+QuizCard.propTypes = {
   className: PropTypes.string,
   item: PropTypes.object.isRequired,
 };
 
-export default QuizzCard;
+export default QuizCard;
