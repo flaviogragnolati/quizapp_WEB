@@ -19,6 +19,8 @@ import styled from 'styled-components';
 //?Custom Styles and Context
 import { SideBarContext } from '../../App';
 import SidebarItem from './components/SidebarItem';
+import { ACTIONS } from 'store/rootReducer';
+import { useDispatch } from 'react-redux';
 
 const HeaderBox = styled(Box)`
   display: flex;
@@ -37,6 +39,14 @@ const SidebarContainer = styled.div`
 
 function SideBar() {
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
+  const Dispatch = useDispatch()
+
+
+  const handleLogout = ()=>{
+    console.log('tu ')
+    Dispatch(ACTIONS.auth.logout())
+  }
+
 
   const SidebarContent = (
     <SidebarContainer
@@ -117,7 +127,9 @@ function SideBar() {
           icon={<FormatListNumberedIcon />}
         />
         <Divider />
-        <SidebarItem label="Logout" link="/logout" icon={<ExitToAppIcon />} />
+        <div  onClick={ handleLogout }>
+        <SidebarItem label="Logout" link='/' icon={<ExitToAppIcon />} />
+        </div>
       </List>
     </SidebarContainer>
   );
