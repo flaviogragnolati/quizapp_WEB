@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
-import List from '../../components/List';
+import List from 'components/List';
 import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuizData } from './QuizInfoSlice'
+import { getSchoolQuizList } from './SchoolQuizSlice'
 import { QuizSchoolSelector, QuizSchoolStatusSelector } from 'utils/selectors';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
   },
 }));
-
-
 
 const quizzes = [
   {
@@ -39,11 +36,8 @@ const SchoolQuiz = () => {
   let columnName = ['Name of Quiz', 'Subject', 'TRASH', ' EDIT'];
   let ButtonName = ['TRASH', 'EDIT QUIZ']
 
-  console.log(status)
-
-
   useEffect(() => {
-    dispatch(getQuizData())
+    dispatch(getSchoolQuizList())
   }, [])
 
   return (
@@ -52,7 +46,6 @@ const SchoolQuiz = () => {
         <h3>Listado de Quizzes</h3>
         {status === 'success' ? <List customers={quizes} columnName={columnName} ButtonName={ButtonName} /> : <h1>Cargando</h1>}
       </Box>
-
       <Button>+ Agregar</Button>
     </Container>
   );

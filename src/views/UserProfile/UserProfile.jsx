@@ -125,7 +125,6 @@ export default function ProfilePage(props) {
                           <i className={"fab fa-facebook"} />
                         </Button>
                       </div>
-                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" Style="color: #0069ac;font-size: 9px;">Password</a>
                     </div>
                   </GridItem>
                 </GridContainer>

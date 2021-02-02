@@ -1,7 +1,9 @@
 import React from 'react';
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import ProfileDetails from '../../components/ProfileDetail';
+import ProfileDetails from 'components/ProfileDetail';
 import Account from 'components/Account';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
