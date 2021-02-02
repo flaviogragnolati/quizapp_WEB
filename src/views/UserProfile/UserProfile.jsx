@@ -1,28 +1,30 @@
-import React,{ useContext} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
-import classNames from 'classnames';
+import classNames from "classnames";
 // @material-ui/core
-
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Button from 'components/CustomButtons/Button.js';
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
-import Parallax from 'components/Parallax/Parallax.js';
-import fakeUser from './fakeUser';
-import EditIcon from '@material-ui/icons/Edit';
-
-import styles from 'assets/jss/material-kit-react/views/profilePage.js';
-
-import ProfileTabs from './ProfileTabs';
-import { capitalize } from 'utils/helpers';
-import { AuthContext } from 'components/Auth/AuthContext';
+import Button from "components/CustomButtons/Button.js";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import Parallax from "components/Parallax/Parallax.js";
+import fakeUser from "./fakeUser";
+import EditIcon from "@material-ui/icons/Edit";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import ProfileTabs from "./ProfileTabs";
+import { AuthContext } from "components/Auth/AuthContext";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileData } from "views/UserProfile/UserProfileSlice";
+import {
+  UserProfileSelector,
+  UserProfileStatusSelector,
+} from "utils/selectors";
 
 const bg_img =
-  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
+  "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
 
 const useStyles = makeStyles(styles);
 
@@ -41,6 +43,15 @@ const {
 
 export default function ProfilePage(props) {
   const user = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const profile = useSelector(UserProfileSelector);
+  const status = useSelector(UserProfileStatusSelector);
+
+  useEffect(() => {
+    let query;
+    query = window.location.href.split("/profile/", 2);
+    dispatch(getProfileData(query[1]));
+  }, []);
 
   const classes = useStyles();
   let showDetails =
@@ -55,84 +66,92 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
 
-  // const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-
   return (
     <div>
-      <Parallax small filter image={bg_img} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
-                <div className={classes.profile}>
-                  <div>
-                    <img src={img} alt="..." className={imageClasses} />
-                  </div>
-                  {showDetails && (
-                    <Button color="secondary">
-                      <EditIcon></EditIcon>
-                      Editar perfil
-                    </Button>
-                  )}
-                  <div className={classes.name}>
-                    <h1 className={classes.title}>{name}</h1>
-                    <h5 className={classes.subtitle}>{`#${id}`}</h5>
-                    <h3 className={classes.subtitle}>{`Role: ${capitalize(
-                      role
-                    )}`}</h3>
-                    <Button
-                      justIcon
-                      link
-                      className={classes.margin5}
-                      component={Link}
-                      to={social.tw}
-                    >
-                      <i className={'fab fa-twitter'} />
-                    </Button>
-                    <Button
-                      justIcon
-                      link
-                      className={classes.margin5}
-                      component={Link}
-                      to={social.ig}
-                    >
-                      <i className={'fab fa-instagram'} />
-                    </Button>
-                    <Button
-                      justIcon
-                      link
-                      className={classes.margin5}
-                      component={Link}
-                      to={social.fb}
-                    >
-                      <i className={'fab fa-facebook'} />
-                    </Button>
-                  </div>
-                </div>
-              </GridItem>
-            </GridContainer>
-            <div className={classes.description}>
-              <hr></hr>
-              <p>{bio}</p>
-              <hr></hr>
+      {status === "success" ? (
+        <>
+          <Parallax small filter image={bg_img} />
+          <div className={classNames(classes.main, classes.mainRaised)}>
+            <div>
+              <div className={classes.container}>
+                <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={6}>
+                    <div className={classes.profile}>
+                      <div>
+                        <img
+                          src={profile.photo}
+                          alt="..."
+                          className={imageClasses}
+                        />
+                      </div>
+                      {showDetails && (
+                        <Button color="secondary">
+                          <EditIcon></EditIcon>
+                          Editar perfil
+                        </Button>
+                      )}
+                      <div className={classes.name}>
+                        <h1
+                          className={classes.title}
+                        >{`${profile.firstName} ${profile.lastName}`}</h1>
+                        <h3 className={classes.subtitle}>
+                          {profile.birthdate}
+                        </h3>
+                        <Button
+                          justIcon
+                          link
+                          className={classes.margin5}
+                          component={Link}
+                          to={social.tw}
+                        >
+                          <i className={"fab fa-twitter"} />
+                        </Button>
+                        <Button
+                          justIcon
+                          link
+                          className={classes.margin5}
+                          component={Link}
+                          to={social.ig}
+                        >
+                          <i className={"fab fa-instagram"} />
+                        </Button>
+                        <Button
+                          justIcon
+                          link
+                          className={classes.margin5}
+                          component={Link}
+                          to={social.fb}
+                        >
+                          <i className={"fab fa-facebook"} />
+                        </Button>
+                      </div>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" Style="color: #0069ac;font-size: 9px;">Password</a>
+                    </div>
+                  </GridItem>
+                </GridContainer>
+                <GridContainer justify="center">
+                  <GridItem
+                    xs={12}
+                    sm={12}
+                    md={8}
+                    className={classes.navWrapper}
+                  >
+                    {showDetails && (
+                      <ProfileTabs
+                        activity={activity}
+                        courses={courses}
+                        favourites={favourites}
+                        teacherIn={teacherIn}
+                        role={role}
+                      />
+                    )}
+                  </GridItem>
+                </GridContainer>
+              </div>
             </div>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                {showDetails && (
-                  <ProfileTabs
-                    activity={activity}
-                    courses={courses}
-                    favourites={favourites}
-                    teacherIn={teacherIn}
-                    role={role}
-                  />
-                )}
-              </GridItem>
-            </GridContainer>
           </div>
-        </div>
-      </div>
+        </>
+      ) : null}
     </div>
   );
 }

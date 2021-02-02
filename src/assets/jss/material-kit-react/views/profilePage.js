@@ -7,10 +7,10 @@ const profilePageStyle = (theme) => ({
   profile: {
     textAlign: 'center',
     '& img': {
-      maxWidth: '160px',
+      maxWidth: '200px',
       width: '100%',
       margin: '0 auto',
-      transform: 'translate3d(0, -50%, 0)',
+      transform: 'translate3d(0, -40%, 0)',
     },
   },
   description: {
@@ -39,7 +39,7 @@ const profilePageStyle = (theme) => ({
     ...title,
     display: 'inline-block',
     position: 'relative',
-    marginTop: '30px',
+    marginTop: '-10px',
     minHeight: '32px',
     textDecoration: 'none',
     color: theme.palette.primary.contrastText,
