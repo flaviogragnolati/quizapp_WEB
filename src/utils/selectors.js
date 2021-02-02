@@ -14,3 +14,6 @@ export const UserProfileStatusSelector = (state) => state.Profile.status
 //School selectors
 export const SchoolQuizListSelector = (state) => state.School.SchoolQuizList.QuizList
 export const SchoolQuizListStatusSelector = (state) => state.School.status
+
+export const SchoolSubjectListSelector = (state) => state.School.SchoolSubjectList.SubjectList.data
+export const SchoolSubjectListStatusSelector = (state) => state.School.status

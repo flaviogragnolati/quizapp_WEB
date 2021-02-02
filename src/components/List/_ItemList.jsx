@@ -18,7 +18,10 @@ import {
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
+import { DelateSubject } from "views/School/SchoolSlice";
+import { useDispatch } from "react-redux";
 // import getInitials from 'src/utils/getInitials';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // school-quiz,quiz-loader
-// PUEDE RECIBIR HASTA 3 BOTONES 
+// PUEDE RECIBIR HASTA 3 BOTONES
 /// este componente deberia recibir NOMBRE DE COLUMNAS COMO ARRAY (columnName)
 /// este componente deberia recibir NOMBRE DE BOTONES COMO ARRAY ( ButtonName)
 /// este componente deberia recibir DATOS COMO ARRAY DE OBJETOS (customers)
@@ -47,14 +50,14 @@ const Results = ({
   ButtonName,
   ...rest
 }) => {
-
-
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [columna, setColumna] = useState(false);
-  const History =  useHistory()
+  const History = useHistory();
+  const dispatch = useDispatch()
+
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -68,17 +71,19 @@ const Results = ({
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const HandleClick = (e)=>{
-    console.log(e)
-    if(e === 'EDIT QUIZ'){
-      History.push('/question-loader')
+  const HandleClick = (e,name) => {
+    if (name === "EDIT QUIZ") {
+      History.push("/question-loader");
+      console.log('EDIT QUIZ',e.target)
     }
-  }
+    if (name === "Delate Subject") {
+      dispatch(DelateSubject(e))
+    }
+  };
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
     let newSelectedCustomerIds = [];
-
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(
         selectedCustomerIds,
@@ -109,7 +114,7 @@ const Results = ({
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-
+  console.log(customers);
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {/* <PerfectScrollbar> */}
@@ -149,7 +154,7 @@ const Results = ({
                 </TableCell>
                 <TableCell>
                   <Box alignItems="center" display="flex">
-                    {customer.avatarUrl && 
+                    {customer.avatarUrl && (
                       <Avatar
                         className={classes.avatar}
                         src={customer.avatarUrl}
@@ -157,45 +162,59 @@ const Results = ({
                         {/* {getInitials(customer.name)} */}
                         {customer.name && customer.name}
                       </Avatar>
-                    }
+                    )}
                     <Typography color="textPrimary" variant="body1">
                       {customer.name && customer.name}
                     </Typography>
                   </Box>
                 </TableCell>
-                        {customer.Subject &&
-                <TableCell>{ customer.Subject.name}</TableCell>}
-                      {customer.quiz &&
-                <TableCell>{ customer.quiz}</TableCell>}
-                      {customer.review &&
-                <TableCell>{ customer.review}</TableCell>}
-                      {customer.alumnos &&
-                <TableCell>{ customer.alumnos}</TableCell>}
+                {customer.Subject && (
+                  <TableCell>{customer.Subject.name}</TableCell>
+                )}
+                {customer && <TableCell>{customer.description}</TableCell>}
+                {customer.quiz && <TableCell>{customer.quiz}</TableCell>}
+                {customer.review && <TableCell>{customer.review}</TableCell>}
+                {customer.alumnos && <TableCell>{customer.alumnos}</TableCell>}
 
                 {customer.email && <TableCell>{customer.email}</TableCell>}
-                {customer.address && 
+                {customer.address && (
                   <TableCell>
-                    
-                      
-                    {customer.address.city}, {customer.address.state}, {customer.address.country}
+                    {customer.address.city}, {customer.address.state},{" "}
+                    {customer.address.country}
                   </TableCell>
-                }
+                )}
 
                 {customer.phone && <TableCell>{customer.phone}</TableCell>}
 
                 {ButtonName && ButtonName[0] && (
                   <TableCell>
-                    <Button name={ButtonName[0]} onClick={ ()=>HandleClick(ButtonName[0])}>{ButtonName[0]}</Button>
+                    <Button
+                      name={ButtonName[0]}
+                      id={customer.id}
+                      onClick={() => HandleClick(customer.id,ButtonName[0])}
+                    >
+                      {ButtonName[0]}
+                    </Button>
                   </TableCell>
                 )}
                 {ButtonName && ButtonName[1] && (
                   <TableCell>
-                    <Button name={ButtonName[1]} onClick={ ()=>HandleClick(ButtonName[1])}>{ButtonName[1]}</Button>
+                    <Button
+                      name={ButtonName[1]}
+                      onClick={() => HandleClick(ButtonName[1])}
+                    >
+                      {ButtonName[1]}
+                    </Button>
                   </TableCell>
                 )}
                 {ButtonName && ButtonName[2] && (
                   <TableCell>
-                    <Button name={ButtonName[2]} onClick={ ()=>HandleClick(ButtonName[2])}>{ButtonName[2]}</Button>
+                    <Button
+                      name={ButtonName[2]}
+                      onClick={() => HandleClick(ButtonName[2])}
+                    >
+                      {ButtonName[2]}
+                    </Button>
                   </TableCell>
                 )}
               </TableRow>

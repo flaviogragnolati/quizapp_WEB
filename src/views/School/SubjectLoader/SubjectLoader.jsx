@@ -13,7 +13,7 @@ import { CreateSubject } from "../SchoolSlice";
 
 
 
-const { name, descripcion } = subjectModel;
+const { name, description } = subjectModel;
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
@@ -61,8 +61,8 @@ export default function SubjectLoader() {
               <Grid item xs={12}>
                 <Field
                   component={TextField}
-                  name={descripcion.name}
-                  label={descripcion.label}
+                  name={description.name}
+                  label={description.label}
                   fullWidth
                 />
               </Grid>
