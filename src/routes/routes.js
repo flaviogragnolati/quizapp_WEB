@@ -12,7 +12,6 @@ import About from 'views/About/';
 import SchoolTeacher from 'views/SchoolTeacher';
 import SchoolQuiz from 'views/SchoolQuiz';
 import RegisterSchool from 'views/Register/RegisterSchool';
-import QuizLoader from 'views/QuizLoader';
 import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
 import SubjectLoader from 'views/SubjectLoader/SubjectLoader';

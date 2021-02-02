@@ -39,3 +39,7 @@ export const selectQuizDetailById = createSelector(
     return quizDetail;
   }
 );
+
+//Profile selectors
+export const UserProfileSelector = (state) => state.Profile.data;
+export const UserProfileStatusSelector = (state) => state.Profile.status;
