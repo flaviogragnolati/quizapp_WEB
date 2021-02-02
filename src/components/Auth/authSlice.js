@@ -1,4 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  isPending,
+  isFulfilled,
+  isRejected,
+} from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
 import {
@@ -31,16 +37,6 @@ const STORE_TOKEN = 'QuizJWT';
 //       });
 //     }, 2000);
 //   });
-
-const isRejectedAction = (action) => {
-  return action.type.endsWith('rejected');
-};
-const isPendingAction = (action) => {
-  return action.type.endsWith('pending');
-};
-const isfulfilledAction = (action) => {
-  return action.type.endsWith('fulfilled');
-};
 
 export const registerUser = createAsyncThunk(
   'user/register',
@@ -101,6 +97,25 @@ export const restoreSession = createAsyncThunk(
   }
 );
 
+const isPendingAction = isPending(
+  registerUser,
+  registerSchool,
+  localLogin,
+  restoreSession
+);
+const isFulfilledAction = isFulfilled(
+  registerUser,
+  registerSchool,
+  localLogin,
+  restoreSession
+);
+const isRejectedAction = isRejected(
+  registerUser,
+  registerSchool,
+  localLogin,
+  restoreSession
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialState_Auth,
@@ -129,7 +144,7 @@ const authSlice = createSlice({
     builder.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;
     });
-    builder.addMatcher(isfulfilledAction, (state, { payload }) => {
+    builder.addMatcher(isFulfilledAction, (state, { payload }) => {
       state.status = status.success;
       state.restore = true;
       state.user = payload;

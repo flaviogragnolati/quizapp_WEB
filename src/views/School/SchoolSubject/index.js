@@ -37,6 +37,6 @@
 
 // export default CustomerListView;
 
-import SchoolSubject from './SchoolSubject'
+import SchoolSubject from './SchoolSubject';
 
-export default SchoolSubject
+export default SchoolSubject;

@@ -14,7 +14,7 @@ import SchoolQuiz from 'views/School/SchoolQuiz';
 import RegisterSchool from 'views/Register/RegisterSchool';
 import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
-import SubjectLoader from 'views/School/SubjectLoader/SubjectLoader';
+import SubjectLoader from 'views/School/SubjectLoader';
 
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
