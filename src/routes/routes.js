@@ -3,18 +3,18 @@ import Home from 'views/Home';
 import Login from 'views/Login/Login';
 import NotFound from 'views/NotFound';
 import UserProfile from 'views/UserProfile';
-import SchoolProfile from 'views/SchoolProfile';
+import SchoolProfile from 'views/School/SchoolProfile';
 import QuizProfile from 'views/QuizProfile';
 import Catalogue from 'views/Catalogue';
 import Register from 'views/Register/Register';
-import SchoolSubject from 'views/SchoolSubject';
+import SchoolSubject from 'views/School/SchoolSubject';
 import About from 'views/About/';
-import SchoolTeacher from 'views/SchoolTeacher';
-import SchoolQuiz from 'views/SchoolQuiz';
+import SchoolTeacher from 'views/School/SchoolTeacher';
+import SchoolQuiz from 'views/School/SchoolQuiz';
 import RegisterSchool from 'views/Register/RegisterSchool';
 import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
-import SubjectLoader from 'views/SubjectLoader/SubjectLoader';
+import SubjectLoader from 'views/School/SubjectLoader/SubjectLoader';
 
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },

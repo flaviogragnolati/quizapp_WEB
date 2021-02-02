@@ -18,10 +18,6 @@ export const QUIZ_SCHOOL_ENDPOINT = BASE_ENDPOINT + '/org/';
 
 export const QUIZ_ENDPOINT = BASE_ENDPOINT + '/quiz';
 
-<<<<<<< HEAD
 export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject';
-=======
-export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject'
 
-export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT +  '/auth/me/'
->>>>>>> 4d5ff281f2a4d498218e49418158a491b4378859
+export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/auth/me/';

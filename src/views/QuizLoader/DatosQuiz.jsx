@@ -27,7 +27,7 @@ const { nameQuiz, descripcion, Logo, materia } = quizModel;
 
 export default function DatosQuiz() {
   const Dispacth= useDispatch()
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -72,6 +72,11 @@ const names = [
   'Virginia Andrews',
   'Kelly Snyder',
 ];
+
+const handleChange = (event) => {
+  setPersonName( event.target.value);
+  console.log(personName)
+};
   const handleSubmit = (values, formik) => {
    
     Dispacth(CreateQuiz(values)) 
@@ -145,22 +150,22 @@ const names = [
                   fullWidth
                 />
               </Grid> */}
-               <FormControl >
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+     <Container>
+     <FormControl >
+        <InputLabel id="demo-mutiple-chip-label" fullWidth>Selecciona una Materia</InputLabel>
         <Select
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"
-          multiple
-          value={['Selecciona una Escuela']}
-          // onChange={handleChange}
+          value={personName}
+           onChange={handleChange}
           input={<Input id="select-multiple-chip" />}
-          renderValue={(selected) => (
-            <div >
-              {selected.map((value) => (
-                <Chip key={value} label={value}  />
-              ))}
-            </div>
-          )}
+          // renderValue={(selected) => (
+          //   <div >
+          //     {selected.map((value) => (
+          //       <Chip key={value} label={value}  />
+          //     ))}
+          //   </div>
+          // )}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
@@ -170,6 +175,7 @@ const names = [
           ))}
         </Select>
       </FormControl>
+     </Container>
             </Grid>
             <Button
               variant="contained"

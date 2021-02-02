@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core
@@ -46,11 +46,11 @@ export default function ProfilePage(props) {
   const dispatch = useDispatch();
   const profile = useSelector(UserProfileSelector);
   const status = useSelector(UserProfileStatusSelector);
-
+  const  datos = useParams();
   useEffect(() => {
-    let query;
-    query = window.location.href.split("/profile/", 2);
-    dispatch(getProfileData(query[1]));
+    console.log(datos)
+
+    dispatch(getProfileData(datos.id))
   }, []);
 
   const classes = useStyles();
