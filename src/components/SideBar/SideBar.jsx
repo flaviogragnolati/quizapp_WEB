@@ -39,14 +39,12 @@ const SidebarContainer = styled.div`
 
 function SideBar() {
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
-  const Dispatch = useDispatch()
+  const Dispatch = useDispatch();
 
-
-  const handleLogout = ()=>{
-    console.log('tu ')
-    Dispatch(ACTIONS.auth.logout())
-  }
-
+  const handleLogout = () => {
+    console.log('tu ');
+    Dispatch(ACTIONS.auth.logout());
+  };
 
   const SidebarContent = (
     <SidebarContainer
@@ -101,34 +99,34 @@ function SideBar() {
           link="/question-loader"
           icon={<FormatListNumberedIcon />}
         />
-                <SidebarItem
+        <SidebarItem
           label="Quiz de Escuela"
           link="/school-quiz"
           icon={<FormatListNumberedIcon />}
         />
-                <SidebarItem
+        <SidebarItem
           label="Teacher de Escuela"
           link="/school-teacher"
           icon={<FormatListNumberedIcon />}
         />
-                <SidebarItem
+        <SidebarItem
           label="Materias de Escuela"
           link="/school-subject"
           icon={<FormatListNumberedIcon />}
         />
-                <SidebarItem
+        <SidebarItem
           label="Cargar materias"
           link="/subject-loader"
           icon={<FormatListNumberedIcon />}
         />
-                <SidebarItem
+        <SidebarItem
           label="Cargar Quiz"
           link="/quiz-loader"
           icon={<FormatListNumberedIcon />}
         />
         <Divider />
-        <div  onClick={ handleLogout }>
-        <SidebarItem label="Logout" link='/' icon={<ExitToAppIcon />} />
+        <div onClick={handleLogout}>
+          <SidebarItem label="Logout" link="/" icon={<ExitToAppIcon />} />
         </div>
       </List>
     </SidebarContainer>

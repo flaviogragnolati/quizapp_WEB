@@ -15,12 +15,13 @@ export const QuizSchoolStatusSelector = (state) => state.QuizInfo.status;
 
 //Catalogue Selectors
 export const catalogueStatusSelector = (state) => state.catalogue.status;
-export const allCatalogueSelector = (state) => state.catalogue;
-export const quizzesSelector = (state) => state.catalogue.quizzes;
-export const quizTagsSelector = (state) => state.catalogue.quizTags;
-export const reviewsSelector = (state) => state.catalogue.reviews;
-export const schoolsSelector = (state) => state.catalogue.schools;
-export const subjectsSelector = (state) => state.catalogue.subjects;
+export const allCatalogueEntitiesSelector = (state) => state.catalogue.entities;
+export const allCatalogueResultSelector = (state) => state.catalogue.result;
+export const quizzesSelector = (state) => state.catalogue.entities.quizzes;
+export const quizTagsSelector = (state) => state.catalogue.entities.quizTags;
+export const reviewsSelector = (state) => state.catalogue.entities.reviews;
+export const schoolsSelector = (state) => state.catalogue.entities.schools;
+export const subjectsSelector = (state) => state.catalogue.entities.subjects;
 
 //Quiz Detail Selectors
 export const selectQuizDetailById = createSelector(

@@ -25,7 +25,6 @@ const Title = styled.h2`
 `;
 
 function FilterGroup({ title, children }) {
-  console.log('childrens', children);
   const [open, setOpen] = useState(false);
   const handleShow = (state) => {
     if (state) {

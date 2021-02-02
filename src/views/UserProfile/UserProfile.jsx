@@ -1,30 +1,30 @@
-import React, { useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // @material-ui/core
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 // core components
-import Button from "components/CustomButtons/Button.js";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Parallax from "components/Parallax/Parallax.js";
-import fakeUser from "./fakeUser";
-import EditIcon from "@material-ui/icons/Edit";
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import ProfileTabs from "./ProfileTabs";
-import { AuthContext } from "components/Auth/AuthContext";
+import Button from 'components/CustomButtons/Button.js';
+import GridContainer from 'components/Grid/GridContainer.jsx';
+import GridItem from 'components/Grid/GridItem.jsx';
+import Parallax from 'components/Parallax/Parallax.js';
+import fakeUser from './fakeUser';
+import EditIcon from '@material-ui/icons/Edit';
+import styles from 'assets/jss/material-kit-react/views/profilePage.js';
+import ProfileTabs from './ProfileTabs';
+import { AuthContext } from 'components/Auth/AuthContext';
 // redux
-import { useDispatch, useSelector } from "react-redux";
-import { getProfileData } from "views/UserProfile/UserProfileSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileData } from 'views/UserProfile/UserProfileSlice';
 import {
   UserProfileSelector,
   UserProfileStatusSelector,
-} from "utils/selectors";
+} from 'utils/selectors';
 
 const bg_img =
-  "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
+  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 const useStyles = makeStyles(styles);
 
@@ -48,9 +48,11 @@ export default function ProfilePage(props) {
   const status = useSelector(UserProfileStatusSelector);
   const datos = useParams();
 
+
   useEffect(() => {
-    console.log(datos)
-    dispatch(getProfileData(datos.id))
+    console.log(datos);
+
+    dispatch(getProfileData(datos.id));
   }, []);
 
   const classes = useStyles();
@@ -68,7 +70,7 @@ export default function ProfilePage(props) {
 
   return (
     <div>
-      {status === "success" ? (
+      {status === 'success' ? (
         <>
           <Parallax small filter image={bg_img} />
           <div className={classNames(classes.main, classes.mainRaised)}>
@@ -104,7 +106,7 @@ export default function ProfilePage(props) {
                           component={Link}
                           to={social.tw}
                         >
-                          <i className={"fab fa-twitter"} />
+                          <i className={'fab fa-twitter'} />
                         </Button>
                         <Button
                           justIcon
@@ -113,7 +115,7 @@ export default function ProfilePage(props) {
                           component={Link}
                           to={social.ig}
                         >
-                          <i className={"fab fa-instagram"} />
+                          <i className={'fab fa-instagram'} />
                         </Button>
                         <Button
                           justIcon
@@ -122,7 +124,7 @@ export default function ProfilePage(props) {
                           component={Link}
                           to={social.fb}
                         >
-                          <i className={"fab fa-facebook"} />
+                          <i className={'fab fa-facebook'} />
                         </Button>
                       </div>
                     </div>

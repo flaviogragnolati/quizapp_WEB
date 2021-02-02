@@ -7,9 +7,9 @@ import {
   tokenSelector,
   restoreSessionSelector,
 } from 'utils/selectors';
-import { ACTIONS } from 'store/rootReducer';
 import { restoreSession } from './authSlice';
 import BackdropLoading from 'components/Loading/BackdropLoading';
+import { ACTIONS } from 'store/rootReducer';
 
 function AuthProvider({ children }) {
   const dispatch = useDispatch();

@@ -37,20 +37,18 @@ function Login(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
-  const user = useSelector(userSelector)
-  const History =   useHistory()
-
+  const user = useSelector(userSelector);
+  const History = useHistory();
 
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
 
-
-  useEffect(()=>{
-    if(user.id){
-      History.push(`/profile/${user.id}`)
+  useEffect(() => {
+    if (user.id) {
+      History.push(`/profile/${user.id}`);
     }
-  },[user])
+  }, [user]);
 
   const classes = useStyles();
 

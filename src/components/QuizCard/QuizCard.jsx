@@ -17,11 +17,13 @@ import PeopleIcon from '@material-ui/icons/People';
 import Bookmark from '../Bookmark';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
-import Badge from '../Badge/Badge';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { quizDetail } from '../../views/Catalogue/quizDetail';
+import { useSelector } from 'react-redux';
+import { allCatalogueEntitiesSelector } from 'utils/selectors';
+import CatalogueTags from './CatalogueTags';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,18 +52,23 @@ const ImgCardContainer = styled.img`
 `;
 
 const QuizCard = ({ className, quiz, ...rest }) => {
+  const entities = useSelector(allCatalogueEntitiesSelector);
   const {
     id,
     quantity,
     name,
     description,
-    SubjectId,
-    SchoolId,
+    logo,
+    active,
+    Subject,
+    School,
+    Reviews,
     QuizTags,
   } = quiz;
+
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  console.log('TAD', QuizTags);
   const handleNotifications = (state) => {
     if (state) {
       dispatch(ACTIONS.favorites.addToFavorites());
@@ -85,21 +92,17 @@ const QuizCard = ({ className, quiz, ...rest }) => {
           <Bookmark action={handleNotifications} />
         </Box>
         <Box display="flex" justifyContent="space-between">
-          <p>{SchoolId}</p>
-          <p>{SubjectId}</p>
+          <p>{entities.schools[School].name}</p>
+          <p>{entities.subjects[Subject].name}</p>
         </Box>
         <Box display="flex" justifyContent="center" mb={3}>
-          <ImgCardContainer src={quiz.media} alt="quiz detail picture" />
+          <ImgCardContainer src={logo} alt="quiz detail picture" />
         </Box>
         <Typography align="center" color="textPrimary" variant="body1">
           {description}
         </Typography>
         <br></br>
-        {QuizTags.map((tag, idx) => (
-          <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
-            {tag}
-          </Badge>
-        ))}
+        <CatalogueTags tagList={QuizTags} />
       </CardContent>
       <Box flexGrow={1} />
       <Divider />
