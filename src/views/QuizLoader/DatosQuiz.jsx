@@ -83,13 +83,12 @@ export default function DatosQuiz() {
     // aca despachar la accion a la api
     // return localStorage.removeItem('form')
   };
-
+  
     useEffect(()=>{
         
         Dispatch(getSubjectsList())
     },[])
     
-    console.log('tu vieja',subjects)
   // let {
   //   name,
   //   description,

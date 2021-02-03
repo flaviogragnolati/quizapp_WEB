@@ -117,7 +117,7 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
-      state.SchoolSubjectList.SubjectList.data = state.SchoolSubjectList.SubjectList.data.filter(
+      state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {
           return subject.id !== payload.id;
         }
