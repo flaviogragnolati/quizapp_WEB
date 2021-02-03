@@ -68,7 +68,6 @@ const QuizCard = ({ className, quiz, ...rest }) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  console.log('TAD', QuizTags);
   const handleNotifications = (state) => {
     if (state) {
       dispatch(ACTIONS.favorites.addToFavorites());
