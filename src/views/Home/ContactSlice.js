@@ -22,6 +22,12 @@ export const contactSchool = createAsyncThunk(
   }
 );
 
+export const finalRegisterSchool = createAsyncThunk( "school/finalRegisterSchool",
+async (payload) => {
+  const SchoolFinalRegister = await axios.post(SCHOOL_REGISTER_ENDPOINT + '/register', payload);
+  return SchoolFinalRegister;
+});
+
 const isPendingAction = isPending(contactSchool);
 const isFulfilledAction = isFulfilled(contactSchool);
 const isRejectedAction = isRejected(contactSchool);
