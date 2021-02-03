@@ -83,7 +83,6 @@ export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.S
 export const SchoolSubjectStatusSelector = (state) => state.School.status;
 
 //Quiz selector
-
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
 export const QuestionsStatusSelector = (state) => state.status;
 

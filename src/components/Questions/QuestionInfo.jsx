@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
   Grid,
@@ -9,7 +9,13 @@ import {
   Select,
   MenuItem,
   InputLabel,
-} from '@material-ui/core';
+  Button,
+  Input,
+} from "@material-ui/core";
+import { Form, Formik } from "formik";
+import { infoQuizModel, initialState_Info } from "./InfoHelp";
+
+const { title, description } = infoQuizModel;
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function QuestionInfo({ info: { title, description }, setMulti }) {
+
+function QuestionInfo({ info, setMulti }) {
+
   const handleChange = (event) => {
     if (event.target.value === 1) {
       setMulti(1);
@@ -33,43 +41,68 @@ function QuestionInfo({ info: { title, description }, setMulti }) {
     }
   };
 
+  const handleSubmit = (e) => {
+    console.log(e);
+  };
+
+  const [infoQuestion, setinfoQuestion] = useState(info)
+
+  useEffect(() => {
+    setinfoQuestion(info)
+  }, [info])
+
+
   const classes = useStyles();
   return (
     <>
-      <Grid item xs={5}>
-        <TextField
-          label="Title"
-          name="title"
-          required
-          value={title}
-          variant="outlined"
-          multiline
-          rowsMax={3}
-        />
-      </Grid>
-      <Grid item xs={3}>
-        <FormControl>
-          <InputLabel>Tipo de pregunta</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            onChange={(e) => handleChange(e)}
-          >
-            <MenuItem value={1}>Multiple Opcion</MenuItem>
-            <MenuItem value={2}>Verdadero o Falso</MenuItem>
-          </Select>
-          <FormHelperText>Elige el tipo de pregunta que deseas</FormHelperText>
-        </FormControl>
-      </Grid>
-      <Grid xs={12}>
-        <TextField
-          fullWidth
-          label="Description"
-          name="description"
-          required
-          value={description}
-          variant="outlined"
-        />
-      </Grid>
+      <Formik onSubmit={handleSubmit} initialValues={initialState_Info}>
+        {(formik) => (
+          <Form Style="display: contents;">
+            <Grid item xs={5}>
+              <TextField
+                label="Title"
+                name="title"
+                required
+                defaultValue={infoQuestion.title}
+                variant="outlined"
+                multiline
+                rowsMax={3}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl>
+                <InputLabel>Tipo de pregunta</InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  onChange={(e) => handleChange(e)}
+                >
+                  <MenuItem value={1}>Multiple Opcion</MenuItem>
+                  <MenuItem value={2}>Verdadero o Falso</MenuItem>
+                </Select>
+                <FormHelperText>
+                  Elige el tipo de pregunta que deseas
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid xs={9}></Grid>
+            <Grid xs={9}>
+              <TextField
+                fullWidth
+                label="Description"
+                name="description"
+                required
+                defaultValue={infoQuestion.description}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid xs={2}>
+              <Button color="primary" variant="contained" type="submit">
+                Editar Info
+              </Button>
+            </Grid>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 }

@@ -31,11 +31,10 @@ export const CreateQuiz = createAsyncThunk(
   export const getAllQuestions = createAsyncThunk(
     'Questions/getAllQuestions',
     async (payload) => {
-      const Questions_response = await axios.get(QUESTIONS_ENDPOINT +'/'+ payload );
-      return Questions_response.data;
+      const Questions_response = await axios.get(QUIZ_ENDPOINT +'/'+ payload );
+      return Questions_response.data.questions.byId;
     }
   );
-
 
   export const deleteQuestion = createAsyncThunk(
     'Questions/deleteQuestion',

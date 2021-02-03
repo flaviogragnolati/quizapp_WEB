@@ -65,6 +65,7 @@ export const localLogin = createAsyncThunk(
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
     return user;
+
   }
 );
 

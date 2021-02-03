@@ -40,7 +40,6 @@ function Login(props) {
   const user = useSelector(userSelector)
   const History =   useHistory()
 
-
   setTimeout(function () {
     setCardAnimation('');
   }, 700);

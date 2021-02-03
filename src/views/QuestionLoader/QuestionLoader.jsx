@@ -16,15 +16,17 @@ const useStyles = makeStyles(() => ({
 
 function QuestionLoader() {
   const Dispatch = useDispatch();
+
   const questions = useSelector(QuestionsSelector);
   const questionsStatus = useSelector(QuestionsStatusSelector);
   const params = useParams();
 
-  const [questionId, setQuestionId] = useState(0);
+  const [questionId, setQuestionId] = useState(1);
   useEffect(() => {
     Dispatch(getAllQuestions(params.id));
   }, []);
   const classes = useStyles();
+
 
   return (
     <Grid
