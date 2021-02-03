@@ -10,6 +10,8 @@ export const RESTORE_ENDPOINT = AUTH_ENDPOINT + '/restore';
 
 export const LOGIN_ENDPOINT = AUTH_ENDPOINT + '/login';
 
+export const LOGIN_ORG_ENDPOINT = AUTH_ENDPOINT + '/login/org';
+
 export const SCHOOL_REGISTER_ENDPOINT = BASE_ENDPOINT + '/org';
 
 export const USER_REGISTER_ENDPOINT = AUTH_ENDPOINT + '/register';

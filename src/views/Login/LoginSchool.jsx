@@ -25,7 +25,7 @@ import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
-import { localLogin } from 'components/Auth/authSlice';
+import { localOrgLogin } from 'components/Auth/authSlice';
 import { userSelector } from 'utils/selectors';
 import { useHistory } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles(styles);
 const image =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
-function Login(props) {
+function LoginSchool(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
@@ -48,15 +48,15 @@ function Login(props) {
 
   useEffect(()=>{
     if(user.id){
-      History.push(`/profile/${user.id}`)
+      History.push(`/catalogue`)
     }
   },[user])
 
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
-    console.log('va;ies', values);
-    dispatch(localLogin(values));
+    // console.log('va;ies', values);
+    dispatch(localOrgLogin(values));
   };
 
   return (
@@ -133,4 +133,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default LoginSchool;

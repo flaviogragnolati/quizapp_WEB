@@ -27,11 +27,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
 import { localLogin } from 'components/Auth/authSlice';
 import { userSelector } from 'utils/selectors';
-import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 const image =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
+
+  const GreyText = styled(Link)`
+  color: ${(p) => p.theme.grey};
+`;
 
 function Login(props) {
   const { email, password } = registerModel;
@@ -118,6 +123,12 @@ function Login(props) {
                           Login
                         </Button>
                       </CardFooter>
+                      <GreyText
+                  to="/loginSchool"
+                  className={classes.Register__School}
+                >
+                  Login como escuela
+                </GreyText>
                     </Form>
                   )}
                 </Formik>

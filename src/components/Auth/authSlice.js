@@ -12,7 +12,8 @@ import {
   USER_REGISTER_ENDPOINT,
   RESTORE_ENDPOINT,
   LOGIN_ENDPOINT,
-  FINAL_REGISTER_SCHOOL_ENDPOINT
+  FINAL_REGISTER_SCHOOL_ENDPOINT,
+  LOGIN_ORG_ENDPOINT
 } from 'utils/endpoints';
 
 const initialState_Auth = {
@@ -69,6 +70,17 @@ export const localLogin = createAsyncThunk(
   }
 );
 
+export const localOrgLogin = createAsyncThunk(
+  'auth/localOrgLogin',
+  async (payload, { dispatch }) => {
+    const login_response = await axios.post(LOGIN_ORG_ENDPOINT, payload);
+    const { user, token } = login_response.data;
+    dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
+    return user;
+  }
+);
+
+
 export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
   async (payload, { getState, dispatch }) => {
@@ -118,6 +130,7 @@ const isPendingAction = isPending(
   registerUser,
   //registerSchool,
   localLogin,
+  localOrgLogin,
   restoreSession,
   contactSchool,
   finalRegisterSchool
@@ -126,6 +139,7 @@ const isFulfilledAction = isFulfilled(
   registerUser,
   //registerSchool,
   localLogin,
+  localOrgLogin,
   restoreSession,
   contactSchool,
   finalRegisterSchool
@@ -134,6 +148,7 @@ const isRejectedAction = isRejected(
   registerUser,
   //registerSchool,
   localLogin,
+  localOrgLogin,
   restoreSession,
   contactSchool,
   finalRegisterSchool
