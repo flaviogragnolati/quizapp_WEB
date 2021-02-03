@@ -12,10 +12,22 @@ export const CreateQuiz = createAsyncThunk(
       payload.SchoolId = 1;
       const QuizCreate_response = await axios.post(QUIZ_ENDPOINT, payload);
       const { quiz, token } = QuizCreate_response;
-
       return quiz;
     }
   );
+
+  export const CreateQuestion = createAsyncThunk(
+    'Quiz/CreateQuiz',
+    async (payload) => {
+
+      payload.modifiedBy = 1;
+      payload.createdBy = 1;
+      const QuestionCreate_response = await axios.post(QUESTIONS_ENDPOINT, payload);
+      const { quiz, token } = QuestionCreate_response;
+      return quiz;
+    }
+  );
+
   export const getAllQuestions = createAsyncThunk(
     'Questions/getAllQuestions',
     async (payload) => {
@@ -23,10 +35,12 @@ export const CreateQuiz = createAsyncThunk(
       return Questions_response.data;
     }
   );
+
+
   export const deleteQuestion = createAsyncThunk(
     'Questions/deleteQuestion',
     async (payload) => {
-      const Questions_response = await axios.get(QUESTIONS_ENDPOINT +'/'+ payload );
+      const Questions_response = await axios.delete(QUESTIONS_ENDPOINT +'/'+ payload );
       return Questions_response.data;
     }
   );
@@ -52,6 +66,16 @@ const QuizLoaderSlice = createSlice({
       state.status = status.success;
     },
     [CreateQuiz.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [CreateQuestion.pending]: (state, {payload  }) => {
+      state.status = status.pending;
+    },
+    [CreateQuestion.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+    },
+    [CreateQuestion.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

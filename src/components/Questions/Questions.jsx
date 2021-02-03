@@ -47,7 +47,8 @@ const questionInfo = {
   ],
 };
 
-const Questions = () => {
+const Questions = ({question}) => {
+  console.log(question)
   const [multi, setMulti] = useState();
   const [multiAns, setMultiAns] = useState(questionInfo.answers);
 

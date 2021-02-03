@@ -123,7 +123,7 @@ const Results = ({
   return (
 
     <Card className={clsx(classes.root, className)} {...rest}>
-      {customers ? 
+      {customers[0] ? 
       <>
       <Box Width={whidth ? whidth : 1}>
         <Table size={"small"} className={customers ? 's' : null}>
