@@ -67,16 +67,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const XButton = styled(Button)`
-  background-color: ${(p) => p.theme.palette.secondary.light};
-`;
-
-const ZButton = styled(Button)`
-  background-color: ${(p) => p.theme.palette.primary.light};
-`;
-
 function FilterSidebar() {
   const c = useStyles();
+
+  const handleClear = () => {};
+  const handleFilter = (filter) => {};
+
   return (
     <SidebarDiv>
       <>
@@ -117,10 +113,20 @@ function FilterSidebar() {
           justifyContent="space-between"
           mt={2}
         >
-          <Button color="primary" variant="contained" size="large">
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            onClick={handleClear}
+          >
             CLEAR
           </Button>
-          <Button color="secondary" variant="contained" size="large">
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            onClick={handleFilter}
+          >
             FIND!
           </Button>
         </Box>

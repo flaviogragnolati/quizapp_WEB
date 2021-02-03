@@ -41,7 +41,8 @@ export default function CountrySelect() {
       renderOption={(option) => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
-          {option.label} ({option.code}) +{option.phone}
+          {option.label}
+          {/* ({option.code}) +{option.phone} */}
         </React.Fragment>
       )}
       renderInput={(params) => (

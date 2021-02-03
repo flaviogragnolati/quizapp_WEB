@@ -1,13 +1,18 @@
 import React from 'react';
 import ComboFilter from './ComboFilter';
+import { useSelector } from 'react-redux';
+import { subjectsSelector } from 'utils/selectors';
+import { formatStateToOptions } from 'utils/helpers';
 
 function SubjectFilterDetail() {
+  const subjects = useSelector(subjectsSelector);
+  const subjectOptions = formatStateToOptions(subjects);
   return (
     <>
       <ComboFilter
         label="Subject Name"
         placeholder="Subject Name"
-        options={fakeSubjects}
+        options={subjectOptions || [{ id: '', label: 'NO DATA' }]}
       />
     </>
   );
