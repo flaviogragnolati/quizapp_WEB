@@ -6,7 +6,7 @@ import notificationSlice from 'views/Notifier/notificationSlice';
 import QuizLoaderSlice from 'views/QuizLoader/QuizLoaderSlice';
 import UserProfileSlice from 'views/UserProfile/UserProfileSlice';
 import SchoolSlice from 'views/School/SchoolSlice';
-import ContactSlice from 'views/Home/ContactSlice';
+
 import quizDetailSlice from 'views/QuizProfile/quizDetailSlice';
 
 // import UserRegisterSlice from 'views/Register/registerSlice';
@@ -20,7 +20,7 @@ const rootReducer = {
   QuizLoader: QuizLoaderSlice.reducer,
   Profile: UserProfileSlice.reducer,
   School: SchoolSlice.reducer,
-  contact: ContactSlice.reducer,
+
   quizDetail: quizDetailSlice.reducer,
 };
 

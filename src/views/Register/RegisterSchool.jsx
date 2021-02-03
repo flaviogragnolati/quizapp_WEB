@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -17,13 +17,15 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
-import { registerUser } from 'components/Auth/authSlice';
-import { finalRegisterSchool } from 'views/Home/ContactSlice';
+//import { registerUser } from 'components/Auth/authSlice';
+import { finalRegisterSchool } from 'components/Auth/authSlice';
+import { useHistory } from 'react-router-dom';
+import { authStatusSelector } from 'utils/selectors';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -37,6 +39,8 @@ function RegisterSchool(props) {
   const classes = useStyles();
   //const { ...rest } = props;
   const dispatch = useDispatch();
+  const history = useHistory();
+  const userStatus = useSelector(authStatusSelector);
 
   const registerInitialValues = {
     name: '',
@@ -48,9 +52,13 @@ function RegisterSchool(props) {
     code: '',
   };
 
+  useEffect(() => {
+    if (userStatus === 'success') {
+      history.push("/home");
+    }
+  }, [userStatus, history]);
+
   const handleSubmit = (data, formik) => {
-    //dispatch(registerUser(data));
-    console.log('data', data)
     dispatch(finalRegisterSchool(data));
   };
 

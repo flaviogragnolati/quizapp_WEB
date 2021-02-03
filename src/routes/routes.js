@@ -15,12 +15,13 @@ import RegisterSchool from 'views/Register/RegisterSchool';
 import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
 import SubjectLoader from 'views/School/SubjectLoader';
+import LoginSchool from 'views/Login/LoginSchool';
 
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
   { path: '/login', component: Login, access: 'guest' },
   { path: '/register', component: Register, access: 'guest' },
-  { path: '/registerSchool', component: RegisterSchool, access: 'guest' },
+  { path: '/loginSchool', component: LoginSchool, access: 'guest' },
   { path: '/about', component: About, access: 'guest' },
   { path: '/registerSchool', component: RegisterSchool, access: 'guest' },
   { path: '/quiz-loader/', component: DatosQuiz, access: 'user' },
