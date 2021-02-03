@@ -23,3 +23,8 @@ export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject';
 export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/auth/me/';
 
 export const QUIZ_INFO_ENDPOINT = QUIZ_ENDPOINT + '/info';
+
+export const QUESTIONS_ENDPOINT =  BASE_ENDPOINT + '/questions';
+
+
+export const FINAL_REGISTER_SCHOOL_ENDPOINT = AUTH_ENDPOINT + '/org/register'

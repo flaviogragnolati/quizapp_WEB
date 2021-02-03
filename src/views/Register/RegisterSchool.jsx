@@ -23,6 +23,7 @@ import { Formik, Form, Field } from 'formik';
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import { registerUser } from 'components/Auth/authSlice';
+import { finalRegisterSchool } from 'views/Home/ContactSlice';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -44,11 +45,13 @@ function RegisterSchool(props) {
     password: '',
     country: '',
     description: '',
-    registerCode: '',
+    code: '',
   };
 
   const handleSubmit = (data, formik) => {
-    dispatch(registerUser(data));
+    //dispatch(registerUser(data));
+    console.log('data', data)
+    dispatch(finalRegisterSchool(data));
   };
 
   return (
@@ -140,6 +143,23 @@ function RegisterSchool(props) {
                         <Field
                           className={classes.Register__Fields}
                           component={TextField}
+                          label="Codigo de Registro"
+                          name="code"
+                          fullWidth
+                          InputProps={{
+                            type: 'tel',
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <VpnKeyIcon
+                                  className={classes.inputIconsColor}
+                                />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          className={classes.Register__Fields}
+                          component={TextField}
                           label="Password"
                           name="password"
                           fullWidth
@@ -153,6 +173,40 @@ function RegisterSchool(props) {
                               </InputAdornment>
                             ),
                             autoComplete: 'off',
+                          }}
+                        />
+                        <Field
+                          className={classes.Register__Fields}
+                          component={TextField}
+                          name="description"
+                          label="Description"
+                          fullWidth
+                          color="primary"
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <DescriptionIcon
+                                  className={classes.inputIconsColor}
+                                />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          className={classes.Register__Fields}
+                          component={TextField}
+                          name="logo"
+                          label="logo"
+                          fullWidth
+                          color="primary"
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <DescriptionIcon
+                                  className={classes.inputIconsColor}
+                                />
+                              </InputAdornment>
+                            ),
                           }}
                         />
                         <Field
@@ -183,40 +237,6 @@ function RegisterSchool(props) {
                             endAdornment: (
                               <InputAdornment position="end">
                                 <LocationCityIcon
-                                  className={classes.inputIconsColor}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          name="description"
-                          label="Description"
-                          fullWidth
-                          color="primary"
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <DescriptionIcon
-                                  className={classes.inputIconsColor}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          className={classes.Register__Fields}
-                          component={TextField}
-                          label="Codigo de Registro"
-                          name="registerCode"
-                          fullWidth
-                          InputProps={{
-                            type: 'tel',
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <VpnKeyIcon
                                   className={classes.inputIconsColor}
                                 />
                               </InputAdornment>

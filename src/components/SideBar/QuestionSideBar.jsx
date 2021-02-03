@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -15,7 +15,8 @@ import {
 import BallotIcon from '@material-ui/icons/Ballot';
 import QuestionItem from './components/QuestionItem';
 import { NavigateBeforeRounded } from '@material-ui/icons';
-
+import { useDispatch } from 'react-redux';
+import { deleteQuestion , getAllQuestions} from 'views/QuizLoader/QuizLoaderSlice'
 const quizzEj = {
   avatar:
     'https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -41,26 +42,32 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const QuestionSideBar = ({ onMobileClose, openMobile }) => {
+const QuestionSideBar = ({ onMobileClose, openMobile , questions}) => {
   const classes = useStyles();
-
-  const [questions, setQuestions] = useState([
-    { id: 1, title: 'Pregunta ' },
-    { id: 2, title: 'Pregunta ' },
-    { id: 3, title: 'Pregunta ' },
-    { id: 4, title: 'Pregunta ' },
-    { id: 5, title: 'Pregunta ' },
-    { id: 6, title: 'Pregunta ' },
-    { id: 7, title: 'Pregunta ' },
-    { id: 8, title: 'Pregunta ' },
-  ]);
+   const Dispatch = useDispatch()
+const params = useParams()
+  
+  // const [questions, setQuestions] = useState([
+  //   { id: 1, title: 'Pregunta ' },
+  //   { id: 2, title: 'Pregunta ' },
+  //   { id: 3, title: 'Pregunta ' },
+  //   { id: 4, title: 'Pregunta ' },
+  //   { id: 5, title: 'Pregunta ' },
+  //   { id: 6, title: 'Pregunta ' },
+  //   { id: 7, title: 'Pregunta ' },
+  //   { id: 8, title: 'Pregunta ' },
+  // ]);
 
   const handleAddQuestion = () => {
-    setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
+    // setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
   };
   const handleQuestionDelete = (id) => {
+    Dispatch(deleteQuestion(id)).then(()=>{
+      console.log(params)
+      Dispatch(getAllQuestions(params.id))
+    })
 
-    setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
+    // setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
   };
   return (
     <Box height="100%" display="flex" flexDirection="column">
@@ -76,12 +83,12 @@ const QuestionSideBar = ({ onMobileClose, openMobile }) => {
       <Divider />
       <Box p={2}>
         <List component={'ol'}>
-          {questions.map((question, idx) => (
+          {questions && questions.map((question, idx) => (
             <QuestionItem
               key={question.title}
               title={`${idx + 1} ${question.title}`}
               icon={BallotIcon}
-              handleQuestionDelete={handleQuestionDelete}
+              onClick={handleQuestionDelete}
               id={question.id}
             />
           ))}

@@ -1,15 +1,30 @@
 import QuestionSideBar from 'components/SideBar/QuestionSideBar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Grid } from '@material-ui/core';
 import Questions from 'components/Questions/Questions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getAllQuestions } from 'views/QuizLoader/QuizLoaderSlice';
 
+ import {QuestionsSelector} from 'utils/selectors'
+import { QuestionsStatusSelector } from 'utils/selectors';
 const useStyles = makeStyles(() => ({
   div_Questions: {
     marginTop: '50px',
   },
 }));
 
+
 function QuestionLoader() {
+
+const Dispatch = useDispatch()
+const questions = useSelector(QuestionsSelector)
+const questionsStatus = useSelector(QuestionsStatusSelector)
+const params = useParams()
+useEffect(() => {
+
+    Dispatch(getAllQuestions(params.id))
+}, [])
   const classes = useStyles();
   return (
     <Grid
@@ -20,7 +35,7 @@ function QuestionLoader() {
       alignItems="flex-start"
     >
       <Grid item sm={2}>
-        <QuestionSideBar />
+        <QuestionSideBar questions={questions} />
       </Grid>
       <Grid
         container
