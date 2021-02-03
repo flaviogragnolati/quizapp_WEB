@@ -7,9 +7,11 @@ import { status } from 'utils/helpers';
 export const CreateQuiz = createAsyncThunk(
     'Quiz/CreateQuiz',
     async (payload) => {
+      payload.teachers = [1];
+      payload.SchoolId = 1;
       const QuizCreate_response = await axios.post(QUIZ_ENDPOINT, payload);
       const { quiz, token } = QuizCreate_response;
-      console.log('RESPUESTA',QuizCreate_response)
+
       return quiz;
     }
   );

@@ -59,7 +59,7 @@ const QuestionSideBar = ({ onMobileClose, openMobile }) => {
     setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
   };
   const handleQuestionDelete = (id) => {
-    console.log('deleting', id);
+
     setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
   };
   return (

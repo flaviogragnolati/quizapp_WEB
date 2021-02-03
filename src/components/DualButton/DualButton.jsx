@@ -6,7 +6,6 @@ function DualButton({ action, colors, variants, texts, ...props }) {
 
   const handleClick = () => {
     setInitial((prev) => !prev);
-    console.log('test');
   };
 
   let content = null;

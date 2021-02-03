@@ -37,22 +37,25 @@ function Login(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
-  const user = useSelector(userSelector);
-  const History = useHistory();
+  const user = useSelector(userSelector)
+  const History =   useHistory()
+
 
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
 
-  useEffect(() => {
-    if (user.id) {
-      History.push(`/profile/${user.id}`);
+
+  useEffect(()=>{
+    if(user.id){
+      History.push(`/profile/${user.id}`)
     }
-  }, [user]);
+  },[user])
 
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
+    console.log('va;ies', values);
     dispatch(localLogin(values));
   };
 
@@ -68,7 +71,7 @@ function Login(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>

@@ -48,7 +48,6 @@ function RegisterSchool(props) {
   };
 
   const handleSubmit = (data, formik) => {
-    console.log(data);
     dispatch(registerUser(data));
   };
 

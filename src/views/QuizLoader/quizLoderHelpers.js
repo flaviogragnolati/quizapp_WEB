@@ -1,12 +1,12 @@
 export const quizModel = {
   nameQuiz: {
-    name: 'nameQuiz',
+    name: 'name',
     label: 'Nombre Quiz*',
     requiredErrorMsg: 'Nombre requerido',
     minErrorMsg: 'Nombre debe ser > 2 caracteres',
   },
   descripcion: {
-    name: 'descripcion',
+    name: 'description',
     label: 'Descripcion*',
     requiredErrorMsg: 'Descripcion requerida',
   },
@@ -22,7 +22,7 @@ export const quizModel = {
     invalidadErrorMsg: 'Enter a valid Logo',
   },
   materia: {
-    name: 'materia',
+    name: 'SubjectId',
     label: 'Materia*',
     requiredErrorMsg: 'Debe ingresar materia',
   },
