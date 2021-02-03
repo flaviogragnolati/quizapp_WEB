@@ -11,6 +11,7 @@ const initialState_School = {
   SchoolSubjectList: {
     error: null,
     SubjectList: {},
+    SubjectDetail: {},
   },
 };
 
@@ -35,11 +36,20 @@ export const getSchoolSubjectsList = createAsyncThunk(
   "School/Get_Subject",
   async () => {
     const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
+    return Subject.data;
+  }
+);
+
+export const getSchoolSubjectsDetail = createAsyncThunk(
+  "School/Get_SubjectDetail",
+  async (payload) => {
+    const Subject = await axios.get(SUBJECT_ENDPOINT + '/' + payload);
     return Subject;
   }
 );
 
-//POSTS
+
+//POST
 
 export const createSubject = createAsyncThunk(
   'school/Create_Subject',
@@ -66,7 +76,8 @@ export const delateSubject = createAsyncThunk(
 export const editSubject = createAsyncThunk(
   "School/Edit_Subject",
   async (payload) => {
-    const Subject_response = await axios.put(SUBJECT_ENDPOINT + '/' + payload);
+    console.log(payload.id)
+    const Subject_response = await axios.put( SUBJECT_ENDPOINT + '/' + payload.id, payload );
     return Subject_response.data;
   }
 );
@@ -83,6 +94,10 @@ const SchoolSlice = createSlice({
     builder.addCase(getSchoolSubjectsList.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
+    });
+    builder.addCase(getSchoolSubjectsDetail.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.SchoolSubjectList.SubjectDetail = payload;
     });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;

@@ -36,7 +36,7 @@ const SchoolSubject = () => {
   useEffect(() => {
 dispatch(getSchoolSubjectsList())
   }, [])
-
+  console.log(subjects)
   return (
       <Container maxWidth={false}>
         <h1>Lista de Materias de la Escuela</h1>

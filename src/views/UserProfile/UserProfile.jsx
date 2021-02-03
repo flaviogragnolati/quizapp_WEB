@@ -50,8 +50,6 @@ export default function ProfilePage(props) {
 
 
   useEffect(() => {
-    console.log(datos);
-
     dispatch(getProfileData(datos.id));
   }, []);
 
