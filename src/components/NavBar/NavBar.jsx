@@ -146,12 +146,13 @@ function NavBar({ toggleTheme, checked, theme }) {
       <AppBar position="fixed" color="secondary">
         <Toolbar>
           <IconButton
+          onClick={() => toggleSideBar()} 
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon onClick={() => toggleSideBar()} />
+            <MenuIcon />
           </IconButton>
           <Button component={Link} to="/" color="inherit" variant="text">
             <Box display="flex" flexDirection="row" justifyContent="flex-begin">
@@ -165,15 +166,19 @@ function NavBar({ toggleTheme, checked, theme }) {
             </Box>
           </Button>
           <div className={classes.grow} />
-          <Button
-            variant="outlined"
-            color="primary"
-            size="Large"
-            component={Link}
-            to="/login"
-          >
-            LOG IN
-          </Button>
+          {Boolean(!user) ? (
+       <Button
+       variant="outlined"
+       color="primary"
+       size="Large"
+       component={Link}
+       to="/login"
+     >
+       LOG IN
+     </Button>
+      ) : (
+       null
+      )}
           <div className={classes.sectionDesktop}>
             <IconButton>
               <ThemeToggler toggleTheme={toggleTheme} checked={checked} />
