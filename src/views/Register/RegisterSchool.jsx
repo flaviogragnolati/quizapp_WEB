@@ -23,6 +23,7 @@ import { Formik, Form, Field } from 'formik';
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 import { TextField } from 'formik-material-ui';
 import { registerUser } from 'components/Auth/authSlice';
+import { finalRegisterSchool } from 'views/Home/ContactSlice';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -48,7 +49,9 @@ function RegisterSchool(props) {
   };
 
   const handleSubmit = (data, formik) => {
-    dispatch(registerUser(data));
+    //dispatch(registerUser(data));
+    console.log('data', data)
+    dispatch(finalRegisterSchool(data));
   };
 
   return (
