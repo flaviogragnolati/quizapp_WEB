@@ -51,7 +51,7 @@ export default function SubjectLoader() {
   
   let editValues = initialState_Subjects
   
-  if (subjectsStatus === 'success' && subjects[0] != undefined) {
+  if (subjectsStatus === 'success' && subjects[0] != undefined && datos.id) {
     editValues = {
       [name.name]:subjects.find((e) => e.id == datos.id).name,
       [description.name]: subjects.find((e) => e.id == datos.id).description,

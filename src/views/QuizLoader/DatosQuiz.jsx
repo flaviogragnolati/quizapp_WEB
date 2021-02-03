@@ -23,14 +23,14 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import { getSchoolSubjectsList } from "views/School/SchoolSlice";
+import { getSubjectsList } from "views/School/SchoolSlice";
 
-import {SchoolSubjectListSelector, SchoolSubjectListStatusSelector} from "utils/selectors"
+import {SchoolSubjectSelector, SchoolSubjectStatusSelector} from "utils/selectors"
 const { nameQuiz, descripcion, Logo, materia } = quizModel;
 export default function DatosQuiz() {
   const Dispatch= useDispatch()
-  const subjects = useSelector(SchoolSubjectListSelector);
-  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
+  const subjects = useSelector(SchoolSubjectSelector);
+  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -91,7 +91,7 @@ const handleChange = (event) => {
 
     useEffect(()=>{
         
-        Dispatch(getSchoolSubjectsList())
+        Dispatch(getSubjectsList())
     },[])
     
     console.log('tu vieja',subjects)
