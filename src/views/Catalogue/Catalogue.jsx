@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import QuizCard from 'components/QuizCard';
 
-import data from './data';
 import FilterSidebar from 'views/Catalogue/components/FilterSidebar';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +25,7 @@ const CatalogueSection = styled.section`
   background-color: ${(p) => p.theme.palette.background.default};
 `;
 
-const qtyToDisplay = 6;
+const qtyToDisplay = 6; //variable para definir la cantidad de `quiz cards` que se muestran por pagina del catalogo
 
 const Catalogue = () => {
   const dispatch = useDispatch();
@@ -36,7 +35,6 @@ const Catalogue = () => {
   const classes = useStyles();
 
   const [page, setPage] = useState(1);
-
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -81,11 +79,6 @@ const Catalogue = () => {
           <Box mt={3}>
             <Grid container spacing={3}>
               {content}
-              {/* {data.map((course) => (
-                <Grid item key={course.id} lg={4} md={6} xs={12}>
-                  <QuizzCard className={classes.courseCard} item={course} />
-                </Grid>
-              ))} */}
             </Grid>
           </Box>
           <Grid item container>

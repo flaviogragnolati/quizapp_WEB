@@ -7,6 +7,7 @@ const initialState_Catalogue = {
   status: status.idle,
   entities: {},
   result: '',
+  filter: false,
 };
 
 export const getCatalogue = createAsyncThunk(
@@ -24,7 +25,6 @@ export const getCatalogue = createAsyncThunk(
         catalogue.status === status.error ||
         catalogue.status === status.success
       ) {
-
         return false;
       }
     },
@@ -34,7 +34,11 @@ export const getCatalogue = createAsyncThunk(
 const catalogueSlice = createSlice({
   name: 'catalogue',
   initialState: initialState_Catalogue,
-  reducers: {},
+  reducers: {
+    setFilter: (state, { payload }) => {
+      state.filter = !state.filter;
+    },
+  },
   extraReducers: {
     [getCatalogue.pending]: (state, { payload }) => {
       state.status = status.pending;

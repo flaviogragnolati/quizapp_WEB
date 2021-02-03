@@ -11,3 +11,19 @@ export const status = Object.freeze({
   error: 'error', //estado cuando NO se resuelve la promesa
   warning: 'warning', //estado cuando la resolucion es parcial o rejectamos con valor
 });
+
+export const formatStateToOptions = (entity) => {
+  if (typeof entity !== 'object')
+    throw new TypeError(
+      'Esta func por ahora solo puede recibir objectos (entidades)'
+    );
+  let responseArray = [];
+  for (const object in entity) {
+    if (Object.hasOwnProperty.call(entity, object)) {
+      const element = entity[object];
+      if (element.id && element.name)
+        responseArray.push({ id: element.id, label: element.name });
+    }
+  }
+  return responseArray;
+};

@@ -18,6 +18,8 @@ import FilterGroup from './FilterGroup';
 import SchoolFilterDetail from './SchoolFilterDetail';
 import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from 'store/rootReducer';
 
 const SidebarDiv = styled.div`
   /* background-color: gray; */
@@ -67,16 +69,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const XButton = styled(Button)`
-  background-color: ${(p) => p.theme.palette.secondary.light};
-`;
-
-const ZButton = styled(Button)`
-  background-color: ${(p) => p.theme.palette.primary.light};
-`;
-
 function FilterSidebar() {
   const c = useStyles();
+  const dispatch = useDispatch();
+  const [filterValues, setFilterValues] = useState({
+    school: '',
+    subject: '',
+    quiz: '',
+  });
+  console.log('FILTER', filterValues);
+  const handleClear = () => {};
+  const handleFilter = (filterValues) => {
+    dispatch(ACTIONS.catalogue.setFilter());
+  };
+
   return (
     <SidebarDiv>
       <>
@@ -98,7 +104,7 @@ function FilterSidebar() {
       </>
       <>
         <FilterGroup title="School Filter">
-          <SchoolFilterDetail />
+          <SchoolFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
         <FilterGroup title="Subject Filter">
@@ -117,10 +123,20 @@ function FilterSidebar() {
           justifyContent="space-between"
           mt={2}
         >
-          <Button color="primary" variant="contained" size="large">
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            onClick={handleClear}
+          >
             CLEAR
           </Button>
-          <Button color="secondary" variant="contained" size="large">
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            onClick={handleFilter}
+          >
             FIND!
           </Button>
         </Box>

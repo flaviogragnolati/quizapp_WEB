@@ -1,20 +1,27 @@
 import React from 'react';
 import ComboFilter from './ComboFilter';
-import CountryFilter from './CountryFilter';
+import { useSelector } from 'react-redux';
+import { quizTagsSelector, quizzesSelector } from 'utils/selectors';
+import { formatStateToOptions } from 'utils/helpers';
 
 function SchoolFilterDetail() {
+  const quizTags = useSelector(quizTagsSelector);
+  const quizzes = useSelector(quizzesSelector);
+  const quizTagsOptions = formatStateToOptions(quizTags);
+  console.log(quizTagsOptions);
+  const quizzesOptions = formatStateToOptions(quizzes);
   return (
     <>
       <ComboFilter
         label="Quiz Name"
         placeholder="Quiz Name"
-        options={fakeQuizzes}
+        options={quizzesOptions || [{ id: '', label: 'NO DATA' }]}
       />
       <br></br>
       <ComboFilter
         label="Quiz Tags"
         placeholder="Quiz Tags"
-        options={fakeTagQuizzes}
+        options={quizTagsOptions || [{ id: '', label: 'NO DATA' }]}
       />
     </>
   );
