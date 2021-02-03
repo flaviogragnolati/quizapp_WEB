@@ -86,5 +86,3 @@ export const SchoolSubjectStatusSelector = (state) => state.School.status;
 
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
 export const QuestionsStatusSelector = (state) => state.status;
-
-
