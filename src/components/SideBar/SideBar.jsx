@@ -98,12 +98,7 @@ function SideBar() {
           icon={<FormatListNumberedIcon />}
         />
         <SidebarItem
-          label="Create Questions"
-          link="/question-loader"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Quiz de Escuela"
+          label="Quizes de la Escuela"
           link="/school-quiz"
           icon={<FormatListNumberedIcon />}
         />

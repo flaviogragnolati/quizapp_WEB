@@ -23,16 +23,6 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-<<<<<<< HEAD
-import { getSubjectsList } from "views/School/SchoolSlice";
-
-import {SchoolSubjectSelector, SchoolSubjectStatusSelector} from "utils/selectors"
-const { nameQuiz, descripcion, Logo, materia } = quizModel;
-export default function DatosQuiz() {
-  const Dispatch= useDispatch()
-  const subjects = useSelector(SchoolSubjectSelector);
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
-=======
 import { getSubjectsList } from 'views/School/SchoolSlice';
 
 import {
@@ -44,7 +34,6 @@ export default function DatosQuiz() {
   const dispatch = useDispatch();
   const subjects = useSelector(SchoolSubjectSelector);
   const subjectsStatus = useSelector(SchoolSubjectStatusSelector);
->>>>>>> 2454f5913fdfc63fa94cfc7616a6a973b219c9de
   const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -98,19 +87,10 @@ export default function DatosQuiz() {
     // return localStorage.removeItem('form')
   };
 
-<<<<<<< HEAD
-    useEffect(()=>{
-        
-        Dispatch(getSubjectsList())
-    },[])
-    
-    console.log('tu vieja',subjects)
-=======
   useEffect(() => {
     dispatch(getSubjectsList());
   }, [dispatch]);
 
->>>>>>> 2454f5913fdfc63fa94cfc7616a6a973b219c9de
   // let {
   //   name,
   //   description,
