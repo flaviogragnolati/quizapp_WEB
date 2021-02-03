@@ -21,6 +21,7 @@ import { SideBarContext } from '../../App';
 import SidebarItem from './components/SidebarItem';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
+import { useAuth } from 'components/Auth/AuthContext';
 
 const HeaderBox = styled(Box)`
   display: flex;
@@ -40,6 +41,7 @@ const SidebarContainer = styled.div`
 function SideBar() {
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
   const Dispatch = useDispatch();
+  const user = useAuth();
 
   const handleLogout = () => {
 
@@ -89,7 +91,8 @@ function SideBar() {
           link="/catalogue"
           icon={<LocalLibraryIcon />}
         />
-        <SidebarItem
+   {Boolean(user) ? (  <div>
+      <SidebarItem
           label="Create Quiz"
           link="/quiz-loader"
           icon={<FormatListNumberedIcon />}
@@ -123,11 +126,11 @@ function SideBar() {
           label="Cargar Quiz"
           link="/quiz-loader"
           icon={<FormatListNumberedIcon />}
-        />
+        /></div>) : (null)}
         <Divider />
-        <div onClick={handleLogout}>
+        {Boolean(user) ? ( <div onClick={handleLogout}>
           <SidebarItem label="Logout" link="/" icon={<ExitToAppIcon />} />
-        </div>
+        </div> ) :(null)}
       </List>
     </SidebarContainer>
   );
