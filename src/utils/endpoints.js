@@ -20,5 +20,6 @@ export const QUIZ_ENDPOINT = BASE_ENDPOINT + '/quiz';
 
 export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject';
 
-export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT +  '/auth/me/'
+export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/auth/me/';
 
+export const QUIZ_INFO_ENDPOINT = QUIZ_ENDPOINT + '/info';

@@ -17,16 +17,20 @@ import {
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from "formik";
 import { initialState_Quiz } from "./quizLoderHelpers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CreateQuiz } from "./QuizLoaderSlice";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-const { nameQuiz, descripcion, Logo, materia } = quizModel;
+import { getSchoolSubjectsList } from "views/School/SchoolSlice";
 
+import {SchoolSubjectListSelector, SchoolSubjectListStatusSelector} from "utils/selectors"
+const { nameQuiz, descripcion, Logo, materia } = quizModel;
 export default function DatosQuiz() {
-  const Dispacth= useDispatch()
+  const Dispatch= useDispatch()
+  const subjects = useSelector(SchoolSubjectListSelector);
+  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -79,19 +83,18 @@ const handleChange = (event) => {
 };
   const handleSubmit = (values, formik) => {
    
-    Dispacth(CreateQuiz(values)) 
+    Dispatch(CreateQuiz(values)) 
 
     // aca despachar la accion a la api
     // return localStorage.removeItem('form')
   };
 
-    // useEffect(()=>{
-    //   if(materiasStatus === 'idle'){
-
-    //     Dispacth(getMaterias())
-    //   }
-    // },[materiaStatus])
-
+    useEffect(()=>{
+        
+        Dispatch(getSchoolSubjectsList())
+    },[])
+    
+    console.log('tu vieja',subjects)
   // let {
   //   name,
   //   description,
@@ -167,9 +170,9 @@ const handleChange = (event) => {
           // )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
+         { !!subjects && subjects.map((subject) => (
+            <MenuItem key={subject.id} value={subject.id}>
+              {subject.name}
             </MenuItem>
           ))}
         </Select>

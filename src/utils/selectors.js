@@ -24,6 +24,8 @@ export const schoolsSelector = (state) => state.catalogue.entities.schools;
 export const subjectsSelector = (state) => state.catalogue.entities.subjects;
 
 //Quiz Detail Selectors
+export const quizDetailStatusSelector = (state) => state.quizDetail.status;
+export const quizDetailSelector = (state, id) => state.quizDetail.detail[id];
 export const selectQuizDetailById = createSelector(
   [
     quizzesSelector,
@@ -34,8 +36,35 @@ export const selectQuizDetailById = createSelector(
     (_, id) => id,
   ],
   (quizzes, tags, reviews, schools, subjects, id) => {
-    let quizDetail = quizzes.filter((quiz) => quiz.id === id);
-    // quizDetail.schoolId =
+    let quizDetail = { ...quizzes[id] };
+    //chequeamos que los campos que pueden ser nulos, y deberian devolver un array, no sean nulos, en ese caso le asignamos un array vacio
+    //en caso de no recibir un array, lo casteamos a array
+    if (quizDetail.Reviews == null) {
+      quizDetail.Reviews = [];
+    } else {
+      console.log(quizDetail);
+      quizDetail.Reviews = Array.isArray(quizDetail.Reviews)
+        ? quizDetail.Reviews
+        : [quizDetail.Reviews];
+    }
+
+    if (quizDetail.QuizTags == null) {
+      quizDetail.QuizTags = [];
+    } else {
+      quizDetail.QuizTags = Array.isArray(quizDetail.QuizTags)
+        ? quizDetail.QuizTags
+        : [quizDetail.QuizTags];
+    }
+
+    const subjectInfo = subjects[quizDetail.Subject];
+    const schoolInfo = schools[quizDetail.School];
+    const reviewsInfo = quizDetail.Reviews.map((reviewId) => reviews[reviewId]);
+    const quizTagsInfo = quizDetail.QuizTags.map((quizId) => tags[quizId]);
+
+    quizDetail.Subject = subjectInfo;
+    quizDetail.School = schoolInfo;
+    quizDetail.Reviews = reviewsInfo;
+    quizDetail.QuizTags = quizTagsInfo;
 
     return quizDetail;
   }
@@ -48,7 +77,6 @@ export const ProfileStatusSelector = (state) => state.Profile.status;
 //School selectors
 export const SchoolQuizSelector = (state) => state.School.SchoolQuizList.QuizList
 export const SchoolQuizStatusSelector = (state) => state.School.status
-
 // export const SchoolSubjectDetailSelector = (state) => state.School.SchoolSubjectList.SubjectDetail
 export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.SubjectList
 export const SchoolSubjectStatusSelector = (state) => state.School.status
