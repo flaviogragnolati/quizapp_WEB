@@ -6,16 +6,20 @@ import { subjectModel } from "./quizLoderHelpers";
 import { Typography, Button, Container, FormControl } from "@material-ui/core";
 import { Formik, Form } from "formik";
 import { initialState_Subjects } from "./quizLoderHelpers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useParams } from "react-router-dom";
+import { SchoolSubjectListSelector, SchoolSubjectListStatusSelector } from 'utils/selectors';
+import { getSchoolSubjectsDetail, editSubject } from "../SchoolSlice";
 
 const { name, description } = subjectModel;
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
   const datos = useParams();
+  const subjects = useSelector(SchoolSubjectListSelector)
+  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -35,14 +39,29 @@ export default function SubjectLoader() {
     },
   }));
 
-  console.log(datos)
-
+  useEffect(() => {
+    if (datos.id !== undefined) {
+    dispatch(getSchoolSubjectsDetail(datos.id))
+    }
+  }, [])
 
   const handleSubmit = (values, formik) => {
-    console.log('submit', values);
-    dispatch(createSubject(values));
+    if (subjects !== undefined) {
+      values.id = datos.id
+      dispatch(editSubject(values));
+    } else {
+      dispatch(createSubject(values));
+    }
   };
-
+  
+  let editValues = initialState_Subjects
+  
+  if (subjectsStatus === 'success') {
+    editValues = {
+      [name.name]:subjects.find((e) => e.id == datos.id).name,
+      [description.name]: subjects.find((e) => e.id == datos.id).description,
+    };
+  }
 
 
 
@@ -51,7 +70,7 @@ export default function SubjectLoader() {
       <Typography variant="h6" gutterBottom>
         Cargar Materias
       </Typography>
-      <Formik onSubmit={handleSubmit} initialValues={initialState_Subjects}>
+      <Formik onSubmit={handleSubmit} initialValues={editValues}>
         {(formik) => (
           <Form>
             <Grid container spacing={3}>

@@ -121,12 +121,14 @@ const Results = ({
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-
+  console.log(customers)
   return (
+
     <Card className={clsx(classes.root, className)} {...rest}>
-      {/* <PerfectScrollbar> */}
+      {customers ? 
+      <>
       <Box Width={whidth ? whidth : 1}>
-        <Table size={"small"} className={classes.Table}>
+        <Table size={"small"} className={customers ? 's' : null}>
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
@@ -229,7 +231,6 @@ const Results = ({
           </TableBody>
         </Table>
       </Box>
-      {/* </PerfectScrollbar> */}
       <TablePagination
         component="div"
         count={customers.length}
@@ -238,7 +239,9 @@ const Results = ({
         page={page}
         rowsPerPage={limit}
         rowsPerPageOptions={[5, 10, 25]}
-      />
+      /> 
+      </>: null}
+      
     </Card>
   );
 };

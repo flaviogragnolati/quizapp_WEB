@@ -79,6 +79,8 @@ export const SchoolQuizListSelector = (state) =>
   state.School.SchoolQuizList.QuizList;
 export const SchoolQuizListStatusSelector = (state) => state.School.status;
 
+export const SchoolSubjectDetailSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectDetail;
 export const SchoolSubjectListSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectList.data;
+  state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectListStatusSelector = (state) => state.School.status;
