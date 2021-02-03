@@ -15,6 +15,7 @@ import {
 import BallotIcon from '@material-ui/icons/Ballot';
 import QuestionItem from './components/QuestionItem';
 import { NavigateBeforeRounded } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
 
 const quizzEj = {
   avatar:
@@ -41,26 +42,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const QuestionSideBar = ({ onMobileClose, openMobile }) => {
+const QuestionSideBar = ({ onMobileClose, openMobile , questions}) => {
   const classes = useStyles();
+  // const Dispatch = useDispatch()
 
-  const [questions, setQuestions] = useState([
-    { id: 1, title: 'Pregunta ' },
-    { id: 2, title: 'Pregunta ' },
-    { id: 3, title: 'Pregunta ' },
-    { id: 4, title: 'Pregunta ' },
-    { id: 5, title: 'Pregunta ' },
-    { id: 6, title: 'Pregunta ' },
-    { id: 7, title: 'Pregunta ' },
-    { id: 8, title: 'Pregunta ' },
-  ]);
+
+  // const [questions, setQuestions] = useState([
+  //   { id: 1, title: 'Pregunta ' },
+  //   { id: 2, title: 'Pregunta ' },
+  //   { id: 3, title: 'Pregunta ' },
+  //   { id: 4, title: 'Pregunta ' },
+  //   { id: 5, title: 'Pregunta ' },
+  //   { id: 6, title: 'Pregunta ' },
+  //   { id: 7, title: 'Pregunta ' },
+  //   { id: 8, title: 'Pregunta ' },
+  // ]);
 
   const handleAddQuestion = () => {
-    setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
+    // setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
   };
   const handleQuestionDelete = (id) => {
 
-    setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
+    // setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
   };
   return (
     <Box height="100%" display="flex" flexDirection="column">
@@ -76,7 +79,7 @@ const QuestionSideBar = ({ onMobileClose, openMobile }) => {
       <Divider />
       <Box p={2}>
         <List component={'ol'}>
-          {questions.map((question, idx) => (
+          {questions && questions.map((question, idx) => (
             <QuestionItem
               key={question.title}
               title={`${idx + 1} ${question.title}`}

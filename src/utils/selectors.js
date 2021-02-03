@@ -76,11 +76,15 @@ export const ProfileSelector = (state) => state.Profile.data;
 export const ProfileStatusSelector = (state) => state.Profile.status;
 
 //School selectors
-export const SchoolQuizSelector = (state) =>
-  state.School.SchoolQuizList.QuizList;
+export const SchoolQuizSelector = (state) => state.School.SchoolQuizList.QuizList;
 export const SchoolQuizStatusSelector = (state) => state.School.status;
-export const SchoolSubjectDetailSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectDetail;
-export const SchoolSubjectSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectDetailSelector = (state) => state.School.SchoolSubjectList.SubjectDetail;
+export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectStatusSelector = (state) => state.School.status;
+
+//Quiz selector
+
+export const QuestionsSelector = (state) => state.QuizLoader.questions;
+export const QuestionsStatusSelector = (state) => state.status;
+
+
