@@ -10,7 +10,7 @@ const initialState_School = {
   },
   SchoolSubjectList: {
     error: null,
-    SubjectList: {},
+    SubjectList: [],
     SubjectDetail: {},
   },
 };

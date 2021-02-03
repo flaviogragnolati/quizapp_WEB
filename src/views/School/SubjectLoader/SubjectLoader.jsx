@@ -46,7 +46,7 @@ export default function SubjectLoader() {
   }, [])
 
   const handleSubmit = (values, formik) => {
-    if (subjects !== undefined) {
+    if (subjects !== undefined && datos.id) {
       values.id = datos.id
       dispatch(editSubject(values));
     } else {
@@ -56,7 +56,7 @@ export default function SubjectLoader() {
   
   let editValues = initialState_Subjects
   
-  if (subjectsStatus === 'success') {
+  if (subjectsStatus === 'success' && subjects) {
     editValues = {
       [name.name]:subjects.find((e) => e.id == datos.id).name,
       [description.name]: subjects.find((e) => e.id == datos.id).description,
