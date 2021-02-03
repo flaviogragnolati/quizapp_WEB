@@ -11,7 +11,7 @@ export const CreateQuiz = createAsyncThunk(
       payload.SchoolId = 1;
       const QuizCreate_response = await axios.post(QUIZ_ENDPOINT, payload);
       const { quiz, token } = QuizCreate_response;
-      console.log('RESPUESTA',QuizCreate_response)
+
       return quiz;
     }
   );

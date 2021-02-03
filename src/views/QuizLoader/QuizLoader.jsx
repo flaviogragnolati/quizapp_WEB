@@ -83,7 +83,6 @@ export default function QuizLoader() {
   const handleSubmit = (values,formik)=>{
     if(activeStep === 1){
       // aca despachar la accion a la api
-      console.log('submit', values)
       localStorage.setItem('form', JSON.stringify(values))
       // return localStorage.removeItem('form')
     }else{

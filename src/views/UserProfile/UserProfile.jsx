@@ -19,8 +19,8 @@ import { AuthContext } from 'components/Auth/AuthContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileData } from 'views/UserProfile/UserProfileSlice';
 import {
-  UserProfileSelector,
-  UserProfileStatusSelector,
+  ProfileSelector,
+  ProfileStatusSelector,
 } from 'utils/selectors';
 
 const bg_img =
@@ -44,12 +44,13 @@ const {
 export default function ProfilePage(props) {
   const user = useContext(AuthContext);
   const dispatch = useDispatch();
-  const profile = useSelector(UserProfileSelector);
-  const status = useSelector(UserProfileStatusSelector);
+  const profile = useSelector(ProfileSelector);
+  const status = useSelector(ProfileStatusSelector);
   const datos = useParams();
 
 
   useEffect(() => {
+
     dispatch(getProfileData(datos.id));
   }, []);
 

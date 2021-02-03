@@ -71,16 +71,12 @@ export const selectQuizDetailById = createSelector(
 );
 
 //Profile selectors
-export const UserProfileSelector = (state) => state.Profile.data;
-export const UserProfileStatusSelector = (state) => state.Profile.status;
+export const ProfileSelector = (state) => state.Profile.data;
+export const ProfileStatusSelector = (state) => state.Profile.status;
 
 //School selectors
-export const SchoolQuizListSelector = (state) =>
-  state.School.SchoolQuizList.QuizList;
-export const SchoolQuizListStatusSelector = (state) => state.School.status;
-
-export const SchoolSubjectDetailSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectDetail;
-export const SchoolSubjectListSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectList;
-export const SchoolSubjectListStatusSelector = (state) => state.School.status;
+export const SchoolQuizSelector = (state) => state.School.SchoolQuizList.QuizList
+export const SchoolQuizStatusSelector = (state) => state.School.status
+// export const SchoolSubjectDetailSelector = (state) => state.School.SchoolSubjectList.SubjectDetail
+export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.SubjectList
+export const SchoolSubjectStatusSelector = (state) => state.School.status

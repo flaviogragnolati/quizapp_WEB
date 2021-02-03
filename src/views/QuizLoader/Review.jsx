@@ -45,7 +45,7 @@ export default function Review() {
   
   let local =  JSON.parse(localStorage.getItem('form'))
   useEffect(()=>{
-    console.log(local)
+
     // setValues(local)
   },[local])
 

@@ -79,14 +79,13 @@ const names = [
 
 const handleChange = (event) => {
   setPersonName( event.target.value);
-  console.log(personName)
+
 };
   const handleSubmit = (values, formik) => {
    
     Dispatch(CreateQuiz(values)) 
 
     // aca despachar la accion a la api
-    console.log("submit", values);
     // return localStorage.removeItem('form')
   };
 

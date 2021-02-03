@@ -24,7 +24,7 @@ export const getCatalogue = createAsyncThunk(
         catalogue.status === status.error ||
         catalogue.status === status.success
       ) {
-        console.log('should not run again', catalogue);
+
         return false;
       }
     },

@@ -3,10 +3,10 @@ import { Box, Container, makeStyles } from '@material-ui/core';
 import List from 'components/List';
 import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSchoolQuizList } from '../SchoolSlice';
+import { getQuizList } from '../SchoolSlice';
 import {
-  SchoolQuizListSelector,
-  SchoolQuizListStatusSelector,
+  SchoolQuizSelector,
+  SchoolQuizStatusSelector,
 } from 'utils/selectors';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 const SchoolQuiz = () => {
   const dispatch = useDispatch();
-  const quizes = useSelector(SchoolQuizListSelector);
-  const status = useSelector(SchoolQuizListStatusSelector);
+  const quizes = useSelector(SchoolQuizSelector);
+  const status = useSelector(SchoolQuizStatusSelector);
 
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'TRASH', ' EDIT'];
   let ButtonName = ['TRASH', 'EDIT QUIZ'];
 
   useEffect(() => {
-    dispatch(getSchoolQuizList());
+    dispatch(getQuizList());
   }, []);
 
   return (
