@@ -24,35 +24,35 @@ const isPendingAction = (action) => {
 
 //GETS
 
-export const getSchoolQuizList = createAsyncThunk(
-  'school/Get_Quiz',
+export const getQuizList = createAsyncThunk(
+  'school/GetQuizList',
   async () => {
     const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
     return Quiz;
   }
 );
 
-export const getSchoolSubjectsList = createAsyncThunk(
-  "School/Get_Subject",
+export const getSubjectsList = createAsyncThunk(
+  "School/GetSubjectsList",
   async () => {
     const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
     return Subject.data;
   }
 );
 
-export const getSchoolSubjectsDetail = createAsyncThunk(
-  "School/Get_SubjectDetail",
-  async (payload) => {
-    const Subject = await axios.get(SUBJECT_ENDPOINT + '/' + payload);
-    return Subject;
-  }
-);
+// export const getSubjectsDetail = createAsyncThunk(
+//   "School/GetSubjectsDetail",
+//   async (payload) => {
+//     const Subject = await axios.get(SUBJECT_ENDPOINT + '/' + payload);
+//     return Subject;
+//   }
+// );
 
 
 //POST
 
 export const createSubject = createAsyncThunk(
-  'school/Create_Subject',
+  'School/Create_Subject',
   async (payload) => {
     payload.SchoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
@@ -87,18 +87,18 @@ const SchoolSlice = createSlice({
   initialState: initialState_School,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getSchoolQuizList.fulfilled, (state, { payload }) => {
+    builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolQuizList.QuizList = payload.data.quizzes.byId;
     });
-    builder.addCase(getSchoolSubjectsList.fulfilled, (state, { payload }) => {
+    builder.addCase(getSubjectsList.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
     });
-    builder.addCase(getSchoolSubjectsDetail.fulfilled, (state, { payload }) => {
-      state.status = status.success;
-      state.SchoolSubjectList.SubjectDetail = payload;
-    });
+    // builder.addCase(getSubjectsDetail.fulfilled, (state, { payload }) => {
+    //   state.status = status.success;
+    //   state.SchoolSubjectList.SubjectDetail = payload;
+    // });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });

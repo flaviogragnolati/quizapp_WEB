@@ -26,7 +26,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
     },
   };
   if (listenArray.includes(action.type)) {
-    console.log('action.type', action.type);
+
     //Si la accion es alguna de las que estamos esuchando:
     if (action.type.includes('favorites/add')) {
       snackbar.message = `Se agrego el curso a favoritos`;

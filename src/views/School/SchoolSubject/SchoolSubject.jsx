@@ -7,8 +7,8 @@ import {
 import List from '../../../components/List';
 import array from './data';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSchoolSubjectsList } from "../SchoolSlice";
-import { SchoolSubjectListSelector,SchoolSubjectListStatusSelector } from 'utils/selectors';
+import { getSubjectsList } from "../SchoolSlice";
+import { SchoolSubjectSelector,SchoolSubjectStatusSelector } from 'utils/selectors';
 
 
 
@@ -28,8 +28,8 @@ const SchoolSubject = () => {
   let columnName = ['Name', 'Description', 'Delate','Edit', 'Teacher']
   let ButtonName = ['Delate Subject', 'Edit Subject', 'Teacher'];
   const dispatch = useDispatch()
-  const subjects = useSelector(SchoolSubjectListSelector)
-  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
+  const subjects = useSelector(SchoolSubjectSelector)
+  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
 
  
  

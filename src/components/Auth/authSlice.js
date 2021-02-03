@@ -90,7 +90,6 @@ export const restoreSession = createAsyncThunk(
         auth.status === status.error ||
         auth.status === status.success
       ) {
-        console.log('should not run again', auth);
         return false;
       }
     },

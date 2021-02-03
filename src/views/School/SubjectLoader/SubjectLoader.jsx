@@ -10,16 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useParams } from "react-router-dom";
-import { SchoolSubjectListSelector, SchoolSubjectListStatusSelector } from 'utils/selectors';
-import { getSchoolSubjectsDetail, editSubject } from "../SchoolSlice";
+import { SchoolSubjectSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
+import { editSubject } from "../SchoolSlice";
 
 const { name, description } = subjectModel;
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
   const datos = useParams();
-  const subjects = useSelector(SchoolSubjectListSelector)
-  const subjectsStatus = useSelector(SchoolSubjectListStatusSelector)
+  const subjects = useSelector(SchoolSubjectSelector)
+  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -39,11 +39,6 @@ export default function SubjectLoader() {
     },
   }));
 
-  useEffect(() => {
-    if (datos.id !== undefined) {
-    dispatch(getSchoolSubjectsDetail(datos.id))
-    }
-  }, [])
 
   const handleSubmit = (values, formik) => {
     if (subjects !== undefined) {
@@ -62,8 +57,6 @@ export default function SubjectLoader() {
       [description.name]: subjects.find((e) => e.id == datos.id).description,
     };
   }
-
-
 
   return (
     <Container>

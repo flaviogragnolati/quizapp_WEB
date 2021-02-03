@@ -9,7 +9,7 @@ export const CreateQuiz = createAsyncThunk(
     async (payload) => {
       const QuizCreate_response = await axios.post(QUIZ_ENDPOINT, payload);
       const { quiz, token } = QuizCreate_response;
-      console.log('RESPUESTA',QuizCreate_response)
+
       return quiz;
     }
   );

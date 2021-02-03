@@ -70,10 +70,8 @@ const Results = ({
   };
 
   const HandleClick = (e, name) => {
-    console.log(name);
     if (name === "EDIT QUIZ") {
       History.push("/question-loader");
-      console.log("EDIT QUIZ", e.target);
     }
     if (name === "Delate Subject") {
       dispatch(delateSubject(e));
@@ -121,7 +119,7 @@ const Results = ({
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-  console.log(customers)
+
   return (
 
     <Card className={clsx(classes.root, className)} {...rest}>

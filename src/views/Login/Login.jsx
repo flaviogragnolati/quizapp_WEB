@@ -53,7 +53,6 @@ function Login(props) {
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
-    console.log('va;ies', values);
     dispatch(localLogin(values));
   };
 

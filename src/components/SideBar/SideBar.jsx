@@ -42,7 +42,7 @@ function SideBar() {
   const Dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log('tu ');
+
     Dispatch(ACTIONS.auth.logout());
   };
 
