@@ -119,15 +119,6 @@ function Inicio(props) {
         <Typography variant="h6" color="inherit" className={classes.more}>
           Descubre la Experiencia
         </Typography>
-        <HeroButton
-          color="primary"
-          variant="contained"
-          size="medium"
-          onClick={handleLoading}
-          b={0}
-        >
-          LOADING TEST
-        </HeroButton>
       </InicioBackground>
       {loading && <BackdropLoading color="secondary" />}
     </>

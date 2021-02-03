@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Parallax from 'components/Parallax/Parallax.js';
 import styled from 'styled-components';
@@ -19,6 +19,12 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectQuizDetailById, catalogueStatusSelector } from 'utils/selectors';
+import { getCatalogue } from 'views/Catalogue/catalogueSlice';
+import { quizDetailStatusSelector } from 'utils/selectors';
+import { quizDetailSelector } from 'utils/selectors';
+import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
+import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -104,10 +110,6 @@ const Picture = styled.div`
   border-radius: 4px;
   border-style: solid; */
 `;
-// const RaisedImg = styled.img`
-//   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
-//     0 8px 10px -5px rgba(0, 0, 0, 0.2);
-// `;
 
 const QuizName = styled.div`
   grid-area: quiz;
@@ -194,24 +196,8 @@ const ShadowBox = styled(Box)`
     0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
-// const StudentBadge = styled(Chip)`
-//   margin-right: 3px;
-//   border-radius: 12px;
-//   padding: 5px 12px;
-//   text-transform: uppercase;
-//   font-size: 0.9rem;
-//   font-weight: 500;
-//   line-height: 1;
-//   color: #fff;
-//   text-align: center;
-//   white-space: nowrap;
-//   vertical-align: baseline;
-//   display: inline-block;
-// `;
-
 const CleanLink = styled(Link)`
   text-decoration: none;
-
   &:focus,
   &:visited,
   &:link,
@@ -227,27 +213,73 @@ const handleClick = () => {
   console.info('Accessing the profile of the user that made the review');
 };
 
+const openDate = new Date().toISOString().split('T')[0];
+const closeDate = new Date('2021-03-22').toISOString().split('T');
+// const teachers = [
+//   { id: 1, name: 'Niels Bohr', school: 'University of Copenhagen' },
+//   { id: 2, name: 'Werner Heisenberg', school: 'University of Munich' },
+//   { id: 3, name: 'Paul Dirac', school: 'University of Cambridge' },
+// ];
+
 function QuizProfile(props) {
   //   const { quizDetail } = props.location.state;
-  const {
-    // img,
-    schoolName,
-    subjectName,
-    quizName,
-    totalStudents,
-    openDate,
-    closeDate,
-    quizDescription,
-    quizReviews,
-    schoolContactInfo,
-    teachers,
-  } = quizDetail;
+  // const {
+  //   // img,
+  //   schoolName,
+  //   subjectName,
+  //   quizName,
+  //   totalStudents,
+  //   openDate,
+  //   closeDate,
+  //   quizDescription,
+  //   quizReviews,
+  //   schoolContactInfo,
+  //   teachers,
+  // } = quizDetail;
+
   const dispatch = useDispatch();
-  // const quizDetailStatus = useSelector(quizDetailStatusSelector)
+  const id = props.match.params.id;
+  const quizDetailStatus = useSelector(quizDetailStatusSelector);
+  const quizDetail = useSelector((state) => quizDetailSelector(state, id));
+  // const quizDetailStatus = useSelector((state) =>
+  //   selectQuizDetailById(state, id)
+  // );
+
+  // const {
+  //   name,
+  //   quantity,
+  //   logo,
+  //   description,
+  //   Subject: { name: subjectName },
+  //   School: { name: schoolName },
+  //   Reviews,
+  //   QuizTags,
+  // } = quizDetailStatus;
 
   const handleEnroll = () => {
     dispatch(ACTIONS.actions.enroll());
   };
+
+  useEffect(() => {
+    if (quizDetailStatus === 'idle') {
+      dispatch(getQuizDetailAsync(id));
+    }
+  }, [dispatch, quizDetailStatus, id]);
+  if (quizDetailStatus === 'pending') {
+    return <BackdropLoading />;
+  } else if (quizDetailStatus === 'error') {
+    return <h1>Ha ocurrido un error metele F5</h1>;
+  } else if (quizDetailStatus === 'success') {
+    var {
+      name,
+      quantity,
+      description,
+      Subject: { name: subjectName },
+      School: { name: schoolName, email: schoolEmail },
+      teachers,
+      Reviews: reviewList,
+    } = quizDetail;
+  }
 
   return (
     <div>
@@ -257,7 +289,7 @@ function QuizProfile(props) {
         <QuizName>
           <ShadowBox>
             <Typography variant="h3" color="secondary">
-              {quizName}
+              {name}
             </Typography>
             <Typography variant="subtitle1" color="secondary">
               {subjectName}
@@ -285,22 +317,23 @@ function QuizProfile(props) {
           <Typography variant="body2">Teachers in this course:</Typography>
           <br></br>
           <Box>
-            {teachers.map((teacher, idx) => {
-              return (
-                <Link
-                  to={{
-                    pathname: '/profile/1',
-                    state: {
-                      owner: false,
-                    },
-                  }}
-                >
-                  <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
-                    {teacher.name}
-                  </Badge>
-                </Link>
-              );
-            })}
+            {teachers &&
+              teachers.map((teacher, idx) => {
+                return (
+                  <Link
+                    to={{
+                      pathname: `/profile/${teacher.userId}`,
+                      state: {
+                        owner: false,
+                      },
+                    }}
+                  >
+                    <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
+                      {teacher.name}
+                    </Badge>
+                  </Link>
+                );
+              })}
           </Box>
         </Teacher>
         <Reviews>
@@ -329,7 +362,7 @@ function QuizProfile(props) {
                       display="inline"
                       variant="body2"
                     >
-                      {totalStudents}
+                      {quantity}
                     </Typography>
                   </Button>
                 </span>
@@ -343,39 +376,48 @@ function QuizProfile(props) {
             >
               <Typography variant="subtitle1">Score</Typography>
               <Typography variant="body1">
-                <Rating name="score" value={quizReviews[0].score} readOnly />
+                <Rating name="score" value={8} readOnly />
               </Typography>
             </Box>
           </Box>
           <Grid spacing={2}>
-            <Grid item>
-              <Typography variant="body1">
-                Student:{' '}
-                <Link
-                  to={{
-                    pathname: '/profile/1',
-                    state: {
-                      owner: false,
-                    },
-                  }}
-                >
-                  <Chip
-                    label={quizReviews[0].user}
-                    variant="outlined"
-                    color="info"
-                    size="small"
-                    onClick={handleClick}
-                  />
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">{quizReviews[0].text}</Typography>
-            </Grid>
+            {reviewList &&
+              reviewList.slice(0, 3).map((review, idx) => {
+                return (
+                  <>
+                    <Grid item>
+                      <Typography variant="body1">
+                        Student:{' '}
+                        <Link
+                          to={{
+                            pathname: `/profile/${review.UserId}`,
+                            state: {
+                              owner: false,
+                            },
+                          }}
+                        >
+                          <Chip
+                            label={review.UserId}
+                            variant="outlined"
+                            color="info"
+                            size="small"
+                            onClick={handleClick}
+                          />
+                        </Link>
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1">
+                        {review.description}
+                      </Typography>
+                    </Grid>
+                  </>
+                );
+              })}
           </Grid>
         </Reviews>
         <Description>
-          <Typography variant="body1">{quizDescription}</Typography>
+          <Typography variant="body1">{description}</Typography>
         </Description>
         {/* <Subject>{subjectName}</Subject> */}
         <DateOpen>
@@ -405,11 +447,11 @@ function QuizProfile(props) {
           <Box display="flex" flexDirection="column">
             <Box display="flex" flexDirection="row" padding="0.2rem">
               <PhoneIcon />
-              <Typography variant="body1">{schoolContactInfo.phone}</Typography>
+              {/* <Typography variant="body1">{schoolContactInfo.phone}</Typography> */}
             </Box>
             <Box display="flex" flexDirection="row" padding="0.2rem">
               <EmailIcon />
-              <Typography variant="body1">{schoolContactInfo.email}</Typography>
+              <Typography variant="body1">{schoolEmail}</Typography>
             </Box>
           </Box>
         </ContactInfo>
@@ -420,8 +462,8 @@ function QuizProfile(props) {
             justifyContent="space-between"
           >
             {/* <Button color="info" variant="contained" size="large">
-              Contact
-            </Button> */}
+            Contact
+          </Button> */}
             <Button
               color="primary"
               variant="contained"
