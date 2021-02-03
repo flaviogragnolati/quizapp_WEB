@@ -46,7 +46,7 @@ const catalogueSlice = createSlice({
     [getCatalogue.fulfilled]: (state, { payload }) => {
       state.status = status.success;
       state.entities = payload.entities;
-      state.result = [...new Set(payload.result)];
+      state.result = [...new Set(payload.result)].sort((a, b) => a - b);
       // for (const key in payload) {
       //   if (Object.hasOwnProperty.call(payload, key)) {
       //     const element = payload[key];

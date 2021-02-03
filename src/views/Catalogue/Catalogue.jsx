@@ -50,7 +50,10 @@ const Catalogue = () => {
     content = <BackdropLoading />;
   } else if (catStatus === 'success') {
     content = quizList
-      .slice(page - 1, page + qtyToDisplay - 1)
+      .slice(
+        (page - 1) * qtyToDisplay,
+        (page - 1) * qtyToDisplay + qtyToDisplay
+      )
       .map((quizId, idx) => (
         <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
           <QuizCard
