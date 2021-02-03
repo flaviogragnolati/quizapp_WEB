@@ -69,7 +69,7 @@ function Login(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={8}>
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>

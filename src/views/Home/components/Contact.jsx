@@ -8,6 +8,8 @@ import Typography from '../../../components/Home_MUI/Typography';
 import TextField from '../../../components/Home_MUI/TextField';
 import Snackbar from '../../../components/Home_MUI/Snackbar';
 import Button from '../../../components/Home_MUI/Button';
+import { useDispatch } from 'react-redux';
+import { contactSchool } from '../ContactSlice';
 
 const styles = (theme) => ({
   root: {
@@ -59,11 +61,30 @@ const styles = (theme) => ({
 
 function Contact(props) {
   const { classes } = props;
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [formInfo, setFormInfo] = useState({
+    correo: '',
+    nombreSchool: '',
+  });
+
+  const handleChange = (event) => {
+  setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setOpen(true);
+
+    let payload = {
+        name: formInfo.nombreSchool,
+        email: formInfo.correo
+    };
+    dispatch(contactSchool(payload))
+    setFormInfo({
+      correo: '',
+      nombreSchool: ''
+    });
   };
 
   const handleClose = () => {
@@ -84,18 +105,24 @@ function Contact(props) {
               </Typography>
               <TextField
                 noBorder
+                name="correo"
                 className={classes.textField}
                 placeholder="Correo electronico"
+                onChange={handleChange}
               />
               <TextField
                 noBorder
+                name="nombreSchool"
                 className={classes.textField}
                 placeholder="Nombre de la Institucion"
+                onChange={handleChange}
               />
               <TextField
                 noBorder
+                name="pais"
                 className={classes.textField}
                 placeholder="Pais"
+                onChange={handleChange}
               />
               <br />
               <br />

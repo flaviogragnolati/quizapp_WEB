@@ -26,12 +26,20 @@ const CatalogueSection = styled.section`
   background-color: ${(p) => p.theme.palette.background.default};
 `;
 
+const qtyToDisplay = 6;
+
 const Catalogue = () => {
   const dispatch = useDispatch();
   const catStatus = useSelector(catalogueStatusSelector);
   const entities = useSelector(allCatalogueEntitiesSelector);
   const quizList = useSelector(allCatalogueResultSelector);
   const classes = useStyles();
+
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     if (catStatus === 'idle') {
@@ -43,14 +51,16 @@ const Catalogue = () => {
   if (catStatus === 'pending') {
     content = <BackdropLoading />;
   } else if (catStatus === 'success') {
-    content = quizList.map((quizId, idx) => (
-      <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
-        <QuizCard
-          className={classes.courseCard}
-          quiz={entities.quizzes[quizId]}
-        />
-      </Grid>
-    ));
+    content = quizList
+      .slice(page - 1, page + qtyToDisplay - 1)
+      .map((quizId, idx) => (
+        <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
+          <QuizCard
+            className={classes.courseCard}
+            quiz={entities.quizzes[quizId]}
+          />
+        </Grid>
+      ));
   } else if (catStatus === 'error') {
     content = <h1>ha ocurrido un error</h1>;
   }
@@ -78,9 +88,21 @@ const Catalogue = () => {
               ))} */}
             </Grid>
           </Box>
-          <Box mt={3} display="flex" justifyContent="center">
-            <Pagination color="primary" count={5} size="small" />
-          </Box>
+          <Grid item container>
+            <Box mt={10}>
+              <Pagination
+                color="secondary"
+                variant="outlined"
+                shape="rounded"
+                size="large"
+                showFirstButton
+                showLastButton
+                count={Math.ceil(quizList.length / qtyToDisplay)}
+                page={page}
+                onChange={handleChange}
+              />
+            </Box>
+          </Grid>
         </Grid>
       </Grid>
     </CatalogueSection>
