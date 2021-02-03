@@ -22,6 +22,7 @@ export const quizTagsSelector = (state) => state.catalogue.entities.quizTags;
 export const reviewsSelector = (state) => state.catalogue.entities.reviews;
 export const schoolsSelector = (state) => state.catalogue.entities.schools;
 export const subjectsSelector = (state) => state.catalogue.entities.subjects;
+export const catalogueFilterSelector = (state) => state.catalogue.filter;
 
 //Quiz Detail Selectors
 export const quizDetailStatusSelector = (state) => state.quizDetail.status;
@@ -75,8 +76,11 @@ export const ProfileSelector = (state) => state.Profile.data;
 export const ProfileStatusSelector = (state) => state.Profile.status;
 
 //School selectors
-export const SchoolQuizSelector = (state) => state.School.SchoolQuizList.QuizList
-export const SchoolQuizStatusSelector = (state) => state.School.status
-// export const SchoolSubjectDetailSelector = (state) => state.School.SchoolSubjectList.SubjectDetail
-export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.SubjectList
-export const SchoolSubjectStatusSelector = (state) => state.School.status
+export const SchoolQuizSelector = (state) =>
+  state.School.SchoolQuizList.QuizList;
+export const SchoolQuizStatusSelector = (state) => state.School.status;
+export const SchoolSubjectDetailSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectDetail;
+export const SchoolSubjectSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectStatusSelector = (state) => state.School.status;

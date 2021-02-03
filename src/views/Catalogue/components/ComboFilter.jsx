@@ -4,6 +4,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { PropTypes } from 'prop-types';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { catalogueFilterSelector } from 'utils/selectors';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +24,18 @@ export default function ComboFilter({
   options,
   limitTags,
   defaultValue,
+  action,
 }) {
+  const filter = useSelector(catalogueFilterSelector);
   const classes = useStyles();
+  const [values, setValues] = useState();
 
+  useEffect(() => {
+    if (filter) {
+      console.log('ASDASDASDASD');
+      action(values);
+    }
+  }, [filter, action, values]);
   return (
     <div className={classes.root}>
       <Autocomplete
@@ -32,6 +45,10 @@ export default function ComboFilter({
         id="multiple-limit-tags"
         options={options}
         getOptionLabel={(option) => option.label}
+        value={values}
+        onChange={(event, newValue) => {
+          setValues(newValue);
+        }}
         renderInput={(params) => (
           <TextField
             {...params}

@@ -18,6 +18,8 @@ import FilterGroup from './FilterGroup';
 import SchoolFilterDetail from './SchoolFilterDetail';
 import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from 'store/rootReducer';
 
 const SidebarDiv = styled.div`
   /* background-color: gray; */
@@ -69,9 +71,17 @@ const useStyles = makeStyles((theme) => ({
 
 function FilterSidebar() {
   const c = useStyles();
-
+  const dispatch = useDispatch();
+  const [filterValues, setFilterValues] = useState({
+    school: '',
+    subject: '',
+    quiz: '',
+  });
+  console.log('FILTER', filterValues);
   const handleClear = () => {};
-  const handleFilter = (filter) => {};
+  const handleFilter = (filterValues) => {
+    dispatch(ACTIONS.catalogue.setFilter());
+  };
 
   return (
     <SidebarDiv>
@@ -94,7 +104,7 @@ function FilterSidebar() {
       </>
       <>
         <FilterGroup title="School Filter">
-          <SchoolFilterDetail />
+          <SchoolFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
         <FilterGroup title="Subject Filter">

@@ -5,15 +5,22 @@ import CountryFilter from './CountryFilter';
 import { useSelector } from 'react-redux';
 import { schoolsSelector } from 'utils/selectors';
 
-function SchoolFilterDetail() {
+function SchoolFilterDetail({ setFilter }) {
   const schools = useSelector(schoolsSelector);
   const schoolOptions = formatStateToOptions(schools);
+  const getFilterValues = (values) => {
+    setFilter((oldValues) => {
+      return { ...oldValues, school: values };
+    });
+  };
+
   return (
     <>
       <ComboFilter
         label="School Name"
         placeholder="School Name"
         options={schoolOptions || [{ id: '', label: 'NO DATA' }]}
+        action={getFilterValues}
       />
       <br></br>
       <CountryFilter label="Country" placeholder="Country" />
