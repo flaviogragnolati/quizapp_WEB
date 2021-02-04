@@ -89,7 +89,6 @@ export default function DatosQuiz() {
         Dispatch(getSubjectsList())
     },[])
     
-    console.log('tu vieja',subjects)
   // let {
   //   name,
   //   description,
