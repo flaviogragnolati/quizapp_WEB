@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCatalogue } from './catalogueSlice';
 import { catalogueStatusSelector } from 'utils/selectors';
 import {
-  allCatalogueEntitiesSelector,
-  allCatalogueResultSelector,
+  catalogueEntitiesSelector,
+  catalogueResultSelector,
+  catalogueFilterSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 
@@ -29,9 +30,14 @@ const qtyToDisplay = 6; //variable para definir la cantidad de `quiz cards` que 
 
 const Catalogue = () => {
   const dispatch = useDispatch();
+
   const catStatus = useSelector(catalogueStatusSelector);
-  const entities = useSelector(allCatalogueEntitiesSelector);
-  const quizList = useSelector(allCatalogueResultSelector);
+  const entities = useSelector(catalogueEntitiesSelector);
+  const filter = useSelector(catalogueFilterSelector);
+
+  const quizList = useSelector((state) =>
+    catalogueResultSelector(state, filter)
+  );
   const classes = useStyles();
 
   const [page, setPage] = useState(1);
@@ -49,19 +55,23 @@ const Catalogue = () => {
   if (catStatus === 'pending') {
     content = <BackdropLoading />;
   } else if (catStatus === 'success') {
-    content = quizList
-      .slice(
-        (page - 1) * qtyToDisplay,
-        (page - 1) * qtyToDisplay + qtyToDisplay
-      )
-      .map((quizId, idx) => (
-        <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
-          <QuizCard
-            className={classes.courseCard}
-            quiz={entities.quizzes[quizId]}
-          />
-        </Grid>
-      ));
+    if (quizList.length < 1) {
+      content = <h3>No hay cursos que se ajusten a ese criterio</h3>;
+    } else {
+      content = quizList
+        .slice(
+          (page - 1) * qtyToDisplay,
+          (page - 1) * qtyToDisplay + qtyToDisplay
+        )
+        .map((quizId, idx) => (
+          <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
+            <QuizCard
+              className={classes.courseCard}
+              quiz={entities.quizzes[quizId]}
+            />
+          </Grid>
+        ));
+    }
   } else if (catStatus === 'error') {
     content = <h1>ha ocurrido un error</h1>;
   }

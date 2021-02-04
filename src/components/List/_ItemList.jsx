@@ -109,12 +109,10 @@ const Results = ({
       });
     }
     if (name === "Borrar Quiz") {
-      console.log(name)
        dispatch(delateQuiz(e));
     }
     console.log('NOMBRE BOTON',name)
     if (name === "TEACHER") {
-      console.log('entro al modal')
       setOpen(true);
     }
   };

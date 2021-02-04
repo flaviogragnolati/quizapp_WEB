@@ -8,11 +8,11 @@ import { schoolsSelector } from 'utils/selectors';
 function SchoolFilterDetail({ setFilter }) {
   const schools = useSelector(schoolsSelector);
   const schoolOptions = formatStateToOptions(schools);
-  const getFilterValues = (values) => {
-    setFilter((oldValues) => {
-      return { ...oldValues, school: values };
-    });
-  };
+  // const getFilterValues = (values) => {
+  //   setFilter((oldValues) => {
+  //     return { ...oldValues, school: values };
+  //   });
+  // };
 
   return (
     <>
@@ -20,7 +20,9 @@ function SchoolFilterDetail({ setFilter }) {
         label="School Name"
         placeholder="School Name"
         options={schoolOptions || [{ id: '', label: 'NO DATA' }]}
-        action={getFilterValues}
+        // action={getFilterValues}
+        setFilter={setFilter}
+        name="school"
       />
       <br></br>
       <CountryFilter label="Country" placeholder="Country" />

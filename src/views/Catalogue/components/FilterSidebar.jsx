@@ -20,6 +20,7 @@ import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
+import { useEffect } from 'react';
 
 const SidebarDiv = styled.div`
   /* background-color: gray; */
@@ -68,20 +69,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
+const initialFilterValues = {
+  school: null,
+  subject: null,
+  quiz: null,
+  tag: null,
+};
 function FilterSidebar() {
   const c = useStyles();
   const dispatch = useDispatch();
-  const [filterValues, setFilterValues] = useState({
-    school: '',
-    subject: '',
-    quiz: '',
-  });
-  console.log('FILTER', filterValues);
-  const handleClear = () => {};
-  const handleFilter = (filterValues) => {
-    dispatch(ACTIONS.catalogue.setFilter());
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+  const handleClear = () => {
+    dispatch(ACTIONS.catalogue.setFilter(false));
+    setFilterValues(initialFilterValues);
   };
+  const handleFilter = () => {
+    dispatch(ACTIONS.catalogue.filter(filterValues));
+    dispatch(ACTIONS.catalogue.setFilter(true));
+  };
+  // useEffect(() => {
+  //   setFilter(false);
+  // }, []);
 
   return (
     <SidebarDiv>
@@ -108,11 +116,11 @@ function FilterSidebar() {
         </FilterGroup>
         <Divider />
         <FilterGroup title="Subject Filter">
-          <SubjectFilterDetail />
+          <SubjectFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
         <FilterGroup title="Quiz Filter">
-          <QuizFilterDetail />
+          <QuizFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
       </>

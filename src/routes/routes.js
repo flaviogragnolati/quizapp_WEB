@@ -17,6 +17,8 @@ import DatosQuiz from 'views/QuizLoader/DatosQuiz';
 import SubjectLoader from 'views/School/SubjectLoader';
 import LoginSchool from 'views/Login/LoginSchool';
 
+
+
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
   { path: '/login', component: Login, access: 'guest' },
