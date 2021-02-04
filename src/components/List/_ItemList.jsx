@@ -20,7 +20,12 @@ import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
 import { delateSubject, editSubject } from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import ModalTeacher from "./Modal";
 // import getInitials from 'src/utils/getInitials';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +37,17 @@ const useStyles = makeStyles((theme) => ({
   Table: {
     whidth: "auto",
     margin: "none",
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -49,6 +65,14 @@ const Results = ({
   ButtonName,
   ...rest
 }) => {
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -83,6 +107,11 @@ const Results = ({
           edit: true,
         },
       });
+    }
+    console.log('NOMBRE BOTON',name)
+    if (name === "TEACHER") {
+      console.log('entro al modal')
+      setOpen(true);
     }
   };
 
@@ -218,7 +247,7 @@ const Results = ({
                   <TableCell>
                     <Button
                       name={ButtonName[2]}
-                      onClick={() => HandleClick(ButtonName[2])}
+                      onClick={() => HandleClick(customer.id,ButtonName[2])}
                     >
                       {ButtonName[2]}
                     </Button>
@@ -239,7 +268,7 @@ const Results = ({
         rowsPerPageOptions={[5, 10, 25]}
       /> 
       </>: null}
-      
+      <ModalTeacher title={'prueba'} content={'contenido'} open={open} setOpen={setOpen}></ModalTeacher>
     </Card>
   );
 };

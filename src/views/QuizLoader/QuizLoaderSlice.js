@@ -17,7 +17,7 @@ export const CreateQuiz = createAsyncThunk(
   );
 
   export const CreateQuestion = createAsyncThunk(
-    'Quiz/CreateQuiz',
+    'Quiz/CreateQuestions',
     async (payload) => {
 
       payload.modifiedBy = 1;
