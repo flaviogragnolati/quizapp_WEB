@@ -60,7 +60,8 @@ export const createSubject = createAsyncThunk(
 export const delateSubject = createAsyncThunk(
   "School/Delate_Subject",
   async (payload) => {
-    const Subject_response = await axios.put(SUBJECT_ENDPOINT + "/" + payload);
+    console.log('sdnodnp')
+    const Subject_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
     return Subject_response.data;
   }
 );
