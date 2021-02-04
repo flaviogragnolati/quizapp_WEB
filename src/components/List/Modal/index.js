@@ -6,8 +6,8 @@ import Fade from "@material-ui/core/Fade";
 import { Field, Form, Formik } from "formik";
 import { Button, Card, Grid, TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector } from "utils/selectors";
-import { getUserEmail } from "views/School/SchoolSlice";
+// import { UserDetailSelector } from "utils/selectors";
+// import { getUserEmail } from "views/School/SchoolSlice";
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
-  const UserDetail = useSelector(UserDetailSelector);
+  // const UserDetail = useSelector(UserDetailSelector);
   // const handleOpen = () => {
   //   setOpen(true);
   // };
@@ -53,7 +53,7 @@ function ModalTeacher({ Id, open, setOpen }) {
   };
   const handleSubmit = (values) => {
     values.id = Id
-    Dispatch(getUserEmail(values))
+    // Dispatch(getUserEmail(values))
   };
   return (
     <Modal
