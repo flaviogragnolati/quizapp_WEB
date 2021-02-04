@@ -5,6 +5,9 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Form, Formik } from 'formik';
 import { Button, Grid, TextField } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import {UserDetailSelector} from 'utils/selectors'
+
 
 const useStyles = makeStyles((theme) => ({
  
@@ -23,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 function ModalTeacher({title, content,open, setOpen}) {
     const classes = useStyles();
-
+    const Dispatch =useDispatch()
+    const UserDetail = useSelector(UserDetailSelector)
     // const handleOpen = () => {
     //   setOpen(true);
     // };
@@ -31,8 +35,8 @@ function ModalTeacher({title, content,open, setOpen}) {
     const handleClose = () => {
       setOpen(false);
     };
-    const handleSubmit = ()=>{
-
+    const handleSubmit = (values)=>{
+        // Dispatch(getUserEmail(values))
     }
     return (
         <Modal
@@ -63,6 +67,15 @@ function ModalTeacher({title, content,open, setOpen}) {
                 // defaultValue={infoQuestion.description}
                 variant="outlined"
               />
+              {UserDetail.id && 
+                <TextField
+                noBorder
+                name="Usuario"
+                placeholder="Usuario"
+                value={UserDetail.name}
+                // onChange={handleChange}
+              />
+              }
               <Button color="primary" variant="contained" type="submit">
                 Buscar Usuario
               </Button>

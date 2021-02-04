@@ -7,6 +7,7 @@ import {
 import { status } from "utils/helpers";
 import axios from "axios";
 import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT } from "utils/endpoints";
+import { GET_USER_EMAIL_ENDPOINT } from "utils/endpoints";
 
 const initialState_School = {
   SchoolQuizList: {
@@ -18,6 +19,9 @@ const initialState_School = {
     SubjectList: [],
     SubjectDetail: {},
   },
+  UserDetail:{
+
+  }
 };
 
 //GET
@@ -32,6 +36,14 @@ export const getSubjectsList = createAsyncThunk(
   async () => {
     const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
     return Subject.data;
+  }
+);
+
+export const getUserEmail = createAsyncThunk(
+  "School/GetUserEmail",
+  async (payload) => {
+    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT,payload);
+    return User_Email_response ;
   }
 );
 
@@ -85,7 +97,8 @@ const isPendingAction = isPending(
   getSubjectsList,
   createSubject,
   delateSubject,
-  editSubject
+  editSubject,
+  getUserEmail,
 );
 
 const isRejectedAction = isRejected(
@@ -93,7 +106,8 @@ const isRejectedAction = isRejected(
   getSubjectsList,
   createSubject,
   delateSubject,
-  editSubject
+  editSubject,
+  getUserEmail,
 );
 
 const SchoolSlice = createSlice({
@@ -108,6 +122,10 @@ const SchoolSlice = createSlice({
     builder.addCase(getSubjectsList.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
+    });
+    builder.addCase(getUserEmail.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.UserDetail = payload;
     });
     // builder.addCase(getSubjectsDetail.fulfilled, (state, { payload }) => {
     //   state.status = status.success;
