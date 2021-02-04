@@ -83,7 +83,7 @@ export default function DatosQuiz() {
     // aca despachar la accion a la api
     // return localStorage.removeItem('form')
   };
-
+  
     useEffect(()=>{
         
         Dispatch(getSubjectsList())
