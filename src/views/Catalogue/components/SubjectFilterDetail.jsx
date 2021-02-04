@@ -4,15 +4,17 @@ import { useSelector } from 'react-redux';
 import { subjectsSelector } from 'utils/selectors';
 import { formatStateToOptions } from 'utils/helpers';
 
-function SubjectFilterDetail() {
+function SubjectFilterDetail({ setFilter }) {
   const subjects = useSelector(subjectsSelector);
   const subjectOptions = formatStateToOptions(subjects);
   return (
     <>
       <ComboFilter
+        name="subject"
         label="Subject Name"
         placeholder="Subject Name"
         options={subjectOptions || [{ id: '', label: 'NO DATA' }]}
+        setFilter={setFilter}
       />
     </>
   );

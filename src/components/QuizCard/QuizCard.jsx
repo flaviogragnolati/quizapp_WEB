@@ -22,7 +22,7 @@ import styled from 'styled-components';
 
 import { quizDetail } from '../../views/Catalogue/quizDetail';
 import { useSelector } from 'react-redux';
-import { allCatalogueEntitiesSelector } from 'utils/selectors';
+import { catalogueEntitiesSelector } from 'utils/selectors';
 import CatalogueTags from './CatalogueTags';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +52,7 @@ const ImgCardContainer = styled.img`
 `;
 
 const QuizCard = ({ className, quiz, ...rest }) => {
-  const entities = useSelector(allCatalogueEntitiesSelector);
+  const entities = useSelector(catalogueEntitiesSelector);
   const {
     id,
     quantity,

@@ -8,6 +8,7 @@ const initialState_Catalogue = {
   entities: {},
   result: '',
   filter: false,
+  filteredResult: '',
 };
 
 export const getCatalogue = createAsyncThunk(
@@ -36,7 +37,49 @@ const catalogueSlice = createSlice({
   initialState: initialState_Catalogue,
   reducers: {
     setFilter: (state, { payload }) => {
-      state.filter = !state.filter;
+      state.filter = payload;
+    },
+    filter: (state, { payload }) => {
+      let filteredCatalogue = [];
+
+      const { school, subject, quiz, tag } = payload;
+      //traemos los arrays de cada filterGroup
+      let schoolResult =
+        school && school.length && school.map((school) => school.id);
+      let subjectResult =
+        subject && subject.length && subject.map((subject) => subject.id);
+      let quizResult = quiz && quiz.length && quiz.map((quiz) => quiz.id);
+      let tagResult = tag && tag.length && tag.map((tag) => tag.id);
+      // console.log('schoolResult', schoolResult);
+      // console.log('subjectResult', subjectResult);
+      // console.log('quizResult', quizResult);
+      // console.log('tagResult', tagResult);
+      state.result.forEach((id, idx) => {
+        let entity = state.entities.quizzes[id];
+        // console.log('ENTITY', entity, typeof entity.QuizTags);
+        if (
+          (schoolResult && schoolResult.includes(entity.School)) ||
+          (subjectResult && subjectResult.includes(entity.Subject)) ||
+          (quizResult && quizResult.includes(entity.id))
+        ) {
+          filteredCatalogue.push(id);
+        }
+        let quizTags = Array.isArray(entity.QuizTags)
+          ? entity.QuizTags
+          : [entity.QuizTags];
+        if (!!entity.QuizTags && tagResult) {
+          tagResult.forEach((tagId) => {
+            if (quizTags.includes(tagId)) {
+              filteredCatalogue.push(id);
+            }
+          });
+        }
+      });
+      console.log(filteredCatalogue);
+      state.filteredResult = [...new Set(filteredCatalogue)];
+    },
+    clearFilter: (state, { payload }) => {
+      state.filter = false;
     },
   },
   extraReducers: {
@@ -47,12 +90,6 @@ const catalogueSlice = createSlice({
       state.status = status.success;
       state.entities = payload.entities;
       state.result = [...new Set(payload.result)].sort((a, b) => a - b);
-      // for (const key in payload) {
-      //   if (Object.hasOwnProperty.call(payload, key)) {
-      //     const element = payload[key];
-      //     state[key] = element;
-      //   }
-      // }
     },
     [getCatalogue.rejected]: (state, { payload }) => {
       state.status = status.error;

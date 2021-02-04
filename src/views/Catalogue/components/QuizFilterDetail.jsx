@@ -4,24 +4,27 @@ import { useSelector } from 'react-redux';
 import { quizTagsSelector, quizzesSelector } from 'utils/selectors';
 import { formatStateToOptions } from 'utils/helpers';
 
-function SchoolFilterDetail() {
+function SchoolFilterDetail({ setFilter }) {
   const quizTags = useSelector(quizTagsSelector);
   const quizzes = useSelector(quizzesSelector);
   const quizTagsOptions = formatStateToOptions(quizTags);
-  console.log(quizTagsOptions);
   const quizzesOptions = formatStateToOptions(quizzes);
   return (
     <>
       <ComboFilter
         label="Quiz Name"
         placeholder="Quiz Name"
+        name="quiz"
         options={quizzesOptions || [{ id: '', label: 'NO DATA' }]}
+        setFilter={setFilter}
       />
       <br></br>
       <ComboFilter
         label="Quiz Tags"
         placeholder="Quiz Tags"
+        name="tag"
         options={quizTagsOptions || [{ id: '', label: 'NO DATA' }]}
+        setFilter={setFilter}
       />
     </>
   );
