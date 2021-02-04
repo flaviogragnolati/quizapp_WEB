@@ -60,7 +60,8 @@ export const createSubject = createAsyncThunk(
 export const delateSubject = createAsyncThunk(
   "School/Delate_Subject",
   async (payload) => {
-    const Subject_response = await axios.put(SUBJECT_ENDPOINT + "/" + payload);
+    console.log('sdnodnp')
+    const Subject_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
     return Subject_response.data;
   }
 );
@@ -117,7 +118,7 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
-      state.SchoolSubjectList.SubjectList.data = state.SchoolSubjectList.SubjectList.data.filter(
+      state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {
           return subject.id !== payload.id;
         }

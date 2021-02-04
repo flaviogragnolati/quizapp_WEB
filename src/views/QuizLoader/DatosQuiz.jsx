@@ -23,17 +23,14 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import { getSubjectsList } from 'views/School/SchoolSlice';
+import { getSubjectsList } from "views/School/SchoolSlice";
 
-import {
-  SchoolSubjectSelector,
-  SchoolSubjectStatusSelector,
-} from 'utils/selectors';
+import {SchoolSubjectSelector, SchoolSubjectStatusSelector} from "utils/selectors"
 const { nameQuiz, descripcion, Logo, materia } = quizModel;
 export default function DatosQuiz() {
-  const dispatch = useDispatch();
+  const Dispatch= useDispatch()
   const subjects = useSelector(SchoolSubjectSelector);
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector);
+  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -81,16 +78,17 @@ export default function DatosQuiz() {
     setPersonName(event.target.value);
   };
   const handleSubmit = (values, formik) => {
-    dispatch(CreateQuiz(values));
-
+    values.SubjectId = personName
+    Dispatch(CreateQuiz(values));
     // aca despachar la accion a la api
     // return localStorage.removeItem('form')
   };
-
-  useEffect(() => {
-    dispatch(getSubjectsList());
-  }, [dispatch]);
-
+  
+    useEffect(()=>{
+        
+        Dispatch(getSubjectsList())
+    },[])
+    
   // let {
   //   name,
   //   description,
@@ -125,30 +123,23 @@ export default function DatosQuiz() {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <Field
                   component={SimpleFileUpload}
                   name={Logo.name}
                   label={Logo.label}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <Field component={TextField} name="logo" label="URl" />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <Field
-                  component={TextField}
-                  name={materia.name}
-                  label={materia.label}
-                  fullWidth
-                />
-              </Grid> */}
-              <Container>
-                <FormControl>
+              <Container Style="padding: 12px;">
+                <FormControl >
                   <InputLabel id="demo-mutiple-chip-label" fullWidth>
                     Selecciona una Materia
                   </InputLabel>
                   <Select
+                  Style="min-width: 180px;"
                     labelId="demo-mutiple-chip-label"
                     id="demo-mutiple-chip"
                     value={personName}
@@ -178,6 +169,7 @@ export default function DatosQuiz() {
               color="primary"
               // className={classes.button}
               type="submit"
+              Style="margin: 26px 0px;"
             >
               Submit Quiz
             </Button>

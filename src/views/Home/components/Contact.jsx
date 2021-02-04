@@ -9,7 +9,7 @@ import TextField from '../../../components/Home_MUI/TextField';
 import Snackbar from '../../../components/Home_MUI/Snackbar';
 import Button from '../../../components/Home_MUI/Button';
 import { useDispatch } from 'react-redux';
-import { contactSchool } from '../ContactSlice';
+import { contactSchool } from 'components/Auth/authSlice';
 
 const styles = (theme) => ({
   root: {

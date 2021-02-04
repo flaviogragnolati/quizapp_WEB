@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
@@ -11,18 +11,25 @@ import {
   List,
   Typography,
   makeStyles,
-} from '@material-ui/core';
-import BallotIcon from '@material-ui/icons/Ballot';
-import QuestionItem from './components/QuestionItem';
-import { NavigateBeforeRounded } from '@material-ui/icons';
+} from "@material-ui/core";
+import BallotIcon from "@material-ui/icons/Ballot";
+import QuestionItem from "./components/QuestionItem";
+import { NavigateBeforeRounded } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteQuestion,
+  getAllQuestions,
+  CreateQuestion,
+} from "views/QuizLoader/QuizLoaderSlice";
+import { SchoolQuizSelector } from "utils/selectors";
 
 const quizzEj = {
   avatar:
-    'https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  subject: 'Quantum Entanglement',
-  category: 'Physics',
-  name: 'First Test',
-  description: 'If you fail this test... pathetic...',
+    "https://images.pexels.com/photos/207732/pexels-photo-207732.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  subject: "Quantum Entanglement",
+  category: "Physics",
+  name: "First Test",
+  description: "If you fail this test... pathetic...",
 };
 
 const useStyles = makeStyles(() => ({
@@ -32,35 +39,43 @@ const useStyles = makeStyles(() => ({
   desktopDrawer: {
     width: 280,
     top: 64,
-    height: 'calc(100% - 64px)',
+    height: "calc(100% - 64px)",
   },
   avatar: {
-    cursor: 'pointer',
+    cursor: "pointer",
     width: 64,
     height: 64,
   },
 }));
 
-const QuestionSideBar = ({ onMobileClose, openMobile }) => {
+const QuestionSideBar = ({ onMobileClose, openMobile, questions, setId }) => {
   const classes = useStyles();
+  const Dispatch = useDispatch();
+  const params = useParams();
+  // const quiz = useSelector(SchoolQuizSelector).find((quiz) => quiz.id === params.id)
+  // console.log(quiz)
 
-  const [questions, setQuestions] = useState([
-    { id: 1, title: 'Pregunta ' },
-    { id: 2, title: 'Pregunta ' },
-    { id: 3, title: 'Pregunta ' },
-    { id: 4, title: 'Pregunta ' },
-    { id: 5, title: 'Pregunta ' },
-    { id: 6, title: 'Pregunta ' },
-    { id: 7, title: 'Pregunta ' },
-    { id: 8, title: 'Pregunta ' },
-  ]);
+
 
   const handleAddQuestion = () => {
-    setQuestions((prevQ) => [...prevQ, { title: 'Nueva preg ' }]);
+    let Question = {};
+    Question.teachers = [1];
+    Question.SchoolId = 1;
+    Question.title = "Question";
+    Question.QuizId = params.id;
+    Question.question =
+      "Ej: Cual es la definicion de macrobiota (seleccionar todas las correctas)";
+    Dispatch(CreateQuestion(Question)).then(() => {
+      Dispatch(getAllQuestions(params.id));
+    });
   };
-  const handleQuestionDelete = (id) => {
 
-    setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
+  const handleQuestionDelete = (id) => {
+    Dispatch(deleteQuestion(id)).then(() => {
+      Dispatch(getAllQuestions(params.id));
+    });
+
+    // setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
   };
   return (
     <Box height="100%" display="flex" flexDirection="column">
@@ -75,16 +90,18 @@ const QuestionSideBar = ({ onMobileClose, openMobile }) => {
       </Box>
       <Divider />
       <Box p={2}>
-        <List component={'ol'}>
-          {questions.map((question, idx) => (
-            <QuestionItem
-              key={question.title}
-              title={`${idx + 1} ${question.title}`}
-              icon={BallotIcon}
-              handleQuestionDelete={handleQuestionDelete}
-              id={question.id}
-            />
-          ))}
+        <List component={"ol"}>
+          {questions &&
+            questions.map((question, idx) => (
+              <QuestionItem
+                key={question.title}
+                title={`${idx + 1} ${question.title}`}
+                icon={BallotIcon}
+                setId={setId}
+                handleQuestionDelete={handleQuestionDelete}
+                id={question.id}
+              />
+            ))}
         </List>
       </Box>
       <Box flexGrow={1} />

@@ -10,6 +10,8 @@ export const RESTORE_ENDPOINT = AUTH_ENDPOINT + '/restore';
 
 export const LOGIN_ENDPOINT = AUTH_ENDPOINT + '/login';
 
+export const LOGIN_ORG_ENDPOINT = AUTH_ENDPOINT + '/login/org';
+
 export const SCHOOL_REGISTER_ENDPOINT = BASE_ENDPOINT + '/org';
 
 export const USER_REGISTER_ENDPOINT = AUTH_ENDPOINT + '/register';
@@ -24,4 +26,7 @@ export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/auth/me/';
 
 export const QUIZ_INFO_ENDPOINT = QUIZ_ENDPOINT + '/info';
 
-export const FINAL_REGISTER_SCHOOL_ENDPOINT = AUTH_ENDPOINT + '/org/register'
+export const QUESTIONS_ENDPOINT =  BASE_ENDPOINT + '/questions';
+
+
+export const FINAL_REGISTER_SCHOOL_ENDPOINT = AUTH_ENDPOINT + '/org/register';

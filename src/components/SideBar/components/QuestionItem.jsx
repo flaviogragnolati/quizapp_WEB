@@ -43,6 +43,7 @@ const QuestionItem = ({
   title,
   handleQuestionDelete,
   id,
+  setId,
   ...rest
 }) => {
   const classes = useStyles();
@@ -54,7 +55,7 @@ const QuestionItem = ({
         disableGutters
         {...rest}
       >
-        <Button activeClassName={classes.active} className={classes.button}>
+        <Button activeClassName={classes.active} className={classes.button} onClick={() => setId(id)} >
           {Icon && <Icon className={classes.icon} size="20" />}
           <span className={classes.title}>{title}</span>
         </Button>

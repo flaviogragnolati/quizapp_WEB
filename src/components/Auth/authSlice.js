@@ -12,6 +12,8 @@ import {
   USER_REGISTER_ENDPOINT,
   RESTORE_ENDPOINT,
   LOGIN_ENDPOINT,
+  FINAL_REGISTER_SCHOOL_ENDPOINT,
+  LOGIN_ORG_ENDPOINT
 } from 'utils/endpoints';
 
 const initialState_Auth = {
@@ -48,7 +50,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const registerSchool = createAsyncThunk(
+/* export const registerSchool = createAsyncThunk(
   'school/register',
   async (payload, { dispatch }) => {
     const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
@@ -56,7 +58,7 @@ export const registerSchool = createAsyncThunk(
     dispatch(setToken(token));
     return user;
   }
-);
+); */
 
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
@@ -65,8 +67,20 @@ export const localLogin = createAsyncThunk(
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
     return user;
+
   }
 );
+
+export const localOrgLogin = createAsyncThunk(
+  'auth/localOrgLogin',
+  async (payload, { dispatch }) => {
+    const login_response = await axios.post(LOGIN_ORG_ENDPOINT, payload);
+    const { user, token } = login_response.data;
+    dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
+    return user;
+  }
+);
+
 
 export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
@@ -96,23 +110,49 @@ export const restoreSession = createAsyncThunk(
   }
 );
 
+export const contactSchool = createAsyncThunk(
+  "contact/contactSchool",
+  async (payload) => {
+    const SchoolContact = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
+    return SchoolContact;
+  }
+);
+
+export const finalRegisterSchool = createAsyncThunk("school/finalRegisterSchool",
+async (payload, { dispatch }) => {
+  const SchoolFinalRegister_response = await axios.post(FINAL_REGISTER_SCHOOL_ENDPOINT, payload);
+  const { user, token } = SchoolFinalRegister_response.data;
+  dispatch(setToken(token));
+  console.log('USER Y TOKEN ', user, token)
+  return user;
+});
+
 const isPendingAction = isPending(
   registerUser,
-  registerSchool,
+  //registerSchool,
   localLogin,
-  restoreSession
+  localOrgLogin,
+  restoreSession,
+  contactSchool,
+  finalRegisterSchool
 );
 const isFulfilledAction = isFulfilled(
   registerUser,
-  registerSchool,
+  //registerSchool,
   localLogin,
-  restoreSession
+  localOrgLogin,
+  restoreSession,
+  contactSchool,
+  finalRegisterSchool
 );
 const isRejectedAction = isRejected(
   registerUser,
-  registerSchool,
+  //registerSchool,
   localLogin,
-  restoreSession
+  localOrgLogin,
+  restoreSession,
+  contactSchool,
+  finalRegisterSchool
 );
 
 const authSlice = createSlice({

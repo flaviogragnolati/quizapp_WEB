@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Results = ({
   className,
-  customers,
+  customers =[],
   whidth,
   columnName,
   ButtonName,
@@ -71,7 +71,7 @@ const Results = ({
 
   const HandleClick = (e, name) => {
     if (name === "EDIT QUIZ") {
-      History.push("/question-loader");
+      History.push(`/question-loader/${e}`);
     }
     if (name === "Delate Subject") {
       dispatch(delateSubject(e));
@@ -123,7 +123,7 @@ const Results = ({
   return (
 
     <Card className={clsx(classes.root, className)} {...rest}>
-      {customers ? 
+      {customers[0] ? 
       <>
       <Box Width={whidth ? whidth : 1}>
         <Table size={"small"} className={customers ? 's' : null}>
@@ -146,7 +146,7 @@ const Results = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.slice(0, limit).map((customer) => (
+            {customers && customers.slice(0, limit).map((customer) => (
               <TableRow
                 hover
                 key={customer.id}
