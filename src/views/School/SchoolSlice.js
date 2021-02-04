@@ -6,8 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { status } from "utils/helpers";
 import axios from "axios";
-import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT } from "utils/endpoints";
-import { GET_USER_EMAIL_ENDPOINT } from "utils/endpoints";
+import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT, QUIZ_ENDPOINT, GET_USER_EMAIL_ENDPOINT } from "utils/endpoints";
 
 const initialState_School = {
   SchoolQuizList: {
@@ -41,8 +40,10 @@ export const getSubjectsList = createAsyncThunk(
 
 export const getUserEmail = createAsyncThunk(
   "School/GetUserEmail",
-  async (payload) => {
-    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT,payload);
+  async ({Id, email}) => {
+    console.log(Id, email)
+    console.log(GET_USER_EMAIL_ENDPOINT + Id)
+    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response ;
   }
 );
@@ -72,9 +73,16 @@ export const createSubject = createAsyncThunk(
 export const delateSubject = createAsyncThunk(
   "School/Delate_Subject",
   async (payload) => {
-    console.log('sdnodnp')
-    const Subject_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
-    return Subject_response.data;
+    const delete_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
+    return delete_response.data;
+  }
+);
+
+export const delateQuiz = createAsyncThunk(
+  "School/Delate_Quiz",
+  async (payload) => {
+    const delete_response = await axios.delete(QUIZ_ENDPOINT + "/" + payload);
+    return delete_response.data;
   }
 );
 
@@ -97,6 +105,7 @@ const isPendingAction = isPending(
   getSubjectsList,
   createSubject,
   delateSubject,
+  delateQuiz,
   editSubject,
   getUserEmail,
 );
@@ -106,6 +115,7 @@ const isRejectedAction = isRejected(
   getSubjectsList,
   createSubject,
   delateSubject,
+  delateQuiz,
   editSubject,
   getUserEmail,
 );
@@ -139,6 +149,14 @@ const SchoolSlice = createSlice({
       state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {
           return subject.id !== payload.id;
+        }
+      );
+    });
+    builder.addCase(delateQuiz.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.SchoolQuizList.QuizList = state.SchoolQuizList.QuizList.filter(
+        (quiz) => {
+          return quiz.id !== payload.id;
         }
       );
     });
