@@ -51,6 +51,7 @@ function QuestionInfo({ info, setMulti }) {
     setinfoQuestion(info)
   }, [info])
 
+  initialState_Info.title = infoQuestion.title
 
   const classes = useStyles();
   return (
