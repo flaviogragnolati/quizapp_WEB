@@ -36,6 +36,7 @@ export default function ComboFilter({
       action(values);
     }
   }, [filter, action, values]);
+
   return (
     <div className={classes.root}>
       <Autocomplete
