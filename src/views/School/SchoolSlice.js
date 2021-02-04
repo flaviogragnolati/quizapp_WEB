@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { status } from "utils/helpers";
 import axios from "axios";
-import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT } from "utils/endpoints";
+import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT, QUIZ_ENDPOINT } from "utils/endpoints";
 
 const initialState_School = {
   SchoolQuizList: {
@@ -60,8 +60,16 @@ export const createSubject = createAsyncThunk(
 export const delateSubject = createAsyncThunk(
   "School/Delate_Subject",
   async (payload) => {
-    const Subject_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
-    return Subject_response.data;
+    const delete_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
+    return delete_response.data;
+  }
+);
+
+export const delateQuiz = createAsyncThunk(
+  "School/Delate_Quiz",
+  async (payload) => {
+    const delete_response = await axios.delete(QUIZ_ENDPOINT + "/" + payload);
+    return delete_response.data;
   }
 );
 
@@ -84,6 +92,7 @@ const isPendingAction = isPending(
   getSubjectsList,
   createSubject,
   delateSubject,
+  delateQuiz,
   editSubject
 );
 
@@ -92,6 +101,7 @@ const isRejectedAction = isRejected(
   getSubjectsList,
   createSubject,
   delateSubject,
+  delateQuiz,
   editSubject
 );
 
@@ -120,6 +130,14 @@ const SchoolSlice = createSlice({
       state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {
           return subject.id !== payload.id;
+        }
+      );
+    });
+    builder.addCase(delateQuiz.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.SchoolQuizList.QuizList = state.SchoolQuizList.QuizList.filter(
+        (quiz) => {
+          return quiz.id !== payload.id;
         }
       );
     });

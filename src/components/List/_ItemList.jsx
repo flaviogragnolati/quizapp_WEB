@@ -18,7 +18,7 @@ import {
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
-import { delateSubject, editSubject } from "views/School/SchoolSlice";
+import { delateSubject, editSubject, delateQuiz } from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
 // import getInitials from 'src/utils/getInitials';
 
@@ -84,6 +84,12 @@ const Results = ({
         },
       });
     }
+
+    if (name === "Borrar Quiz") {
+      console.log(name)
+       dispatch(delateQuiz(e));
+    }
+    
   };
 
   const handleSelectOne = (event, id) => {
