@@ -9,7 +9,7 @@ import { initialState_Subjects } from "./quizLoderHelpers";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { SchoolSubjectSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
 import { editSubject } from "../SchoolSlice";
 
@@ -20,6 +20,7 @@ export default function SubjectLoader() {
   const datos = useParams();
   const subjects = useSelector(SchoolSubjectSelector)
   const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
+  const History= useHistory()
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -44,8 +45,10 @@ export default function SubjectLoader() {
     if (subjects !== undefined && datos.id) {
       values.id = datos.id
       dispatch(editSubject(values));
+      History.push('/school-subject')
     } else {
       dispatch(createSubject(values));
+      History.push('/school-subject')
     }
   };
   

@@ -67,7 +67,7 @@ function ModalTeacher({title, content,open, setOpen}) {
                 // defaultValue={infoQuestion.description}
                 variant="outlined"
               />
-              {UserDetail.id && 
+              {/* {UserDetail.id && 
                 <TextField
                 noBorder
                 name="Usuario"
@@ -75,7 +75,7 @@ function ModalTeacher({title, content,open, setOpen}) {
                 value={UserDetail.name}
                 // onChange={handleChange}
               />
-              }
+              } */}
               <Button color="primary" variant="contained" type="submit">
                 Buscar Usuario
               </Button>
