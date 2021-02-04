@@ -25,7 +25,7 @@ const SchoolQuiz = () => {
 
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH', ' EDIT'];
-  let ButtonName = ['TRASH', 'EDIT QUIZ'];
+  let ButtonName = ['Borrar Quiz', 'EDIT QUIZ'];
 
   useEffect(() => {
     dispatch(getQuizList());

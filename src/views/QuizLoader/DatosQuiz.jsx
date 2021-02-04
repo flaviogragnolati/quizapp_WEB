@@ -80,12 +80,9 @@ export default function DatosQuiz() {
   const handleSubmit = (values, formik) => {
     values.SubjectId = personName
     Dispatch(CreateQuiz(values));
-    // aca despachar la accion a la api
-    // return localStorage.removeItem('form')
   };
-  
+
     useEffect(()=>{
-        
         Dispatch(getSubjectsList())
     },[])
     
