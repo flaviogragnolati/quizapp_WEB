@@ -33,3 +33,5 @@ export const FINAL_REGISTER_SCHOOL_ENDPOINT = AUTH_ENDPOINT + '/org/register';
 export const GET_USER_EMAIL_ENDPOINT = BASE_ENDPOINT + '/users/email/';
 
 export const TEACHER_ENDPOINT = BASE_ENDPOINT + '/teachers/';
+
+export const ENROLLS_ENDPOINT = BASE_ENDPOINT + '/roles/enrolled/';

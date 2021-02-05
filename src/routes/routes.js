@@ -16,7 +16,8 @@ import QuestionLoader from 'views/QuestionLoader';
 import DatosQuiz from 'views/QuizLoader/DatosQuiz';
 import SubjectLoader from 'views/School/SubjectLoader';
 import LoginSchool from 'views/Login/LoginSchool';
-
+import QuizTeacher from 'views/Teacher/QuizTeacher';
+import EnrollTeacher from "views/Teacher/EnrollTeacher";
 
 
 export const routes = [
@@ -36,6 +37,8 @@ export const routes = [
   { path: '/school-subject', component: SchoolSubject, access: 'guest' },
   { path: '/school-teacher', component: SchoolTeacher, access: 'guest' },
   { path: '/school-quiz', component: SchoolQuiz, access: 'guest' },
+  { path: '/quiz-list', component: QuizTeacher, access: 'guest' },
+  { path: '/enroll-list/:id', component: EnrollTeacher, access: 'guest' },
   { path: '/404', component: NotFound, access: 'guest' },
 ];
 

@@ -60,6 +60,7 @@ const Results = ({
   whidth,
   columnName,
   ButtonName,
+  User,
   ...rest
 }) => {
 
@@ -89,12 +90,13 @@ const Results = ({
     } else {
       newSelectedCustomerIds = [];
     }
-
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
+  // console.log(User)
   const HandleClick = (e, name) => {
-    if (name === "EDIT QUIZ") {
+    console.log(e,name)
+    if (name === "Editar Preguntas") {
       History.push(`/question-loader/${e}`);
     }
     if (name === "Delate Subject") {
@@ -111,14 +113,12 @@ const Results = ({
     if (name === "Borrar Quiz") {
        dispatch(delateQuiz(e));
     }
-    console.log('NOMBRE BOTON',name)
     if (name === "TEACHER") {
       setOpen(true);
       setQuizId(e)
     }
-    if (name === "Borrar Quiz") {
-      console.log(name)
-       dispatch(delateQuiz(e));
+    if (name === "Enrolar") {
+      History.push(`/enroll-list/${e}`);
     }
   };
 

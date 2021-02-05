@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // import { Link } from 'react-router-dom';
 //?Material UI
 import {
@@ -8,20 +8,20 @@ import {
   Box,
   IconButton,
   Typography,
-} from '@material-ui/core';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import HomeIcon from '@material-ui/icons/Home';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import CloseIcon from '@material-ui/icons/Close';
-import styled from 'styled-components';
+} from "@material-ui/core";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import HomeIcon from "@material-ui/icons/Home";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import CloseIcon from "@material-ui/icons/Close";
+import styled from "styled-components";
 //?Custom Styles and Context
-import { SideBarContext } from '../../App';
-import SidebarItem from './components/SidebarItem';
-import { ACTIONS } from 'store/rootReducer';
-import { useDispatch } from 'react-redux';
-import { useAuth } from 'components/Auth/AuthContext';
+import { SideBarContext } from "../../App";
+import SidebarItem from "./components/SidebarItem";
+import { ACTIONS } from "store/rootReducer";
+import { useDispatch } from "react-redux";
+import { useAuth } from "components/Auth/AuthContext";
 
 const HeaderBox = styled(Box)`
   display: flex;
@@ -44,7 +44,6 @@ function SideBar() {
   const user = useAuth();
 
   const handleLogout = () => {
-
     Dispatch(ACTIONS.auth.logout());
   };
 
@@ -65,10 +64,10 @@ function SideBar() {
         <SidebarItem
           label="Teacher Account"
           link={{
-            pathname: '/profile/1',
+            pathname: "/profile/1",
             state: {
               owner: true,
-              role: 'teacher',
+              role: "teacher",
             },
           }}
           icon={<AccountBoxIcon />}
@@ -76,10 +75,10 @@ function SideBar() {
         <SidebarItem
           label="Student Account"
           link={{
-            pathname: '/profile/1',
+            pathname: "/profile/1",
             state: {
               owner: true,
-              role: 'student',
+              role: "student",
             },
           }}
           icon={<AccountBoxIcon />}
@@ -91,50 +90,60 @@ function SideBar() {
           link="/catalogue"
           icon={<LocalLibraryIcon />}
         />
-   {Boolean(user) ? (  <div>
-      <SidebarItem
-          label="Create Quiz"
-          link="/quiz-loader"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Quizes de la Escuela"
-          link="/school-quiz"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Teacher de Escuela"
-          link="/school-teacher"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Materias de Escuela"
-          link="/school-subject"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Cargar materias"
-          link="/subject-loader"
-          icon={<FormatListNumberedIcon />}
-        />
-        <SidebarItem
-          label="Cargar Quiz"
-          link="/quiz-loader"
-          icon={<FormatListNumberedIcon />}
-        /></div>) : (null)}
+        {Boolean(user) ? (
+          <div>
+            <SidebarItem
+              label="Create Quiz"
+              link="/quiz-loader"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Quizes de la Escuela"
+              link="/school-quiz"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Teacher de Escuela"
+              link="/school-teacher"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Materias de Escuela"
+              link="/school-subject"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Cargar materias"
+              link="/subject-loader"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Lista Quiz Teacher"
+              link="/quiz-list"
+              icon={<FormatListNumberedIcon />}
+            />
+            <SidebarItem
+              label="Cargar Quiz"
+              link="/quiz-loader"
+              icon={<FormatListNumberedIcon />}
+            />
+          </div>
+        ) : null}
         <Divider />
-        {Boolean(user) ? ( <div onClick={handleLogout}>
-          <SidebarItem label="Logout" link="/" icon={<ExitToAppIcon />} />
-        </div> ) :(null)}
+        {Boolean(user) ? (
+          <div onClick={handleLogout}>
+            <SidebarItem label="Logout" link="/" icon={<ExitToAppIcon />} />
+          </div>
+        ) : null}
       </List>
     </SidebarContainer>
   );
 
   return (
     <div>
-      <React.Fragment key={'left'}>
+      <React.Fragment key={"left"}>
         <Drawer
-          anchor={'left'}
+          anchor={"left"}
           open={openSidebar}
           onClose={() => toggleSideBar()}
         >
