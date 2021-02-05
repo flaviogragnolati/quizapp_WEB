@@ -4,15 +4,26 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { Field, Form, Formik } from "formik";
-import { Button, Card, Grid, TextField } from "@material-ui/core";
+import { Button, Card, Grid, IconButton, TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector, UserDetailStatusSelector } from "utils/selectors";
-import { getUserEmail, cleanUser, postUserToTeacher } from "views/School/SchoolSlice";
+import {
+  UserDetailSelector,
+  UserDetailStatusSelector,
+  UserRoleSelector,
+} from "utils/selectors";
+import {
+  getUserEmail,
+  cleanUser,
+  postUserToTeacher,
+  removeTeacher,
+} from "views/School/SchoolSlice";
 import { Alert } from "@material-ui/lab";
 import Typography from "components/Home_MUI/Typography";
 import { ACTIONS } from "store/rootReducer";
-
-
+import SearchUser from "components/List/Modal/Components/SearchUser";
+import PromoteToTeacher from "components/List/Modal/Components/PromoteToTeacher";
+import RemoveFromTeacher from "components/List/Modal/Components/RemoveFromTeacher";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -26,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "30vh",
     minHeight: "30vh",
     alignItems: "center",
-    justifyContent: "center",
     display: "flex",
     flexDirection: "column",
     border: "3px solid black",
@@ -45,6 +55,12 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: "1vh",
   },
+  closeIcon: {
+    width: '100%',
+    textAlign: 'end',
+    padding: '2px',
+  },
+
   // paper: {
   //   backgroundColor: theme.palette.background.paper,
   //   border: "2px solid #000",
@@ -57,24 +73,31 @@ function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
   const UserDetail = useSelector(UserDetailSelector);
+  const role = useSelector(UserRoleSelector);
   const status = useSelector(UserDetailStatusSelector);
   // const handleOpen = () => {
   //   setOpen(true);
   // };
 
   const handleClose = () => {
-    Dispatch(cleanUser())
-    // Dispatch(ACTIONS.School.cleanUser())
     setOpen(false);
+    Dispatch(cleanUser());
+    // Dispatch(ACTIONS.School.cleanUser())
   };
   const handleSubmit = (values) => {
-    if (status === "idle" ||  status === "error") {
-    values.Id = Id;
-    Dispatch(getUserEmail(values))
-    } if (status === "success") {
-      Dispatch(postUserToTeacher({quizzId: Id, teacherId: UserDetail.id}))
+    if (status === "idle" || status === "error") {
+      values.Id = Id;
+      Dispatch(getUserEmail(values));
     }
-
+    if (
+      (status === "success" && !role) ||
+      (status === "success" && role && !role.name === "Teacher")
+    ) {
+      Dispatch(postUserToTeacher({ QuizId: Id, UserId: UserDetail.id }));
+    }
+    if (status === "success" && role && role.name === "Teacher") {
+      Dispatch(removeTeacher({ QuizId: Id, UserId: UserDetail.id }));
+    }
   };
   return (
     <Modal
@@ -82,7 +105,6 @@ function ModalTeacher({ Id, open, setOpen }) {
       aria-describedby="transition-modal-description"
       className={classes.modal}
       open={open}
-      onClose={handleClose}
       BackdropComponent={Backdrop}
       BackdropProps={{}}
     >
@@ -91,54 +113,20 @@ function ModalTeacher({ Id, open, setOpen }) {
           {(formik) => (
             <Form Style="display: contents;">
               <Card className={classes.root}>
-                {status === "error" ? (
-                  <Alert className={classes.alert} severity="error">
-                    No existe usuario con ese mail.
-                  </Alert>
+                <div className={classes.closeIcon}  >
+                  <IconButton  onClick={handleClose}>
+                  <CancelPresentationIcon />
+                  </IconButton >
+                </div>
+                <div>
+                {status === "idle" || status === "error" ? (
+                  <SearchUser />
+                ) : status === "success" && role && role.name === "Teacher" ? (
+                  <RemoveFromTeacher />
                 ) : status === "success" ? (
-                  <Grid className={classes.user_data} xs={12}>
-                    <img className={classes.photo} src={UserDetail.photo} />
-                    <Typography variant="button" display="block">
-                      {`${UserDetail.firstName} ${UserDetail.lastName}`}
-                    </Typography>
-                    <Typography variant="button" display="block">
-                      {UserDetail.birthdate}
-                    </Typography>
-                  </Grid>
+                  <PromoteToTeacher />
                 ) : null}
-                <Grid xs={12}>
-                  <Field
-                    className={classes.field}
-                    placeholder="Email del Usuario"
-                    name="email"
-                    required
-                    // defaultValue={infoQuestion.description}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid xs={12}>
-                  {status === "success" ? (
-                    <Grid xs={12}>
-                      <Button
-                        className={classes.button}
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                      >
-                        Promover a profesor
-                      </Button>
-                    </Grid>
-                  ) : status === "idle" ||  status === "error" ? (
-                    <Button
-                      className={classes.button}
-                      color="primary"
-                      variant="contained"
-                      type="submit"
-                    >
-                      Buscar Usuario
-                    </Button>
-                  ) : null}
-                </Grid>
+                </div>
               </Card>
             </Form>
           )}

@@ -20,6 +20,7 @@ const initialState_School = {
   },
   UserDetail:{
     data: {},
+    role: {},
     status: 'idle',
   }
 };
@@ -69,8 +70,8 @@ export const createSubject = createAsyncThunk(
 
 export const postUserToTeacher = createAsyncThunk(
   "School/UserToTeacher",
-  async ({quizzId, teacherId}) => {
-    const User_Email_response = await axios.post(TEACHER_ENDPOINT, {quizzId , teacherId});
+  async ({QuizId, UserId}) => {
+    const User_Email_response = await axios.post(TEACHER_ENDPOINT, {QuizId , UserId});
     return User_Email_response.data ;
   }
 );
@@ -89,6 +90,14 @@ export const delateQuiz = createAsyncThunk(
   "School/Delate_Quiz",
   async (payload) => {
     const delete_response = await axios.delete(QUIZ_ENDPOINT + "/" + payload);
+    return delete_response.data;
+  }
+);
+
+export const removeTeacher = createAsyncThunk(
+  "School/Remove_Teacher",
+  async ({QuizId , UserId}) => {
+    const delete_response = await axios.delete(TEACHER_ENDPOINT + '?UserId=' + UserId + '&&QuizId=' + QuizId);
     return delete_response.data;
   }
 );
@@ -125,6 +134,18 @@ const isRejectedAction = isRejected(
   editSubject,
 );
 
+const isPendingActionDetail = isPending(
+  getUserEmail,
+  postUserToTeacher,
+  removeTeacher,
+);
+
+const isRejectedActionDetail = isRejected(
+  getUserEmail,
+  postUserToTeacher,
+  removeTeacher,
+);
+
 const SchoolSlice = createSlice({
   name: "school",
   initialState: initialState_School,
@@ -152,22 +173,12 @@ const SchoolSlice = createSlice({
       state.UserDetail.data = payload;  
       state.UserDetail.status = status.error;
     });
-    builder.addCase(getUserEmail.pending, (state, { payload }) => {
-      state.UserDetail.status = status.success.pending;
-    });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
     builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
       state.UserDetail.status = status.success;
       state.UserDetail.role = payload
-    });
-    builder.addCase(postUserToTeacher.rejected, (state, { payload }) => {
-      state.UserDetail.status = status.error;
-      state.UserDetail.data = payload
-    });
-    builder.addCase(postUserToTeacher.pending, (state, { payload }) => {
-      state.UserDetail.status = status.pending;
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
@@ -185,6 +196,11 @@ const SchoolSlice = createSlice({
         }
       );
     });
+    builder.addCase(removeTeacher.fulfilled, (state, { payload }) => {
+      state.UserDetail.status = status.idle;
+      state.UserDetail.data = {}
+      state.UserDetail.role = {}
+    });
     builder.addCase(editSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
@@ -197,6 +213,13 @@ const SchoolSlice = createSlice({
     builder.addMatcher(isRejectedAction, (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
+    });
+    builder.addMatcher(isPendingActionDetail, (state, { payload }) => {
+      state.UserDetail.status = status.pending;
+    });
+    builder.addMatcher(isRejectedActionDetail, (state, { payload }) => {
+      state.UserDetail.status = status.error;
+      state.UserDetail.data = payload
     });
   },
 });
