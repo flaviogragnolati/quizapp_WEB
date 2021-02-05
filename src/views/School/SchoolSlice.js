@@ -40,8 +40,10 @@ export const getSubjectsList = createAsyncThunk(
 
 export const getUserEmail = createAsyncThunk(
   "School/GetUserEmail",
-  async (payload) => {
-    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT,payload);
+  async ({Id, email}) => {
+    console.log(Id, email)
+    console.log(GET_USER_EMAIL_ENDPOINT + Id)
+    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response ;
   }
 );

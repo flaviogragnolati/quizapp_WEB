@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+<<<<<<< HEAD
 
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
@@ -48,12 +49,29 @@ function ModalTeacher({ Id, open, setOpen }) {
   //   setOpen(true);
   // };
 
+=======
+
+function ModalTeacher({ Id, open, setOpen }) {
+  const classes = useStyles();
+  const Dispatch = useDispatch();
+  const UserDetail = useSelector(UserDetailSelector);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
+>>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
   const handleClose = () => {
     setOpen(false);
   };
   const handleSubmit = (values) => {
+<<<<<<< HEAD
     values.id = Id
     // Dispatch(getUserEmail(values))
+=======
+    values.Id = Id
+    console.log('tu', values)
+    Dispatch(getUserEmail(values))
+>>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
   };
   return (
     <Modal
@@ -79,7 +97,11 @@ function ModalTeacher({ Id, open, setOpen }) {
                   className={classes.field}
                   placeholder="Email del Usuario"
                   name="email"
+<<<<<<< HEAD
                   required
+=======
+
+>>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
                   // defaultValue={infoQuestion.description}
                   variant="outlined"
                 />
@@ -98,4 +120,8 @@ function ModalTeacher({ Id, open, setOpen }) {
   );
 }
 
+<<<<<<< HEAD
 export default ModalTeacher;
+=======
+export default ModalTeacher;
+>>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34

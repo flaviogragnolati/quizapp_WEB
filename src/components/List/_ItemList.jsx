@@ -24,6 +24,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import ModalTeacher from "./Modal";
+import { delateQuiz } from "views/School/SchoolSlice";
 // import getInitials from 'src/utils/getInitials';
 
 
@@ -72,12 +73,15 @@ const Results = ({
     setOpen(true);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [columna, setColumna] = useState(false);
+  const [QuizId, setQuizId] = useState(0);
   const History = useHistory();
   const dispatch = useDispatch();
 
@@ -114,6 +118,11 @@ const Results = ({
     console.log('NOMBRE BOTON',name)
     if (name === "TEACHER") {
       setOpen(true);
+      setQuizId(e)
+    }
+    if (name === "Borrar Quiz") {
+      console.log(name)
+       dispatch(delateQuiz(e));
     }
   };
 
@@ -270,7 +279,7 @@ const Results = ({
         rowsPerPageOptions={[5, 10, 25]}
       /> 
       </>: null}
-      <ModalTeacher title={'prueba'} content={'contenido'} open={open} setOpen={setOpen}></ModalTeacher>
+      <ModalTeacher Id={QuizId} open={open} setOpen={setOpen}></ModalTeacher>
     </Card>
   );
 };
