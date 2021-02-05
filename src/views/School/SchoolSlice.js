@@ -16,10 +16,11 @@ const initialState_School = {
   SchoolSubjectList: {
     error: null,
     SubjectList: [],
-    SubjectDetail: {},
+    // SubjectDetail: {},
   },
   UserDetail:{
-
+    data: {},
+    status: 'idle',
   }
 };
 
@@ -41,10 +42,9 @@ export const getSubjectsList = createAsyncThunk(
 export const getUserEmail = createAsyncThunk(
   "School/GetUserEmail",
   async ({Id, email}) => {
-    console.log(Id, email)
-    console.log(GET_USER_EMAIL_ENDPOINT + Id)
-    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
-    return User_Email_response ;
+
+    const User_Email_response = await axios.post(GET_USER_EMAIL_ENDPOINT + Id, {email});
+    return User_Email_response.data ;
   }
 );
 
@@ -107,7 +107,6 @@ const isPendingAction = isPending(
   delateSubject,
   delateQuiz,
   editSubject,
-  getUserEmail,
 );
 
 const isRejectedAction = isRejected(
@@ -117,7 +116,6 @@ const isRejectedAction = isRejected(
   delateSubject,
   delateQuiz,
   editSubject,
-  getUserEmail,
 );
 
 const SchoolSlice = createSlice({
@@ -134,13 +132,18 @@ const SchoolSlice = createSlice({
       state.SchoolSubjectList.SubjectList = payload;
     });
     builder.addCase(getUserEmail.fulfilled, (state, { payload }) => {
-      state.status = status.success;
-      state.UserDetail = payload;
+      let userInfo=payload.user
+      userInfo.role = payload.role
+      state.UserDetail.data = userInfo;  
+      state.UserDetail.status = status.success;
     });
-    // builder.addCase(getSubjectsDetail.fulfilled, (state, { payload }) => {
-    //   state.status = status.success;
-    //   state.SchoolSubjectList.SubjectDetail = payload;
-    // });
+    builder.addCase(getUserEmail.rejected, (state, { payload }) => {
+      state.UserDetail.data = payload;  
+      state.UserDetail.status = status.error;
+    });
+    builder.addCase(getUserEmail.pending, (state, { payload }) => {
+      state.UserDetail.status = status.success.pending;
+    });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });

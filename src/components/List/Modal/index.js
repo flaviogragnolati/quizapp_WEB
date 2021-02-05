@@ -6,15 +6,18 @@ import Fade from "@material-ui/core/Fade";
 import { Field, Form, Formik } from "formik";
 import { Button, Card, Grid, TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector } from "utils/selectors";
+import { UserDetailSelector, UserDetailStatusSelector } from "utils/selectors";
 import { getUserEmail } from "views/School/SchoolSlice";
+import { Alert } from "@material-ui/lab";
+import Typography from "components/Home_MUI/Typography";
 
 const useStyles = makeStyles((theme) => ({
   field: {
     padding: "20px",
     fontSize: "16px",
     borderRadius: "3px",
-    margin: "10px",
+    margin: "15px",
+    minWidth: "25vh",
   },
   root: {
     minWidth: "30vh",
@@ -30,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  photo: {
+    maxHeight: "20vh",
+  },
+  user_data: {
+    margin: "3vh 3vh 0vh 3vh",
+  },
+  button: {
+    margin: "1vh",
+  },
   // paper: {
   //   backgroundColor: theme.palette.background.paper,
   //   border: "2px solid #000",
@@ -38,41 +50,23 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-
-<<<<<<< HEAD
-
-function ModalTeacher({ Id, open, setOpen }) {
-  const classes = useStyles();
-  const Dispatch = useDispatch();
-  // const UserDetail = useSelector(UserDetailSelector);
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-=======
-
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
   const UserDetail = useSelector(UserDetailSelector);
+  const status = useSelector(UserDetailStatusSelector);
   // const handleOpen = () => {
   //   setOpen(true);
   // };
 
->>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
   const handleClose = () => {
     setOpen(false);
   };
   const handleSubmit = (values) => {
-<<<<<<< HEAD
-    values.id = Id
-    // Dispatch(getUserEmail(values))
-=======
-    values.Id = Id
-    console.log('tu', values)
-    Dispatch(getUserEmail(values))
->>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
+    values.Id = Id;
+    Dispatch(getUserEmail(values));
   };
+  console.log(UserDetail.firstName);
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -84,33 +78,58 @@ function ModalTeacher({ Id, open, setOpen }) {
       BackdropProps={{}}
     >
       <Fade in={open}>
-        {/* <div className={classes.paper}>
-            <h2 id="transition-modal-title">{title}</h2>
-            <p id="transition-modal-description">{content}</p>
-          </div> */}
-        <Formik onSubmit={handleSubmit}  initialValues={{ email: '' }}>
+        <Formik onSubmit={handleSubmit} initialValues={{ email: "" }}>
           {(formik) => (
             <Form Style="display: contents;">
               <Card className={classes.root}>
-              <Grid xs={12}>
-                <Field
-                  className={classes.field}
-                  placeholder="Email del Usuario"
-                  name="email"
-<<<<<<< HEAD
-                  required
-=======
-
->>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
-                  // defaultValue={infoQuestion.description}
-                  variant="outlined"
-                />
+                {status === "error" ? (
+                  <Alert className={classes.alert} severity="error">
+                    No se encontro el Email.
+                  </Alert>
+                ) : status === "success" ? (
+                  <Grid className={classes.user_data} xs={12}>
+                    <img className={classes.photo} src={UserDetail.photo} />
+                    <Typography variant="button" display="block">
+                      {`${UserDetail.firstName} ${UserDetail.lastName}`}
+                    </Typography>
+                    <Typography variant="button" display="block">
+                      {UserDetail.birthdate}
+                    </Typography>
+                  </Grid>
+                ) : null}
+                <Grid xs={12}>
+                  <Field
+                    className={classes.field}
+                    placeholder="Email del Usuario"
+                    name="email"
+                    required
+                    // defaultValue={infoQuestion.description}
+                    variant="outlined"
+                  />
                 </Grid>
-                              <Grid xs={12}>
-                <Button color="primary" variant="contained" type="submit">
-                  Buscar Usuario
-                </Button>
-              </Grid>
+                <Grid xs={12}>
+                  {status === "success" ? (
+                    <Grid xs={12}>
+                      <Button
+                        className={classes.button}
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                      >
+                        Promover a profesor
+                      </Button>
+                    </Grid>
+                  ) : status === "idle" ? (
+                    <Button
+                      className={classes.button}
+                      color="primary"
+                      variant="contained"
+                      type="submit"
+                    >
+                      Buscar Usuario
+                    </Button>
+                  ) : null}
+                </Grid>
               </Card>
             </Form>
           )}
@@ -120,8 +139,4 @@ function ModalTeacher({ Id, open, setOpen }) {
   );
 }
 
-<<<<<<< HEAD
 export default ModalTeacher;
-=======
-export default ModalTeacher;
->>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34

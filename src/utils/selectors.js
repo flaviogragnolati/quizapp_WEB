@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
 //General or Global selectors
 export const notificationSelector = (state) => state.notifications.list;
@@ -80,19 +80,19 @@ export const ProfileSelector = (state) => state.Profile.data;
 export const ProfileStatusSelector = (state) => state.Profile.status;
 
 //School selectors
-export const SchoolQuizSelector = (state) =>
-  state.School.SchoolQuizList.QuizList;
+
+// export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
+export const SchoolQuizSelector = (state) =>state.School.SchoolQuizList.QuizList;
 export const SchoolQuizStatusSelector = (state) => state.School.status;
-export const SchoolSubjectDetailSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectDetail;
-export const SchoolSubjectSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectSelector = (state) =>state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectStatusSelector = (state) => state.School.status;
+export const UserDetailSelector = (state) =>state.School.UserDetail.data;
+export const UserDetailStatusSelector = (state) => state.School.UserDetail.status;
+
+
 
 //Quiz selector
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
 export const QuestionsStatusSelector = (state) => state.status;
 
-//teacher
 
-export const UserDetailSelector = (state) => state.UserDetail

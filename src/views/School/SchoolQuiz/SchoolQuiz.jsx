@@ -24,15 +24,8 @@ const SchoolQuiz = () => {
   const status = useSelector(SchoolQuizStatusSelector);
 
   const classes = useStyles();
-<<<<<<< HEAD
-  let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH', ' EDIT', 'TEACHER'];
-  let ButtonName = ['Borrar Quiz', 'EDIT QUIZ', 'TEACHER'];
-=======
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH', ' EDIT','TEACHER'];
   let ButtonName = ['Borrar Quiz', 'EDIT QUIZ','TEACHER'];
- 
-
->>>>>>> 684361c98f90b7acef4eacbd733febe6ffb57a34
 
   useEffect(() => {
     dispatch(getQuizList());

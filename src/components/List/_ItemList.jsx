@@ -20,11 +20,7 @@ import Button from "components/Home_MUI/Button";
 import { Link, useHistory } from "react-router-dom";
 import { delateSubject, editSubject, delateQuiz } from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import ModalTeacher from "./Modal";
-import { delateQuiz } from "views/School/SchoolSlice";
 // import getInitials from 'src/utils/getInitials';
 
 
