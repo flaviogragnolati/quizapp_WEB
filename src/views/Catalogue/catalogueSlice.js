@@ -14,7 +14,10 @@ const initialState_Catalogue = {
 export const getCatalogue = createAsyncThunk(
   'catalogue/getCatalogue',
   async (payload, thunkApi) => {
-    const catalogue_response = await axios.get(QUIZ_ENDPOINT);
+    const { page, pageSize } = payload;
+    const catalogue_response = await axios.get(QUIZ_ENDPOINT, {
+      params: { page, pageSize },
+    });
     return catalogue_response.data;
   },
   {

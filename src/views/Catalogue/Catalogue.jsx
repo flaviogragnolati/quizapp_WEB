@@ -26,7 +26,7 @@ const CatalogueSection = styled.section`
   background-color: ${(p) => p.theme.palette.background.default};
 `;
 
-const qtyToDisplay = 6; //variable para definir la cantidad de `quiz cards` que se muestran por pagina del catalogo
+const pageSize = 6; //variable para definir la cantidad de `quiz cards` que se muestran por pagina del catalogo
 
 const Catalogue = () => {
   const dispatch = useDispatch();
@@ -47,9 +47,10 @@ const Catalogue = () => {
 
   useEffect(() => {
     if (catStatus === 'idle') {
-      dispatch(getCatalogue());
+      const params = { page, pageSize };
+      dispatch(getCatalogue(params));
     }
-  }, [catStatus, dispatch]);
+  }, [catStatus, dispatch, page]);
   let content;
 
   if (catStatus === 'pending') {
@@ -59,10 +60,7 @@ const Catalogue = () => {
       content = <h3>No hay cursos que se ajusten a ese criterio</h3>;
     } else {
       content = quizList
-        .slice(
-          (page - 1) * qtyToDisplay,
-          (page - 1) * qtyToDisplay + qtyToDisplay
-        )
+        .slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
         .map((quizId, idx) => (
           <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
             <QuizCard
@@ -103,7 +101,7 @@ const Catalogue = () => {
                 size="large"
                 showFirstButton
                 showLastButton
-                count={Math.ceil(quizList.length / qtyToDisplay)}
+                count={Math.ceil(quizList.length / pageSize)}
                 page={page}
                 onChange={handleChange}
               />
