@@ -89,7 +89,6 @@ const Results = ({
     } else {
       newSelectedCustomerIds = [];
     }
-
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
