@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { status } from "utils/helpers";
 import axios from "axios";
-import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT, QUIZ_ENDPOINT, GET_USER_EMAIL_ENDPOINT } from "utils/endpoints";
+import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT, QUIZ_ENDPOINT, GET_USER_EMAIL_ENDPOINT, TEACHER_ENDPOINT } from "utils/endpoints";
 
 const initialState_School = {
   SchoolQuizList: {
@@ -40,10 +40,9 @@ export const getSubjectsList = createAsyncThunk(
 );
 
 export const getUserEmail = createAsyncThunk(
-  "School/GetUserEmail",
+  "School/getUserDetail",
   async ({Id, email}) => {
-
-    const User_Email_response = await axios.post(GET_USER_EMAIL_ENDPOINT + Id, {email});
+    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response.data ;
   }
 );
@@ -65,6 +64,14 @@ export const createSubject = createAsyncThunk(
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
     const { subject } = Subject_response;
     return subject;
+  }
+);
+
+export const postUserToTeacher = createAsyncThunk(
+  "School/UserToTeacher",
+  async ({quizzId, teacherId}) => {
+    const User_Email_response = await axios.post(TEACHER_ENDPOINT, {quizzId , teacherId});
+    return User_Email_response.data ;
   }
 );
 
@@ -121,7 +128,12 @@ const isRejectedAction = isRejected(
 const SchoolSlice = createSlice({
   name: "school",
   initialState: initialState_School,
-  reducers: {},
+  reducers: {
+    cleanUser: (state, { payload }) => {
+      state.UserDetail.status = status.idle;
+      state.UserDetail.data = {}
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
       state.status = status.success;
@@ -132,9 +144,8 @@ const SchoolSlice = createSlice({
       state.SchoolSubjectList.SubjectList = payload;
     });
     builder.addCase(getUserEmail.fulfilled, (state, { payload }) => {
-      let userInfo=payload.user
-      userInfo.role = payload.role
-      state.UserDetail.data = userInfo;  
+      state.UserDetail.role = payload.role
+      state.UserDetail.data = payload.user;  
       state.UserDetail.status = status.success;
     });
     builder.addCase(getUserEmail.rejected, (state, { payload }) => {
@@ -146,6 +157,17 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
+    });
+    builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
+      state.UserDetail.status = status.success;
+      state.UserDetail.role = payload
+    });
+    builder.addCase(postUserToTeacher.rejected, (state, { payload }) => {
+      state.UserDetail.status = status.error;
+      state.UserDetail.data = payload
+    });
+    builder.addCase(postUserToTeacher.pending, (state, { payload }) => {
+      state.UserDetail.status = status.pending;
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
@@ -178,5 +200,7 @@ const SchoolSlice = createSlice({
     });
   },
 });
+
+export const { cleanUser } = SchoolSlice.actions
 
 export default SchoolSlice;

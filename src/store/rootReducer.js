@@ -20,7 +20,6 @@ const rootReducer = {
   QuizLoader: QuizLoaderSlice.reducer,
   Profile: UserProfileSlice.reducer,
   School: SchoolSlice.reducer,
-
   quizDetail: quizDetailSlice.reducer,
 };
 
@@ -33,4 +32,5 @@ export const ACTIONS = {
   auth: { ...authSlice.actions },
   catalogue: { ...catalogueSlice.actions },
   quizDetail: { ...quizDetailSlice.actions },
+  School: { ...SchoolSlice.actions },
 };

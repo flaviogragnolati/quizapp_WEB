@@ -1,3 +1,4 @@
+import React from 'react'
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -12,85 +13,51 @@ import { Alert } from "@material-ui/lab";
 import Typography from "components/Home_MUI/Typography";
 import { ACTIONS } from "store/rootReducer";
 
-
-
 const useStyles = makeStyles((theme) => ({
-  field: {
-    padding: "20px",
-    fontSize: "16px",
-    borderRadius: "3px",
-    margin: "15px",
-    minWidth: "25vh",
-  },
-  root: {
-    minWidth: "30vh",
-    minHeight: "30vh",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    flexDirection: "column",
-    border: "3px solid black",
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  photo: {
-    maxHeight: "20vh",
-  },
-  user_data: {
-    margin: "3vh 3vh 0vh 3vh",
-  },
-  button: {
-    margin: "1vh",
-  },
-  // paper: {
-  //   backgroundColor: theme.palette.background.paper,
-  //   border: "2px solid #000",
-  //   boxShadow: theme.shadows[5],
-  //   padding: theme.spacing(2, 4, 3),
-  // },
-}));
+    field: {
+      padding: "20px",
+      fontSize: "16px",
+      borderRadius: "3px",
+      margin: "15px",
+      minWidth: "25vh",
+    },
+    root: {
+      minWidth: "30vh",
+      minHeight: "30vh",
+      alignItems: "center",
+      justifyContent: "center",
+      display: "flex",
+      flexDirection: "column",
+      border: "3px solid black",
+    },
+    modal: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    photo: {
+      maxHeight: "20vh",
+    },
+    user_data: {
+      margin: "3vh 3vh 0vh 3vh",
+    },
+    button: {
+      margin: "1vh",
+    },
+    // paper: {
+    //   backgroundColor: theme.palette.background.paper,
+    //   border: "2px solid #000",
+    //   boxShadow: theme.shadows[5],
+    //   padding: theme.spacing(2, 4, 3),
+    // },
+  }));
 
-function ModalTeacher({ Id, open, setOpen }) {
-  const classes = useStyles();
-  const Dispatch = useDispatch();
-  const UserDetail = useSelector(UserDetailSelector);
-  const status = useSelector(UserDetailStatusSelector);
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  const handleClose = () => {
-    Dispatch(cleanUser())
-    // Dispatch(ACTIONS.School.cleanUser())
-    setOpen(false);
-  };
-  const handleSubmit = (values) => {
-    if (status === "idle" ||  status === "error") {
-    values.Id = Id;
-    Dispatch(getUserEmail(values))
-    } if (status === "success") {
-      Dispatch(postUserToTeacher({quizzId: Id, teacherId: UserDetail.id}))
-    }
-
-  };
-  return (
-    <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      className={classes.modal}
-      open={open}
-      onClose={handleClose}
-      BackdropComponent={Backdrop}
-      BackdropProps={{}}
-    >
-      <Fade in={open}>
-        <Formik onSubmit={handleSubmit} initialValues={{ email: "" }}>
-          {(formik) => (
-            <Form Style="display: contents;">
-              <Card className={classes.root}>
+function PromoteToTeacher() {
+    const classes = useStyles();
+    const UserDetail = useSelector(UserDetailSelector);
+    
+    return (
+        <Card className={classes.root}>
                 {status === "error" ? (
                   <Alert className={classes.alert} severity="error">
                     No existe usuario con ese mail.
@@ -140,12 +107,7 @@ function ModalTeacher({ Id, open, setOpen }) {
                   ) : null}
                 </Grid>
               </Card>
-            </Form>
-          )}
-        </Formik>
-      </Fade>
-    </Modal>
-  );
+    )
 }
 
-export default ModalTeacher;
+export default PromoteToTeacher
