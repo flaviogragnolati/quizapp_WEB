@@ -2,6 +2,7 @@ import { ACTIONS } from './rootReducer';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
 import { postUserToTeacher, removeTeacher } from 'views/School/SchoolSlice';
 import { enrollUser } from 'views/Teacher/TeacherSlice';
+import { localLogin, restoreSession, localOrgLogin } from 'components/Auth/authSlice';
 
 //?Array para guardar todas las acciones que requiren de notificacion
 const PENDING = 'pending';
@@ -24,6 +25,10 @@ const listenArray = [
   ...allTypesAsync(postUserToTeacher),
   ...allTypesAsync(removeTeacher),
   ...allTypesAsync(enrollUser),
+  ...allTypesAsync(localLogin),
+  ...allTypesAsync(localOrgLogin),
+  ...allTypesAsync(restoreSession),
+
 ]
 const notificationMiddleware = (store) => (next) => (action) => {
   // const dispatch = store.dispatch;
@@ -125,6 +130,64 @@ const notificationMiddleware = (store) => (next) => (action) => {
           break;
         case FULFILLED:
           snackbar.message = 'Solicitud de ingreso enviada exitosamente';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }else if (action.type.includes('localLogin')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Enviando solicitud de ingreso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'se inicio sesion correctamente';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }else if (action.type.includes('localOrgLogin')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Enviando solicitud de ingreso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'se inicio sesion correctamente como escuela';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }
+    else if (action.type.includes('restoreSession')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Enviando solicitud de ingreso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'sesion restablecida exitosamente';
           snackbar.options.variant = 'success';
           break;
         case REJECTED:
