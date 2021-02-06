@@ -41,7 +41,7 @@ export const getSubjectsList = createAsyncThunk(
 );
 
 export const getUserEmail = createAsyncThunk(
-  "School/getUserDetail",
+  "School/getUserEmail",
   async ({Id, email}) => {
     const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response.data ;
