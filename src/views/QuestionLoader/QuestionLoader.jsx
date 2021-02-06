@@ -47,7 +47,7 @@ function QuestionLoader() {
         justify="space-between"
         alignItems="flex-start"
       >
-        <Questions question={questions.find((question) => question.id === questionId )}/>
+        <Questions question={questions.find((question) => question.id === questionId )} reset={questionId}/>
       </Grid>
     </Grid>
   );

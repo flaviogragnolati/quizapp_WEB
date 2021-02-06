@@ -38,7 +38,7 @@ const questionInfo = {
   ],
 };
 
-const Questions = ({ question }) => {
+const Questions = ({ question, reset }) => {
   const [multi, setMulti] = useState();
   const [multiAns, setMultiAns] = useState(questionInfo.answers);
 
@@ -79,7 +79,7 @@ const Questions = ({ question }) => {
         justify="space-between"
         alignItems="flex-start"
       >
-        {question ? <QuestionInfo info={question} setMulti={setMulti} /> : null}
+        {question ? <QuestionInfo info={question} setMulti={setMulti} reset={reset} /> : null}
       </Grid>
       <Grid
         item

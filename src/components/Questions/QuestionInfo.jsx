@@ -12,7 +12,7 @@ import {
   Button,
   Input,
 } from "@material-ui/core";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { infoQuizModel, initialState_Info } from "./InfoHelp";
 
 const { title, description } = infoQuizModel;
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function QuestionInfo({ info, setMulti }) {
+function QuestionInfo({ info, setMulti, reset }) {
 
   const handleChange = (event) => {
     if (event.target.value === 1) {
@@ -45,24 +45,39 @@ function QuestionInfo({ info, setMulti }) {
     console.log(e);
   };
 
-  const [infoQuestion, setinfoQuestion] = useState(info)
+  const [infoQuestion, setinfoQuestion] = useState({})
+  const [sync, setSync] = useState(true)
+  // console.log('tu vieja suelta info', info)
+  // console.log('tu vieja suelta infoQuestion', infoQuestion)
 
   useEffect(() => {
-    setinfoQuestion(info)
-  }, [info])
+    console.log('useEfect')
+    if(sync === false){
+      console.log('tu vieja en useEffect', infoQuestion)
+      setSync(true)
+      setinfoQuestion(info)
+    }
+  }, [sync])
 
-  initialState_Info.title = infoQuestion.title
+  if(info.title !== infoQuestion.title || info.question !== infoQuestion.question){
+       setSync(false)
+       setinfoQuestion(info)
+
+
+  }
 
   const classes = useStyles();
   return (
     <>
-      <Formik onSubmit={handleSubmit} initialValues={initialState_Info}>
+      <Formik onSubmit={handleSubmit} initialValues={ {title: infoQuestion.title, question: infoQuestion.question }}>
         {(formik) => (
           <Form Style="display: contents;">
             <Grid item xs={5}>
-              <TextField
+              
+              <Field
                 label="Title"
                 name="title"
+                component={TextField}
                 required
                 defaultValue={infoQuestion.title}
                 variant="outlined"
@@ -87,12 +102,13 @@ function QuestionInfo({ info, setMulti }) {
             </Grid>
             <Grid xs={9}></Grid>
             <Grid xs={9}>
-              <TextField
+              <Field
                 fullWidth
-                label="Description"
-                name="description"
+                label="Question"
+                name="question"
+                component={TextField}
                 required
-                defaultValue={infoQuestion.description}
+                defaultValue={infoQuestion.question}
                 variant="outlined"
               />
             </Grid>

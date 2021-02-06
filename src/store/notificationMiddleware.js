@@ -1,7 +1,7 @@
 import { ACTIONS } from './rootReducer';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
 import { postUserToTeacher, removeTeacher, delateQuiz, delateSubject , editSubject , createSubject } from 'views/School/SchoolSlice';
-import { enrollUser } from 'views/Teacher/TeacherSlice';
+import { enrollUser , enrollToSudent, getQuizesTeacher } from 'views/Teacher/TeacherSlice';
 import { localLogin, restoreSession, localOrgLogin } from 'components/Auth/authSlice';
 
 //?Array para guardar todas las acciones que requiren de notificacion
