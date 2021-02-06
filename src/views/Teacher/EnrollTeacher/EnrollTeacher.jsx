@@ -30,8 +30,8 @@ function EnrollTeacher() {
     const user = useSelector(userSelector);
   
     const classes = useStyles();
-    let columnName = ['Email Alumno','Preguntas', 'Editar','Aceptar alumnos'];
-    let ButtonName = ['Editar Preguntas', 'Editar Quiz','Enrolar'];
+    let columnName = ['Nombre Alumno' , 'Email Alumno', 'Editar','Aceptar alumnos'];
+    let ButtonName = ['Aceptar En Quiz','Rechazar'];
 
     useEffect(() => {
       dispatch(getToEnrollList(params.id));
@@ -40,7 +40,7 @@ function EnrollTeacher() {
     return (
       <Container maxWidth={false}>
         <Box mt={3}>
-          <h3>Listado de Quizzes</h3>
+          <h2>Listado de Usuarios solicitando ser enrolados en el Quiz</h2>
           {(status === 'success' && students.length === 0 ? <h3>No hay alumnos esperando a ser agregados al Quiz</h3> : status === 'success' ? (
             <List
               customers={students}

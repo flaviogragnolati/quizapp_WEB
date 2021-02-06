@@ -17,11 +17,16 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Button from "components/Home_MUI/Button";
-import { Link, useHistory } from "react-router-dom";
-import { delateSubject, editSubject, delateQuiz } from "views/School/SchoolSlice";
+import { Link, useHistory, useParams } from "react-router-dom";
+import {
+  delateSubject,
+  editSubject,
+  delateQuiz,
+} from "views/School/SchoolSlice";
 import { useDispatch } from "react-redux";
 import ModalTeacher from "./Modal";
 // import getInitials from 'src/utils/getInitials';
+import { enrollToSudent } from "views/Teacher/TeacherSlice";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,18 +36,21 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     marginRight: theme.spacing(2),
   },
+  button: {
+    padding: "16px 5px",
+  },
   Table: {
     whidth: "auto",
     margin: "none",
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -56,16 +64,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Results = ({
   className,
-  customers =[],
+  customers = [],
   whidth,
   columnName,
   ButtonName,
   User,
   ...rest
 }) => {
-
   const [open, setOpen] = useState(false);
-
+  const params = useParams()
   const handleOpen = () => {
     setOpen(true);
   };
@@ -93,9 +100,8 @@ const Results = ({
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  // console.log(User)
   const HandleClick = (e, name) => {
-    console.log(customers)
+    console.log(params.id, e)
     if (name === "Editar Preguntas") {
       History.push(`/question-loader/${e}`);
     }
@@ -111,15 +117,17 @@ const Results = ({
       });
     }
     if (name === "Borrar Quiz") {
-       dispatch(delateQuiz(e));
+      dispatch(delateQuiz(e));
     }
     if (name === "TEACHER") {
-      console.log('entre')
       setOpen(true);
-      setQuizId(e)
+      setQuizId(e);
     }
     if (name === "Enrolar") {
       History.push(`/enroll-list/${e}`);
+    }
+    if (name === "Aceptar En Quiz") {
+      dispatch(enrollToSudent({ QuizId:params.id , UserId: e }))
     }
   };
 
@@ -200,26 +208,30 @@ const Results = ({
                           value="true"
                         />
                       </TableCell>
-                      <TableCell>
-                        <Box alignItems="center" display="flex">
-                          {customer.avatarUrl && (
-                            <Avatar
-                              className={classes.avatar}
-                              src={customer.avatarUrl}
-                            >
-                              {/* {getInitials(customer.name)} */}
-                              {customer.name && customer.name}
-                            </Avatar>
-                          )}
-                          <Typography color="textPrimary" variant="body1">
-                            {customer.name && customer.name}
-                          </Typography>
-                        </Box>
-                      </TableCell>
+                      {customer.avatarUrl && customer.name ? (
+                        <TableCell>
+                          <Box alignItems="center" display="flex">
+                            {customer.avatarUrl && (
+                              <Avatar
+                                className={classes.avatar}
+                                src={customer.avatarUrl}
+                              >
+                                {/* {getInitials(customer.name)} */}
+                                {customer.name && customer.name}
+                              </Avatar>
+                            )}
+                            {customer.name && (
+                              <Typography color="textPrimary" variant="body1">
+                                {customer.name}
+                              </Typography>
+                            )}
+                          </Box>
+                        </TableCell>
+                      ) : null}
                       {customer.Subject && (
                         <TableCell>{customer.Subject.name}</TableCell>
                       )}
-                      {customer && (
+                      {customer.description && (
                         <TableCell>{customer.description}</TableCell>
                       )}
                       {customer.quiz && <TableCell>{customer.quiz}</TableCell>}
@@ -229,6 +241,9 @@ const Results = ({
                       {customer.alumnos && (
                         <TableCell>{customer.alumnos}</TableCell>
                       )}
+                      {customer.firstName && customer.lastName ? (
+                        <TableCell>{`${customer.firstName} ${customer.lastName}`}</TableCell>
+                      ) : null}
                       {customer.email && (
                         <TableCell>{customer.email}</TableCell>
                       )}
@@ -246,6 +261,7 @@ const Results = ({
                       {ButtonName && ButtonName[0] && (
                         <TableCell>
                           <Button
+                            className={classes.button}
                             name={ButtonName[0]}
                             id={customer.id}
                             onClick={() =>
@@ -259,6 +275,7 @@ const Results = ({
                       {ButtonName && ButtonName[1] && (
                         <TableCell>
                           <Button
+                            className={classes.button}
                             name={ButtonName[1]}
                             onClick={() =>
                               HandleClick(customer.id, ButtonName[1])
@@ -271,6 +288,8 @@ const Results = ({
                       {ButtonName && ButtonName[2] && (
                         <TableCell>
                           <Button
+                            className={classes.button}
+                            classes
                             name={ButtonName[2]}
                             onClick={() =>
                               HandleClick(customer.id, ButtonName[2])
