@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { status } from "utils/helpers";
 import axios from "axios";
-import { TEACHER_ENDPOINT, ENROLLS_ENDPOINT, TO_STUDENT } from "utils/endpoints";
+import { TEACHER_ENDPOINT, ENROLLS_ENDPOINT, TO_STUDENT, TO_ENROLL } from "utils/endpoints";
 
 const initialState_Teacher = {
   TeacherQuizList: {},
@@ -39,17 +39,26 @@ export const enrollToSudent = createAsyncThunk(
     return Quiz.data;
 });
 
+export const enrollUser = createAsyncThunk(
+  "quizDetail/enrollUser", async ({ UserId, QuizId }) => {
+    console.log({ UserId, QuizId })
+    const Quiz = await axios.post(TO_ENROLL , { UserId, QuizId });
+    return Quiz.data;
+});
+
 
 const isPendingAction = isPending(
     getQuizesTeacher,
     getToEnrollList,
     enrollToSudent,
+    enrollUser,
     );
 
 const isRejectedAction = isRejected(
     getQuizesTeacher,
     getToEnrollList,
     enrollToSudent,
+    enrollUser,
     );
 
 const TeacherSlice = createSlice({
@@ -69,6 +78,9 @@ const TeacherSlice = createSlice({
       state.status = status.success;
       state.UserDetail.data = payload;
       state.TeacherUserList = state.TeacherUserList.filter((Users) => Users.id !== payload.user.id)}); 
+    builder.addCase(enrollUser.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+    });
     ////////////
 
     builder.addMatcher(isPendingAction, (state, { payload }) => {

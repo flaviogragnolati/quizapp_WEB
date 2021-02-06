@@ -40,3 +40,4 @@ export const ENROLLS_ENDPOINT = BASE_ENDPOINT + '/roles/enrolled/';
 
 export const TO_STUDENT = BASE_ENDPOINT + '/roles/student/';
 
+export const TO_ENROLL = BASE_ENDPOINT + '/roles/enroll';

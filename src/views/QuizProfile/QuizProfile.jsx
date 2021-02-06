@@ -21,9 +21,10 @@ import { ACTIONS } from 'store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectQuizDetailById, catalogueStatusSelector } from 'utils/selectors';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { quizDetailStatusSelector } from 'utils/selectors';
+import { quizDetailStatusSelector, userSelector } from 'utils/selectors';
 import { quizDetailSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
+import { enrollUser } from 'views/Teacher/TeacherSlice';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const schoolImg =
@@ -241,6 +242,8 @@ function QuizProfile(props) {
   const id = props.match.params.id;
   const quizDetailStatus = useSelector(quizDetailStatusSelector);
   const quizDetail = useSelector((state) => quizDetailSelector(state, id));
+  const user = useSelector(userSelector);
+
   // const quizDetailStatus = useSelector((state) =>
   //   selectQuizDetailById(state, id)
   // );
@@ -256,8 +259,8 @@ function QuizProfile(props) {
   //   QuizTags,
   // } = quizDetailStatus;
 
-  const handleEnroll = () => {
-    dispatch(ACTIONS.actions.enroll());
+  const handleEnroll = (values) => {
+    dispatch(enrollUser({ UserId: user.id, QuizId: quizDetail.id }));
   };
 
   useEffect(() => {

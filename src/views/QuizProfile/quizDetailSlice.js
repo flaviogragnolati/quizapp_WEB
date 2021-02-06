@@ -5,7 +5,7 @@ import {
   isFulfilled,
   isRejected,
 } from '@reduxjs/toolkit';
-import { QUIZ_INFO_ENDPOINT } from 'utils/endpoints';
+import { QUIZ_INFO_ENDPOINT, TO_ENROLL } from 'utils/endpoints';
 import { status } from 'utils/helpers';
 import axios from 'axios';
 
@@ -35,10 +35,15 @@ export const getQuizDetailAsync = createAsyncThunk(
   }
 );
 
-
-const isPendingAction = isPending(getQuizDetailAsync);
-const isFulfilledAction = isFulfilled(getQuizDetailAsync);
-const isRejectedAction = isRejected(getQuizDetailAsync);
+const isPendingAction = isPending(
+  getQuizDetailAsync,
+);
+const isFulfilledAction = isFulfilled(
+  getQuizDetailAsync,
+);
+const isRejectedAction = isRejected(
+  getQuizDetailAsync,
+);
 
 const quizDetailSlice = createSlice({
   name: 'quizDetail',
