@@ -95,7 +95,7 @@ const Results = ({
 
   // console.log(User)
   const HandleClick = (e, name) => {
-    console.log(e,name)
+    console.log(customers)
     if (name === "Editar Preguntas") {
       History.push(`/question-loader/${e}`);
     }
@@ -114,6 +114,7 @@ const Results = ({
        dispatch(delateQuiz(e));
     }
     if (name === "TEACHER") {
+      console.log('entre')
       setOpen(true);
       setQuizId(e)
     }
@@ -157,124 +158,144 @@ const Results = ({
   };
 
   return (
-
     <Card className={clsx(classes.root, className)} {...rest}>
-      {customers[0] ? 
-      <>
-      <Box Width={whidth ? whidth : 1}>
-        <Table size={"small"} className={customers ? 's' : null}>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={selectedCustomerIds.length === customers.length}
-                  color="primary"
-                  indeterminate={
-                    selectedCustomerIds.length > 0 &&
-                    selectedCustomerIds.length < customers.length
-                  }
-                  onChange={handleSelectAll}
-                />
-              </TableCell>
-              {columnName.map((name) => {
-                return <TableCell>{name}</TableCell>;
-              })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {customers && customers.slice(0, limit).map((customer) => (
-              <TableRow
-                hover
-                key={customer.id}
-                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-              >
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                    onChange={(event) => handleSelectOne(event, customer.id)}
-                    value="true"
-                  />
-                </TableCell>
-                <TableCell>
-                  <Box alignItems="center" display="flex">
-                    {customer.avatarUrl && (
-                      <Avatar
-                        className={classes.avatar}
-                        src={customer.avatarUrl}
-                      >
-                        {/* {getInitials(customer.name)} */}
-                        {customer.name && customer.name}
-                      </Avatar>
-                    )}
-                    <Typography color="textPrimary" variant="body1">
-                      {customer.name && customer.name}
-                    </Typography>
-                  </Box>
-                </TableCell>
-                {customer.Subject && (
-                  <TableCell>{customer.Subject.name}</TableCell>
-                )}
-                {customer && <TableCell>{customer.description}</TableCell>}
-                {customer.quiz && <TableCell>{customer.quiz}</TableCell>}
-                {customer.review && <TableCell>{customer.review}</TableCell>}
-                {customer.alumnos && <TableCell>{customer.alumnos}</TableCell>}
-
-                {customer.email && <TableCell>{customer.email}</TableCell>}
-                {customer.address && (
-                  <TableCell>
-                    {customer.address.city}, {customer.address.state},{" "}
-                    {customer.address.country}
+      {customers[0] ? (
+        <>
+          <Box Width={whidth ? whidth : 1}>
+            <Table size={"small"} className={customers ? "s" : null}>
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      checked={selectedCustomerIds.length === customers.length}
+                      color="primary"
+                      indeterminate={
+                        selectedCustomerIds.length > 0 &&
+                        selectedCustomerIds.length < customers.length
+                      }
+                      onChange={handleSelectAll}
+                    />
                   </TableCell>
-                )}
-
-                {customer.phone && <TableCell>{customer.phone}</TableCell>}
-
-                {ButtonName && ButtonName[0] && (
-                  <TableCell>
-                    <Button
-                      name={ButtonName[0]}
-                      id={customer.id}
-                      onClick={() => HandleClick(customer.id, ButtonName[0])}
+                  {columnName.map((name) => {
+                    return <TableCell>{name}</TableCell>;
+                  })}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {customers &&
+                  customers.slice(0, limit).map((customer) => (
+                    <TableRow
+                      hover
+                      key={customer.id}
+                      selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                     >
-                      {ButtonName[0]}
-                    </Button>
-                  </TableCell>
-                )}
-                {ButtonName && ButtonName[1] && (
-                  <TableCell>
-                    <Button
-                      name={ButtonName[1]}
-                      onClick={() => HandleClick(customer.id, ButtonName[1])}
-                    >
-                      {ButtonName[1]}
-                    </Button>
-                  </TableCell>
-                )}
-                {ButtonName && ButtonName[2] && (
-                  <TableCell>
-                    <Button
-                      name={ButtonName[2]}
-                      onClick={() => HandleClick(customer.id,ButtonName[2])}
-                    >
-                      {ButtonName[2]}
-                    </Button>
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Box>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      /> 
-      </>: null}
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={
+                            selectedCustomerIds.indexOf(customer.id) !== -1
+                          }
+                          onChange={(event) =>
+                            handleSelectOne(event, customer.id)
+                          }
+                          value="true"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Box alignItems="center" display="flex">
+                          {customer.avatarUrl && (
+                            <Avatar
+                              className={classes.avatar}
+                              src={customer.avatarUrl}
+                            >
+                              {/* {getInitials(customer.name)} */}
+                              {customer.name && customer.name}
+                            </Avatar>
+                          )}
+                          <Typography color="textPrimary" variant="body1">
+                            {customer.name && customer.name}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      {customer.Subject && (
+                        <TableCell>{customer.Subject.name}</TableCell>
+                      )}
+                      {customer && (
+                        <TableCell>{customer.description}</TableCell>
+                      )}
+                      {customer.quiz && <TableCell>{customer.quiz}</TableCell>}
+                      {customer.review && (
+                        <TableCell>{customer.review}</TableCell>
+                      )}
+                      {customer.alumnos && (
+                        <TableCell>{customer.alumnos}</TableCell>
+                      )}
+                      {customer.email && (
+                        <TableCell>{customer.email}</TableCell>
+                      )}
+                      {customer.address && (
+                        <TableCell>
+                          {customer.address.city}, {customer.address.state},{" "}
+                          {customer.address.country}
+                        </TableCell>
+                      )}
+
+                      {customer.phone && (
+                        <TableCell>{customer.phone}</TableCell>
+                      )}
+
+                      {ButtonName && ButtonName[0] && (
+                        <TableCell>
+                          <Button
+                            name={ButtonName[0]}
+                            id={customer.id}
+                            onClick={() =>
+                              HandleClick(customer.id, ButtonName[0])
+                            }
+                          >
+                            {ButtonName[0]}
+                          </Button>
+                        </TableCell>
+                      )}
+                      {ButtonName && ButtonName[1] && (
+                        <TableCell>
+                          <Button
+                            name={ButtonName[1]}
+                            onClick={() =>
+                              HandleClick(customer.id, ButtonName[1])
+                            }
+                          >
+                            {ButtonName[1]}
+                          </Button>
+                        </TableCell>
+                      )}
+                      {ButtonName && ButtonName[2] && (
+                        <TableCell>
+                          <Button
+                            name={ButtonName[2]}
+                            onClick={() =>
+                              HandleClick(customer.id, ButtonName[2])
+                            }
+                          >
+                            {ButtonName[2]}
+                          </Button>
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </Box>
+          <TablePagination
+            component="div"
+            count={customers.length}
+            onChangePage={handlePageChange}
+            onChangeRowsPerPage={handleLimitChange}
+            page={page}
+            rowsPerPage={limit}
+            rowsPerPageOptions={[5, 10, 25]}
+          />
+        </>
+      ) : null}
       <ModalTeacher Id={QuizId} open={open} setOpen={setOpen}></ModalTeacher>
     </Card>
   );
