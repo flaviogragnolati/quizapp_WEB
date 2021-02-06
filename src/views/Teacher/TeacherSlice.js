@@ -65,14 +65,10 @@ const TeacherSlice = createSlice({
       state.status = status.success;
       state.TeacherUserList = payload;
     });
-    // builder.addCase(enrollToSudent.fulfilled, (state, { payload }) => {
-    //   state.status = status.success;
-    //   state.UserDetail.data = payload;
-    // });
     builder.addCase(enrollToSudent.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.UserDetail.data = payload;
-      state.TeacherUserList = state.TeacherUserList.filter((Users) => {Users.id === payload.id})}); //si hay 1 solo tiene que dejar el array vacio (se mantiene igual)
+      state.TeacherUserList = state.TeacherUserList.filter((Users) => Users.id !== payload.id)}); 
     ////////////
 
     builder.addMatcher(isPendingAction, (state, { payload }) => {
