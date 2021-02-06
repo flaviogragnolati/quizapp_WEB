@@ -20,6 +20,7 @@ const listenArray = [
   ACTIONS.favorites.addToFavorites.type,
   ACTIONS.favorites.removeFromFavorites.type,
   ACTIONS.actions.enroll.type,
+  ACTIONS.auth.logout.type,
   ACTIONS.catalogue.filter.type, //'catalogue/filter'
   ...allTypesAsync(getCatalogue),
   ...allTypesAsync(postUserToTeacher),
@@ -89,7 +90,13 @@ const notificationMiddleware = (store) => (next) => (action) => {
       //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
       snackbar.message = `Estas filtrando el catalogo`;
       snackbar.options.variant = 'success';
-    } else if (action.type.includes('getCatalogue')) {
+    }else if (action.type === "auth/logout") {
+      console.log('entre a la notificacion')
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
+      snackbar.message = `se cerro la sesion correctamente`;
+      snackbar.options.variant = 'success';
+    } 
+    else if (action.type.includes('getCatalogue')) {
 
       allNotificationAsync('tengo datos', 'esperando datos', 'ocurrio un error')
       

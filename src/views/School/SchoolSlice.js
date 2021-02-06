@@ -220,6 +220,6 @@ const SchoolSlice = createSlice({
   },
 });
 
-export const { cleanUser } = SchoolSlice.actions
+export const { cleanUser  } = SchoolSlice.actions
 
 export default SchoolSlice;
