@@ -71,7 +71,6 @@ export const createSubject = createAsyncThunk(
 export const postUserToTeacher = createAsyncThunk(
   "School/UserToTeacher",
   async ({QuizId, UserId}) => {
-    console.log(QuizId,UserId)
     const User_Email_response = await axios.post(TEACHER_ENDPOINT, {QuizId , UserId});
     return User_Email_response.data ;
   }
@@ -170,16 +169,12 @@ const SchoolSlice = createSlice({
       state.UserDetail.data = payload.user;  
       state.UserDetail.status = status.success;
     });
-    builder.addCase(getUserEmail.rejected, (state, { payload }) => {
-      state.UserDetail.data = payload;  
-      state.UserDetail.status = status.error;
-    });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
     builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
       state.UserDetail.status = status.success;
-      state.UserDetail.role = payload
+      state.UserDetail.role = payload.role
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;

@@ -34,6 +34,8 @@ export const getQuizDetailAsync = createAsyncThunk(
     },
   }
 );
+
+
 const isPendingAction = isPending(getQuizDetailAsync);
 const isFulfilledAction = isFulfilled(getQuizDetailAsync);
 const isRejectedAction = isRejected(getQuizDetailAsync);

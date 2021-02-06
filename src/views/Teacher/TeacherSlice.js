@@ -68,7 +68,7 @@ const TeacherSlice = createSlice({
     builder.addCase(enrollToSudent.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.UserDetail.data = payload;
-      state.TeacherUserList = state.TeacherUserList.filter((Users) => Users.id !== payload.id)}); 
+      state.TeacherUserList = state.TeacherUserList.filter((Users) => Users.id !== payload.user.id)}); 
     ////////////
 
     builder.addMatcher(isPendingAction, (state, { payload }) => {

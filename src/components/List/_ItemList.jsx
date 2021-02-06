@@ -101,7 +101,6 @@ const Results = ({
   };
 
   const HandleClick = (e, name) => {
-    console.log(params.id, e)
     if (name === "Editar Preguntas") {
       History.push(`/question-loader/${e}`);
     }
@@ -127,7 +126,10 @@ const Results = ({
       History.push(`/enroll-list/${e}`);
     }
     if (name === "Aceptar En Quiz") {
-      dispatch(enrollToSudent({ QuizId:params.id , UserId: e }))
+      dispatch(enrollToSudent({ QuizId:params.id , UserId: e , accepted:true}))
+    }
+    if (name === "Rechazar") {
+      dispatch(enrollToSudent({ QuizId:params.id , UserId: e , accepted:false}))
     }
   };
 
@@ -227,7 +229,7 @@ const Results = ({
                             )}
                           </Box>
                         </TableCell>
-                      ) : null}
+                      ) : customer.name ? <TableCell>{customer.name}</TableCell> : null}
                       {customer.Subject && (
                         <TableCell>{customer.Subject.name}</TableCell>
                       )}
