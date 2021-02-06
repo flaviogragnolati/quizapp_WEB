@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { COUNT_QUIZ_ENDPOINT } from 'utils/endpoints';
 import { QUIZ_ENDPOINT } from 'utils/endpoints';
 import { status } from 'utils/helpers';
 
@@ -7,6 +8,7 @@ const initialState_Catalogue = {
   status: status.idle,
   entities: {},
   result: '',
+  total: '',
   filter: false,
   filteredResult: '',
 };
@@ -18,7 +20,13 @@ export const getCatalogue = createAsyncThunk(
     const catalogue_response = await axios.get(QUIZ_ENDPOINT, {
       params: { page, pageSize },
     });
-    return catalogue_response.data;
+    const totalQuizzes = await axios.get(COUNT_QUIZ_ENDPOINT);
+    console.log('total quizzes', totalQuizzes);
+    const returnPayload = {
+      ...catalogue_response.data,
+      total: totalQuizzes.data,
+    };
+    return returnPayload;
   },
   {
     condition: (payload, { getState }) => {
@@ -93,6 +101,7 @@ const catalogueSlice = createSlice({
       state.status = status.success;
       state.entities = payload.entities;
       state.result = [...new Set(payload.result)].sort((a, b) => a - b);
+      state.total = payload.total;
     },
     [getCatalogue.rejected]: (state, { payload }) => {
       state.status = status.error;

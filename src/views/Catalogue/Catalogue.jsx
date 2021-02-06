@@ -12,6 +12,7 @@ import {
   catalogueEntitiesSelector,
   catalogueResultSelector,
   catalogueFilterSelector,
+  totalCatalogueSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 
@@ -34,6 +35,7 @@ const Catalogue = () => {
   const catStatus = useSelector(catalogueStatusSelector);
   const entities = useSelector(catalogueEntitiesSelector);
   const filter = useSelector(catalogueFilterSelector);
+  const total = useSelector(totalCatalogueSelector);
 
   const quizList = useSelector((state) =>
     catalogueResultSelector(state, filter)
@@ -101,7 +103,7 @@ const Catalogue = () => {
                 size="large"
                 showFirstButton
                 showLastButton
-                count={Math.ceil(quizList.length / pageSize)}
+                count={Math.ceil(total / pageSize)}
                 page={page}
                 onChange={handleChange}
               />

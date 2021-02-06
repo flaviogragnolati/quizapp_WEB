@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
 
 //General or Global selectors
 export const notificationSelector = (state) => state.notifications.list;
@@ -20,6 +20,7 @@ export const catalogueResultSelector = (state, filter) => {
   if (filter) return state.catalogue.filteredResult;
   else return state.catalogue.result;
 };
+export const totalCatalogueSelector = (state) => state.catalogue.total;
 
 export const quizzesSelector = (state) => state.catalogue.entities.quizzes;
 export const quizTagsSelector = (state) => state.catalogue.entities.quizTags;
@@ -82,12 +83,14 @@ export const ProfileStatusSelector = (state) => state.Profile.status;
 //School selectors
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
-export const SchoolQuizSelector = (state) =>state.School.SchoolQuizList.QuizList;
+export const SchoolQuizSelector = (state) =>
+  state.School.SchoolQuizList.QuizList;
 export const SchoolQuizStatusSelector = (state) => state.School.status;
-export const SchoolSubjectSelector = (state) =>state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectStatusSelector = (state) => state.School.status;
-export const UserDetailSelector = (state) =>state.School.UserDetail.data;
-export const UserRoleSelector = (state) =>state.School.UserDetail.role;
+export const UserDetailSelector = (state) => state.School.UserDetail.data;
+export const UserRoleSelector = (state) => state.School.UserDetail.role;
 export const UserDetailStatusSelector = (state) => state.School.UserDetail.status;
 
 //Quiz selector
