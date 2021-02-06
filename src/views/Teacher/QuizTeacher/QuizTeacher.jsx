@@ -51,7 +51,6 @@ function QuizTeacher() {
           <h1>Cargando</h1>
         )}
       </Box>
-      <Button>+ Agregar</Button>
     </Container>
   );
 };

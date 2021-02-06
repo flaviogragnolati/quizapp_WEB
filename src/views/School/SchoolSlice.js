@@ -71,6 +71,7 @@ export const createSubject = createAsyncThunk(
 export const postUserToTeacher = createAsyncThunk(
   "School/UserToTeacher",
   async ({QuizId, UserId}) => {
+    console.log(QuizId,UserId)
     const User_Email_response = await axios.post(TEACHER_ENDPOINT, {QuizId , UserId});
     return User_Email_response.data ;
   }

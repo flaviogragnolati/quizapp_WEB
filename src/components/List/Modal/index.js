@@ -91,7 +91,7 @@ function ModalTeacher({ Id, open, setOpen }) {
     }
     if (
       (status === "success" && !role) ||
-      (status === "success" && role && !role.name === "Teacher")
+      (status === "success" && role && role.name !== "Teacher")
     ) {
       Dispatch(postUserToTeacher({ QuizId: Id, UserId: UserDetail.id }));
     }
