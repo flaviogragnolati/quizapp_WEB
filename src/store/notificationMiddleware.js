@@ -30,8 +30,31 @@ const listenArray = [
   ...allTypesAsync(restoreSession),
 
 ]
+
+
 const notificationMiddleware = (store) => (next) => (action) => {
   // const dispatch = store.dispatch;
+
+  const allNotificationAsync = (fullfiled,pending,rejected)=>{
+
+    let state = action.type.split('/')[2];
+    switch (state) {
+      case PENDING:
+        snackbar.message = pending;
+        snackbar.options.variant = 'info';
+        break;
+      case FULFILLED:
+        snackbar.message = fullfiled;
+        snackbar.options.variant = 'success';
+        break;
+      case REJECTED:
+        snackbar.message = rejected;
+        snackbar.options.variant = 'error';
+        break;
+      default:
+        break;
+    }
+  }
 
   const snackbar = {
     message: '',
@@ -64,139 +87,29 @@ const notificationMiddleware = (store) => (next) => (action) => {
       snackbar.message = `Estas filtrando el catalogo`;
       snackbar.options.variant = 'success';
     } else if (action.type.includes('getCatalogue')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'estamos buscando';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'toma la data guacshin';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'te re cabe logi no ten es nada de data!!!';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+
+      allNotificationAsync('tengo datos', 'esperando datos', 'ocurrio un error')
+      
     }else if (action.type.includes('postUserToTeacher')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Modificando nivel de acceso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'Se promovio exitosamente a profesor';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+      
+      allNotificationAsync('Se promovio exitosamente a profesor', 'Modificando nivel de acceso', 'Ocurrio un error intente de nuevo')
+
     }else if (action.type.includes('removeTeacher')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Modificando nivel de acceso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'Se removio el nivel de acceso  profesor';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+      allNotificationAsync('Se removio el nivel de acceso  profesor', 'Modificando nivel de acceso', 'Ocurrio un error intente de nuevo')
+
     }else if (action.type.includes('enrollUser')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Enviando solicitud de ingreso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'Solicitud de ingreso enviada exitosamente';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+
+      allNotificationAsync('Solicitud de ingreso enviada exitosamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
     }else if (action.type.includes('localLogin')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Enviando solicitud de ingreso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'se inicio sesion correctamente';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+
+      allNotificationAsync('se inicio sesion correctamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
+
     }else if (action.type.includes('localOrgLogin')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Enviando solicitud de ingreso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'se inicio sesion correctamente como escuela';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+
+      allNotificationAsync('se inicio sesion correctamente como escuela', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
     }
     else if (action.type.includes('restoreSession')) {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
-      let state = action.type.split('/')[2];
-      switch (state) {
-        case PENDING:
-          snackbar.message = 'Enviando solicitud de ingreso';
-          snackbar.options.variant = 'info';
-          break;
-        case FULFILLED:
-          snackbar.message = 'sesion restablecida exitosamente';
-          snackbar.options.variant = 'success';
-          break;
-        case REJECTED:
-          snackbar.message = 'Ocurrio un error intente de nuevo';
-          snackbar.options.variant = 'error';
-          break;
-        default:
-          break;
-      }
+      allNotificationAsync('sesion restablecida exitosamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
     }
     store.dispatch(ACTIONS.notifications.enqueueSnackbar(snackbar));
   }
