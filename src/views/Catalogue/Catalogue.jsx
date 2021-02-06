@@ -46,11 +46,15 @@ const Catalogue = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
+  const [cachedPages, setCachedPages] = useState([]);
 
   useEffect(() => {
     if (catStatus === 'idle') {
-      const params = { page, pageSize };
+      const params = { page: page - 1, pageSize: pageSize * 2 };
       dispatch(getCatalogue(params));
+      setCachedPages((cachedPages) => {
+        cachedPages.forEach((oldPage) => oldPage == page);
+      });
     }
   }, [catStatus, dispatch, page]);
   let content;
