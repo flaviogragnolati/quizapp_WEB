@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 const SchoolSubject = () => {
   // const classes = useStyles();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Description', 'Delate','Edit', 'Teacher']
-  let ButtonName = ['Delate Subject', 'Edit Subject', 'Teacher'];
+  let columnName = ['Name', 'Description', 'Delate','Edit']
+  let ButtonName = ['Delate Subject', 'Edit Subject'];
   const dispatch = useDispatch()
   const subjects = useSelector(SchoolSubjectSelector)
   const subjectsStatus = useSelector(SchoolSubjectStatusSelector)

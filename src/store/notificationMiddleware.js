@@ -1,6 +1,6 @@
 import { ACTIONS } from './rootReducer';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { postUserToTeacher, removeTeacher } from 'views/School/SchoolSlice';
+import { postUserToTeacher, removeTeacher, delateQuiz, delateSubject , editSubject , createSubject } from 'views/School/SchoolSlice';
 import { enrollUser } from 'views/Teacher/TeacherSlice';
 import { localLogin, restoreSession, localOrgLogin } from 'components/Auth/authSlice';
 
@@ -28,7 +28,10 @@ const listenArray = [
   ...allTypesAsync(localLogin),
   ...allTypesAsync(localOrgLogin),
   ...allTypesAsync(restoreSession),
-
+  ...allTypesAsync(delateQuiz),
+  ...allTypesAsync(delateSubject),
+  ...allTypesAsync(editSubject),
+  ...allTypesAsync(createSubject),
 ]
 
 
@@ -91,7 +94,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
       allNotificationAsync('tengo datos', 'esperando datos', 'ocurrio un error')
       
     }else if (action.type.includes('postUserToTeacher')) {
-      
+
       allNotificationAsync('Se promovio exitosamente a profesor', 'Modificando nivel de acceso', 'Ocurrio un error intente de nuevo')
 
     }else if (action.type.includes('removeTeacher')) {
@@ -109,7 +112,24 @@ const notificationMiddleware = (store) => (next) => (action) => {
       allNotificationAsync('se inicio sesion correctamente como escuela', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
     }
     else if (action.type.includes('restoreSession')) {
+
       allNotificationAsync('sesion restablecida exitosamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
+   
+    }else if (action.type.includes('Delate_Quiz')) {
+
+      allNotificationAsync('Se elimino exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
+
+    }else if (action.type.includes('Delate_Subject')) {
+
+      allNotificationAsync('Se elimino exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
+
+    }else if (action.type.includes('Edit_Subject')) {
+
+      allNotificationAsync('Se modifico exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
+
+    }else if (action.type.includes('Create_Subject')) {
+
+      allNotificationAsync('Se creo exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
     }
     store.dispatch(ACTIONS.notifications.enqueueSnackbar(snackbar));
   }
