@@ -365,7 +365,7 @@ function QuizProfile(props) {
                       display="inline"
                       variant="body2"
                     >
-                      {quantity}
+                      { quantity && quantity}
                     </Typography>
                   </Button>
                 </span>

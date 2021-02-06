@@ -1,7 +1,9 @@
 import { ACTIONS } from './rootReducer';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-//?Array para guardar todas las acciones que requiren de notificacion
+import { postUserToTeacher, removeTeacher } from 'views/School/SchoolSlice';
+import { enrollUser } from 'views/Teacher/TeacherSlice';
 
+//?Array para guardar todas las acciones que requiren de notificacion
 const PENDING = 'pending';
 const REJECTED = 'rejected';
 const FULFILLED = 'fulfilled';
@@ -19,8 +21,10 @@ const listenArray = [
   ACTIONS.actions.enroll.type,
   ACTIONS.catalogue.filter.type, //'catalogue/filter'
   ...allTypesAsync(getCatalogue),
-];
-
+  ...allTypesAsync(postUserToTeacher),
+  ...allTypesAsync(removeTeacher),
+  ...allTypesAsync(enrollUser),
+]
 const notificationMiddleware = (store) => (next) => (action) => {
   // const dispatch = store.dispatch;
 
@@ -59,7 +63,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
       let state = action.type.split('/')[2];
       switch (state) {
         case PENDING:
-          snackbar.message = 'estamos bbuscando';
+          snackbar.message = 'estamos buscando';
           snackbar.options.variant = 'info';
           break;
         case FULFILLED:
@@ -68,6 +72,63 @@ const notificationMiddleware = (store) => (next) => (action) => {
           break;
         case REJECTED:
           snackbar.message = 'te re cabe logi no ten es nada de data!!!';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }else if (action.type.includes('postUserToTeacher')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Modificando nivel de acceso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'Se promovio exitosamente a profesor';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }else if (action.type.includes('removeTeacher')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Modificando nivel de acceso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'Se removio el nivel de acceso  profesor';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
+          snackbar.options.variant = 'error';
+          break;
+        default:
+          break;
+      }
+    }else if (action.type.includes('enrollUser')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES ASINCRONAS
+      let state = action.type.split('/')[2];
+      switch (state) {
+        case PENDING:
+          snackbar.message = 'Enviando solicitud de ingreso';
+          snackbar.options.variant = 'info';
+          break;
+        case FULFILLED:
+          snackbar.message = 'Solicitud de ingreso enviada exitosamente';
+          snackbar.options.variant = 'success';
+          break;
+        case REJECTED:
+          snackbar.message = 'Ocurrio un error intente de nuevo';
           snackbar.options.variant = 'error';
           break;
         default:
