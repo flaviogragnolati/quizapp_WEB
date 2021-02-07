@@ -42,10 +42,11 @@ const questionInfo = {
 };
 
 const Questions = ({ question, reset }) => {
+  const QuestionDetail = useSelector(QuestionsDetailSelector)
+  console.log(QuestionDetail.Answers)
   const [multi, setMulti] = useState();
-  const [multiAns, setMultiAns] = useState(questionInfo.answers);
+  const [multiAns, setMultiAns] = useState(QuestionDetail.Answers);
   const Dispatch =  useDispatch()
-
   const handleAnsDelete = (id) => {
     setMultiAns((prevAns) => prevAns.filter((ans) => ans.id !== id));
   };
@@ -66,6 +67,7 @@ const Questions = ({ question, reset }) => {
      if(question){
 
        Dispatch(ACTIONS.School.setQuestionDetail(question))
+       setMultiAns(QuestionDetail.Answers)
      }
    }, [question]);
 
@@ -99,7 +101,7 @@ const Questions = ({ question, reset }) => {
         alignItems="center"
       >
         {multi === undefined ? null : multi === 1 ? (
-          multiAns.map((ans, idx) => {
+      multiAns.map((ans, idx) => {
             return <QuestionMulti key={idx} answer={ans} handlers={handlers} />;
           })
         ) : multi === 2 ? (
