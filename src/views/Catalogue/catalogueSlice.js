@@ -9,6 +9,7 @@ const initialState_Catalogue = {
   entities: {},
   result: '',
   total: '',
+  force: false,
   filter: false,
   filteredResult: '',
 };
@@ -20,8 +21,8 @@ export const getCatalogue = createAsyncThunk(
     const catalogue_response = await axios.get(QUIZ_ENDPOINT, {
       params: { page, pageSize },
     });
+    console.log('cat response', catalogue_response);
     const totalQuizzes = await axios.get(COUNT_QUIZ_ENDPOINT);
-    console.log('total quizzes', totalQuizzes);
     const returnPayload = {
       ...catalogue_response.data,
       total: totalQuizzes.data,
@@ -34,8 +35,7 @@ export const getCatalogue = createAsyncThunk(
       if (
         catalogue.status === status.pending ||
         catalogue.status === status.loading ||
-        catalogue.status === status.error ||
-        catalogue.status === status.success
+        catalogue.status === status.error
       ) {
         return false;
       }
@@ -99,9 +99,25 @@ const catalogueSlice = createSlice({
     },
     [getCatalogue.fulfilled]: (state, { payload }) => {
       state.status = status.success;
-      state.entities = payload.entities;
-      state.result = [...new Set(payload.result)].sort((a, b) => a - b);
-      state.total = payload.total;
+      const entities = payload.entities;
+      Object.keys(entities).forEach((entity) => {
+        if (Object.keys(entities[entity])[0] === 'null') {
+          return;
+        }
+        state.entities[entity] = {
+          ...state.entities[entity],
+          ...entities[entity],
+        };
+      });
+      state.result = [
+        ...state.result,
+        ...[...new Set(payload.result)].sort((a, b) => a - b),
+      ];
+      if (state.total !== payload.total) {
+        state.total = payload.total;
+      }
+      if (typeof state.total === 'number' && state.total !== payload.total)
+        state.force = true;
     },
     [getCatalogue.rejected]: (state, { payload }) => {
       state.status = status.error;

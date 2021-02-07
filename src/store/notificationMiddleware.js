@@ -1,8 +1,23 @@
 import { ACTIONS } from './rootReducer';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { postUserToTeacher, removeTeacher, delateQuiz, delateSubject , editSubject , createSubject } from 'views/School/SchoolSlice';
-import { enrollUser , enrollToSudent, getQuizesTeacher } from 'views/Teacher/TeacherSlice';
-import { localLogin, restoreSession, localOrgLogin } from 'components/Auth/authSlice';
+import {
+  postUserToTeacher,
+  removeTeacher,
+  delateQuiz,
+  delateSubject,
+  editSubject,
+  createSubject,
+} from 'views/School/SchoolSlice';
+import {
+  enrollUser,
+  enrollToSudent,
+  getQuizesTeacher,
+} from 'views/Teacher/TeacherSlice';
+import {
+  localLogin,
+  restoreSession,
+  localOrgLogin,
+} from 'components/Auth/authSlice';
 
 //?Array para guardar todas las acciones que requiren de notificacion
 const PENDING = 'pending';
@@ -33,14 +48,12 @@ const listenArray = [
   ...allTypesAsync(delateSubject),
   ...allTypesAsync(editSubject),
   ...allTypesAsync(createSubject),
-]
-
+];
 
 const notificationMiddleware = (store) => (next) => (action) => {
   // const dispatch = store.dispatch;
 
-  const allNotificationAsync = (fullfiled,pending,rejected)=>{
-
+  const allNotificationAsync = (fullfiled, pending, rejected) => {
     let state = action.type.split('/')[2];
     switch (state) {
       case PENDING:
@@ -58,7 +71,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
       default:
         break;
     }
-  }
+  };
 
   const snackbar = {
     message: '',
@@ -90,53 +103,79 @@ const notificationMiddleware = (store) => (next) => (action) => {
       //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
       snackbar.message = `Estas filtrando el catalogo`;
       snackbar.options.variant = 'success';
-    }else if (action.type === "auth/logout") {
-      console.log('entre a la notificacion')
+    } else if (action.type === 'auth/logout') {
+      console.log('entre a la notificacion');
       //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
       snackbar.message = `se cerro la sesion correctamente`;
       snackbar.options.variant = 'success';
-    } 
-    else if (action.type.includes('getCatalogue')) {
-
-      allNotificationAsync('tengo datos', 'esperando datos', 'ocurrio un error')
-      
-    }else if (action.type.includes('postUserToTeacher')) {
-
-      allNotificationAsync('Se promovio exitosamente a profesor', 'Modificando nivel de acceso', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('removeTeacher')) {
-      allNotificationAsync('Se removio el nivel de acceso  profesor', 'Modificando nivel de acceso', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('enrollUser')) {
-
-      allNotificationAsync('Solicitud de ingreso enviada exitosamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
-    }else if (action.type.includes('localLogin')) {
-
-      allNotificationAsync('se inicio sesion correctamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('localOrgLogin')) {
-
-      allNotificationAsync('se inicio sesion correctamente como escuela', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
     }
-    else if (action.type.includes('restoreSession')) {
-
-      allNotificationAsync('sesion restablecida exitosamente', 'Enviando solicitud de ingreso', 'Ocurrio un error intente de nuevo')
-   
-    }else if (action.type.includes('Delate_Quiz')) {
-
-      allNotificationAsync('Se elimino exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('Delate_Subject')) {
-
-      allNotificationAsync('Se elimino exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('Edit_Subject')) {
-
-      allNotificationAsync('Se modifico exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
-
-    }else if (action.type.includes('Create_Subject')) {
-
-      allNotificationAsync('Se creo exitosamente', 'cargando', 'Ocurrio un error intente de nuevo')
+    // else if (action.type.includes('getCatalogue')) {
+    //   allNotificationAsync(
+    //     'tengo datos',
+    //     'esperando datos',
+    //     'ocurrio un error'
+    //   );
+    // }
+    else if (action.type.includes('postUserToTeacher')) {
+      allNotificationAsync(
+        'Se promovio exitosamente a profesor',
+        'Modificando nivel de acceso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('removeTeacher')) {
+      allNotificationAsync(
+        'Se removio el nivel de acceso  profesor',
+        'Modificando nivel de acceso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('enrollUser')) {
+      allNotificationAsync(
+        'Solicitud de ingreso enviada exitosamente',
+        'Enviando solicitud de ingreso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('localLogin')) {
+      allNotificationAsync(
+        'se inicio sesion correctamente',
+        'Enviando solicitud de ingreso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('localOrgLogin')) {
+      allNotificationAsync(
+        'se inicio sesion correctamente como escuela',
+        'Enviando solicitud de ingreso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('restoreSession')) {
+      allNotificationAsync(
+        'sesion restablecida exitosamente',
+        'Enviando solicitud de ingreso',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('Delate_Quiz')) {
+      allNotificationAsync(
+        'Se elimino exitosamente',
+        'cargando',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('Delate_Subject')) {
+      allNotificationAsync(
+        'Se elimino exitosamente',
+        'cargando',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('Edit_Subject')) {
+      allNotificationAsync(
+        'Se modifico exitosamente',
+        'cargando',
+        'Ocurrio un error intente de nuevo'
+      );
+    } else if (action.type.includes('Create_Subject')) {
+      allNotificationAsync(
+        'Se creo exitosamente',
+        'cargando',
+        'Ocurrio un error intente de nuevo'
+      );
     }
     store.dispatch(ACTIONS.notifications.enqueueSnackbar(snackbar));
   }

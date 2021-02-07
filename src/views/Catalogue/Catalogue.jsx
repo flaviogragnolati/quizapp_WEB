@@ -15,6 +15,7 @@ import {
   totalCatalogueSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
+import { forceCatalogueSelector } from 'utils/selectors';
 
 const useStyles = makeStyles((theme) => ({
   courseCard: {
@@ -36,6 +37,7 @@ const Catalogue = () => {
   const entities = useSelector(catalogueEntitiesSelector);
   const filter = useSelector(catalogueFilterSelector);
   const total = useSelector(totalCatalogueSelector);
+  const force = useSelector(forceCatalogueSelector);
 
   const quizList = useSelector((state) =>
     catalogueResultSelector(state, filter)
@@ -49,15 +51,38 @@ const Catalogue = () => {
   const [cachedPages, setCachedPages] = useState([]);
 
   useEffect(() => {
-    if (catStatus === 'idle') {
-      const params = { page: page - 1, pageSize: pageSize * 2 };
+    if (!cachedPages.includes(page)) {
+      const params = {
+        page: (page - 1) / 2,
+        pageSize: pageSize * 2,
+      };
       dispatch(getCatalogue(params));
-      setCachedPages((cachedPages) => {
-        cachedPages.forEach((oldPage) => oldPage == page);
-      });
+      if (cachedPages.length > 15) {
+        setCachedPages((oldCachedPages) => [
+          ...oldCachedPages.slice(2),
+          page,
+          page + 1,
+        ]);
+      } else {
+        setCachedPages((oldCachedPages) => [...oldCachedPages, page, page + 1]);
+      }
+      if (catStatus === 'error') {
+        setCachedPages((oldCachedPages) =>
+          oldCachedPages.filter(
+            (oldPage) => oldPage !== page || oldPage !== page + 1
+          )
+        );
+      }
     }
-  }, [catStatus, dispatch, page]);
+  }, [dispatch, page, cachedPages, catStatus]);
+
   let content;
+  // let lodingMore = null;
+  // useEffect(() => {
+  //   if (catStatus === 'pending') {
+  //     lodingMore = <h3>Cargando...</h3>;
+  //   }
+  // }, [catStatus]);
 
   if (catStatus === 'pending') {
     content = <BackdropLoading />;
@@ -96,6 +121,7 @@ const Catalogue = () => {
           <Box mt={3}>
             <Grid container spacing={3}>
               {content}
+              {catStatus === 'pending' ? <h3>Cargando...</h3> : null}
             </Grid>
           </Box>
           <Grid item container>
