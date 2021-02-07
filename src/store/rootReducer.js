@@ -4,7 +4,7 @@ import catalogueSlice from 'views/Catalogue/catalogueSlice';
 // import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
 import QuizLoaderSlice from 'views/QuizLoader/QuizLoaderSlice';
-import UserProfileSlice from 'views/UserProfile/UserProfileSlice';
+import profileSlice from 'views/UserProfile/profileSlice';
 import SchoolSlice from 'views/School/SchoolSlice';
 import TeacherSlice from 'views/Teacher/TeacherSlice';
 import quizDetailSlice from 'views/QuizProfile/quizDetailSlice';
@@ -17,10 +17,10 @@ const rootReducer = {
   actions: actionsSlice.reducer,
   auth: authSlice.reducer,
   catalogue: catalogueSlice.reducer,
-  QuizLoader: QuizLoaderSlice.reducer,
-  Profile: UserProfileSlice.reducer,
-  School: SchoolSlice.reducer,
   quizDetail: quizDetailSlice.reducer,
+  profile: profileSlice.reducer,
+  QuizLoader: QuizLoaderSlice.reducer,
+  School: SchoolSlice.reducer,
   Teacher: TeacherSlice.reducer,
 };
 

@@ -17,13 +17,12 @@ import ProfileTabs from './ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileData } from 'views/UserProfile/UserProfileSlice';
+import { getUserData } from 'views/UserProfile/profileSlice';
 import {
   ProfileSelector,
   ProfileStatusSelector,
   authStatusSelector,
 } from 'utils/selectors';
-import { isWidthUp } from '@material-ui/core';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
 
@@ -33,12 +32,9 @@ const bg_img =
 const useStyles = makeStyles(styles);
 
 const {
-  id,
   img,
   social,
-  name,
   role: propRole,
-  bio,
   courses,
   favourites,
   activity,
@@ -56,6 +52,9 @@ export default function ProfilePage(props) {
 
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
+    if (user.id !== id) {
+      dispatch(getUserData(id));
+    }
   }, [user, authStatus]);
 
   const classes = useStyles();

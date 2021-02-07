@@ -24,7 +24,9 @@ export const COUNT_QUIZ_ENDPOINT = QUIZ_ENDPOINT + '/all/quizzes';
 
 export const SUBJECT_ENDPOINT = BASE_ENDPOINT + '/subject';
 
-export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/auth/me/';
+export const USER_PROFILE_ENDPOINT = BASE_ENDPOINT + '/user';
+
+export const SCHOOL_PROFILE_ENDPOINT = BASE_ENDPOINT + '/school';
 
 export const QUIZ_INFO_ENDPOINT = QUIZ_ENDPOINT + '/info';
 
