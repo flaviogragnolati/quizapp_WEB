@@ -29,8 +29,8 @@ function QuizTeacher() {
   const user = useSelector(userSelector);
 
   const classes = useStyles();
-  let columnName = ['Nombre del Quiz', 'Description' ,'Preguntas', 'Editar','Aceptar alumnos'];
-  let ButtonName = ['Editar Preguntas', 'Editar Quiz','Enrolar'];
+  let columnName = ['Nombre del Quiz', 'Description' ,'Preguntas','Aceptar alumnos'];
+  let ButtonName = ['Editar Preguntas', 'Enrolar'];
 
   useEffect(() => {
     dispatch(getQuizesTeacher(user.id));

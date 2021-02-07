@@ -99,6 +99,11 @@ export const UserDetailStatusSelector = (state) =>
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
 export const QuestionsStatusSelector = (state) => state.status;
 
+
+export const QuestionsDetailStatusSelector = (state) => state.School.QuestionDetail.status;
+export const QuestionsDetailSelector = (state) => state.School.QuestionDetail.data;
+
+
 //Teacher selectors
 export const TeacherQuizSelector = (state) => state.Teacher.TeacherQuizList;
 export const TeacherQuizStatusSelector = (state) => state.Teacher.status;

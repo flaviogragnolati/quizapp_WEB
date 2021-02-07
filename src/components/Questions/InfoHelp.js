@@ -5,17 +5,17 @@ export const infoQuizModel = {
     requiredErrorMsg: "Titulo is required",
     minErrorMsg: "Titulo must be >2 chars",
   },
-  description: {
-    name: "description",
+  question: {
+    name: "question",
     label: "Last name*",
     requiredErrorMsg: "description is required",
     minErrorMsg: "description must be >2 chars",
   },
 };
 
-const { title, description } = infoQuizModel;
+const { title, question } = infoQuizModel;
 
 export const initialState_Info = {
   [title.name]: "",
-  [description.name]: "",
+  [question.name]: "",
 };

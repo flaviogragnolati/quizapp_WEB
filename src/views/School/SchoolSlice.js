@@ -22,6 +22,10 @@ const initialState_School = {
     data: {},
     role: {},
     status: 'idle',
+  },
+  QuestionDetail:{
+    data:{},
+    status: status.idle,
   }
 };
 
@@ -154,6 +158,11 @@ const SchoolSlice = createSlice({
       state.UserDetail.status = status.idle;
       state.UserDetail.data = {}
     },
+    setQuestionDetail: (state,{payload}) =>{
+      state.QuestionDetail.data = payload
+      state.QuestionDetail.status = status.pending
+      state.QuestionDetail.status = status.success
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
@@ -220,6 +229,6 @@ const SchoolSlice = createSlice({
   },
 });
 
-export const { cleanUser  } = SchoolSlice.actions
+export const { cleanUser, setQuestionDetail  } = SchoolSlice.actions
 
 export default SchoolSlice;

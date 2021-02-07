@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
 
 function QuestionLoader() {
   const Dispatch = useDispatch();
-
   const questions = useSelector(QuestionsSelector);
   const questionsStatus = useSelector(QuestionsStatusSelector);
   const params = useParams();

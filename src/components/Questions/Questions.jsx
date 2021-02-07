@@ -5,8 +5,11 @@ import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoT
 import QuestionInfo from "components/Questions/QuestionInfo";
 import QuestionMulti from "components/Questions/QuestionMulti";
 import QuestionTF from "components/Questions/QuestionTF";
-import { useEffect } from "react";
+import { ACTIONS } from "store/rootReducer";
 
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -41,6 +44,7 @@ const questionInfo = {
 const Questions = ({ question, reset }) => {
   const [multi, setMulti] = useState();
   const [multiAns, setMultiAns] = useState(questionInfo.answers);
+  const Dispatch =  useDispatch()
 
   const handleAnsDelete = (id) => {
     setMultiAns((prevAns) => prevAns.filter((ans) => ans.id !== id));
@@ -58,8 +62,12 @@ const Questions = ({ question, reset }) => {
     handleAnsDelete,
     handleAnsAdd,
   };
+   useEffect(() => {
+     if(question){
 
-  // useEffect(() => {}, [multiAns]);
+       Dispatch(ACTIONS.School.setQuestionDetail(question))
+     }
+   }, [question]);
 
   return (
     <>

@@ -14,8 +14,11 @@ import {
 } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import { infoQuizModel, initialState_Info } from "./InfoHelp";
+import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
+import { useDispatch, useSelector } from "react-redux";
 
-const { title, description } = infoQuizModel;
+
+const { title, question } = infoQuizModel;
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -46,43 +49,53 @@ function QuestionInfo({ info, setMulti, reset }) {
   };
 
   const [infoQuestion, setinfoQuestion] = useState({})
-  const [sync, setSync] = useState(true)
-  // console.log('tu vieja suelta info', info)
-  // console.log('tu vieja suelta infoQuestion', infoQuestion)
+  const [sync, setSync] = useState(false)
+  const QuestionDetail = useSelector(QuestionsDetailSelector)
+  const QuestionStatusDetail = useSelector(QuestionsDetailStatusSelector)
+  
+  let editValues = initialState_Info
+  
+  // useEffect(() => {
+  //   if(sync === false){
+      
+  //     setSync(true)
+  //   }
+  // }, [QuestionDetail])
+  
+//   if(sync){
+//   editValues.title = QuestionDetail.title
+//   editValues.question = QuestionDetail.question
 
-  useEffect(() => {
-    console.log('useEfect')
-    if(sync === false){
-      console.log('tu vieja en useEffect', infoQuestion)
-      setSync(true)
-      setinfoQuestion(info)
+// }
+
+  // if(QuestionStatusDetail === 'success'){
+    if(QuestionDetail.title !== editValues.title){
+      console.log( 'ENTRO AL IF',QuestionDetail)
+        editValues.title = QuestionDetail.title
+  editValues.question = QuestionDetail.question
+
+      // setSync(false)
     }
-  }, [sync])
-
-  if(info.title !== infoQuestion.title || info.question !== infoQuestion.question){
-       setSync(false)
-       setinfoQuestion(info)
-
-
-  }
-
+  // }
+console.log('EDIT VALUE', QuestionStatusDetail)
   const classes = useStyles();
   return (
     <>
-      <Formik onSubmit={handleSubmit} initialValues={ {title: infoQuestion.title, question: infoQuestion.question }}>
+      <Formik onSubmit={handleSubmit} initialValues={ editValues !== initialState_Info ? editValues : initialState_Info}>
         {(formik) => (
           <Form Style="display: contents;">
             <Grid item xs={5}>
               
-              <Field
+              <TextField
                 label="Title"
                 name="title"
-                component={TextField}
+                // component={TextField}
                 required
-                defaultValue={infoQuestion.title}
+                value={formik.values.title}
+                onChange={formik.handleChange}
                 variant="outlined"
-                multiline
-                rowsMax={3}
+                // multiline
+                // rowsMax={3}
               />
             </Grid>
             <Grid item xs={3}>
@@ -102,13 +115,14 @@ function QuestionInfo({ info, setMulti, reset }) {
             </Grid>
             <Grid xs={9}></Grid>
             <Grid xs={9}>
-              <Field
+            <TextField
                 fullWidth
                 label="Question"
                 name="question"
-                component={TextField}
+                // component={TextField}
                 required
-                defaultValue={infoQuestion.question}
+                value={formik.values.question}
+                onChange={formik.handleChange}
                 variant="outlined"
               />
             </Grid>
