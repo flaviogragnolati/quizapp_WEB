@@ -28,6 +28,18 @@ export const CreateQuiz = createAsyncThunk(
     }
   );
 
+  export const UpdateQuestion = createAsyncThunk(
+    'Quiz/UpdateQuestion',
+    async (payload) => {
+
+      payload.modifiedBy = 1;
+      payload.createdBy = 1;
+      const UpdateQuestion_response = await axios.put(QUESTIONS_ENDPOINT +'/' + payload.id, payload);
+      // const { quiz, token } = UpdateQuestion_response;
+      return UpdateQuestion_response.data;
+    }
+  );
+
   export const getAllQuestions = createAsyncThunk(
     'Quiz/getAllQuestions',
     async (payload) => {
@@ -96,6 +108,16 @@ const QuizLoaderSlice = createSlice({
       state.status = status.success;
     },
     [deleteQuestion.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [UpdateQuestion.pending]: (state, {payload  }) => {
+      state.status = status.pending;
+    },
+    [UpdateQuestion.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+    },
+    [UpdateQuestion.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

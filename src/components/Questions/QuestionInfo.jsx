@@ -16,6 +16,7 @@ import { Field, Form, Formik } from "formik";
 import { infoQuizModel, initialState_Info } from "./InfoHelp";
 import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
 import { useDispatch, useSelector } from "react-redux";
+import { UpdateQuestion } from "views/QuizLoader/QuizLoaderSlice";
 
 
 const { title, question } = infoQuizModel;
@@ -44,44 +45,34 @@ function QuestionInfo({ info, setMulti, reset }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    console.log(e);
-  };
-
-  const [infoQuestion, setinfoQuestion] = useState({})
-  const [sync, setSync] = useState(false)
+  
+  
   const QuestionDetail = useSelector(QuestionsDetailSelector)
-  const QuestionStatusDetail = useSelector(QuestionsDetailStatusSelector)
+  const Dispatch = useDispatch()
   
   let editValues = initialState_Info
   
-  // useEffect(() => {
-  //   if(sync === false){
-      
-  //     setSync(true)
-  //   }
-  // }, [QuestionDetail])
+  const handleSubmit = (values, formik) => {
+    console.log(values);
+    values.id = QuestionDetail.id
+    Dispatch(UpdateQuestion(values))
+  };
+  useEffect(() => {
   
-//   if(sync){
-//   editValues.title = QuestionDetail.title
-//   editValues.question = QuestionDetail.question
+  }, [Dispatch])
+  
 
-// }
 
-  // if(QuestionStatusDetail === 'success'){
     if(QuestionDetail.title !== editValues.title){
       console.log( 'ENTRO AL IF',QuestionDetail)
         editValues.title = QuestionDetail.title
-  editValues.question = QuestionDetail.question
+      editValues.question = QuestionDetail.question
 
-      // setSync(false)
     }
-  // }
-console.log('EDIT VALUE', QuestionStatusDetail)
   const classes = useStyles();
   return (
     <>
-      <Formik onSubmit={handleSubmit} initialValues={ editValues !== initialState_Info ? editValues : initialState_Info}>
+      <Formik onSubmit={handleSubmit} initialValues={ editValues }>
         {(formik) => (
           <Form Style="display: contents;">
             <Grid item xs={5}>
