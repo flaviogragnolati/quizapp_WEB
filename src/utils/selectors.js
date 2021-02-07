@@ -32,6 +32,7 @@ export const catalogueFilterSelector = (state) => state.catalogue.filter;
 //Quiz Detail Selectors
 export const quizDetailStatusSelector = (state) => state.quizDetail.status;
 export const quizDetailSelector = (state, id) => state.quizDetail.detail[id];
+export const quizDetailHistorySelector = (state) => state.quizDetail.idHistory;
 // export const selectQuizDetailById = createSelector(
 //   [
 //     quizzesSelector,

@@ -24,26 +24,18 @@ export const getQuizDetailAsync = createAsyncThunk(
   {
     condition: (payload, { getState }) => {
       const { quizDetail } = getState();
-      const { idHistory } = quizDetail;
-      if (idHistory.includes(payload)) {
-        console.log(
-          `detail for ${payload} Memoized, will only refetch after 5min`
-        );
+      const { idHistory, status } = quizDetail;
+
+      if (idHistory.includes(payload) || status === 'pending') {
         return false;
       }
     },
   }
 );
 
-const isPendingAction = isPending(
-  getQuizDetailAsync,
-);
-const isFulfilledAction = isFulfilled(
-  getQuizDetailAsync,
-);
-const isRejectedAction = isRejected(
-  getQuizDetailAsync,
-);
+const isPendingAction = isPending(getQuizDetailAsync);
+const isFulfilledAction = isFulfilled(getQuizDetailAsync);
+const isRejectedAction = isRejected(getQuizDetailAsync);
 
 const quizDetailSlice = createSlice({
   name: 'quizDetail',

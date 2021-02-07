@@ -26,6 +26,7 @@ import { quizDetailSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { enrollUser } from 'views/Teacher/TeacherSlice';
 import BackdropLoading from 'components/Loading/BackdropLoading';
+import { quizDetailHistorySelector } from 'utils/selectors';
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -242,6 +243,7 @@ function QuizProfile(props) {
   const id = props.match.params.id;
   const quizDetailStatus = useSelector(quizDetailStatusSelector);
   const quizDetail = useSelector((state) => quizDetailSelector(state, id));
+  const quizDetailHistory = useSelector(quizDetailHistorySelector);
   const user = useSelector(userSelector);
 
   // const quizDetailStatus = useSelector((state) =>
@@ -264,15 +266,16 @@ function QuizProfile(props) {
   };
 
   useEffect(() => {
-    if (quizDetailStatus === 'idle') {
+    if (!quizDetailHistory.includes(parseInt(id))) {
       dispatch(getQuizDetailAsync(id));
     }
-  }, [dispatch, quizDetailStatus, id]);
+  }, [dispatch, quizDetailStatus, quizDetailHistory, id]);
+
   if (quizDetailStatus === 'pending') {
     return <BackdropLoading />;
   } else if (quizDetailStatus === 'error') {
     return <h1>Ha ocurrido un error metele F5</h1>;
-  } else if (quizDetailStatus === 'success') {
+  } else if (quizDetailStatus === 'success' && !!quizDetail) {
     var {
       name,
       quantity,
@@ -365,7 +368,7 @@ function QuizProfile(props) {
                       display="inline"
                       variant="body2"
                     >
-                      { quantity && quantity}
+                      {quantity && quantity}
                     </Typography>
                   </Button>
                 </span>
