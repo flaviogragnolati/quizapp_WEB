@@ -20,13 +20,13 @@ const initialState_Teacher = {
 //GET
 
 export const getQuizesTeacher = createAsyncThunk(
-  "school/GetQuizesTeacher", async (payload) => {
+  "teacher/getQuizesTeacher", async (payload) => {
     const Quiz = await axios.get(TEACHER_ENDPOINT + 'quizzesTeacher/' + payload);
     return Quiz.data;
 });
 
 export const getToEnrollList = createAsyncThunk(
-    "school/GetToEnrollList", async (payload) => {
+    "teacher/getToEnrollList", async (payload) => {
       const Quiz = await axios.get(ENROLLS_ENDPOINT + payload);
       return Quiz.data;
   });
@@ -34,13 +34,13 @@ export const getToEnrollList = createAsyncThunk(
 //POST
 
 export const enrollToSudent = createAsyncThunk(
-  "school/EnrollToSudent", async (payload) => {
+  "teacher/enrollToSudent", async (payload) => {
     const Quiz = await axios.post(TO_STUDENT , payload);
     return Quiz.data;
 });
 
 export const enrollUser = createAsyncThunk(
-  "quizDetail/enrollUser", async ({ UserId, QuizId }) => {
+  "teacher/enrollUser", async ({ UserId, QuizId }) => {
     console.log({ UserId, QuizId })
     const Quiz = await axios.post(TO_ENROLL , { UserId, QuizId });
     return Quiz.data;
@@ -62,7 +62,7 @@ const isRejectedAction = isRejected(
     );
 
 const TeacherSlice = createSlice({
-  name: "school",
+  name: "teacher",
   initialState: initialState_Teacher,
   reducers: {},
   extraReducers: (builder) => {

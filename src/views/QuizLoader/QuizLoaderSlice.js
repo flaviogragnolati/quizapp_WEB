@@ -17,7 +17,7 @@ export const CreateQuiz = createAsyncThunk(
   );
 
   export const CreateQuestion = createAsyncThunk(
-    'Quiz/CreateQuestions',
+    'Quiz/CreateQuestion',
     async (payload) => {
 
       payload.modifiedBy = 1;
@@ -29,7 +29,7 @@ export const CreateQuiz = createAsyncThunk(
   );
 
   export const getAllQuestions = createAsyncThunk(
-    'Questions/getAllQuestions',
+    'Quiz/getAllQuestions',
     async (payload) => {
       const Questions_response = await axios.get(QUIZ_ENDPOINT +'/'+ payload );
       return Questions_response.data.questions.byId;
@@ -37,7 +37,7 @@ export const CreateQuiz = createAsyncThunk(
   );
 
   export const deleteQuestion = createAsyncThunk(
-    'Questions/deleteQuestion',
+    'Quiz/deleteQuestion',
     async (payload) => {
       const Questions_response = await axios.delete(QUESTIONS_ENDPOINT +'/'+ payload );
       return Questions_response.data;
