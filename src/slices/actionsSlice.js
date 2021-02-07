@@ -11,9 +11,15 @@ const actionsSlice = createSlice({
   initialState: initialState_Actions,
   reducers: {
     enroll: (state, payload) => {},
+    addToFavorites: (state, action) => {},
+    removeFromFavorites: (state, action) => {},
   },
 });
 
-export const { enroll } = actionsSlice.actions;
+export const {
+  enroll,
+  addToFavorites,
+  removeFromFavorites,
+} = actionsSlice.actions;
 
 export default actionsSlice;

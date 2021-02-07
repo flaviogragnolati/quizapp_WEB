@@ -32,8 +32,8 @@ const allTypesAsync = (thunk) => {
 };
 
 const listenArray = [
-  ACTIONS.favorites.addToFavorites.type,
-  ACTIONS.favorites.removeFromFavorites.type,
+  ACTIONS.actions.addToFavorites.type,
+  ACTIONS.actions.removeFromFavorites.type,
   ACTIONS.actions.enroll.type,
   ACTIONS.auth.logout.type,
   ACTIONS.catalogue.filter.type, //'catalogue/filter'
@@ -90,10 +90,10 @@ const notificationMiddleware = (store) => (next) => (action) => {
   };
   if (listenArray.includes(action.type)) {
     //Si la accion es alguna de las que estamos esuchando:
-    if (action.type.includes('favorites/add')) {
+    if (action.type.includes('actions/add')) {
       snackbar.message = `Se agrego el curso a favoritos`;
       snackbar.options.variant = 'success';
-    } else if (action.type.includes('favorites/remove')) {
+    } else if (action.type.includes('actions/remove')) {
       snackbar.message = `Se elimino el curso de favoritos`;
       snackbar.options.variant = 'warning';
     } else if (action.type.includes('actions/enroll')) {
