@@ -8,11 +8,11 @@ import {
 import { status } from 'utils/helpers';
 import axios from 'axios';
 import {
-  SCHOOL_REGISTER_ENDPOINT,
+  SCHOOL_PREREGISTER_ENDPOINT,
   USER_REGISTER_ENDPOINT,
   RESTORE_ENDPOINT,
   LOGIN_ENDPOINT,
-  FINAL_REGISTER_SCHOOL_ENDPOINT,
+  SCHOOL_FINAL_REGISTER_ENDPOINT,
   LOGIN_ORG_ENDPOINT,
 } from 'utils/endpoints';
 
@@ -101,7 +101,10 @@ export const restoreSession = createAsyncThunk(
 export const contactSchool = createAsyncThunk(
   'contact/contactSchool',
   async (payload) => {
-    const SchoolContact = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
+    const SchoolContact = await axios.post(
+      SCHOOL_PREREGISTER_ENDPOINT,
+      payload
+    );
     return SchoolContact;
   }
 );
@@ -110,7 +113,7 @@ export const finalRegisterSchool = createAsyncThunk(
   'school/finalRegisterSchool',
   async (payload, { dispatch }) => {
     const SchoolFinalRegister_response = await axios.post(
-      FINAL_REGISTER_SCHOOL_ENDPOINT,
+      SCHOOL_FINAL_REGISTER_ENDPOINT,
       payload
     );
     const { user, token } = SchoolFinalRegister_response.data;

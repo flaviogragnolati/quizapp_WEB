@@ -6,10 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-import {
-  USER_PROFILE_ENDPOINT,
-  SCHOOL_PROFILE_ENDPOINT,
-} from 'utils/endpoints';
+import { USER_PROFILE_ENDPOINT, SCHOOL_ENDPOINT } from 'utils/endpoints';
 
 const initialState_Profile = {
   status: status.idle,
@@ -31,7 +28,7 @@ export const getSchoolData = createAsyncThunk(
   'profile/getSchoolData',
   async (payload) => {
     const schoolData_response = await axios.get(
-      SCHOOL_PROFILE_ENDPOINT + payload
+      SCHOOL_ENDPOINT + '/' + payload
     );
     return schoolData_response.data;
   }

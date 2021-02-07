@@ -19,8 +19,9 @@ import { useAuth } from 'components/Auth/AuthContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from 'views/UserProfile/profileSlice';
 import {
-  ProfileSelector,
-  ProfileStatusSelector,
+  userProfileSelector,
+  schoolProfileSelector,
+  profileStatusSelector,
   authStatusSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
@@ -31,15 +32,7 @@ const bg_img =
 
 const useStyles = makeStyles(styles);
 
-const {
-  img,
-  social,
-  role: propRole,
-  courses,
-  favourites,
-  activity,
-  teacherIn,
-} = fakeUser;
+const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 
 export default function ProfilePage(props) {
   const dispatch = useDispatch();
