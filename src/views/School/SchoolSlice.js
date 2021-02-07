@@ -27,13 +27,13 @@ const initialState_School = {
 
 //GET
 
-export const getQuizList = createAsyncThunk("school/GetQuizList", async () => {
+export const getQuizList = createAsyncThunk("school/getQuizList", async () => {
   const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
   return Quiz;
 });
 
 export const getSubjectsList = createAsyncThunk(
-  "School/GetSubjectsList",
+  "school/getSubjectsList",
   async () => {
     const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
     return Subject.data;
@@ -41,7 +41,7 @@ export const getSubjectsList = createAsyncThunk(
 );
 
 export const getUserEmail = createAsyncThunk(
-  "School/getUserEmail",
+  "school/getUserEmail",
   async ({Id, email}) => {
     const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response.data ;
@@ -59,7 +59,7 @@ export const getUserEmail = createAsyncThunk(
 //POST
 
 export const createSubject = createAsyncThunk(
-  "School/Create_Subject",
+  "school/createSubject",
   async (payload) => {
     payload.SchoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
@@ -69,7 +69,7 @@ export const createSubject = createAsyncThunk(
 );
 
 export const postUserToTeacher = createAsyncThunk(
-  "School/postUserToTeacher",
+  "school/postUserToTeacher",
   async ({QuizId, UserId}) => {
     const User_Email_response = await axios.post(TEACHER_ENDPOINT, {QuizId , UserId});
     return User_Email_response.data ;
@@ -79,7 +79,7 @@ export const postUserToTeacher = createAsyncThunk(
 //DELETE
 
 export const delateSubject = createAsyncThunk(
-  "School/Delate_Subject",
+  "school/delateSubject",
   async (payload) => {
     const delete_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
     return delete_response.data;
@@ -87,7 +87,7 @@ export const delateSubject = createAsyncThunk(
 );
 
 export const delateQuiz = createAsyncThunk(
-  "School/Delate_Quiz",
+  "school/delateQuiz",
   async (payload) => {
     const delete_response = await axios.delete(QUIZ_ENDPOINT + "/" + payload);
     return delete_response.data;
@@ -95,7 +95,7 @@ export const delateQuiz = createAsyncThunk(
 );
 
 export const removeTeacher = createAsyncThunk(
-  "School/removeTeacher",
+  "school/removeTeacher",
   async ({QuizId , UserId}) => {
     const delete_response = await axios.delete(TEACHER_ENDPOINT + '?UserId=' + UserId + '&&QuizId=' + QuizId);
     return delete_response.data;
@@ -105,7 +105,7 @@ export const removeTeacher = createAsyncThunk(
 //PUT
 
 export const editSubject = createAsyncThunk(
-  "School/Edit_Subject",
+  "school/editSubject",
   async (payload) => {
     console.log(payload.id);
     const Subject_response = await axios.put(

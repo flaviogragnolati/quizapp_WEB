@@ -42,7 +42,7 @@ function SideBar() {
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
   const Dispatch = useDispatch();
   const user = useAuth();
-
+  console.log(user)
   const handleLogout = () => {
     Dispatch(ACTIONS.auth.logout());
   };

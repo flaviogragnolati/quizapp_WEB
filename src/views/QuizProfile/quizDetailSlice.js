@@ -56,4 +56,5 @@ const quizDetailSlice = createSlice({
     });
   },
 });
+
 export default quizDetailSlice;
