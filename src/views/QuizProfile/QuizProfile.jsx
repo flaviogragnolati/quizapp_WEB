@@ -217,49 +217,14 @@ const handleClick = () => {
 
 const openDate = new Date().toISOString().split('T')[0];
 const closeDate = new Date('2021-03-22').toISOString().split('T');
-// const teachers = [
-//   { id: 1, name: 'Niels Bohr', school: 'University of Copenhagen' },
-//   { id: 2, name: 'Werner Heisenberg', school: 'University of Munich' },
-//   { id: 3, name: 'Paul Dirac', school: 'University of Cambridge' },
-// ];
 
 function QuizProfile(props) {
-  //   const { quizDetail } = props.location.state;
-  // const {
-  //   // img,
-  //   schoolName,
-  //   subjectName,
-  //   quizName,
-  //   totalStudents,
-  //   openDate,
-  //   closeDate,
-  //   quizDescription,
-  //   quizReviews,
-  //   schoolContactInfo,
-  //   teachers,
-  // } = quizDetail;
-
   const dispatch = useDispatch();
   const id = props.match.params.id;
   const quizDetailStatus = useSelector(quizDetailStatusSelector);
   const quizDetail = useSelector((state) => quizDetailSelector(state, id));
   const quizDetailHistory = useSelector(quizDetailHistorySelector);
   const user = useSelector(userSelector);
-
-  // const quizDetailStatus = useSelector((state) =>
-  //   selectQuizDetailById(state, id)
-  // );
-
-  // const {
-  //   name,
-  //   quantity,
-  //   logo,
-  //   description,
-  //   Subject: { name: subjectName },
-  //   School: { name: schoolName },
-  //   Reviews,
-  //   QuizTags,
-  // } = quizDetailStatus;
 
   const handleEnroll = (values) => {
     dispatch(enrollUser({ UserId: user.id, QuizId: quizDetail.id }));

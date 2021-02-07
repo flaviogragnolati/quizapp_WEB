@@ -61,7 +61,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   };
 
   const handleMenuProfile = () => {
-    history.push('/profile/1');
+    history.push(`/profile/${user.id}`);
     handleMenuClose();
   };
 
@@ -92,9 +92,11 @@ function NavBar({ toggleTheme, checked, theme }) {
       onClose={handleMenuClose}
       position="fixed"
     >
-      <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
       {Boolean(user) ? (
-        <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
+        <>
+          <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
+          <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
+        </>
       ) : (
         <MenuItem
           onClick={() => {
@@ -146,7 +148,7 @@ function NavBar({ toggleTheme, checked, theme }) {
       <AppBar position="fixed" color="secondary">
         <Toolbar>
           <IconButton
-          onClick={() => toggleSideBar()} 
+            onClick={() => toggleSideBar()}
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -167,18 +169,16 @@ function NavBar({ toggleTheme, checked, theme }) {
           </Button>
           <div className={classes.grow} />
           {Boolean(!user) ? (
-       <Button
-       variant="outlined"
-       color="primary"
-       size="Large"
-       component={Link}
-       to="/login"
-     >
-       LOG IN
-     </Button>
-      ) : (
-       null
-      )}
+            <Button
+              variant="outlined"
+              color="primary"
+              size="Large"
+              component={Link}
+              to="/login"
+            >
+              LOG IN
+            </Button>
+          ) : null}
           <div className={classes.sectionDesktop}>
             <IconButton>
               <ThemeToggler toggleTheme={toggleTheme} checked={checked} />

@@ -13,7 +13,7 @@ import {
   RESTORE_ENDPOINT,
   LOGIN_ENDPOINT,
   FINAL_REGISTER_SCHOOL_ENDPOINT,
-  LOGIN_ORG_ENDPOINT
+  LOGIN_ORG_ENDPOINT,
 } from 'utils/endpoints';
 
 const initialState_Auth = {
@@ -50,16 +50,6 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-/* export const registerSchool = createAsyncThunk(
-  'school/register',
-  async (payload, { dispatch }) => {
-    const school_response = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
-    const { user, token } = school_response.data;
-    dispatch(setToken(token));
-    return user;
-  }
-); */
-
 export const localLogin = createAsyncThunk(
   'auth/localLogin',
   async (payload, { dispatch }) => {
@@ -67,7 +57,6 @@ export const localLogin = createAsyncThunk(
     const { user, token } = login_response.data;
     dispatch(setToken(token)); //!no esta bien visto en bajo los ojos de la redux pipol
     return user;
-
   }
 );
 
@@ -80,7 +69,6 @@ export const localOrgLogin = createAsyncThunk(
     return user;
   }
 );
-
 
 export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
@@ -111,21 +99,25 @@ export const restoreSession = createAsyncThunk(
 );
 
 export const contactSchool = createAsyncThunk(
-  "contact/contactSchool",
+  'contact/contactSchool',
   async (payload) => {
     const SchoolContact = await axios.post(SCHOOL_REGISTER_ENDPOINT, payload);
     return SchoolContact;
   }
 );
 
-export const finalRegisterSchool = createAsyncThunk("school/finalRegisterSchool",
-async (payload, { dispatch }) => {
-  const SchoolFinalRegister_response = await axios.post(FINAL_REGISTER_SCHOOL_ENDPOINT, payload);
-  const { user, token } = SchoolFinalRegister_response.data;
-  dispatch(setToken(token));
-  console.log('USER Y TOKEN ', user, token)
-  return user;
-});
+export const finalRegisterSchool = createAsyncThunk(
+  'school/finalRegisterSchool',
+  async (payload, { dispatch }) => {
+    const SchoolFinalRegister_response = await axios.post(
+      FINAL_REGISTER_SCHOOL_ENDPOINT,
+      payload
+    );
+    const { user, token } = SchoolFinalRegister_response.data;
+    dispatch(setToken(token));
+    return user;
+  }
+);
 
 const isPendingAction = isPending(
   registerUser,

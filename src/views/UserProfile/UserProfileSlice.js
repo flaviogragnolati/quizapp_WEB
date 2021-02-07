@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
-import {
-    USER_PROFILE_ENDPOINT,
-} from 'utils/endpoints';
+import { USER_PROFILE_ENDPOINT } from 'utils/endpoints';
 
 const initialState_Profile = {
   status: status.idle,
@@ -16,7 +14,7 @@ const initialState_Profile = {
 export const getProfileData = createAsyncThunk(
   'auth/getProfileData',
   async (payload) => {
-    const data = await axios.get(USER_PROFILE_ENDPOINT + payload );
+    const data = await axios.get(USER_PROFILE_ENDPOINT + payload);
     return data;
   }
 );
@@ -24,10 +22,9 @@ export const getProfileData = createAsyncThunk(
 const UserProfileSlice = createSlice({
   name: 'getProfileData',
   initialState: initialState_Profile,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: {
-    [getProfileData.pending]: (state, {  }) => {
+    [getProfileData.pending]: (state, {}) => {
       state.status = status.pending;
     },
     [getProfileData.fulfilled]: (state, { payload }) => {
@@ -40,6 +37,5 @@ const UserProfileSlice = createSlice({
     },
   },
 });
-
 
 export default UserProfileSlice;

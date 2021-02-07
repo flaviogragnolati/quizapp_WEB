@@ -49,7 +49,6 @@ const Catalogue = () => {
     setPage(value);
   };
   const [cachedPages, setCachedPages] = useState([]);
-
   useEffect(() => {
     if (!cachedPages.includes(page)) {
       const params = {
