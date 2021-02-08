@@ -41,9 +41,7 @@ function App(props) {
           <SideBar />
         </SideBarContext.Provider>
         <div Style="padding-top: 64px">
-          <Switch>
-            <AppRoutes />
-          </Switch>
+          <AppRoutes />
         </div>
         <hr></hr>
         <FloatingBack />

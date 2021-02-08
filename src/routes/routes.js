@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import OnlyGuestRoute from 'components/Auth/OnlyGuestRoute';
 import Home from 'views/Home';
 import Login from 'views/Login/Login';
@@ -63,60 +63,63 @@ export const routes = [
 
 export const createRoutes = (routes) => {
   if (routes.length < 1) return null;
+  return (
+    <Switch>
+      {routes.map((route, idx) => {
+        if (routes.length === idx + 1) {
+          return <Route component={NotFound} />;
+        }
+        switch (route.access) {
+          case 'guest':
+            return (
+              <Route
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
+          case 'onlyGuest':
+            return (
+              <OnlyGuestRoute
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
+          case 'user':
+            return (
+              <Route
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
 
-  return routes.map((route, idx) => {
-    if (routes.length === idx + 1) {
-      return <Route key={idx} path="" component={NotFound} />;
-    }
-    switch (route.access) {
-      case 'guest':
-        return (
-          <Route
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        );
-      case 'onlyGuest':
-        return (
-          <OnlyGuestRoute
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        );
-      case 'user':
-        return (
-          <Route
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        );
+          case 'admin':
+            return (
+              <Route
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
 
-      case 'admin':
-        return (
-          <Route
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        );
-
-      default:
-        console.error('ACCESS LEVEL NOT DEFINED');
-        return (
-          <Route
-            key={route.path + idx}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        );
-    }
-  });
+          default:
+            console.error('ACCESS LEVEL NOT DEFINED');
+            return (
+              <Route
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
+        }
+      })}
+    </Switch>
+  );
 };

@@ -81,7 +81,7 @@ export default function MyProfile(props) {
                 <div>
                   <img src={photo} alt="..." className={imageClasses} />
                 </div>
-                <Button color="secondary">
+                <Button color="secondary" link component={Link} to="">
                   <EditIcon></EditIcon>
                   Editar perfil
                 </Button>
