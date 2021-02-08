@@ -23,11 +23,7 @@ const initialState_School = {
     role: {},
     status: 'idle',
   },
-  QuestionDetail:{
-    data:{},
-    status: status.idle,
-    Answers : [],
-  }
+
 };
 
 //GET
@@ -159,12 +155,7 @@ const SchoolSlice = createSlice({
       state.UserDetail.status = status.idle;
       state.UserDetail.data = {}
     },
-    setQuestionDetail: (state,{payload}) =>{
-      state.QuestionDetail.data = payload;
-      payload.Answers  ? state.QuestionDetail.Answers = payload.Answers : state.QuestionDetail.Answers =[];
-     state.QuestionDetail.status = status.pending 
-      state.QuestionDetail.status = status.success
-    }
+
   },
   extraReducers: (builder) => {
     builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
