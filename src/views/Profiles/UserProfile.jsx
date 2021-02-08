@@ -37,102 +37,85 @@ const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 export default function ProfilePage(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useAuth();
-  const authStatus = useSelector(authStatusSelector);
   const id = parseInt(useParams().id);
-
-  let showDetails, role;
+  const profileStatus = useSelector(profileStatusSelector);
+  const user = useSelector(userProfileSelector);
 
   useEffect(() => {
-    if (!user && authStatus !== 'error') return <BackdropLoading />;
-  }, [user, authStatus]);
+    if (profileStatus === 'idle' || user.id !== id) {
+      dispatch(getUserData(id));
+    }
+  }, [dispatch, profileStatus, user, id]);
 
   const classes = useStyles();
-
-  if (authStatus === 'success') {
-    role = Boolean(user) && user.type;
-  }
 
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+
   let content;
-  if (authStatus === 'pending') {
+  if (profileStatus === 'pending') {
     content = <BackdropLoading />;
-  } else if (authStatus === 'error') {
-    history.push('/login');
-  } else if (authStatus === 'success') {
-    if (role === 'school') {
-    } else {
-      const { firstName, lastName, email, birthdate, cellphone, photo } = user;
-      content = (
-        <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.profile}>
-                <div>
-                  <img src={photo} alt="..." className={imageClasses} />
-                </div>
-                {showDetails && (
-                  <Button color="secondary">
-                    <EditIcon></EditIcon>
-                    Editar perfil
-                  </Button>
-                )}
-                <div className={classes.name}>
-                  <h1
-                    className={classes.title}
-                  >{`${firstName} ${lastName}`}</h1>
-                  <h3 className={classes.subtitle}>{birthdate}</h3>
-                  <Button
-                    justIcon
-                    link
-                    className={classes.margin5}
-                    component={Link}
-                    to={social.tw}
-                  >
-                    <i className={'fab fa-twitter'} />
-                  </Button>
-                  <Button
-                    justIcon
-                    link
-                    className={classes.margin5}
-                    component={Link}
-                    to={social.ig}
-                  >
-                    <i className={'fab fa-instagram'} />
-                  </Button>
-                  <Button
-                    justIcon
-                    link
-                    className={classes.margin5}
-                    component={Link}
-                    to={social.fb}
-                  >
-                    <i className={'fab fa-facebook'} />
-                  </Button>
-                </div>
+  } else if (profileStatus === 'error') {
+    content = <h1>Ha ocurrido un error...metele F5</h1>;
+  } else if (profileStatus === 'success') {
+    const { firstName, lastName, email, birthdate, cellphone, photo } = user;
+    content = (
+      <div className={classes.container}>
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={6}>
+            <div className={classes.profile}>
+              <div>
+                <img src={photo} alt="..." className={imageClasses} />
               </div>
-            </GridItem>
-          </GridContainer>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-              {showDetails && (
-                <ProfileTabs
-                  activity={activity}
-                  courses={courses}
-                  favourites={favourites}
-                  teacherIn={teacherIn}
-                  role={role}
-                />
-              )}
-            </GridItem>
-          </GridContainer>
-        </div>
-      );
-    }
+              <div className={classes.name}>
+                <h1 className={classes.title}>{`${firstName} ${lastName}`}</h1>
+                <h3 className={classes.subtitle}>{birthdate}</h3>
+                <Button
+                  justIcon
+                  link
+                  className={classes.margin5}
+                  component={Link}
+                  to={social.tw}
+                >
+                  <i className={'fab fa-twitter'} />
+                </Button>
+                <Button
+                  justIcon
+                  link
+                  className={classes.margin5}
+                  component={Link}
+                  to={social.ig}
+                >
+                  <i className={'fab fa-instagram'} />
+                </Button>
+                <Button
+                  justIcon
+                  link
+                  className={classes.margin5}
+                  component={Link}
+                  to={social.fb}
+                >
+                  <i className={'fab fa-facebook'} />
+                </Button>
+              </div>
+            </div>
+          </GridItem>
+        </GridContainer>
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+            <ProfileTabs
+              activity={activity}
+              courses={courses}
+              favourites={favourites}
+              teacherIn={teacherIn}
+            />
+          </GridItem>
+        </GridContainer>
+      </div>
+    );
   }
 
   return (

@@ -64,7 +64,15 @@ export default function MyProfile(props) {
   } else if (authStatus === 'success') {
     if (role === 'school') {
     } else {
-      const { firstName, lastName, email, birthdate, cellphone, photo } = user;
+      const {
+        id,
+        firstName,
+        lastName,
+        email,
+        birthdate,
+        cellphone,
+        photo,
+      } = user;
       content = (
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -73,12 +81,10 @@ export default function MyProfile(props) {
                 <div>
                   <img src={photo} alt="..." className={imageClasses} />
                 </div>
-                {showDetails && (
-                  <Button color="secondary">
-                    <EditIcon></EditIcon>
-                    Editar perfil
-                  </Button>
-                )}
+                <Button color="secondary">
+                  <EditIcon></EditIcon>
+                  Editar perfil
+                </Button>
                 <div className={classes.name}>
                   <h1
                     className={classes.title}
@@ -117,15 +123,14 @@ export default function MyProfile(props) {
           </GridContainer>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-              {showDetails && (
-                <ProfileTabs
-                  activity={activity}
-                  courses={courses}
-                  favourites={favourites}
-                  teacherIn={teacherIn}
-                  role={role}
-                />
-              )}
+              <ProfileTabs
+                activity={activity}
+                courses={courses}
+                favourites={favourites}
+                teacherIn={teacherIn}
+                role={role}
+              />
+              ){' '}
             </GridItem>
           </GridContainer>
         </div>

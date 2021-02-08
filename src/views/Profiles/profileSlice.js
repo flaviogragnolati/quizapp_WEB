@@ -18,10 +18,24 @@ const initialState_Profile = {
 export const getUserData = createAsyncThunk(
   'profile/getUserData',
   async (payload) => {
-    //! estamos trayendo info que nos vamos a usar y es `privada`
-    //! hay que modificar la ruta (o crear una nueva) que solo envie informacion publica
-    const userData_response = await axios.get(USER_PROFILE_ENDPOINT + payload);
+    const userData_response = await axios.get(
+      USER_PROFILE_ENDPOINT + '/' + payload
+    );
     return userData_response.data;
+  },
+  {
+    condition: (payload, { getState }) => {
+      const {
+        profile: { status },
+      } = getState();
+      if (
+        status === status.pending ||
+        status === status.loading ||
+        status === status.error
+      ) {
+        return false;
+      }
+    },
   }
 );
 export const getSchoolData = createAsyncThunk(
