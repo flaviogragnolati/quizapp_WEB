@@ -5,9 +5,11 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { PropTypes } from 'prop-types';
 
-function AddRemove({ action, ...rest }) {
-  const [correct, setcorrect] = useState(false);
+function AddRemove({ action, respCorrect =false, boolean, ...rest }) {
+  const [correct, setcorrect] = useState(respCorrect);
   let content;
+  boolean(correct)
+  console.log(' CAMBIANDO',correct)
   if (correct === true) {
     content = <CheckCircleIcon style={{ color: 'green' }} {...rest} />;
   } else {

@@ -48,6 +48,7 @@ const Questions = ({ question, reset }) => {
   console.log(QuestionDetail.Answers)
   const [multi, setMulti] = useState();
   const [multiAns, setMultiAns] = useState([]);
+  const [boolean,SetBoolean] = useState(false);
   const Dispatch =  useDispatch()
   const handleAnsDelete = (id) => {
     console.log(id)
@@ -58,20 +59,20 @@ const Questions = ({ question, reset }) => {
   const handleAnsAdd = () => {
     setMultiAns((prevAns) => [
       ...prevAns,
-      { id: 'prueba', text: "", correct: false },
+      { id: 'prueba', text: "", correct: boolean },
     ]);
     // let { text, correct, QuestionId } = req.body;
     console.log('esto le envio', { QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:false})
-    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:false}))
+    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:boolean}))
   };
 
   const handleUpdate = (id)=>{
     let text =  document.getElementById(id).value
-    let correct = false
+    let correct = boolean;
     console.log( 'modificando',text)
     Dispatch(UpdateAnswers({text,id,correct}))
   }
-
+console.log('tengo mest6',boolean)
   const handlers = {
     handleAnsDelete,
     handleAnsAdd,
@@ -105,7 +106,7 @@ const Questions = ({ question, reset }) => {
         justify="space-between"
         alignItems="flex-start"
       >
-        {question ? <QuestionInfo info={question} setMulti={setMulti} reset={reset} /> : null}
+        {question ? <QuestionInfo info={question} setMulti={setMulti}  reset={reset} /> : null}
       </Grid>
       <Grid
         item
@@ -118,7 +119,7 @@ const Questions = ({ question, reset }) => {
       >
         {multi === undefined ? null : multi === 1 ? (
       multiAns.map((ans, idx) => {
-            return <QuestionMulti key={idx} answer={ans}  handlers={handlers} />;
+            return <QuestionMulti key={idx} answer={ans} SetBoolean={SetBoolean} handlers={handlers} />;
           })
         ) : multi === 2 ? (
           <QuestionTF answer={questionInfo.answersTF} />

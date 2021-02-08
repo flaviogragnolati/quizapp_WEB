@@ -17,9 +17,11 @@ import TrueFalse from '../TrueFalse/index';
 
 function QuestionMulti({
   answer,
+  SetBoolean,
    QuestionId,
     handlers: { handleAnsDelete, handleAnsAdd, handleUpdate, },
 }) {
+  console.log(answer, 'tu vieja')
   return (
     <>
       <Grid item md={8} xs={12}>
@@ -49,7 +51,7 @@ function QuestionMulti({
             texts={['Incorrecta', 'Correcta']}
             size="small"
           /> */}
-          <TrueFalse fontSize="large" />
+          <TrueFalse fontSize="large" respCorrect={answer.correct}  boolean={SetBoolean}  />
           <IconButton
             color="secondary"
             aria-label="delete answer"
