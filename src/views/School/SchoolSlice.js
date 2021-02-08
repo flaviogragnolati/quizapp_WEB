@@ -33,7 +33,7 @@ const initialState_School = {
 //GET
 
 export const getQuizList = createAsyncThunk("school/getQuizList", async () => {
-  const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
+  const Quiz = await axios.get(SCHOOL_ENDPOINT + '/' + 1 + "/quizzes");
   return Quiz;
 });
 
@@ -50,6 +50,14 @@ export const getUserEmail = createAsyncThunk(
   async ({Id, email}) => {
     const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
     return User_Email_response.data ;
+  }
+);
+
+export const getTeachersSchool = createAsyncThunk(
+  "school/getTeachersSchool",
+  async ({Id}) => {
+    const teacherResponse = await axios.get(TEACHER_ENDPOINT + 'school/'+ id);
+    return teacherResponse.data ;
   }
 );
 
@@ -128,6 +136,7 @@ const isPendingAction = isPending(
   delateSubject,
   delateQuiz,
   editSubject,
+  getTeachersSchool
 );
 
 const isRejectedAction = isRejected(
@@ -137,6 +146,7 @@ const isRejectedAction = isRejected(
   delateSubject,
   delateQuiz,
   editSubject,
+  getTeachersSchool,
 );
 
 const isPendingActionDetail = isPending(

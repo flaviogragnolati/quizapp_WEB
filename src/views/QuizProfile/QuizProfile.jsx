@@ -19,14 +19,17 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectQuizDetailById, catalogueStatusSelector } from 'utils/selectors';
+import { selectQuizDetailById, catalogueStatusSelector, UserRoleSelector } from 'utils/selectors';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { quizDetailStatusSelector, userSelector } from 'utils/selectors';
+import { quizDetailStatusSelector } from 'utils/selectors';
 import { quizDetailSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { enrollUser } from 'views/Teacher/TeacherSlice';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { quizDetailHistorySelector } from 'utils/selectors';
+import { getUserEmail } from 'views/School/SchoolSlice';
+import { userSelector } from 'utils/selectors';
+
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -225,6 +228,7 @@ function QuizProfile(props) {
   const quizDetail = useSelector((state) => quizDetailSelector(state, id));
   const quizDetailHistory = useSelector(quizDetailHistorySelector);
   const user = useSelector(userSelector);
+  const role = useSelector(UserRoleSelector)
 
   const handleEnroll = (values) => {
     dispatch(enrollUser({ UserId: user.id, QuizId: quizDetail.id }));
@@ -235,6 +239,11 @@ function QuizProfile(props) {
       dispatch(getQuizDetailAsync(id));
     }
   }, [dispatch, quizDetailStatus, quizDetailHistory, id]);
+
+  useEffect(() => {
+    dispatch(getUserEmail({Id: id, email: user.email}))
+  }, [user]);
+
 
   if (quizDetailStatus === 'pending') {
     return <BackdropLoading />;
@@ -435,14 +444,23 @@ function QuizProfile(props) {
             {/* <Button color="info" variant="contained" size="large">
             Contact
           </Button> */}
-            <Button
+          {role.name === 'Teacher' || role.name === 'Student' ? <Button
+              color="primary"
+              variant="contained"
+              size="large"
+              // onClick={      console.log(user)}
+            >
+              Hacer Quiz
+            </Button>
+            : <Button
               color="primary"
               variant="contained"
               size="large"
               onClick={handleEnroll}
             >
               Enroll
-            </Button>
+            </Button>}
+            
           </Box>
         </Actions>
       </MainContainer>
