@@ -70,9 +70,9 @@ const QuizCard = ({ className, quiz, ...rest }) => {
   const dispatch = useDispatch();
   const handleNotifications = (state) => {
     if (state) {
-      dispatch(ACTIONS.favorites.addToFavorites());
+      dispatch(ACTIONS.actions.addToFavorites());
     } else {
-      dispatch(ACTIONS.favorites.removeFromFavorites());
+      dispatch(ACTIONS.actions.removeFromFavorites());
     }
   };
 

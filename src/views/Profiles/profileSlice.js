@@ -38,6 +38,7 @@ export const getUserData = createAsyncThunk(
     },
   }
 );
+
 export const getSchoolData = createAsyncThunk(
   'profile/getSchoolData',
   async (payload) => {
@@ -45,6 +46,20 @@ export const getSchoolData = createAsyncThunk(
       SCHOOL_ENDPOINT + '/' + payload
     );
     return schoolData_response.data;
+  },
+  {
+    condition: (payload, { getState }) => {
+      const {
+        profile: { status },
+      } = getState();
+      if (
+        status === status.pending ||
+        status === status.loading ||
+        status === status.error
+      ) {
+        return false;
+      }
+    },
   }
 );
 

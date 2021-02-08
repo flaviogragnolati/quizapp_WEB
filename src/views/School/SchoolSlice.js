@@ -3,64 +3,70 @@ import {
   createAsyncThunk,
   isPending,
   isRejected,
-} from "@reduxjs/toolkit";
-import { status } from "utils/helpers";
-import axios from "axios";
-import { SCHOOL_ENDPOINT, SUBJECT_ENDPOINT, QUIZ_ENDPOINT, GET_USER_EMAIL_ENDPOINT, TEACHER_ENDPOINT } from "utils/endpoints";
+} from '@reduxjs/toolkit';
+import { status } from 'utils/helpers';
+import axios from 'axios';
+import {
+  SCHOOL_ENDPOINT,
+  SUBJECT_ENDPOINT,
+  QUIZ_ENDPOINT,
+  GET_USER_EMAIL_ENDPOINT,
+  TEACHER_ENDPOINT,
+} from 'utils/endpoints';
 
 const initialState_School = {
+  //!el `status` general no esta definido, y en los extrareducers lo estamos `creando`, si es parte del estado deberia estar presente como parte del `initialState`
   SchoolQuizList: {
     error: null,
     QuizList: {},
+    status: status.idle,
   },
   SchoolSubjectList: {
     error: null,
     SubjectList: [],
     // SubjectDetail: {},
   },
-  UserDetail:{
+  UserDetail: {
     data: {},
     role: {},
-    status: 'idle',
+    status: status.idle,
   },
-
 };
 
 //GET
 
-export const getQuizList = createAsyncThunk("school/getQuizList", async () => {
-  const Quiz = await axios.get(SCHOOL_ENDPOINT + 1 + "/quizzes");
-  return Quiz;
-});
+export const getQuizList = createAsyncThunk(
+  'school/getQuizList',
+  async (payload) => {
+    const allQuizzes_response = await axios.get(
+      SCHOOL_ENDPOINT + '/' + payload + '/quizzes'
+    );
+    return allQuizzes_response.data;
+  }
+);
 
 export const getSubjectsList = createAsyncThunk(
-  "school/getSubjectsList",
+  'school/getSubjectsList',
   async () => {
-    const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
+    const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + '/subjects');
     return Subject.data;
   }
 );
 
 export const getUserEmail = createAsyncThunk(
-  "school/getUserEmail",
-  async ({Id, email}) => {
-    const User_Email_response = await axios.get(GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email);
-    return User_Email_response.data ;
+  'school/getUserEmail',
+  async ({ Id, email }) => {
+    const User_Email_response = await axios.get(
+      GET_USER_EMAIL_ENDPOINT + Id + '?email=' + email
+    );
+    return User_Email_response.data;
   }
 );
-
-// export const getSubjectsDetail = createAsyncThunk(
-//   "School/GetSubjectsDetail",
-//   async (payload) => {
-//     const Subject = await axios.get(SUBJECT_ENDPOINT + '/' + payload);
-//     return Subject;
-//   }
-// );
 
 //POST
 
 export const createSubject = createAsyncThunk(
-  "school/createSubject",
+  'school/createSubject',
   async (payload) => {
     payload.SchoolId = 1;
     const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
@@ -70,35 +76,42 @@ export const createSubject = createAsyncThunk(
 );
 
 export const postUserToTeacher = createAsyncThunk(
-  "school/postUserToTeacher",
-  async ({QuizId, UserId}) => {
-    const User_Email_response = await axios.post(TEACHER_ENDPOINT, {QuizId , UserId});
-    return User_Email_response.data ;
+  'school/postUserToTeacher',
+  async ({ QuizId, UserId }) => {
+    const User_Email_response = await axios.post(TEACHER_ENDPOINT, {
+      QuizId,
+      UserId,
+    });
+    return User_Email_response.data;
   }
 );
 
 //DELETE
 
 export const delateSubject = createAsyncThunk(
-  "school/delateSubject",
+  'school/delateSubject',
   async (payload) => {
-    const delete_response = await axios.delete(SUBJECT_ENDPOINT + "/" + payload);
+    const delete_response = await axios.delete(
+      SUBJECT_ENDPOINT + '/' + payload
+    );
     return delete_response.data;
   }
 );
 
 export const delateQuiz = createAsyncThunk(
-  "school/delateQuiz",
+  'school/delateQuiz',
   async (payload) => {
-    const delete_response = await axios.delete(QUIZ_ENDPOINT + "/" + payload);
+    const delete_response = await axios.delete(QUIZ_ENDPOINT + '/' + payload);
     return delete_response.data;
   }
 );
 
 export const removeTeacher = createAsyncThunk(
-  "school/removeTeacher",
-  async ({QuizId , UserId}) => {
-    const delete_response = await axios.delete(TEACHER_ENDPOINT + '?UserId=' + UserId + '&&QuizId=' + QuizId);
+  'school/removeTeacher',
+  async ({ QuizId, UserId }) => {
+    const delete_response = await axios.delete(
+      TEACHER_ENDPOINT + '?UserId=' + UserId + '&&QuizId=' + QuizId
+    );
     return delete_response.data;
   }
 );
@@ -106,11 +119,11 @@ export const removeTeacher = createAsyncThunk(
 //PUT
 
 export const editSubject = createAsyncThunk(
-  "school/editSubject",
+  'school/editSubject',
   async (payload) => {
     console.log(payload.id);
     const Subject_response = await axios.put(
-      SUBJECT_ENDPOINT + "/" + payload.id,
+      SUBJECT_ENDPOINT + '/' + payload.id,
       payload
     );
     return Subject_response.data;
@@ -123,7 +136,7 @@ const isPendingAction = isPending(
   createSubject,
   delateSubject,
   delateQuiz,
-  editSubject,
+  editSubject
 );
 
 const isRejectedAction = isRejected(
@@ -132,43 +145,42 @@ const isRejectedAction = isRejected(
   createSubject,
   delateSubject,
   delateQuiz,
-  editSubject,
+  editSubject
 );
 
 const isPendingActionDetail = isPending(
   getUserEmail,
   postUserToTeacher,
-  removeTeacher,
+  removeTeacher
 );
 
 const isRejectedActionDetail = isRejected(
   getUserEmail,
   postUserToTeacher,
-  removeTeacher,
+  removeTeacher
 );
 
 const SchoolSlice = createSlice({
-  name: "school",
+  name: 'school',
   initialState: initialState_School,
   reducers: {
     cleanUser: (state, { payload }) => {
       state.UserDetail.status = status.idle;
-      state.UserDetail.data = {}
+      state.UserDetail.data = {};
     },
-
   },
   extraReducers: (builder) => {
     builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
-      state.status = status.success;
-      state.SchoolQuizList.QuizList = payload.data.quizzes.byId;
+      state.SchoolQuizList.status = status.success;
+      state.SchoolQuizList.QuizList = payload.quizzes.byId;
     });
     builder.addCase(getSubjectsList.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
     });
     builder.addCase(getUserEmail.fulfilled, (state, { payload }) => {
-      state.UserDetail.role = payload.role
-      state.UserDetail.data = payload.user;  
+      state.UserDetail.role = payload.role;
+      state.UserDetail.data = payload.user;
       state.UserDetail.status = status.success;
     });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
@@ -176,7 +188,7 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
       state.UserDetail.status = status.success;
-      state.UserDetail.role = payload.role
+      state.UserDetail.role = payload.role;
     });
     builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
@@ -196,32 +208,46 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(removeTeacher.fulfilled, (state, { payload }) => {
       state.UserDetail.status = status.idle;
-      state.UserDetail.data = {}
-      state.UserDetail.role = {}
+      state.UserDetail.data = {};
+      state.UserDetail.role = {};
     });
     builder.addCase(editSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
     });
 
     ////////////
-
-    builder.addMatcher(isPendingAction, (state, { payload }) => {
-      state.status = status.pending;
+    builder.addMatcher(isPendingAction, (state, action) => {
+      const { type } = action;
+      const nameSpace = type.split('/')['1'];
+      if (nameSpace === 'SchoolQuizList') {
+        //!desprolijo, complejo e innecesario...pero para no cambiar todo lo hacemos asi, para la prox...mejor estrategia de `namespaces`
+        state.SchoolQuizList.status = status.pending;
+      } else {
+        state.status = status.pending;
+      }
     });
-    builder.addMatcher(isRejectedAction, (state, { payload }) => {
-      state.status = status.error;
-      state.error = payload;
+    builder.addMatcher(isRejectedAction, (state, action) => {
+      const { type } = action;
+      const nameSpace = type.split('/')['1'];
+      if (nameSpace === 'SchoolQuizList') {
+        //!desprolijo, complejo e innecesario...pero para no cambiar todo lo hacemos asi, para la prox...mejor estrategia de `namespaces`
+        state.SchoolQuizList.status = status.error;
+        state.SchoolQuizList.error = action.payload;
+      } else {
+        state.status = status.error;
+        state.error = action.payload;
+      }
     });
     builder.addMatcher(isPendingActionDetail, (state, { payload }) => {
       state.UserDetail.status = status.pending;
     });
     builder.addMatcher(isRejectedActionDetail, (state, { payload }) => {
       state.UserDetail.status = status.error;
-      state.UserDetail.data = payload
+      state.UserDetail.data = payload;
     });
   },
 });
 
-export const { cleanUser, setQuestionDetail  } = SchoolSlice.actions
+export const { cleanUser, setQuestionDetail } = SchoolSlice.actions;
 
 export default SchoolSlice;

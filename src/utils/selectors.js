@@ -87,7 +87,12 @@ export const profileStatusSelector = (state) => state.profile.status;
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
 export const SchoolQuizSelector = (state) =>
   state.School.SchoolQuizList.QuizList;
+export const schoolQuizStatusSelector = (state) =>
+  state.School.SchoolQuizList.status;
+
+//? porque ser llama `SchoolQuizStatus`? si lo que hace es traer el status general del slice School >>>>>>>>>>>>>>>>>>
 export const SchoolQuizStatusSelector = (state) => state.School.status;
+//?<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 export const SchoolSubjectSelector = (state) =>
   state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectStatusSelector = (state) => state.School.status;
@@ -98,17 +103,18 @@ export const UserDetailStatusSelector = (state) =>
 
 //Quiz selector
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
-export const QuestionDetailSelector = (state) => state.QuizLoader.questionDetail;
-export const QuestionDetailAnswersSelector = (state) => state.QuizLoader.answers;
+export const QuestionDetailSelector = (state) =>
+  state.QuizLoader.questionDetail;
+export const QuestionDetailAnswersSelector = (state) =>
+  state.QuizLoader.answers;
 export const QuestionStatusSelector = (state) => state.QuizLoader.status;
-
 
 export const QuestionsStatusSelector = (state) => state.status;
 
-
-export const QuestionsDetailStatusSelector = (state) => state.School.QuestionDetail.status;
-export const QuestionsDetailSelector = (state) => state.School.QuestionDetail.data;
-
+export const QuestionsDetailStatusSelector = (state) =>
+  state.School.QuestionDetail.status;
+export const QuestionsDetailSelector = (state) =>
+  state.School.QuestionDetail.data;
 
 //Teacher selectors
 export const TeacherQuizSelector = (state) => state.Teacher.TeacherQuizList;

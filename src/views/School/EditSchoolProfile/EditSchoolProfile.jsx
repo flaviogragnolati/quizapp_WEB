@@ -3,7 +3,6 @@ import { Container, Grid, makeStyles } from '@material-ui/core';
 import ProfileDetails from 'components/ProfileDetail';
 import Account from 'components/Account';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SchoolProfile = () => {
+const EditSchoolProfile = () => {
   const classes = useStyles();
 
   return (
@@ -30,4 +29,4 @@ const SchoolProfile = () => {
   );
 };
 
-export default SchoolProfile;
+export default EditSchoolProfile;
