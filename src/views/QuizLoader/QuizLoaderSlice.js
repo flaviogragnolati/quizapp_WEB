@@ -56,6 +56,15 @@ export const CreateQuiz = createAsyncThunk(
       return UpdateAnswers_response.data
     }
   );
+
+  export const DeleteAnswers = createAsyncThunk(
+    'Quiz/DeleteAnswers',
+    async (id) => {
+      console.log('ESTO LE MANDO', id)
+      const DeleteAnswers_response = await axios.delete(ANSWERS_ENDPOINT + id);
+      return DeleteAnswers_response.data
+    }
+  );
   export const deleteQuestion = createAsyncThunk(
     'Quiz/deleteQuestion',
     async (payload) => {
@@ -136,6 +145,16 @@ const QuizLoaderSlice = createSlice({
       state.status = status.success;
     },
     [UpdateAnswers.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [DeleteAnswers.pending]: (state, {payload  }) => {
+      state.status = status.pending;
+    },
+    [DeleteAnswers.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+    },
+    [DeleteAnswers.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },

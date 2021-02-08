@@ -10,7 +10,7 @@ import { ACTIONS } from "store/rootReducer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
-import { UpdateAnswers } from "views/QuizLoader/QuizLoaderSlice";
+import { UpdateAnswers, DeleteAnswers } from "views/QuizLoader/QuizLoaderSlice";
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -49,6 +49,8 @@ const Questions = ({ question, reset }) => {
   const [multiAns, setMultiAns] = useState(QuestionDetail.Answers);
   const Dispatch =  useDispatch()
   const handleAnsDelete = (id) => {
+    console.log(id)
+     Dispatch(DeleteAnswers(id))
     setMultiAns((prevAns) => prevAns.filter((ans) => ans.id !== id));
   };
 
