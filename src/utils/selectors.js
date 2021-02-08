@@ -98,6 +98,11 @@ export const UserDetailStatusSelector = (state) =>
 
 //Quiz selector
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
+export const QuestionDetailSelector = (state) => state.QuizLoader.questionDetail;
+export const QuestionDetailAnswersSelector = (state) => state.QuizLoader.answers;
+export const QuestionStatusSelector = (state) => state.QuizLoader.status;
+
+
 export const QuestionsStatusSelector = (state) => state.status;
 
 
