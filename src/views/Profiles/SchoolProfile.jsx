@@ -16,10 +16,16 @@ import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import ProfileTabs from './components/ProfileTabs';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './profileSlice';
-import { userProfileSelector, profileStatusSelector } from 'utils/selectors';
+import { getSchoolData, getUserData } from './profileSlice';
+import { schoolProfileSelector, profileStatusSelector } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
+import { getQuizList } from 'views/School/SchoolSlice';
+import { SchoolQuizSelector } from 'utils/selectors';
+import SchoolProfileQuizDetail from './components/SchoolProfileQuizDetail';
+import { quizDetail } from '../Catalogue/quizDetail';
+import { schoolQuizStatusSelector } from 'utils/selectors';
+import { Container } from '@material-ui/core';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -32,19 +38,22 @@ export default function ProfilePage(props) {
   const dispatch = useDispatch();
   const id = parseInt(useParams().id);
   const profileStatus = useSelector(profileStatusSelector);
-  const user = useSelector(userProfileSelector);
+  const school = useSelector(schoolProfileSelector);
+  const quizList = useSelector(SchoolQuizSelector);
+  const quizListStatus = useSelector(schoolQuizStatusSelector);
 
   useEffect(() => {
-    if (profileStatus === 'idle' || user.id !== id) {
-      dispatch(getUserData(id));
+    if (profileStatus === 'idle' || school.id !== id) {
+      dispatch(getSchoolData(id));
+      dispatch(getQuizList(id));
     }
-  }, [dispatch, profileStatus, user, id]);
+  }, [dispatch, profileStatus, school, id]);
 
   const classes = useStyles();
 
   const imageClasses = classNames(
     classes.imgRaised,
-    classes.imgRoundedCircle,
+    // classes.imgRoundedCircle,
     classes.imgFluid
   );
 
@@ -53,19 +62,23 @@ export default function ProfilePage(props) {
     content = <BackdropLoading />;
   } else if (profileStatus === 'error') {
     content = <h1>Ha ocurrido un error...metele F5</h1>;
-  } else if (profileStatus === 'success') {
-    const { firstName, lastName, email, birthdate, cellphone, photo } = user;
+  } else if (profileStatus === 'success' && quizListStatus === 'success') {
+    const { id, name, email, description, country, city, logo } = school;
+    console.log('quizlist', quizList);
     content = (
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={6}>
             <div className={classes.profile}>
               <div>
-                <img src={photo} alt="..." className={imageClasses} />
+                <img src={logo} alt="..." className={imageClasses} />
               </div>
               <div className={classes.name}>
-                <h1 className={classes.title}>{`${firstName} ${lastName}`}</h1>
-                <h3 className={classes.subtitle}>{birthdate}</h3>
+                <h1 className={classes.title}>{name}</h1>
+                <h3
+                  className={classes.subtitle}
+                >{`Sede en ${country}, ${city}`}</h3>
+                <p>{description}</p>
                 <Button
                   justIcon
                   link
@@ -93,19 +106,23 @@ export default function ProfilePage(props) {
                 >
                   <i className={'fab fa-facebook'} />
                 </Button>
+                <h4>{email}</h4>
               </div>
             </div>
           </GridItem>
         </GridContainer>
         <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-            <ProfileTabs
-              activity={activity}
-              courses={courses}
-              favourites={favourites}
-              teacherIn={teacherIn}
-            />
+          <GridItem xs={12} sm={12} md={6}>
+            <h2>Listado de Quizzes</h2>
+            <br></br>
           </GridItem>
+          <GridContainer justify="center">
+            {quizList.map((quiz, idx) => (
+              <GridItem xs={8} sm={6} md={4} className={classes.navWrapper}>
+                <SchoolProfileQuizDetail key={idx} quizDetail={quiz} />
+              </GridItem>
+            ))}
+          </GridContainer>
         </GridContainer>
       </div>
     );
