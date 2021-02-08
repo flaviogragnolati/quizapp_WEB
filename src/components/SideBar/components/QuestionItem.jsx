@@ -43,7 +43,7 @@ const QuestionItem = ({
   title,
   handleQuestionDelete,
   id,
-  setId,
+  setId, // recibe setId de QuestionSidebar
   ...rest
 }) => {
   const classes = useStyles();
@@ -55,7 +55,8 @@ const QuestionItem = ({
         disableGutters
         {...rest}
       >
-        <Button activeClassName={classes.active} className={classes.button} onClick={() => setId(id)} >
+      {/* aca setea el id de la pregunta para ser filtrada en QuestionLoader */}
+        <Button activeClassName={classes.active} className={classes.button} onClick={() => setId(id)} > 
           {Icon && <Icon className={classes.icon} size="20" />}
           <span className={classes.title}>{title}</span>
         </Button>

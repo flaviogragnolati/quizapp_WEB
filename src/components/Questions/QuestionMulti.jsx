@@ -21,7 +21,6 @@ function QuestionMulti({
    QuestionId,
     handlers: { handleAnsDelete, handleAnsAdd, handleUpdate, },
 }) {
-  console.log(answer, 'tu vieja')
   return (
     <>
       <Grid item md={8} xs={12}>
@@ -51,6 +50,8 @@ function QuestionMulti({
             texts={['Incorrecta', 'Correcta']}
             size="small"
           /> */}
+          {/* le paso respCorrect para que tome el valor true/false de los datos recibidos de la api */}
+          {/* le paso boolean para obtener el valor true/false del boton y setearselo en el handlerUpdate */}
           <TrueFalse fontSize="large" respCorrect={answer.correct}  boolean={SetBoolean}  />
           <IconButton
             color="secondary"

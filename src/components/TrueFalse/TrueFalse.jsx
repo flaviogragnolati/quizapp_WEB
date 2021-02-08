@@ -8,7 +8,6 @@ import { PropTypes } from 'prop-types';
 function AddRemove({ action, respCorrect =false, boolean, ...rest }) {
   const [correct, setcorrect] = useState(respCorrect);
   let content;
-  boolean(correct)
   console.log(' CAMBIANDO',correct)
   if (correct === true) {
     content = <CheckCircleIcon style={{ color: 'green' }} {...rest} />;
@@ -23,6 +22,8 @@ function AddRemove({ action, respCorrect =false, boolean, ...rest }) {
   };
 
   useEffect(() => {
+    boolean(correct)
+
     if (typeof action === 'function') {
       action(correct);
     }
