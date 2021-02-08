@@ -5,7 +5,8 @@ import { useAuth } from 'components/Auth/AuthContext';
 
 function ProtectRoute({ component: Component, ...rest }) {
   const user = useAuth();
-  const HOME = '/home';
+  //!falta agregar la verificacion del admin contra la DB
+  const REDIRECT = '/home';
   return (
     <Route
       {...rest}
@@ -13,7 +14,7 @@ function ProtectRoute({ component: Component, ...rest }) {
         user.type === 'admin' ? (
           <Component {...props} />
         ) : (
-          <Redirect to={HOME} />
+          <Redirect to={REDIRECT} />
         )
       }
     />
