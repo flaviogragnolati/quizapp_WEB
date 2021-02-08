@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import { infoQuizModel, initialState_Info } from "./InfoHelp";
-import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
+import {QuestionDetailSelector, QuestionStatusSelector} from 'utils/selectors'
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateQuestion } from "views/QuizLoader/QuizLoaderSlice";
 
@@ -47,11 +47,11 @@ function QuestionInfo({ info, setMulti, reset }) {
 
   
   
-  const QuestionDetail = useSelector(QuestionsDetailSelector)
+  const QuestionDetail = useSelector(QuestionDetailSelector)
   const Dispatch = useDispatch()
   
   let editValues = initialState_Info
-  
+  console.log(QuestionDetail)
   const handleSubmit = (values, formik) => {
     console.log(values);
     values.id = QuestionDetail.id
@@ -63,10 +63,10 @@ function QuestionInfo({ info, setMulti, reset }) {
   
 
 
-    if(QuestionDetail.title !== editValues.title){
+    if(QuestionDetail  !== editValues){
       console.log( 'ENTRO AL IF',QuestionDetail)
-        editValues.title = QuestionDetail.title
-      editValues.question = QuestionDetail.question
+        editValues.title = !QuestionDetail.title ? editValues.title: QuestionDetail.title
+      editValues.question = QuestionDetail.question ? QuestionDetail.question : ''
 
     }
   const classes = useStyles();

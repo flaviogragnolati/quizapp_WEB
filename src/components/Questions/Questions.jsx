@@ -9,9 +9,10 @@ import { ACTIONS } from "store/rootReducer";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {QuestionsDetailSelector, QuestionsDetailStatusSelector, QuestionsStatusSelector} from 'utils/selectors'
-import { UpdateAnswers, DeleteAnswers } from "views/QuizLoader/QuizLoaderSlice";
+import {QuestionDetailSelector, QuestionDetailAnswersSelector, QuestionStatusSelector} from 'utils/selectors'
+import { UpdateAnswers, DeleteAnswers, getAllQuestions } from "views/QuizLoader/QuizLoaderSlice";
 import { CreateAnswers } from "views/QuizLoader/QuizLoaderSlice";
+import { useParams } from "react-router-dom";
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -46,16 +47,22 @@ const questionInfo = {
 const Questions = ({ question, reset }) => {
 
   // recibe question que es el estado filtrado sincronamente. contiene el detalle de la pregunta y las respuestas
-  const QuestionDetail = useSelector(QuestionsDetailSelector)
-  const QuzLoaderStatus = useSelector(QuestionsStatusSelector);
+  const QuestionDetail = useSelector(QuestionDetailSelector)
+  const QuestionStatus = useSelector(QuestionStatusSelector);
+  const Answers = useSelector(QuestionDetailAnswersSelector)
   const [multi, setMulti] = useState();
-  const [multiAns, setMultiAns] = useState([]);
+  const [multiAns, setMultiAns] = useState(Answers);
   const [boolean,SetBoolean] = useState(false);
+  const params = useParams();
+
   const Dispatch =  useDispatch()
   const handleAnsDelete = (id) => {
     console.log(id)
-     Dispatch(DeleteAnswers(id))
-    setMultiAns((prevAns) => prevAns.filter((ans) => ans.id !== id));
+     Dispatch(DeleteAnswers(id)).then(()=>{
+      Dispatch(getAllQuestions(params.id));
+
+    })
+    // setMultiAns((prevAns) => prevAns.filter((ans) => ans.id !== id));
   };
 
   const handleAnsAdd = () => {
@@ -64,13 +71,19 @@ const Questions = ({ question, reset }) => {
       { id: 'prueba', text: "", correct: boolean },
     ]);
     //creo una nueva respuesta con un texto por defecto
-    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:boolean}))
+    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:boolean})).then(()=>{
+      Dispatch(getAllQuestions(params.id));
+
+    })
   };
 
   const handleUpdate = (id)=>{
     let text =  document.getElementById(id).value
     //modifica la respuesta
-    Dispatch(UpdateAnswers({text,id,correct:boolean}))
+    Dispatch(UpdateAnswers({text,id,correct:boolean})).then(()=>{
+      Dispatch(getAllQuestions(params.id));
+
+    })
   }
 console.log('tengo mest6',boolean)
   const handlers = {
@@ -79,13 +92,15 @@ console.log('tengo mest6',boolean)
     handleUpdate,
   };
    useEffect(() => {
-    setMultiAns(QuestionDetail.Answers)
+    setMultiAns(question)
      if(question){
-       Dispatch(ACTIONS.School.setQuestionDetail(question))
-       setMultiAns(QuestionDetail.Answers)
-     }
-   }, [question,multiAns,Dispatch,multi,QuzLoaderStatus]);
+      //  Dispatch(ACTIONS.School.setQuestionDetail(question))
+       Dispatch(ACTIONS.quizLoader.setQuestionDetail(question))
 
+       setMultiAns(Answers)
+     }
+     setMultiAns(Answers)
+   }, [question,multiAns,Dispatch,Answers,QuestionStatus]);
 
 
   return (
@@ -106,7 +121,7 @@ console.log('tengo mest6',boolean)
         justify="space-between"
         alignItems="flex-start"
       >
-        {question ? <QuestionInfo info={question} setMulti={setMulti}  reset={reset} /> : null}
+        { QuestionDetail ? <QuestionInfo info={question} setMulti={setMulti}  reset={reset} /> : null}
       </Grid>
       <Grid
         item
@@ -117,8 +132,10 @@ console.log('tengo mest6',boolean)
         justify="space-between"
         alignItems="center"
       >
+
         {multi === undefined ? null : multi === 1 ? (
-      multiAns.map((ans, idx) => {
+          console.log(multiAns),
+          Answers.map((ans, idx) => {
         //le pasa handlers a con las acciones para disparar. 
         //SetBoolean es para obtener el valor true/false de correct y setearlo en el handlerUpdate
             return <QuestionMulti key={idx} answer={ans} SetBoolean={SetBoolean} handlers={handlers} />;

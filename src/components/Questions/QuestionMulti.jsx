@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DualButton from '../DualButton/index';
 import {
   Box,
@@ -14,6 +14,8 @@ import {
 import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TrueFalse from '../TrueFalse/index';
+import { useSelector } from 'react-redux';
+import { QuestionStatusSelector } from 'utils/selectors';
 
 function QuestionMulti({
   answer,
@@ -21,6 +23,10 @@ function QuestionMulti({
    QuestionId,
     handlers: { handleAnsDelete, handleAnsAdd, handleUpdate, },
 }) {
+  const QuestionStatus = useSelector(QuestionStatusSelector)
+   useEffect(()=>{
+      console.log('RENDERIZANDO RESPUESTAS')
+   },[QuestionStatus])
   return (
     <>
       <Grid item md={8} xs={12}>

@@ -86,6 +86,8 @@ const initialState_QuizLoader = {
   status: status.idle,
   materiaStatus: status.idle,
   questions:[],
+  questionDetail:{},
+  answers:[],
   error:''
 };
 
@@ -93,6 +95,10 @@ const QuizLoaderSlice = createSlice({
   name: 'Quiz',
   initialState: initialState_QuizLoader,
   reducers: {
+    setQuestionDetail: (state,{payload}) =>{
+   state.questionDetail = payload
+   state.answers = payload.Answers ? payload.Answers : [];
+    }
   },
   extraReducers: {
     [CreateQuiz.pending]: (state, {payload  }) => {

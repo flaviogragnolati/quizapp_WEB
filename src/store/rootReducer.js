@@ -30,5 +30,6 @@ export const ACTIONS = {
   auth: { ...authSlice.actions },
   catalogue: { ...catalogueSlice.actions },
   quizDetail: { ...quizDetailSlice.actions },
+  quizLoader : {...QuizLoaderSlice.actions},
   School: { ...SchoolSlice.actions },
 };

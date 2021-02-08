@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { getAllQuestions } from "views/QuizLoader/QuizLoaderSlice";
 
 import { QuestionsSelector } from "utils/selectors";
-import { QuestionsStatusSelector } from "utils/selectors";
+import { QuestionsStatusSelector, QuestionDetailAnswersSelector} from "utils/selectors";
 const useStyles = makeStyles(() => ({
   div_Questions: {
     marginTop: "50px",
@@ -18,12 +18,19 @@ function QuestionLoader() {
   const Dispatch = useDispatch();
   const questions = useSelector(QuestionsSelector);
   const questionsStatus = useSelector(QuestionsStatusSelector);
+  const Answers = useSelector(QuestionDetailAnswersSelector)
   const params = useParams();
 
   const [questionId, setQuestionId] = useState(1); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
   useEffect(() => {
     Dispatch(getAllQuestions(params.id));
-  }, []);
+  }, [questionId]);
+
+  useEffect(() => {
+    console.log('RENDERIZANDO DE NUEVO')
+    // Dispatch(getAllQuestions(params.id));
+
+  }, [questionId,questionsStatus, Answers]);
   const classes = useStyles();
 
 
