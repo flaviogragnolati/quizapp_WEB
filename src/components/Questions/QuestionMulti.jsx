@@ -11,17 +11,20 @@ import {
   IconButton,
   //   makeStyles,
 } from '@material-ui/core';
+import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TrueFalse from '../TrueFalse/index';
 
 function QuestionMulti({
   answer,
-  handlers: { handleAnsDelete, handleAnsAdd },
+   QuestionId,
+    handlers: { handleAnsDelete, handleAnsAdd, handleUpdate, },
 }) {
   return (
     <>
       <Grid item md={8} xs={12}>
         <TextField
+        id={answer.id}
           fullWidth
           label={`Answer ${answer.id}`}
           name={`answer ${answer.id}`}
@@ -56,6 +59,17 @@ function QuestionMulti({
           >
             <DeleteIcon fontSize="large" />
           </IconButton>
+          <IconButton
+            color="secondary"
+            aria-label="guardar"
+            component="span"
+            size="large"
+            onClick={() => handleUpdate(answer.id)}
+            name={answer.id}
+          >
+            <SyncRoundedIcon name={answer.id}/>
+          </IconButton>
+         
         </Box>
       </Grid>
     </>

@@ -10,6 +10,7 @@ import { ACTIONS } from "store/rootReducer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
+import { UpdateAnswers } from "views/QuizLoader/QuizLoaderSlice";
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -58,10 +59,17 @@ const Questions = ({ question, reset }) => {
     ]);
   };
 
+  const handleUpdate = (id)=>{
+    let text =  document.getElementById(id).value
+    let correct = false
+    console.log( 'modificando',text)
+    Dispatch(UpdateAnswers({text,id,correct}))
+  }
 
   const handlers = {
     handleAnsDelete,
     handleAnsAdd,
+    handleUpdate,
   };
    useEffect(() => {
      if(question){
@@ -102,7 +110,7 @@ const Questions = ({ question, reset }) => {
       >
         {multi === undefined ? null : multi === 1 ? (
       multiAns.map((ans, idx) => {
-            return <QuestionMulti key={idx} answer={ans} handlers={handlers} />;
+            return <QuestionMulti key={idx} answer={ans}  handlers={handlers} />;
           })
         ) : multi === 2 ? (
           <QuestionTF answer={questionInfo.answersTF} />

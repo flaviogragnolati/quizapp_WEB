@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { QUESTIONS_ENDPOINT } from 'utils/endpoints';
-import { QUIZ_ENDPOINT } from 'utils/endpoints';
+import { QUIZ_ENDPOINT, ANSWERS_ENDPOINT } from 'utils/endpoints';
 import { status } from 'utils/helpers';
 
 
@@ -48,6 +48,14 @@ export const CreateQuiz = createAsyncThunk(
     }
   );
 
+  export const UpdateAnswers = createAsyncThunk(
+    'Quiz/UpdateAnswers',
+    async (payload) => {
+      console.log('ESTO LE MANDO', payload)
+      const UpdateAnswers_response = await axios.put(ANSWERS_ENDPOINT + payload.id , payload );
+      return UpdateAnswers_response.data
+    }
+  );
   export const deleteQuestion = createAsyncThunk(
     'Quiz/deleteQuestion',
     async (payload) => {
@@ -118,6 +126,16 @@ const QuizLoaderSlice = createSlice({
       state.status = status.success;
     },
     [UpdateQuestion.rejected]: (state, { payload }) => {
+      state.status = status.error;
+      state.error = payload;
+    },
+    [UpdateAnswers.pending]: (state, {payload  }) => {
+      state.status = status.pending;
+    },
+    [UpdateAnswers.fulfilled]: (state, { payload }) => {
+      state.status = status.success;
+    },
+    [UpdateAnswers.rejected]: (state, { payload }) => {
       state.status = status.error;
       state.error = payload;
     },
