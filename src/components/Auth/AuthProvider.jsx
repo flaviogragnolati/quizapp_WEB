@@ -36,8 +36,8 @@ function AuthProvider({ children }) {
   }, [authStatus, token, restore, dispatch]);
   return (
     <AuthContext.Provider value={user}>
-      {children}
       {authStatus === 'pending' && <BackdropLoading />}
+      {children}
     </AuthContext.Provider>
   );
 }

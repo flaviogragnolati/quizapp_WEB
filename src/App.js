@@ -31,9 +31,6 @@ function App(props) {
   const sidebarCtx = { openSidebar, toggleSideBar };
   //* ^^^^^^^^^^^ SIDEBAR MANAGEMENT ^^^^^^^^^^^
 
-  //* vvvvvvvvvv AUTH MANAGEMENT vvvvvvvvvv
-  //* ^^^^^^^^^^^ AUTH MANAGEMENT ^^^^^^^^^^^
-
   return (
     <ThemeWrapper theme={theme}>
       <div className="App">
@@ -46,7 +43,6 @@ function App(props) {
         <div Style="padding-top: 64px">
           <Switch>
             <AppRoutes />
-            <Redirect to="/404" />
           </Switch>
         </div>
         <hr></hr>

@@ -1,4 +1,5 @@
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
+import OnlyGuestRoute from 'components/Auth/OnlyGuestRoute';
 import Home from 'views/Home';
 import Login from 'views/Login/Login';
 import NotFound from 'views/NotFound';
@@ -19,10 +20,23 @@ import SubjectLoader from 'views/School/SubjectLoader';
 import LoginSchool from 'views/Login/LoginSchool';
 import QuizTeacher from 'views/Teacher/QuizTeacher';
 import EnrollTeacher from 'views/Teacher/EnrollTeacher';
-
+/**
+ * !Definicion de `roles` y niveles de acceso:
+ * ?guest: Puede acceder cualquier usuario a esta ruta, inclusive un guest (ej. /catalogue)
+ * ?onlyGuest: Solo pueden acceder los usuarios/schools NO logeados (ej. /login)
+ * ?user: Es necesario estar logeado para poder acceder, pudiendo ser student o teacher.
+ * ?en caso de ser teacher se muestra la info correspondiente
+ * ?teacher: Es necesario estar logeado como user y ademas tener el rol de teacher
+ * ?school: Es necesario estar logeado y ser una `school` para poder acceder a la ruta
+ * ?admin: Es necesario estar logeado y ser un usuario tipo `admin`
+ *
+ * *Pasar los niveles de acceso como strings o array de strings para definir varios niveles,
+ * !OJO: los niveles de acceso no pueden ser mutuamente excluyentes (ej.: ['onlyGuest','user'])
+ * *['guest'|'onlyGuest'|'user'|'teacher'|'school'|'admin',...]
+ */
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
-  { path: '/login', component: Login, access: 'guest' },
+  { path: '/login', component: Login, access: 'onlyGuest' },
   { path: '/register', component: Register, access: 'guest' },
   { path: '/loginSchool', component: LoginSchool, access: 'guest' },
   { path: '/about', component: About, access: 'guest' },
@@ -48,13 +62,25 @@ export const routes = [
 ];
 
 export const createRoutes = (routes) => {
-  if (routes.lenght < 1) return null;
+  if (routes.length < 1) return null;
 
   return routes.map((route, idx) => {
+    if (routes.length === idx + 1) {
+      return <Route key={idx} path="" component={NotFound} />;
+    }
     switch (route.access) {
       case 'guest':
         return (
           <Route
+            key={route.path + idx}
+            path={route.path}
+            component={route.component}
+            exact={route.exact}
+          />
+        );
+      case 'onlyGuest':
+        return (
+          <OnlyGuestRoute
             key={route.path + idx}
             path={route.path}
             component={route.component}

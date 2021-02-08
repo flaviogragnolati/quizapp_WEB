@@ -5,16 +5,12 @@ import { useAuth } from 'components/Auth/AuthContext';
 
 function ProtectRoute({ component: Component, ...rest }) {
   const user = useAuth();
-  const REDIRECT = '/home';
+  const REDIRECT = '/login';
   return (
     <Route
       {...rest}
       render={(props) =>
-        user.type === 'school' ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={REDIRECT} />
-        )
+        Boolean(user) ? <Component {...props} /> : <Redirect to={REDIRECT} />
       }
     />
   );

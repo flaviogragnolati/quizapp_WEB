@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
 //?Material UI
 import {
@@ -8,20 +8,20 @@ import {
   Box,
   IconButton,
   Typography,
-} from "@material-ui/core";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
-import HomeIcon from "@material-ui/icons/Home";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import CloseIcon from "@material-ui/icons/Close";
-import styled from "styled-components";
+} from '@material-ui/core';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CloseIcon from '@material-ui/icons/Close';
+import styled from 'styled-components';
 //?Custom Styles and Context
-import { SideBarContext } from "../../App";
-import SidebarItem from "./components/SidebarItem";
-import { ACTIONS } from "store/rootReducer";
-import { useDispatch } from "react-redux";
-import { useAuth } from "components/Auth/AuthContext";
+import { SideBarContext } from '../../App';
+import SidebarItem from './components/SidebarItem';
+import { ACTIONS } from 'store/rootReducer';
+import { useDispatch } from 'react-redux';
+import { useAuth } from 'components/Auth/AuthContext';
 
 const HeaderBox = styled(Box)`
   display: flex;
@@ -42,7 +42,6 @@ function SideBar() {
   const { openSidebar, toggleSideBar } = useContext(SideBarContext);
   const Dispatch = useDispatch();
   const user = useAuth();
-  console.log(user)
   const handleLogout = () => {
     Dispatch(ACTIONS.auth.logout());
   };
@@ -62,24 +61,9 @@ function SideBar() {
         </HeaderBox>
         <Divider />
         <SidebarItem
-          label="Teacher Account"
+          label="My Profile"
           link={{
-            pathname: "/profile/1",
-            state: {
-              owner: true,
-              role: "teacher",
-            },
-          }}
-          icon={<AccountBoxIcon />}
-        />
-        <SidebarItem
-          label="Student Account"
-          link={{
-            pathname: "/profile/1",
-            state: {
-              owner: true,
-              role: "student",
-            },
+            pathname: '/myprofile',
           }}
           icon={<AccountBoxIcon />}
         />
@@ -141,9 +125,9 @@ function SideBar() {
 
   return (
     <div>
-      <React.Fragment key={"left"}>
+      <React.Fragment key={'left'}>
         <Drawer
-          anchor={"left"}
+          anchor={'left'}
           open={openSidebar}
           onClose={() => toggleSideBar()}
         >
