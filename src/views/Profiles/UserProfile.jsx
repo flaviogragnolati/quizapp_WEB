@@ -97,16 +97,6 @@ export default function ProfilePage(props) {
             </div>
           </GridItem>
         </GridContainer>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-            <ProfileTabs
-              activity={activity}
-              courses={courses}
-              favourites={favourites}
-              teacherIn={teacherIn}
-            />
-          </GridItem>
-        </GridContainer>
       </div>
     );
   }
