@@ -16,7 +16,10 @@ const initialState_School = {
   SchoolSubjectList: {
     error: null,
     SubjectList: [],
-    // SubjectDetail: {},
+  },
+  SchoolTeacherList: {
+    error: null,
+    TeacherList: {},
   },
   UserDetail:{
     data: {},
@@ -27,20 +30,21 @@ const initialState_School = {
     data:{},
     status: status.idle,
     Answers : [],
-  }
+  },
+
 };
 
 //GET
 
-export const getQuizList = createAsyncThunk("school/getQuizList", async () => {
-  const Quiz = await axios.get(SCHOOL_ENDPOINT + '/' + 1 + "/quizzes");
+export const getQuizList = createAsyncThunk("school/getQuizList", async ({id}) => {
+  const Quiz = await axios.get(SCHOOL_ENDPOINT + '/' + id + "/quizzes");
   return Quiz;
 });
 
 export const getSubjectsList = createAsyncThunk(
   "school/getSubjectsList",
-  async () => {
-    const Subject = await axios.get(SCHOOL_ENDPOINT + 1 + "/subjects");
+  async ({id}) => {
+    const Subject = await axios.get(SCHOOL_ENDPOINT + '/' + id + "/subjects");
     return Subject.data;
   }
 );
@@ -55,8 +59,8 @@ export const getUserEmail = createAsyncThunk(
 
 export const getTeachersSchool = createAsyncThunk(
   "school/getTeachersSchool",
-  async ({Id}) => {
-    const teacherResponse = await axios.get(TEACHER_ENDPOINT + 'school/'+ id);
+  async ({SchoolId}) => {
+    const teacherResponse = await axios.get(TEACHER_ENDPOINT + 'school/'+ SchoolId);
     return teacherResponse.data ;
   }
 );
@@ -73,9 +77,8 @@ export const getTeachersSchool = createAsyncThunk(
 
 export const createSubject = createAsyncThunk(
   "school/createSubject",
-  async (payload) => {
-    payload.SchoolId = 1;
-    const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
+  async ({SchoolId}) => {
+    const Subject_response = await axios.post(SUBJECT_ENDPOINT, SchoolId);
     const { subject } = Subject_response;
     return subject;
   }
@@ -120,7 +123,6 @@ export const removeTeacher = createAsyncThunk(
 export const editSubject = createAsyncThunk(
   "school/editSubject",
   async (payload) => {
-    console.log(payload.id);
     const Subject_response = await axios.put(
       SUBJECT_ENDPOINT + "/" + payload.id,
       payload
@@ -189,6 +191,10 @@ const SchoolSlice = createSlice({
       state.UserDetail.role = payload.role
       state.UserDetail.data = payload.user;  
       state.UserDetail.status = status.success;
+    });
+    builder.addCase(getTeachersSchool.fulfilled, (state, { payload }) => {
+      state.SchoolTeacherList = payload;  
+      state.status = status.success;
     });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;

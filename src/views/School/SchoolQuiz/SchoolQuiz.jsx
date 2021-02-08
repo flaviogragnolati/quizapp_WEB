@@ -8,6 +8,7 @@ import {
   SchoolQuizSelector,
   SchoolQuizStatusSelector,
 } from 'utils/selectors';
+import { userSelector } from 'utils/selectors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,14 +23,14 @@ const SchoolQuiz = () => {
   const dispatch = useDispatch();
   const quizes = useSelector(SchoolQuizSelector);
   const status = useSelector(SchoolQuizStatusSelector);
-
+  const school = useSelector(userSelector)
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER'];
   let ButtonName = ['Borrar Quiz','TEACHER'];
 
   useEffect(() => {
-    dispatch(getQuizList());
-  }, []);
+    dispatch(getQuizList({id: school.id}));
+  }, [school]);
 
   return (
     <Container maxWidth={false}>
