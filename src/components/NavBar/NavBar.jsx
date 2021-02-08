@@ -61,7 +61,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   };
 
   const handleMenuProfile = () => {
-    history.push(`/profile/${user.id}`);
+    history.push(`/myprofile`);
     handleMenuClose();
   };
 

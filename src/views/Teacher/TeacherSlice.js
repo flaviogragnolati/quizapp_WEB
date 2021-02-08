@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { status } from "utils/helpers";
 import axios from "axios";
-import { TEACHER_ENDPOINT, ENROLLS_ENDPOINT, TO_STUDENT, TO_ENROLL } from "utils/endpoints";
+import { TEACHER_ENDPOINT, ENROLLS_ENDPOINT, TO_STUDENT, TO_ENROLL, QUIZ_ENDPOINT } from "utils/endpoints";
 
 const initialState_Teacher = {
   TeacherQuizList: {},
@@ -47,11 +47,20 @@ export const enrollUser = createAsyncThunk(
 });
 
 
+//PUT
+
+export const activationQuiz = createAsyncThunk(
+  "teacher/activateQuiz", async (payload) => {
+    const Quiz = await axios.put(QUIZ_ENDPOINT + '/activate/' + payload);
+    return Quiz.data;
+});
+
 const isPendingAction = isPending(
     getQuizesTeacher,
     getToEnrollList,
     enrollToSudent,
     enrollUser,
+    activationQuiz
     );
 
 const isRejectedAction = isRejected(
@@ -59,6 +68,7 @@ const isRejectedAction = isRejected(
     getToEnrollList,
     enrollToSudent,
     enrollUser,
+    activationQuiz
     );
 
 const TeacherSlice = createSlice({
@@ -79,6 +89,11 @@ const TeacherSlice = createSlice({
       state.UserDetail.data = payload;
       state.TeacherUserList = state.TeacherUserList.filter((Users) => Users.id !== payload.user.id)}); 
     builder.addCase(enrollUser.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+    });
+    builder.addCase(activationQuiz.fulfilled, (state, { payload }) => {
+      let indice = state.TeacherQuizList.findIndex((quiz) => quiz.id === payload)
+      state.TeacherQuizList[indice].active = !state.TeacherQuizList[indice].active
       state.status = status.success;
     });
     ////////////

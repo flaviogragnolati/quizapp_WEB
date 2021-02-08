@@ -10,7 +10,7 @@ function ProtectRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        user.role === 'admin' ? (
+        user.type === 'admin' ? (
           <Component {...props} />
         ) : (
           <Redirect to={HOME} />

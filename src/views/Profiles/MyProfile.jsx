@@ -10,14 +10,14 @@ import Button from 'components/CustomButtons/Button.js';
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
-import fakeUser from './fakeUser';
+import fakeUser from './components/fakeUser';
 import EditIcon from '@material-ui/icons/Edit';
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
-import ProfileTabs from './ProfileTabs';
+import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from 'views/UserProfile/profileSlice';
+import { getUserData } from './profileSlice';
 import {
   userProfileSelector,
   schoolProfileSelector,
@@ -34,29 +34,20 @@ const useStyles = makeStyles(styles);
 
 const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 
-export default function ProfilePage(props) {
-  const dispatch = useDispatch();
+export default function MyProfile(props) {
   const history = useHistory();
   const user = useAuth();
   const authStatus = useSelector(authStatusSelector);
-  const id = parseInt(useParams().id);
 
   let showDetails, role;
 
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
-    if (user.id !== id) {
-      dispatch(getUserData(id));
-    }
   }, [user, authStatus]);
 
   const classes = useStyles();
+
   if (authStatus === 'success') {
-    if (user && user.id === id) {
-      showDetails = true;
-    } else {
-      showDetails = false;
-    }
     role = Boolean(user) && user.type;
   }
 
@@ -73,7 +64,15 @@ export default function ProfilePage(props) {
   } else if (authStatus === 'success') {
     if (role === 'school') {
     } else {
-      const { firstName, lastName, email, birthdate, cellphone, photo } = user;
+      const {
+        id,
+        firstName,
+        lastName,
+        email,
+        birthdate,
+        cellphone,
+        photo,
+      } = user;
       content = (
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -82,12 +81,10 @@ export default function ProfilePage(props) {
                 <div>
                   <img src={photo} alt="..." className={imageClasses} />
                 </div>
-                {showDetails && (
-                  <Button color="secondary">
-                    <EditIcon></EditIcon>
-                    Editar perfil
-                  </Button>
-                )}
+                <Button color="secondary">
+                  <EditIcon></EditIcon>
+                  Editar perfil
+                </Button>
                 <div className={classes.name}>
                   <h1
                     className={classes.title}
@@ -126,15 +123,14 @@ export default function ProfilePage(props) {
           </GridContainer>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-              {showDetails && (
-                <ProfileTabs
-                  activity={activity}
-                  courses={courses}
-                  favourites={favourites}
-                  teacherIn={teacherIn}
-                  role={role}
-                />
-              )}
+              <ProfileTabs
+                activity={activity}
+                courses={courses}
+                favourites={favourites}
+                teacherIn={teacherIn}
+                role={role}
+              />
+              ){' '}
             </GridItem>
           </GridContainer>
         </div>

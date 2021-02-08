@@ -45,7 +45,7 @@ const SchoolQuiz = () => {
           <h1>Cargando</h1>
         )}
       </Box>
-      <Button>+ Agregar</Button>
+      <Button>Agregar + </Button>
     </Container>
   );
 };
