@@ -52,10 +52,8 @@ const QuestionSideBar = ({ onMobileClose, openMobile, questions, setId }) => {
   const classes = useStyles();
   const Dispatch = useDispatch();
   const params = useParams();
-  // const quiz = useSelector(SchoolQuizSelector).find((quiz) => quiz.id === params.id)
-  // console.log(quiz)
 
-
+  //recibe setId desde QuestionLoader para guardar el id en su estado local
 
   const handleAddQuestion = () => {
     let Question = {};
@@ -75,7 +73,6 @@ const QuestionSideBar = ({ onMobileClose, openMobile, questions, setId }) => {
       Dispatch(getAllQuestions(params.id));
     });
 
-    // setQuestions((prevQ) => prevQ.filter((q) => q.id !== id));
   };
   return (
     <Box height="100%" display="flex" flexDirection="column">
@@ -97,7 +94,7 @@ const QuestionSideBar = ({ onMobileClose, openMobile, questions, setId }) => {
                 key={question.title}
                 title={`${idx + 1} ${question.title}`}
                 icon={BallotIcon}
-                setId={setId}
+                setId={setId} // se le pasa setId para objener desde dentro el id de la pregunta 
                 handleQuestionDelete={handleQuestionDelete}
                 id={question.id}
               />

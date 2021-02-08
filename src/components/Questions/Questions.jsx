@@ -9,8 +9,9 @@ import { ACTIONS } from "store/rootReducer";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
+import {QuestionsDetailSelector, QuestionsDetailStatusSelector, QuestionsStatusSelector} from 'utils/selectors'
 import { UpdateAnswers, DeleteAnswers } from "views/QuizLoader/QuizLoaderSlice";
+import { CreateAnswers } from "views/QuizLoader/QuizLoaderSlice";
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -43,10 +44,13 @@ const questionInfo = {
 };
 
 const Questions = ({ question, reset }) => {
+
+  // recibe question que es el estado filtrado sincronamente. contiene el detalle de la pregunta y las respuestas
   const QuestionDetail = useSelector(QuestionsDetailSelector)
-  console.log(QuestionDetail.Answers)
+  const QuzLoaderStatus = useSelector(QuestionsStatusSelector);
   const [multi, setMulti] = useState();
-  const [multiAns, setMultiAns] = useState(QuestionDetail.Answers);
+  const [multiAns, setMultiAns] = useState([]);
+  const [boolean,SetBoolean] = useState(false);
   const Dispatch =  useDispatch()
   const handleAnsDelete = (id) => {
     console.log(id)
@@ -57,29 +61,32 @@ const Questions = ({ question, reset }) => {
   const handleAnsAdd = () => {
     setMultiAns((prevAns) => [
       ...prevAns,
-      { id: 10, text: "", correct: false },
+      { id: 'prueba', text: "", correct: boolean },
     ]);
+    //creo una nueva respuesta con un texto por defecto
+    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:boolean}))
   };
 
   const handleUpdate = (id)=>{
     let text =  document.getElementById(id).value
-    let correct = false
-    console.log( 'modificando',text)
-    Dispatch(UpdateAnswers({text,id,correct}))
+    //modifica la respuesta
+    Dispatch(UpdateAnswers({text,id,correct:boolean}))
   }
-
+console.log('tengo mest6',boolean)
   const handlers = {
     handleAnsDelete,
     handleAnsAdd,
     handleUpdate,
   };
    useEffect(() => {
+    setMultiAns(QuestionDetail.Answers)
      if(question){
-
        Dispatch(ACTIONS.School.setQuestionDetail(question))
        setMultiAns(QuestionDetail.Answers)
      }
-   }, [question]);
+   }, [question,multiAns,Dispatch,multi,QuzLoaderStatus]);
+
+
 
   return (
     <>
@@ -99,7 +106,7 @@ const Questions = ({ question, reset }) => {
         justify="space-between"
         alignItems="flex-start"
       >
-        {question ? <QuestionInfo info={question} setMulti={setMulti} reset={reset} /> : null}
+        {question ? <QuestionInfo info={question} setMulti={setMulti}  reset={reset} /> : null}
       </Grid>
       <Grid
         item
@@ -112,7 +119,9 @@ const Questions = ({ question, reset }) => {
       >
         {multi === undefined ? null : multi === 1 ? (
       multiAns.map((ans, idx) => {
-            return <QuestionMulti key={idx} answer={ans}  handlers={handlers} />;
+        //le pasa handlers a con las acciones para disparar. 
+        //SetBoolean es para obtener el valor true/false de correct y setearlo en el handlerUpdate
+            return <QuestionMulti key={idx} answer={ans} SetBoolean={SetBoolean} handlers={handlers} />;
           })
         ) : multi === 2 ? (
           <QuestionTF answer={questionInfo.answersTF} />

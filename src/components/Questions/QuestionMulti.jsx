@@ -17,6 +17,7 @@ import TrueFalse from '../TrueFalse/index';
 
 function QuestionMulti({
   answer,
+  SetBoolean,
    QuestionId,
     handlers: { handleAnsDelete, handleAnsAdd, handleUpdate, },
 }) {
@@ -49,7 +50,9 @@ function QuestionMulti({
             texts={['Incorrecta', 'Correcta']}
             size="small"
           /> */}
-          <TrueFalse fontSize="large" />
+          {/* le paso respCorrect para que tome el valor true/false de los datos recibidos de la api */}
+          {/* le paso boolean para obtener el valor true/false del boton y setearselo en el handlerUpdate */}
+          <TrueFalse fontSize="large" respCorrect={answer.correct}  boolean={SetBoolean}  />
           <IconButton
             color="secondary"
             aria-label="delete answer"

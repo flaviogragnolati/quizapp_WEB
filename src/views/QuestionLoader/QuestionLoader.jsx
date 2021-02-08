@@ -20,7 +20,7 @@ function QuestionLoader() {
   const questionsStatus = useSelector(QuestionsStatusSelector);
   const params = useParams();
 
-  const [questionId, setQuestionId] = useState(1);
+  const [questionId, setQuestionId] = useState(1); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
   useEffect(() => {
     Dispatch(getAllQuestions(params.id));
   }, []);
@@ -36,6 +36,7 @@ function QuestionLoader() {
       alignItems="flex-start"
     >
       <Grid item sm={2}>
+        {/* se le pasa el setQuestionId para que me cambie el valor del estado por el id de la pregunta clickeada  */}
         <QuestionSideBar questions={questions} setId={setQuestionId}/>
       </Grid>
       <Grid
@@ -46,6 +47,7 @@ function QuestionLoader() {
         justify="space-between"
         alignItems="flex-start"
       >
+        {/* se pasa detalle de la pregunta con sus respuestas */}
         <Questions question={questions.find((question) => question.id === questionId )} reset={questionId}/>
       </Grid>
     </Grid>
