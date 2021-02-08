@@ -26,6 +26,7 @@ const initialState_School = {
   QuestionDetail:{
     data:{},
     status: status.idle,
+    Answers : [],
   }
 };
 
@@ -159,8 +160,9 @@ const SchoolSlice = createSlice({
       state.UserDetail.data = {}
     },
     setQuestionDetail: (state,{payload}) =>{
-      state.QuestionDetail.data = payload
-      state.QuestionDetail.status = status.pending
+      state.QuestionDetail.data = payload;
+      payload.Answers  ? state.QuestionDetail.Answers = payload.Answers : state.QuestionDetail.Answers =[];
+     state.QuestionDetail.status = status.pending 
       state.QuestionDetail.status = status.success
     }
   },

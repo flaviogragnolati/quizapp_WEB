@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {QuestionsDetailSelector, QuestionsDetailStatusSelector} from 'utils/selectors'
 import { UpdateAnswers, DeleteAnswers } from "views/QuizLoader/QuizLoaderSlice";
+import { CreateAnswers } from "views/QuizLoader/QuizLoaderSlice";
 
 const questionInfo = {
   title: "QCD - enunciado",
@@ -46,7 +47,7 @@ const Questions = ({ question, reset }) => {
   const QuestionDetail = useSelector(QuestionsDetailSelector)
   console.log(QuestionDetail.Answers)
   const [multi, setMulti] = useState();
-  const [multiAns, setMultiAns] = useState(QuestionDetail.Answers);
+  const [multiAns, setMultiAns] = useState([]);
   const Dispatch =  useDispatch()
   const handleAnsDelete = (id) => {
     console.log(id)
@@ -57,8 +58,11 @@ const Questions = ({ question, reset }) => {
   const handleAnsAdd = () => {
     setMultiAns((prevAns) => [
       ...prevAns,
-      { id: 10, text: "", correct: false },
+      { id: 'prueba', text: "", correct: false },
     ]);
+    // let { text, correct, QuestionId } = req.body;
+    console.log('esto le envio', { QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:false})
+    Dispatch(CreateAnswers({ QuestionId:QuestionDetail.id, text:'escribe tu respuesta', correct:false}))
   };
 
   const handleUpdate = (id)=>{
@@ -74,12 +78,14 @@ const Questions = ({ question, reset }) => {
     handleUpdate,
   };
    useEffect(() => {
+    setMultiAns(QuestionDetail.Answers)
      if(question){
-
        Dispatch(ACTIONS.School.setQuestionDetail(question))
        setMultiAns(QuestionDetail.Answers)
      }
-   }, [question]);
+   }, [question,multiAns,Dispatch,multi]);
+
+
 
   return (
     <>

@@ -34,7 +34,7 @@ export const QUIZ_INFO_ENDPOINT = QUIZ_ENDPOINT + '/info';
 
 export const QUESTIONS_ENDPOINT = BASE_ENDPOINT + '/questions';
 
-export const ANSWERS_ENDPOINT = BASE_ENDPOINT + '/answers/';
+export const ANSWERS_ENDPOINT = BASE_ENDPOINT + '/answers';
 
 export const GET_USER_EMAIL_ENDPOINT = BASE_ENDPOINT + '/users/email/';
 
