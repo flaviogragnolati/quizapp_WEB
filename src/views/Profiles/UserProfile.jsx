@@ -10,14 +10,14 @@ import Button from 'components/CustomButtons/Button.js';
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
 import Parallax from 'components/Parallax/Parallax.js';
-import fakeUser from './fakeUser';
+import fakeUser from './components/fakeUser';
 import EditIcon from '@material-ui/icons/Edit';
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
-import ProfileTabs from './ProfileTabs';
+import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from 'views/UserProfile/profileSlice';
+import { getUserData } from './profileSlice';
 import {
   userProfileSelector,
   schoolProfileSelector,
@@ -45,18 +45,11 @@ export default function ProfilePage(props) {
 
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
-    if (user.id !== id) {
-      dispatch(getUserData(id));
-    }
   }, [user, authStatus]);
 
   const classes = useStyles();
+
   if (authStatus === 'success') {
-    if (user && user.id === id) {
-      showDetails = true;
-    } else {
-      showDetails = false;
-    }
     role = Boolean(user) && user.type;
   }
 

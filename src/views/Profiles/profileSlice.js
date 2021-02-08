@@ -37,7 +37,7 @@ export const getSchoolData = createAsyncThunk(
 const isRejectedAction = isRejected(getUserData);
 const isPendingAction = isPending(getUserData);
 
-const UserProfileSlice = createSlice({
+const profileSlice = createSlice({
   name: 'profile',
   initialState: initialState_Profile,
   reducers: {},
@@ -60,4 +60,4 @@ const UserProfileSlice = createSlice({
   },
 });
 
-export default UserProfileSlice;
+export default profileSlice;

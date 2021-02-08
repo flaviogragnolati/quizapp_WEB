@@ -4,7 +4,7 @@ import catalogueSlice from 'views/Catalogue/catalogueSlice';
 // import favoritesSlice from 'views/Catalogue/favoritesSlice';
 import notificationSlice from 'views/Notifier/notificationSlice';
 import QuizLoaderSlice from 'views/QuizLoader/QuizLoaderSlice';
-import profileSlice from 'views/UserProfile/profileSlice';
+import profileSlice from 'views/Profiles/profileSlice';
 import SchoolSlice from 'views/School/SchoolSlice';
 import TeacherSlice from 'views/Teacher/TeacherSlice';
 import quizDetailSlice from 'views/QuizProfile/quizDetailSlice';

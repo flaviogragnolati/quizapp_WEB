@@ -2,7 +2,8 @@ import { Route } from 'react-router-dom';
 import Home from 'views/Home';
 import Login from 'views/Login/Login';
 import NotFound from 'views/NotFound';
-import UserProfile from 'views/UserProfile';
+import MyProfile from 'views/Profiles/MyProfile';
+import UserProfile from 'views/Profiles/UserProfile';
 import SchoolProfile from 'views/School/SchoolProfile';
 import QuizProfile from 'views/QuizProfile';
 import Catalogue from 'views/Catalogue';
@@ -17,8 +18,7 @@ import DatosQuiz from 'views/QuizLoader/DatosQuiz';
 import SubjectLoader from 'views/School/SubjectLoader';
 import LoginSchool from 'views/Login/LoginSchool';
 import QuizTeacher from 'views/Teacher/QuizTeacher';
-import EnrollTeacher from "views/Teacher/EnrollTeacher";
-
+import EnrollTeacher from 'views/Teacher/EnrollTeacher';
 
 export const routes = [
   { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
@@ -28,9 +28,14 @@ export const routes = [
   { path: '/about', component: About, access: 'guest' },
   { path: '/registerSchool', component: RegisterSchool, access: 'guest' },
   { path: '/quiz-loader/', component: DatosQuiz, access: 'user' },
-  { path: ['/subject-loader/:id','/subject-loader'], component: SubjectLoader, access: 'guest' },
+  {
+    path: ['/subject-loader/:id', '/subject-loader'],
+    component: SubjectLoader,
+    access: 'guest',
+  },
   { path: '/question-loader/:id', component: QuestionLoader, access: 'user' },
   { path: '/profile/:id', component: UserProfile, access: 'guest' },
+  { path: '/myprofile', component: MyProfile, access: 'guest' },
   { path: '/catalogue', component: Catalogue, access: 'guest' },
   { path: '/school-profile/:id', component: SchoolProfile, access: 'guest' },
   { path: '/quiz-detail/:id', component: QuizProfile, access: 'guest' },

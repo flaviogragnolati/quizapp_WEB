@@ -10,7 +10,7 @@ function ProtectRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        user.role === 'school' ? (
+        user.type === 'school' ? (
           <Component {...props} />
         ) : (
           <Redirect to={HOME} />
