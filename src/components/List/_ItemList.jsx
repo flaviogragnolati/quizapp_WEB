@@ -26,7 +26,7 @@ import {
 import { useDispatch } from "react-redux";
 import ModalTeacher from "./Modal";
 // import getInitials from 'src/utils/getInitials';
-import { enrollToSudent } from "views/Teacher/TeacherSlice";
+import { enrollToSudent, activationQuiz } from "views/Teacher/TeacherSlice";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -130,6 +130,9 @@ const Results = ({
     }
     if (name === "Rechazar") {
       dispatch(enrollToSudent({ QuizId:params.id , UserId: e , accepted:false}))
+    }
+    if (name === "Activar/Desactivar") {
+      dispatch(activationQuiz(e))
     }
   };
 
@@ -259,7 +262,7 @@ const Results = ({
                       {customer.phone && (
                         <TableCell>{customer.phone}</TableCell>
                       )}
-
+                      {customer.active === false ? (<TableCell>Desactivado</TableCell>) : customer.active === true ? (<TableCell>Activado</TableCell>) : null}
                       {ButtonName && ButtonName[0] && (
                         <TableCell>
                           <Button
