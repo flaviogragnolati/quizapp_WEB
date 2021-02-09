@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
 // import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
@@ -15,42 +15,41 @@ import {
   TableRow,
   Typography,
   makeStyles,
-} from "@material-ui/core";
-import Button from "components/Home_MUI/Button";
-import { Link, useHistory, useParams } from "react-router-dom";
+} from '@material-ui/core';
+import Button from 'components/Home_MUI/Button';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import {
   deleteSubject,
   editSubject,
   delateQuiz,
-} from "views/School/SchoolSlice";
-import { useDispatch } from "react-redux";
-import ModalTeacher from "./Modal";
+} from 'views/School/SchoolSlice';
+import { useDispatch } from 'react-redux';
+import ModalTeacher from './Modal';
 // import getInitials from 'src/utils/getInitials';
-import { enrollToSudent, activationQuiz } from "views/Teacher/TeacherSlice";
-
+import { enrollToSudent, activationQuiz } from 'views/Teacher/TeacherSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: "none",
+    margin: 'none',
   },
   avatar: {
     marginRight: theme.spacing(2),
   },
   button: {
-    padding: "16px 5px",
+    padding: '16px 5px',
   },
   Table: {
-    whidth: "auto",
-    margin: "none",
+    whidth: 'auto',
+    margin: 'none',
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -73,7 +72,7 @@ const Results = ({
   propsNames,
   ...rest
 }) => {
-  const params = useParams()
+  const params = useParams();
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -83,21 +82,21 @@ const Results = ({
   let btnProps = ['add', 'edit', 'delete','activate','enroll', 'accept', 'reject']
 
   if (propsNames.length !== columnName.length) {
-    throw new Error('Las propiedades y las columnas no coinciden')
+    throw new Error('Las propiedades y las columnas no coinciden');
   }
 
   for (const key in actions) {
     if (Object.hasOwnProperty.call(actions, key)) {
       const element = actions[key];
       if (typeof element !== 'function') {
-        throw new Error(`La accion ${key} no es una funcion`)
+        throw new Error(`La accion ${key} no es una funcion`);
       }
       if (!btnProps.includes(key)) {
-        throw new Error(`La accion ${key} no esta en btnProps`)
+        throw new Error(`La accion ${key} no esta en btnProps`);
       }
     }
   }
-  
+
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
@@ -149,13 +148,12 @@ const Results = ({
     setPage(newPage);
   };
 
-
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {customers[0] ? (
         <>
           <Box Width={whidth ? whidth : 1}>
-            <Table size={"small"} className={customers ? "s" : null}>
+            <Table size={'small'} className={customers ? 's' : null}>
               <TableHead>
                 <TableRow>
                   <TableCell padding="checkbox">
@@ -175,8 +173,7 @@ const Results = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {customers.map((info) =>
-
+                {customers.map((info) => (
                   <TableRow
                     hover
                     key={info.id}
@@ -190,27 +187,41 @@ const Results = ({
                       />
                     </TableCell>
                     {propsNames.map((prop) => {
-                      
-                      
                       if (btnProps.includes(prop)) {
-                        return <TableCell>
-                          <Button className={classes.button} name={prop} id={info.id}
-                            onClick={() => actions[prop](info.id)}
+                        return (
+                          <TableCell>
+                            <Button
+                              className={classes.button}
+                              name={prop}
+                              id={info.id}
+                              onClick={() => actions[prop](info.id)}
                             >
-                            {prop}
-                          </Button>
-                        </TableCell>
+                              {prop}
+                            </Button>
+                          </TableCell>
+                        );
                       }
                       // puse este if porque a la info de subjects la recibe dentro de otro objeto
-                      if(typeof info[prop] === 'object'){
-                        return <TableCell>{ info[prop].name ? info[prop].name : '-'}</TableCell>
-                      }else{
-
-                        return <TableCell>{ info[prop] || typeof info[prop] === 'boolean' || info[prop] === 0 ? info[prop] + '' : '-'}</TableCell>
+                      if (typeof info[prop] === 'object') {
+                        return (
+                          <TableCell>
+                            {info[prop].name ? info[prop].name : '-'}
+                          </TableCell>
+                        );
+                      } else {
+                        return (
+                          <TableCell>
+                            {info[prop] ||
+                            typeof info[prop] === 'boolean' ||
+                            info[prop] === 0
+                              ? info[prop] + ''
+                              : '-'}
+                          </TableCell>
+                        );
                       }
                     })}
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
           </Box>
