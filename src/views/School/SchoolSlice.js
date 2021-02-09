@@ -82,8 +82,8 @@ export const getTeachersSchool = createAsyncThunk(
 
 export const createSubject = createAsyncThunk(
   "school/createSubject",
-  async ({SchoolId}) => {
-    const Subject_response = await axios.post(SUBJECT_ENDPOINT, SchoolId);
+  async (payload) => {
+    const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
     const { subject } = Subject_response;
     return subject;
   }
@@ -102,8 +102,8 @@ export const postUserToTeacher = createAsyncThunk(
 
 //DELETE
 
-export const delateSubject = createAsyncThunk(
-  'school/delateSubject',
+export const deleteSubject = createAsyncThunk(
+  'school/deleteSubject',
   async (payload) => {
     const delete_response = await axios.delete(
       SUBJECT_ENDPOINT + '/' + payload
@@ -135,10 +135,8 @@ export const removeTeacher = createAsyncThunk(
 export const editSubject = createAsyncThunk(
   'school/editSubject',
   async (payload) => {
-    const Subject_response = await axios.put(
-      SUBJECT_ENDPOINT + '/' + payload.id,
-      payload
-    );
+    console.log(payload)
+    const Subject_response = await axios.put(SUBJECT_ENDPOINT + '/' + payload.id , payload);
     return Subject_response.data;
   }
 );
@@ -147,7 +145,7 @@ const isPendingAction = isPending(
   getQuizList,
   getSubjectsList,
   createSubject,
-  delateSubject,
+  deleteSubject,
   delateQuiz,
   editSubject,
   getTeachersSchool,
@@ -157,7 +155,7 @@ const isRejectedAction = isRejected(
   getQuizList,
   getSubjectsList,
   createSubject,
-  delateSubject,
+  deleteSubject,
   delateQuiz,
   editSubject,
   getTeachersSchool,
@@ -209,7 +207,7 @@ const SchoolSlice = createSlice({
       state.UserDetail.status = status.success;
       state.UserDetail.role = payload.role;
     });
-    builder.addCase(delateSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(deleteSubject.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {

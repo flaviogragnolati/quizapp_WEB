@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getQuizList } from '../SchoolSlice';
 import {
   SchoolQuizSelector,
+<<<<<<< HEAD
   schoolQuizStatusSelector,
+=======
+  SchoolStatusSelector,
+>>>>>>> c6396f7af89d3f8e7cf5088f289390e1fa5d7ede
 } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
 
@@ -22,7 +26,11 @@ const useStyles = makeStyles((theme) => ({
 const SchoolQuiz = () => {
   const dispatch = useDispatch();
   const quizes = useSelector(SchoolQuizSelector);
+<<<<<<< HEAD
   const status = useSelector(schoolQuizStatusSelector);
+=======
+  const status = useSelector(SchoolStatusSelector);
+>>>>>>> c6396f7af89d3f8e7cf5088f289390e1fa5d7ede
   const school = useSelector(userSelector)
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER'];

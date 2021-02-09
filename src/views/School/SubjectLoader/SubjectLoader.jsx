@@ -10,16 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useHistory, useParams } from "react-router-dom";
-import { SchoolSubjectSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
+import { SchoolSubjectSelector, SchoolStatusSelector } from 'utils/selectors';
 import { editSubject } from "../SchoolSlice";
+import { userSelector } from "utils/selectors";
 
 const { name, description } = subjectModel;
+
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
   const datos = useParams();
   const subjects = useSelector(SchoolSubjectSelector)
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
+  const subjectsStatus = useSelector(SchoolStatusSelector)
+  const school = useSelector(userSelector)
   const History= useHistory()
 
   const useStyles = makeStyles((theme) => ({
@@ -42,16 +45,19 @@ export default function SubjectLoader() {
 
 
   const handleSubmit = (values, formik) => {
+    console.log(datos.id,school.id)
     if (subjects !== undefined && datos.id) {
       values.id = datos.id
-      dispatch(editSubject({SchoolId:values.id}));
+      dispatch(editSubject(values));
       History.push('/school-subject')
     } else {
+      values.SchoolId = school.id
       dispatch(createSubject(values));
       History.push('/school-subject')
     }
   };
-  
+
+
   let editValues = initialState_Subjects
   
   if (subjectsStatus === 'success' && subjects[0] != undefined && datos.id) {

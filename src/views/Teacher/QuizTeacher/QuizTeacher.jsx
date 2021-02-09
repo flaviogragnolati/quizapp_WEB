@@ -5,11 +5,13 @@ import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuizList } from 'views/School/SchoolSlice';
 import {
-    TeacherQuizSelector,
-    TeacherQuizStatusSelector,
-    userSelector,
+  TeacherQuizSelector,
+  TeacherQuizStatusSelector,
+  userSelector,
 } from 'utils/selectors';
 import { getQuizesTeacher } from 'views/Teacher/TeacherSlice';
+import { activationQuiz } from 'views/Teacher/TeacherSlice';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +29,28 @@ function QuizTeacher() {
   const quizes = useSelector(TeacherQuizSelector);
   const status = useSelector(TeacherQuizStatusSelector);
   const user = useSelector(userSelector);
+  const History = useHistory()
+
+  let handlerActivation = (e) => {
+    dispatch(activationQuiz(e))
+  }
+
+  let handlerQuestions = (e) => {
+    History.push(`/question-loader/${e}`)
+  }
+
+  let handlerEnroll = (e) => {
+    History.push(`/enroll-list/${e}`);
+  }
 
   const classes = useStyles();
-  let columnName = ['Nombre del Quiz', 'Description', 'Estado' ,'Activar Quiz','Preguntas','Aceptar alumnos'];
-  let ButtonName = [ 'Activar/Desactivar' ,'Editar Preguntas', 'Enrolar'];
+  let columnName = ['Nombre del Quiz', 'Description', 'Estado', 'Activar Quiz', 'Preguntas', 'Aceptar alumnos'];
+  let propsNames = ['name', 'description', 'active', 'activate', 'edit', 'enroll']
+  let actions = {
+    activate: handlerActivation,
+    edit: handlerQuestions,
+    enroll: handlerEnroll,
+  }
 
   useEffect(() => {
     dispatch(getQuizesTeacher(user.id));
@@ -43,13 +63,12 @@ function QuizTeacher() {
         {status === 'success' ? (
           <List
             customers={quizes}
-            columnName={columnName}
-            ButtonName={ButtonName}
+            propsNames={propsNames} columnName={columnName} actions={actions}
             User={user}
           />
         ) : (
-          <h1>Cargando</h1>
-        )}
+            <h1>Cargando</h1>
+          )}
       </Box>
     </Container>
   );

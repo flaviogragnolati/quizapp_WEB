@@ -5,7 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Container from '@material-ui/core/Container';
 import Typography from '../../../components/Home_MUI/Typography';
-import TextField from '../../../components/Home_MUI/TextField';
+// import TextField from '../../../components/Home_MUI/TextField';
+import { TextField } from '@material-ui/core';
 import Snackbar from '../../../components/Home_MUI/Snackbar';
 import Button from '../../../components/Home_MUI/Button';
 import { useDispatch } from 'react-redux';
@@ -23,7 +24,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -32,6 +33,7 @@ const styles = (theme) => ({
   textField: {
     width: '100%',
     marginTop: theme.spacing(3),
+    backgroundColor: theme.palette.background.paper,
   },
   button: {
     width: '100%',
@@ -62,33 +64,26 @@ const styles = (theme) => ({
 function Contact(props) {
   const { classes } = props;
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const [formInfo, setFormInfo] = useState({
     correo: '',
     nombreSchool: '',
   });
 
   const handleChange = (event) => {
-  setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
+    setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpen(true);
-
     let payload = {
-        name: formInfo.nombreSchool,
-        email: formInfo.correo
+      name: formInfo.nombreSchool,
+      email: formInfo.correo,
     };
-    dispatch(contactSchool(payload))
+    dispatch(contactSchool(payload));
     setFormInfo({
       correo: '',
-      nombreSchool: ''
+      nombreSchool: '',
     });
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -105,6 +100,7 @@ function Contact(props) {
               </Typography>
               <TextField
                 noBorder
+                variant="filled"
                 name="correo"
                 className={classes.textField}
                 placeholder="Correo electronico"
@@ -112,6 +108,7 @@ function Contact(props) {
               />
               <TextField
                 noBorder
+                variant="filled"
                 name="nombreSchool"
                 className={classes.textField}
                 placeholder="Nombre de la Institucion"
@@ -119,6 +116,7 @@ function Contact(props) {
               />
               <TextField
                 noBorder
+                variant="filled"
                 name="pais"
                 className={classes.textField}
                 placeholder="Pais"
@@ -149,11 +147,6 @@ function Contact(props) {
           </Hidden>
         </Grid>
       </Grid>
-      <Snackbar
-        open={open}
-        onClose={handleClose}
-        message="En breve te enviaremos mas informacion."
-      />
     </Container>
   );
 }

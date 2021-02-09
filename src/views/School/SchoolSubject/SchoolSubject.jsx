@@ -8,10 +8,10 @@ import List from '../../../components/List';
 import array from './data';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubjectsList } from "../SchoolSlice";
-import { SchoolSubjectSelector,SchoolSubjectStatusSelector } from 'utils/selectors';
+import { SchoolSubjectSelector,SchoolStatusSelector } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
-
-
+import { deleteSubject } from 'views/School/SchoolSlice'
+import { Link, useHistory, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,26 +22,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const SchoolSubject = () => {
   // const classes = useStyles();
+  const history = useHistory();
   const [customers] = useState(array);
-  let columnName = ['Name', 'Description', 'Delate','Edit']
-  let ButtonName = ['Delate Subject', 'Edit Subject'];
   const dispatch = useDispatch()
   const subjects = useSelector(SchoolSubjectSelector)
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
+  const subjectsStatus = useSelector(SchoolStatusSelector)
   const school = useSelector(userSelector)
  
- 
   useEffect(() => {
-dispatch(getSubjectsList({id:school.id}))
+    dispatch(getSubjectsList({id:school.id}))
   }, [school])
+  
+  let handlerDelete = (e) => {
+    dispatch(deleteSubject(e))
+  }
+
+  let handlerEdit = (e) => {
+    history.push({
+      pathname: `/subject-loader/${e}`,
+      state: {
+        edit: true,
+      },
+    });
+  }  
+
+  let columnName = ['Name', 'Description', 'Delate','Edit']
+  let propsNames = ['name','description','delete','edit']
+  let actions = {
+    delete: handlerDelete,
+    edit: handlerEdit,
+  }
+
   return (
       <Container maxWidth={false}>
         <h1>Lista de Materias de la Escuela</h1>
         <Box mt={3}>
-          {subjectsStatus === 'success' ? <List customers={subjects} columnName={columnName} ButtonName={ButtonName}/> : null}
+          {subjectsStatus === 'success' ? <List 
+          customers={subjects} propsNames={propsNames} columnName={columnName} actions={actions}/> : null}
         </Box>
       </Container>
 
