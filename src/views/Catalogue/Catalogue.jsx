@@ -16,6 +16,7 @@ import {
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { forceCatalogueSelector } from 'utils/selectors';
+import LimitedBackdropLoading from 'components/Loading/LimitedBackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
   courseCard: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CatalogueSection = styled.section`
+  z-index: 1;
   margin-top: 5rem;
   background-color: ${(p) => p.theme.palette.background.default};
 `;
@@ -84,7 +86,7 @@ const Catalogue = () => {
   // }, [catStatus]);
 
   if (catStatus === 'pending') {
-    content = <BackdropLoading />;
+    content = <LimitedBackdropLoading />;
   } else if (catStatus === 'success') {
     if (quizList.length < 1) {
       content = <h3>No hay cursos que se ajusten a ese criterio</h3>;
