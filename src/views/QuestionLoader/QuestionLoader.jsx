@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { getAllQuestions } from "views/QuizLoader/QuizLoaderSlice";
 
 import { QuestionsSelector } from "utils/selectors";
-import { QuestionsStatusSelector, QuestionDetailAnswersSelector} from "utils/selectors";
+import { QuestionStatusSelector, QuestionDetailAnswersSelector} from "utils/selectors";
 const useStyles = makeStyles(() => ({
   div_Questions: {
     marginTop: "50px",
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 function QuestionLoader() {
   const Dispatch = useDispatch();
   const questions = useSelector(QuestionsSelector);
-  const questionsStatus = useSelector(QuestionsStatusSelector);
+  const questionsStatus = useSelector(QuestionStatusSelector);
   const Answers = useSelector(QuestionDetailAnswersSelector)
   const params = useParams();
 
