@@ -11,6 +11,7 @@ import {
 } from 'utils/selectors';
 import { getToEnrollList } from 'views/Teacher/TeacherSlice';
 import { useParams } from 'react-router-dom';
+import { enrollToSudent } from '../TeacherSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,13 +31,25 @@ function EnrollTeacher() {
     const user = useSelector(userSelector);
   
     const classes = useStyles();
-    let columnName = ['Nombre Alumno' , 'Email Alumno', 'Editar','Aceptar alumnos'];
-    let ButtonName = ['Aceptar En Quiz','Rechazar'];
+    let columnName = ['Nombre Alumno' , 'Email Alumno', 'Aceptar','Aceptar alumnos'];
+  let propsNames = ['name', 'email', 'accept', 'reject']
 
+  
+  const handleAccept = (e)=>{
+    
+    dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: true }))
+  }
+  const handleReject =(e)=>{
+    
+    dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: false }))
+  }
+  const actions = {
+    accept: handleAccept,
+    reject: handleReject,
+  }
     useEffect(() => {
       dispatch(getToEnrollList(params.id));
     }, [user]);
-    console.log(students)
     return (
       <Container maxWidth={false}>
         <Box mt={3}>
@@ -45,8 +58,9 @@ function EnrollTeacher() {
             <List
               customers={students}
               columnName={columnName}
-              ButtonName={ButtonName}
               User={user}
+              propsNames={propsNames}
+              actions={actions}
             />
           ) : <h1>Cargando</h1>
           )}

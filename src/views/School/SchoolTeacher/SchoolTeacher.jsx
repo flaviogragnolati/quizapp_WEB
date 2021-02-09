@@ -18,8 +18,19 @@ const useStyles = makeStyles((theme) => ({
 
 const SchoolTeacher = () => {
   // const classes = useStyles();
+
+
+  // en este componente se deberia poder quitar un teacher de una quiz???
+  // deberia tener un enlace al perfil del teacher??
+  //la informacion que devuelve la api son solo IdQuiz y idUser, deberia recibir:
+  //nombre de usuario.
+  //nombre del quiz.
+  //nombre del subject.
+  // cantidad de alumnos???
+  // reviews???
   const [customers] = useState(array);
-  let columnName = ['Name', 'Subject', 'Quiz', 'Review', 'Alumnos' ];
+  const columnName = ['Name', 'Subject', 'Quiz', 'Review', 'Alumnos' ];
+  const propsNames=['name','subject','quiz','review', 'alumnos']
   const dispatch = useDispatch()
   const school = useSelector(userSelector)
 
@@ -31,7 +42,7 @@ const SchoolTeacher = () => {
     <Container maxWidth={false}>
       <Box mt={3}>
         <h3>Listado de Teachers</h3>
-        <List customers={customers} columnName={columnName} />
+        <List customers={customers} columnName={columnName} propsNames={propsNames} />
       </Box>
       <Button>+ Agregar</Button>
     </Container>

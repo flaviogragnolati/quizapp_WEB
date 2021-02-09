@@ -80,7 +80,7 @@ const Results = ({
   const [page, setPage] = useState(0);
   const History = useHistory();
   const dispatch = useDispatch();
-  let btnProps = ['add', 'edit', 'delete','activate','enroll']
+  let btnProps = ['add', 'edit', 'delete','activate','enroll', 'accept', 'reject']
 
   if (propsNames.length !== columnName.length) {
     throw new Error('Las propiedades y las columnas no coinciden')
@@ -112,12 +112,7 @@ const Results = ({
   const HandleClick = (e, name) => {
    
    
-    if (name === "Aceptar En Quiz") {
-      dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: true }))
-    }
-    if (name === "Rechazar") {
-      dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: false }))
-    }
+  
   };
 
   const handleSelectOne = (event, id) => {

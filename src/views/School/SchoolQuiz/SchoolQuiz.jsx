@@ -31,7 +31,6 @@ const SchoolQuiz = () => {
 
 
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER'];
-  let ButtonName = ['Borrar Quiz','TEACHER'];
   let propsNames = ['name', 'Subject', 'description', 'delete', 'add'];
   const handleDelete = (e)=>{
     
@@ -60,7 +59,6 @@ const SchoolQuiz = () => {
             customers={quizes}
             propsNames={propsNames}
             columnName={columnName}
-            ButtonName={ButtonName}
             actions={actions}
           />
         ) : (

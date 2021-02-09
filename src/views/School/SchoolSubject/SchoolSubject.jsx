@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
+  Button,
   Container,
   makeStyles
 } from '@material-ui/core';
@@ -62,6 +63,9 @@ const SchoolSubject = () => {
           {subjectsStatus === 'success' ? <List 
           customers={subjects} propsNames={propsNames} columnName={columnName} actions={actions}/> : null}
         </Box>
+        <Button component={Link} to='/subject-loader'>
+          agregar Materia
+        </Button>
       </Container>
 
   );
