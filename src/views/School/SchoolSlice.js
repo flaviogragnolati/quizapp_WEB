@@ -64,13 +64,14 @@ export const getUserEmail = createAsyncThunk(
   }
 );
 
-export const getTeachersSchool = createAsyncThunk(
-  'school/getTeachersSchool',
-  async ({ SchoolId }) => {
-    const teacherResponse = await axios.get(
-      TEACHER_ENDPOINT + 'school/' + SchoolId
+
+export const getTeachersQuiz = createAsyncThunk(
+  'school/getTeachersQuiz',
+  async ({ QuizId }) => {
+    const teachersResponse = await axios.get(
+      QUIZ_ENDPOINT + '/' + QuizId + '/teachers'
     );
-    return teacherResponse.data;
+    return teachersResponse.data;
   }
 );
 
@@ -155,7 +156,7 @@ const isPendingAction = isPending(
   deleteSubject,
   delateQuiz,
   editSubject,
-  getTeachersSchool
+  getTeachersQuiz,
 );
 
 const isRejectedAction = isRejected(
@@ -165,7 +166,7 @@ const isRejectedAction = isRejected(
   deleteSubject,
   delateQuiz,
   editSubject,
-  getTeachersSchool
+  getTeachersQuiz,
 );
 
 const isPendingActionDetail = isPending(
@@ -203,7 +204,7 @@ const SchoolSlice = createSlice({
       state.UserDetail.data = payload.user;
       state.UserDetail.status = status.success;
     });
-    builder.addCase(getTeachersSchool.fulfilled, (state, { payload }) => {
+    builder.addCase(getTeachersQuiz.fulfilled, (state, { payload }) => {
       state.SchoolTeacherList = payload;
       state.status = status.success;
     });

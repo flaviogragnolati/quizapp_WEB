@@ -60,7 +60,7 @@ const Results = ({
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  let btnProps = ['add', 'edit', 'delete','activate','enroll', 'accept', 'reject']
+  let btnProps = ['add','edit','delete','activate','enroll','accept','reject','ver']
 
   if (propsNames.length !== columnName.length) {
     throw new Error('Las propiedades y las columnas no coinciden');

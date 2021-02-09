@@ -3,13 +3,11 @@ import { Box, Container, makeStyles } from '@material-ui/core';
 import List from 'components/List';
 import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { delateQuiz, getQuizList } from '../SchoolSlice';
-import {
-  SchoolQuizSelector,
-  SchoolStatusSelector,
-} from 'utils/selectors';
+import { delateQuiz, getQuizList, getTeachersQuiz } from '../SchoolSlice';
+import { SchoolQuizSelector, SchoolStatusSelector, } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
 import ModalTeacher from 'components/List/Modal';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,12 +26,12 @@ const SchoolQuiz = () => {
   const [QuizId, setQuizId] = useState(0);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
+  const history = useHistory()
 
-
-  let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER'];
-  let propsNames = ['name', 'Subject', 'description', 'delete', 'add'];
+  let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER','TEACHER'];
+  let propsNames = ['name', 'Subject', 'description', 'delete', 'add', 'ver'];
+  
   const handleDelete = (e)=>{
-    
     dispatch(delateQuiz(e));
   }
 
@@ -41,12 +39,20 @@ const SchoolQuiz = () => {
     setOpen(true);
     setQuizId(e);
   }
+
+  const handleSee = (e)=>{
+    dispatch(getTeachersQuiz({QuizId: e}))
+    history.push('/quiz-teacher/')
+  }
+
   let actions = {
     delete: handleDelete,
     add:handleAdd,
+    ver:handleSee,
   }
   useEffect(() => {
     dispatch(getQuizList({id: school.id}));
+
   }, [school]);
 
  

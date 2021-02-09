@@ -86,6 +86,7 @@ export const profileStatusSelector = (state) => state.profile.status;
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
 export const SchoolQuizSelector = (state) =>state.School.SchoolQuizList;
+export const SchoolTeachersSelector = (state) =>state.School.SchoolTeacherList;
 export const SchoolStatusSelector = (state) => state.School.status;
 export const SchoolSubjectSelector = (state) =>state.School.SchoolSubjectList.SubjectList;
 export const UserDetailSelector = (state) => state.School.UserDetail.data;
