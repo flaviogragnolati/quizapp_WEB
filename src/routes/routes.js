@@ -21,6 +21,8 @@ import SubjectLoader from 'views/School/SubjectLoader';
 import LoginSchool from 'views/Login/LoginSchool';
 import QuizTeacher from 'views/Teacher/QuizTeacher';
 import EnrollTeacher from 'views/Teacher/EnrollTeacher';
+import TeacherDashboard from '../views/Dashboard/TeacherDashboard';
+
 /**
  * !Definicion de `roles` y niveles de acceso:
  * ?guest: Puede acceder cualquier usuario a esta ruta, inclusive un guest (ej. /catalogue)
@@ -59,6 +61,7 @@ export const routes = [
   { path: '/school-quiz', component: SchoolQuiz, access: 'guest' },
   { path: '/quiz-list', component: QuizTeacher, access: 'guest' },
   { path: '/enroll-list/:id', component: EnrollTeacher, access: 'guest' },
+  { path: '/teacher-dashboard', component: TeacherDashboard, access: 'tea' },
   { path: '/404', component: NotFound, access: 'guest' },
 ];
 

@@ -18,6 +18,7 @@ import {
   restoreSession,
   localOrgLogin,
 } from 'components/Auth/authSlice';
+import { contactSchool } from 'components/Auth/authSlice';
 
 //?Array para guardar todas las acciones que requiren de notificacion
 const PENDING = 'pending';
@@ -37,6 +38,7 @@ const listenArray = [
   ACTIONS.actions.enroll.type,
   ACTIONS.auth.logout.type,
   ACTIONS.catalogue.filter.type, //'catalogue/filter'
+  ...allTypesAsync(contactSchool),
   ...allTypesAsync(getCatalogue),
   ...allTypesAsync(postUserToTeacher),
   ...allTypesAsync(removeTeacher),
@@ -56,15 +58,18 @@ const notificationMiddleware = (store) => (next) => (action) => {
   const allNotificationAsync = (fullfiled, pending, rejected) => {
     let state = action.type.split('/')[2];
     switch (state) {
-      case PENDING:
-        snackbar.message = pending;
-        snackbar.options.variant = 'info';
-        break;
       case FULFILLED:
+        if (!fullfiled) break;
         snackbar.message = fullfiled;
         snackbar.options.variant = 'success';
         break;
+      case PENDING:
+        if (!pending) break;
+        snackbar.message = pending;
+        snackbar.options.variant = 'info';
+        break;
       case REJECTED:
+        if (!rejected) break;
         snackbar.message = rejected;
         snackbar.options.variant = 'error';
         break;
@@ -108,15 +113,13 @@ const notificationMiddleware = (store) => (next) => (action) => {
       //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
       snackbar.message = `se cerro la sesion correctamente`;
       snackbar.options.variant = 'success';
-    }
-    // else if (action.type.includes('getCatalogue')) {
-    //   allNotificationAsync(
-    //     'tengo datos',
-    //     'esperando datos',
-    //     'ocurrio un error'
-    //   );
-    // }
-    else if (action.type.includes('postUserToTeacher')) {
+    } else if (action.type.includes('contactSchool')) {
+      allNotificationAsync(
+        'Nos pondremos en contacto en breve',
+        null,
+        'Ha ocurrido un error intente nuevamente'
+      );
+    } else if (action.type.includes('postUserToTeacher')) {
       allNotificationAsync(
         'Se promovio exitosamente a profesor',
         'Modificando nivel de acceso',

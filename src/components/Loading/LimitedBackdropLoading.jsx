@@ -1,7 +1,8 @@
 import React from 'react';
 import { Backdrop, CircularProgress } from '@material-ui/core/';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
+// import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -9,8 +10,14 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
 }));
+const LimitedBackdrop = withStyles({
+  root: {
+    position: 'absolute',
+    zIndex: 1,
+  },
+})(Backdrop);
 
-export default function BackdropLoading({
+export default function LimitedBackdropLoading({
   action,
   color = 'inherit',
   thickness = 4,
@@ -28,9 +35,13 @@ export default function BackdropLoading({
   };
   return (
     <div>
-      <Backdrop className={classes.backdrop} open={true} onClick={handleClose}>
+      <LimitedBackdrop
+        className={classes.LimitedBackdrop}
+        open={true}
+        onClick={handleClose}
+      >
         <CircularProgress color={color} size={size} thickness={thickness} />
-      </Backdrop>
+      </LimitedBackdrop>
     </div>
   );
 }
