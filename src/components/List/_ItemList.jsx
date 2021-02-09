@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 // import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
-  Avatar,
   Box,
   Card,
   Checkbox,
@@ -13,20 +12,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography,
   makeStyles,
 } from '@material-ui/core';
 import Button from 'components/Home_MUI/Button';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import {
-  deleteSubject,
-  editSubject,
-  delateQuiz,
-} from 'views/School/SchoolSlice';
-import { useDispatch } from 'react-redux';
-import ModalTeacher from './Modal';
-// import getInitials from 'src/utils/getInitials';
-import { enrollToSudent, activationQuiz } from 'views/Teacher/TeacherSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,11 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// school-quiz,quiz-loader
-// PUEDE RECIBIR HASTA 3 BOTONES
-/// este componente deberia recibir NOMBRE DE COLUMNAS COMO ARRAY (columnName)
-/// este componente deberia recibir NOMBRE DE BOTONES COMO ARRAY ( ButtonName)
-/// este componente deberia recibir DATOS COMO ARRAY DE OBJETOS (customers)
+
 
 const Results = ({
   className,
@@ -72,13 +56,10 @@ const Results = ({
   propsNames,
   ...rest
 }) => {
-  const params = useParams();
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const History = useHistory();
-  const dispatch = useDispatch();
   let btnProps = ['add', 'edit', 'delete','activate','enroll', 'accept', 'reject']
 
   if (propsNames.length !== columnName.length) {
@@ -108,11 +89,6 @@ const Results = ({
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const HandleClick = (e, name) => {
-   
-   
-  
-  };
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
