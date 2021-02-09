@@ -228,7 +228,6 @@ function QuizProfile(props) {
   const quizDetail = useSelector((state) => quizDetailSelector(state, id));
   const quizDetailHistory = useSelector(quizDetailHistorySelector);
   const user = useSelector(userSelector);
-  const role = useSelector(UserRoleSelector)
 
   const handleEnroll = (values) => {
     dispatch(enrollUser({ UserId: user.id, QuizId: quizDetail.id }));
@@ -239,10 +238,6 @@ function QuizProfile(props) {
       dispatch(getQuizDetailAsync(id));
     }
   }, [dispatch, quizDetailStatus, quizDetailHistory, id]);
-
-  useEffect(() => {
-    dispatch(getUserEmail({Id: id, email: user.email}))
-  }, [user]);
 
 
   if (quizDetailStatus === 'pending') {
@@ -444,23 +439,15 @@ function QuizProfile(props) {
             {/* <Button color="info" variant="contained" size="large">
             Contact
           </Button> */}
-          {role.name === 'Teacher' || role.name === 'Student' ? <Button
-              color="primary"
-              variant="contained"
-              size="large"
-              // onClick={      console.log(user)}
-            >
-              Hacer Quiz
-            </Button>
-            : <Button
+ <Button
               color="primary"
               variant="contained"
               size="large"
               onClick={handleEnroll}
             >
               Enroll
-            </Button>}
-            
+            </Button>
+          
           </Box>
         </Actions>
       </MainContainer>
