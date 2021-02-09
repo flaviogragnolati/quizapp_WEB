@@ -19,7 +19,7 @@ import {
 import Button from "components/Home_MUI/Button";
 import { Link, useHistory, useParams } from "react-router-dom";
 import {
-  delateSubject,
+  deleteSubject,
   editSubject,
   delateQuiz,
 } from "views/School/SchoolSlice";
@@ -69,18 +69,12 @@ const Results = ({
   columnName,
   ButtonName,
   User,
+  actions,
+  propsNames,
   ...rest
 }) => {
   const [open, setOpen] = useState(false);
   const params = useParams()
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -88,7 +82,24 @@ const Results = ({
   const [QuizId, setQuizId] = useState(0);
   const History = useHistory();
   const dispatch = useDispatch();
+  let btnProps = ['add', 'edit', 'delete','activate','enroll']
 
+  if (propsNames.length !== columnName.length) {
+    throw new Error('Las propiedades y las columnas no coinciden')
+  }
+
+  for (const key in actions) {
+    if (Object.hasOwnProperty.call(actions, key)) {
+      const element = actions[key];
+      if (typeof element !== 'function') {
+        throw new Error(`La accion ${key} no es una funcion`)
+      }
+      if (!btnProps.includes(key)) {
+        throw new Error(`La accion ${key} no esta en btnProps`)
+      }
+    }
+  }
+  
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
@@ -101,20 +112,6 @@ const Results = ({
   };
 
   const HandleClick = (e, name) => {
-    if (name === "Editar Preguntas") {
-      History.push(`/question-loader/${e}`);
-    }
-    if (name === "Delate Subject") {
-      dispatch(delateSubject(e));
-    }
-    if (name === "Edit Subject") {
-      History.push({
-        pathname: `/subject-loader/${e}`,
-        state: {
-          edit: true,
-        },
-      });
-    }
     if (name === "Borrar Quiz") {
       dispatch(delateQuiz(e));
     }
@@ -122,17 +119,11 @@ const Results = ({
       setOpen(true);
       setQuizId(e);
     }
-    if (name === "Enrolar") {
-      History.push(`/enroll-list/${e}`);
-    }
     if (name === "Aceptar En Quiz") {
-      dispatch(enrollToSudent({ QuizId:params.id , UserId: e , accepted:true}))
+      dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: true }))
     }
     if (name === "Rechazar") {
-      dispatch(enrollToSudent({ QuizId:params.id , UserId: e , accepted:false}))
-    }
-    if (name === "Activar/Desactivar") {
-      dispatch(activationQuiz(e))
+      dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: false }))
     }
   };
 
@@ -170,6 +161,7 @@ const Results = ({
     setPage(newPage);
   };
 
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {customers[0] ? (
@@ -195,117 +187,34 @@ const Results = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {customers &&
-                  customers.slice(0, limit).map((customer) => (
-                    <TableRow
-                      hover
-                      key={customer.id}
-                      selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={
-                            selectedCustomerIds.indexOf(customer.id) !== -1
-                          }
-                          onChange={(event) =>
-                            handleSelectOne(event, customer.id)
-                          }
-                          value="true"
-                        />
-                      </TableCell>
-                      {customer.avatarUrl && customer.name ? (
-                        <TableCell>
-                          <Box alignItems="center" display="flex">
-                            {customer.avatarUrl && (
-                              <Avatar
-                                className={classes.avatar}
-                                src={customer.avatarUrl}
-                              >
-                                {/* {getInitials(customer.name)} */}
-                                {customer.name && customer.name}
-                              </Avatar>
-                            )}
-                            {customer.name && (
-                              <Typography color="textPrimary" variant="body1">
-                                {customer.name}
-                              </Typography>
-                            )}
-                          </Box>
-                        </TableCell>
-                      ) : customer.name ? <TableCell>{customer.name}</TableCell> : null}
-                      {customer.Subject && (
-                        <TableCell>{customer.Subject.name}</TableCell>
-                      )}
-                      {customer.description && (
-                        <TableCell>{customer.description}</TableCell>
-                      )}
-                      {customer.quiz && <TableCell>{customer.quiz}</TableCell>}
-                      {customer.review && (
-                        <TableCell>{customer.review}</TableCell>
-                      )}
-                      {customer.alumnos && (
-                        <TableCell>{customer.alumnos}</TableCell>
-                      )}
-                      {customer.firstName && customer.lastName ? (
-                        <TableCell>{`${customer.firstName} ${customer.lastName}`}</TableCell>
-                      ) : null}
-                      {customer.email && (
-                        <TableCell>{customer.email}</TableCell>
-                      )}
-                      {customer.address && (
-                        <TableCell>
-                          {customer.address.city}, {customer.address.state},{" "}
-                          {customer.address.country}
-                        </TableCell>
-                      )}
+                {customers.map((info) =>
 
-                      {customer.phone && (
-                        <TableCell>{customer.phone}</TableCell>
-                      )}
-                      {customer.active === false ? (<TableCell>Desactivado</TableCell>) : customer.active === true ? (<TableCell>Activado</TableCell>) : null}
-                      {ButtonName && ButtonName[0] && (
-                        <TableCell>
-                          <Button
-                            className={classes.button}
-                            name={ButtonName[0]}
-                            id={customer.id}
-                            onClick={() =>
-                              HandleClick(customer.id, ButtonName[0])
-                            }
+                  <TableRow
+                    hover
+                    key={info.id}
+                    selected={selectedCustomerIds.indexOf(info.id) !== -1}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        checked={selectedCustomerIds.indexOf(info.id) !== -1}
+                        onChange={(event) => handleSelectOne(event, info.id)}
+                        value="true"
+                      />
+                    </TableCell>
+                    {propsNames.map((prop) => {
+                      if (btnProps.includes(prop)) {
+                        return <TableCell>
+                          <Button className={classes.button} name={prop} id={info.id}
+                            onClick={() => actions[prop](info.id)}
                           >
-                            {ButtonName[0]}
+                            {prop}
                           </Button>
                         </TableCell>
-                      )}
-                      {ButtonName && ButtonName[1] && (
-                        <TableCell>
-                          <Button
-                            className={classes.button}
-                            name={ButtonName[1]}
-                            onClick={() =>
-                              HandleClick(customer.id, ButtonName[1])
-                            }
-                          >
-                            {ButtonName[1]}
-                          </Button>
-                        </TableCell>
-                      )}
-                      {ButtonName && ButtonName[2] && (
-                        <TableCell>
-                          <Button
-                            className={classes.button}
-                            classes
-                            name={ButtonName[2]}
-                            onClick={() =>
-                              HandleClick(customer.id, ButtonName[2])
-                            }
-                          >
-                            {ButtonName[2]}
-                          </Button>
-                        </TableCell>
-                      )}
-                    </TableRow>
-                  ))}
+                      }
+                      return <TableCell>{ info[prop] || typeof info[prop] === 'boolean' || info[prop] === 0 ? info[prop] + '' : '-'}</TableCell>
+                    })}
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </Box>

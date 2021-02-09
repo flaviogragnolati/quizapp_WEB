@@ -4,7 +4,7 @@ import {
   postUserToTeacher,
   removeTeacher,
   delateQuiz,
-  delateSubject,
+  deleteSubject,
   editSubject,
   createSubject,
 } from 'views/School/SchoolSlice';
@@ -45,7 +45,7 @@ const listenArray = [
   ...allTypesAsync(localOrgLogin),
   ...allTypesAsync(restoreSession),
   ...allTypesAsync(delateQuiz),
-  ...allTypesAsync(delateSubject),
+  ...allTypesAsync(deleteSubject),
   ...allTypesAsync(editSubject),
   ...allTypesAsync(createSubject),
 ];
