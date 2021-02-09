@@ -85,20 +85,9 @@ export const profileStatusSelector = (state) => state.profile.status;
 //School selectors
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
-<<<<<<< HEAD
-export const SchoolQuizSelector = (state) =>
-  state.School.SchoolQuizList.QuizList;
-export const schoolQuizStatusSelector = (state) =>
-  state.School.SchoolQuizList.status;
-
-export const SchoolSubjectSelector = (state) =>
-  state.School.SchoolSubjectList.SubjectList;
-export const SchoolSubjectStatusSelector = (state) => state.School.status;
-=======
 export const SchoolQuizSelector = (state) =>state.School.SchoolQuizList;
 export const SchoolStatusSelector = (state) => state.School.status;
 export const SchoolSubjectSelector = (state) =>state.School.SchoolSubjectList.SubjectList;
->>>>>>> c6396f7af89d3f8e7cf5088f289390e1fa5d7ede
 export const UserDetailSelector = (state) => state.School.UserDetail.data;
 export const UserRoleSelector = (state) => state.School.UserDetail.role;
 export const UserDetailStatusSelector = (state) =>state.School.UserDetail.status;

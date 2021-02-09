@@ -73,13 +73,11 @@ const Results = ({
   propsNames,
   ...rest
 }) => {
-  const [open, setOpen] = useState(false);
   const params = useParams()
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [QuizId, setQuizId] = useState(0);
   const History = useHistory();
   const dispatch = useDispatch();
   let btnProps = ['add', 'edit', 'delete','activate','enroll']
@@ -112,13 +110,8 @@ const Results = ({
   };
 
   const HandleClick = (e, name) => {
-    if (name === "Borrar Quiz") {
-      dispatch(delateQuiz(e));
-    }
-    if (name === "TEACHER") {
-      setOpen(true);
-      setQuizId(e);
-    }
+   
+   
     if (name === "Aceptar En Quiz") {
       dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: true }))
     }
@@ -202,16 +195,24 @@ const Results = ({
                       />
                     </TableCell>
                     {propsNames.map((prop) => {
+                      
+                      
                       if (btnProps.includes(prop)) {
                         return <TableCell>
                           <Button className={classes.button} name={prop} id={info.id}
                             onClick={() => actions[prop](info.id)}
-                          >
+                            >
                             {prop}
                           </Button>
                         </TableCell>
                       }
-                      return <TableCell>{ info[prop] || typeof info[prop] === 'boolean' || info[prop] === 0 ? info[prop] + '' : '-'}</TableCell>
+                      // puse este if porque a la info de subjects la recibe dentro de otro objeto
+                      if(typeof info[prop] === 'object'){
+                        return <TableCell>{ info[prop].name ? info[prop].name : '-'}</TableCell>
+                      }else{
+
+                        return <TableCell>{ info[prop] || typeof info[prop] === 'boolean' || info[prop] === 0 ? info[prop] + '' : '-'}</TableCell>
+                      }
                     })}
                   </TableRow>
                 )}
@@ -229,7 +230,6 @@ const Results = ({
           />
         </>
       ) : null}
-      <ModalTeacher Id={QuizId} open={open} setOpen={setOpen}></ModalTeacher>
     </Card>
   );
 };
