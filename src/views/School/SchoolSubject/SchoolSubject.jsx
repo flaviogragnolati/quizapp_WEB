@@ -8,7 +8,8 @@ import List from '../../../components/List';
 import array from './data';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubjectsList } from "../SchoolSlice";
-import { SchoolSubjectSelector,SchoolSubjectStatusSelector } from 'utils/selectors';
+import { SchoolSubjectSelector,SchoolStatusSelector } from 'utils/selectors';
+import { userSelector } from 'utils/selectors';
 
 
 
@@ -29,13 +30,13 @@ const SchoolSubject = () => {
   let ButtonName = ['Delate Subject', 'Edit Subject'];
   const dispatch = useDispatch()
   const subjects = useSelector(SchoolSubjectSelector)
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
-
+  const subjectsStatus = useSelector(SchoolStatusSelector)
+  const school = useSelector(userSelector)
  
  
   useEffect(() => {
-dispatch(getSubjectsList())
-  }, [])
+dispatch(getSubjectsList({id:school.id}))
+  }, [school])
   return (
       <Container maxWidth={false}>
         <h1>Lista de Materias de la Escuela</h1>

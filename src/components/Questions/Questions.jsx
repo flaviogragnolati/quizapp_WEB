@@ -92,15 +92,13 @@ console.log('tengo mest6',boolean)
     handleUpdate,
   };
    useEffect(() => {
-    setMultiAns(question)
      if(question){
-      //  Dispatch(ACTIONS.School.setQuestionDetail(question))
-       Dispatch(ACTIONS.quizLoader.setQuestionDetail(question))
 
-       setMultiAns(Answers)
+       setMultiAns(question)
+          Dispatch(ACTIONS.quizLoader.setQuestionDetail(question))
+        setMultiAns(Answers)
      }
-     setMultiAns(Answers)
-   }, [question,multiAns,Dispatch,Answers,QuestionStatus]);
+   }, [question]);
 
 
   return (

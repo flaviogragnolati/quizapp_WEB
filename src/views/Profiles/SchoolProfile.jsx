@@ -24,7 +24,7 @@ import { getQuizList } from 'views/School/SchoolSlice';
 import { SchoolQuizSelector } from 'utils/selectors';
 import SchoolProfileQuizDetail from './components/SchoolProfileQuizDetail';
 import { quizDetail } from '../Catalogue/quizDetail';
-import { schoolQuizStatusSelector } from 'utils/selectors';
+import { SchoolStatusSelector } from 'utils/selectors';
 import { Container } from '@material-ui/core';
 
 const bg_img =
@@ -40,7 +40,7 @@ export default function ProfilePage(props) {
   const profileStatus = useSelector(profileStatusSelector);
   const school = useSelector(schoolProfileSelector);
   const quizList = useSelector(SchoolQuizSelector);
-  const quizListStatus = useSelector(schoolQuizStatusSelector);
+  const quizListStatus = useSelector(SchoolStatusSelector);
 
   useEffect(() => {
     if (profileStatus === 'idle' || school.id !== id) {
