@@ -37,6 +37,7 @@ const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 export default function ProfilePage(props) {
   const dispatch = useDispatch();
   const id = parseInt(useParams().id);
+  console.log('ID school profile', id);
   const profileStatus = useSelector(profileStatusSelector);
   const school = useSelector(schoolProfileSelector);
   const quizList = useSelector(SchoolQuizSelector);
@@ -45,7 +46,7 @@ export default function ProfilePage(props) {
   useEffect(() => {
     if (profileStatus === 'idle' || school.id !== id) {
       dispatch(getSchoolData(id));
-      dispatch(getQuizList(id));
+      dispatch(getQuizList({ id }));
     }
   }, [dispatch, profileStatus, school, id]);
 
@@ -60,7 +61,7 @@ export default function ProfilePage(props) {
   let content;
   if (profileStatus === 'pending') {
     content = <BackdropLoading />;
-  } else if (profileStatus === 'error') {
+  } else if (profileStatus === 'error' || quizListStatus === 'error') {
     content = <h1>Ha ocurrido un error...metele F5</h1>;
   } else if (profileStatus === 'success' && quizListStatus === 'success') {
     const { id, name, email, description, country, city, logo } = school;
