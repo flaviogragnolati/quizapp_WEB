@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useHistory, useParams } from "react-router-dom";
-import { SchoolSubjectSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
+import { SchoolSubjectSelector, SchoolStatusSelector } from 'utils/selectors';
 import { editSubject } from "../SchoolSlice";
 
 const { name, description } = subjectModel;
@@ -19,7 +19,7 @@ export default function SubjectLoader() {
   const dispatch = useDispatch();
   const datos = useParams();
   const subjects = useSelector(SchoolSubjectSelector)
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
+  const subjectsStatus = useSelector(SchoolStatusSelector)
   const History= useHistory()
 
   const useStyles = makeStyles((theme) => ({

@@ -25,12 +25,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { getSubjectsList } from "views/School/SchoolSlice";
 
-import {SchoolSubjectSelector, SchoolSubjectStatusSelector} from "utils/selectors"
+import {SchoolSubjectSelector, SchoolStatusSelector} from "utils/selectors"
 const { nameQuiz, descripcion, Logo, materia } = quizModel;
 export default function DatosQuiz() {
   const Dispatch= useDispatch()
   const subjects = useSelector(SchoolSubjectSelector);
-  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
+  const subjectsStatus = useSelector(SchoolStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
