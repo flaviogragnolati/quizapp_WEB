@@ -92,9 +92,12 @@ console.log('tengo mest6',boolean)
     handleUpdate,
   };
    useEffect(() => {
-    setMultiAns(question)
-       Dispatch(ACTIONS.quizLoader.setQuestionDetail(question))
-     setMultiAns(Answers)
+     if(question){
+
+       setMultiAns(question)
+          Dispatch(ACTIONS.quizLoader.setQuestionDetail(question))
+        setMultiAns(Answers)
+     }
    }, [question]);
 
 

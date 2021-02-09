@@ -94,18 +94,10 @@ export const UserDetailStatusSelector = (state) =>state.School.UserDetail.status
 
 //Quiz selector
 export const QuestionsSelector = (state) => state.QuizLoader.questions;
-export const QuestionDetailSelector = (state) =>
-  state.QuizLoader.questionDetail;
-export const QuestionDetailAnswersSelector = (state) =>
-  state.QuizLoader.answers;
+export const QuestionDetailSelector = (state) => state.QuizLoader.questionDetail;
+export const QuestionDetailAnswersSelector = (state) => state.QuizLoader.answers;
 export const QuestionStatusSelector = (state) => state.QuizLoader.status;
 
-export const QuestionsStatusSelector = (state) => state.status;
-
-export const QuestionsDetailStatusSelector = (state) =>
-  state.School.QuestionDetail.status;
-export const QuestionsDetailSelector = (state) =>
-  state.School.QuestionDetail.data;
 
 //Teacher selectors
 export const TeacherQuizSelector = (state) => state.Teacher.TeacherQuizList;

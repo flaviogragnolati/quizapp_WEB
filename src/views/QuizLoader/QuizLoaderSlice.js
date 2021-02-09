@@ -97,7 +97,7 @@ const QuizLoaderSlice = createSlice({
   reducers: {
     setQuestionDetail: (state,{payload}) =>{
    state.questionDetail = payload
-   state.answers = payload.Answers ? payload.Answers : [];
+   state.answers = !payload.Answers ? [] : payload.Answers ;
     }
   },
   extraReducers: {
