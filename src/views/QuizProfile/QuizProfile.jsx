@@ -19,14 +19,17 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import { ACTIONS } from 'store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectQuizDetailById, catalogueStatusSelector } from 'utils/selectors';
+import { selectQuizDetailById, catalogueStatusSelector, UserRoleSelector } from 'utils/selectors';
 import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { quizDetailStatusSelector, userSelector } from 'utils/selectors';
+import { quizDetailStatusSelector } from 'utils/selectors';
 import { quizDetailSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { enrollUser } from 'views/Teacher/TeacherSlice';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { quizDetailHistorySelector } from 'utils/selectors';
+import { getUserEmail } from 'views/School/SchoolSlice';
+import { userSelector } from 'utils/selectors';
+
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -236,6 +239,7 @@ function QuizProfile(props) {
     }
   }, [dispatch, quizDetailStatus, quizDetailHistory, id]);
 
+
   if (quizDetailStatus === 'pending') {
     return <BackdropLoading />;
   } else if (quizDetailStatus === 'error') {
@@ -435,7 +439,7 @@ function QuizProfile(props) {
             {/* <Button color="info" variant="contained" size="large">
             Contact
           </Button> */}
-            <Button
+ <Button
               color="primary"
               variant="contained"
               size="large"
@@ -443,6 +447,7 @@ function QuizProfile(props) {
             >
               Enroll
             </Button>
+          
           </Box>
         </Actions>
       </MainContainer>
