@@ -5,7 +5,8 @@ import Login from 'views/Login/Login';
 import NotFound from 'views/NotFound';
 import MyProfile from 'views/Profiles/MyProfile';
 import UserProfile from 'views/Profiles/UserProfile';
-import SchoolProfile from 'views/School/SchoolProfile';
+import SchoolProfile from 'views/Profiles/SchoolProfile';
+import EditSchoolProfile from 'views/School/EditSchoolProfile';
 import QuizProfile from 'views/QuizProfile';
 import Catalogue from 'views/Catalogue';
 import Register from 'views/Register/Register';
@@ -68,6 +69,7 @@ export const createRoutes = (routes) => {
       {routes.map((route, idx) => {
         if (routes.length === idx + 1) {
           return <Route component={NotFound} />;
+          // return <Redirect to="/404" />;
         }
         switch (route.access) {
           case 'guest':

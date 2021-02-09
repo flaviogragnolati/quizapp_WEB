@@ -67,6 +67,20 @@ function SideBar() {
           }}
           icon={<AccountBoxIcon />}
         />
+        <SidebarItem
+          label="User Profile"
+          link={{
+            pathname: '/profile/1',
+          }}
+          icon={<AccountBoxIcon />}
+        />
+        <SidebarItem
+          label="School Profile"
+          link={{
+            pathname: '/school-profile/1',
+          }}
+          icon={<AccountBoxIcon />}
+        />
         <Divider />
         <SidebarItem label="Home" link="/" icon={<HomeIcon />} />
         <SidebarItem
