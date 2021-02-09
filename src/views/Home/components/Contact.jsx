@@ -62,33 +62,26 @@ const styles = (theme) => ({
 function Contact(props) {
   const { classes } = props;
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const [formInfo, setFormInfo] = useState({
     correo: '',
     nombreSchool: '',
   });
 
   const handleChange = (event) => {
-  setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
+    setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpen(true);
-
     let payload = {
-        name: formInfo.nombreSchool,
-        email: formInfo.correo
+      name: formInfo.nombreSchool,
+      email: formInfo.correo,
     };
-    dispatch(contactSchool(payload))
+    dispatch(contactSchool(payload));
     setFormInfo({
       correo: '',
-      nombreSchool: ''
+      nombreSchool: '',
     });
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -149,11 +142,6 @@ function Contact(props) {
           </Hidden>
         </Grid>
       </Grid>
-      <Snackbar
-        open={open}
-        onClose={handleClose}
-        message="En breve te enviaremos mas informacion."
-      />
     </Container>
   );
 }

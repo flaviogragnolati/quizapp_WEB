@@ -99,7 +99,7 @@ export const restoreSession = createAsyncThunk(
 );
 
 export const contactSchool = createAsyncThunk(
-  'contact/contactSchool',
+  'auth/contactSchool',
   async (payload) => {
     const SchoolContact = await axios.post(
       SCHOOL_PREREGISTER_ENDPOINT,
@@ -110,7 +110,7 @@ export const contactSchool = createAsyncThunk(
 );
 
 export const finalRegisterSchool = createAsyncThunk(
-  'school/finalRegisterSchool',
+  'auth/finalRegisterSchool',
   async (payload, { dispatch }) => {
     const SchoolFinalRegister_response = await axios.post(
       SCHOOL_FINAL_REGISTER_ENDPOINT,
@@ -157,7 +157,7 @@ const authSlice = createSlice({
     setToken: (state, { payload }) => {
       state.token = payload;
       window.localStorage.setItem(STORE_TOKEN, payload);
-      axios.defaults.headers.common.Authorization = `Bearer ${state.token}`;
+      axios.defaults.headers.common.Authorization = state.token;
     },
     restoreToken: (state, { payload }) => {
       state.token = window.localStorage.getItem(STORE_TOKEN);
