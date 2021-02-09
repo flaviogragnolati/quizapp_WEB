@@ -90,9 +90,6 @@ export const SchoolQuizSelector = (state) =>
 export const schoolQuizStatusSelector = (state) =>
   state.School.SchoolQuizList.status;
 
-//? porque ser llama `SchoolQuizStatus`? si lo que hace es traer el status general del slice School >>>>>>>>>>>>>>>>>>
-export const SchoolQuizStatusSelector = (state) => state.School.status;
-//?<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 export const SchoolSubjectSelector = (state) =>
   state.School.SchoolSubjectList.SubjectList;
 export const SchoolSubjectStatusSelector = (state) => state.School.status;

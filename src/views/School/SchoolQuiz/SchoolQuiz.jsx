@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getQuizList } from '../SchoolSlice';
 import {
   SchoolQuizSelector,
-  SchoolQuizStatusSelector,
+  schoolQuizStatusSelector,
 } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const SchoolQuiz = () => {
   const dispatch = useDispatch();
   const quizes = useSelector(SchoolQuizSelector);
-  const status = useSelector(SchoolQuizStatusSelector);
+  const status = useSelector(schoolQuizStatusSelector);
   const school = useSelector(userSelector)
   const classes = useStyles();
   let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER'];
