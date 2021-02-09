@@ -82,8 +82,8 @@ export const getTeachersSchool = createAsyncThunk(
 
 export const createSubject = createAsyncThunk(
   "school/createSubject",
-  async ({SchoolId}) => {
-    const Subject_response = await axios.post(SUBJECT_ENDPOINT, SchoolId);
+  async (payload) => {
+    const Subject_response = await axios.post(SUBJECT_ENDPOINT, payload);
     const { subject } = Subject_response;
     return subject;
   }
@@ -135,10 +135,8 @@ export const removeTeacher = createAsyncThunk(
 export const editSubject = createAsyncThunk(
   'school/editSubject',
   async (payload) => {
-    const Subject_response = await axios.put(
-      SUBJECT_ENDPOINT + '/' + payload.id,
-      payload
-    );
+    console.log(payload)
+    const Subject_response = await axios.put(SUBJECT_ENDPOINT + '/' + payload.id , payload);
     return Subject_response.data;
   }
 );
