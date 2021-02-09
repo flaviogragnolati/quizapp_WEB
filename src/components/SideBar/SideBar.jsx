@@ -101,11 +101,6 @@ function SideBar() {
               icon={<FormatListNumberedIcon />}
             />
             <SidebarItem
-              label="Teacher de Escuela"
-              link="/school-teacher"
-              icon={<FormatListNumberedIcon />}
-            />
-            <SidebarItem
               label="Materias de Escuela"
               link="/school-subject"
               icon={<FormatListNumberedIcon />}

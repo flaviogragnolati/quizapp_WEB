@@ -50,9 +50,9 @@ const SchoolQuiz = () => {
     add:handleAdd,
     ver:handleSee,
   }
+  
   useEffect(() => {
     dispatch(getQuizList({id: school.id}));
-
   }, [school]);
 
  

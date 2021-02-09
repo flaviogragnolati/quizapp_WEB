@@ -12,7 +12,6 @@ import Catalogue from 'views/Catalogue';
 import Register from 'views/Register/Register';
 import SchoolSubject from 'views/School/SchoolSubject';
 import About from 'views/About/';
-import SchoolTeacher from 'views/School/SchoolTeacher';
 import SchoolQuiz from 'views/School/SchoolQuiz';
 import RegisterSchool from 'views/Register/RegisterSchool';
 import QuestionLoader from 'views/QuestionLoader';
@@ -59,7 +58,6 @@ export const routes = [
   { path: '/school-profile/:id', component: SchoolProfile, access: 'guest' },
   { path: '/quiz-detail/:id', component: QuizProfile, access: 'guest' },
   { path: '/school-subject', component: SchoolSubject, access: 'guest' },
-  { path: '/school-teacher', component: SchoolTeacher, access: 'guest' },
   { path: '/quiz-teacher', component: TeachersQuiz, access: 'guest' },
   { path: '/school-quiz', component: SchoolQuiz, access: 'guest' },
   { path: '/quiz-list', component: QuizTeacher, access: 'guest' },
