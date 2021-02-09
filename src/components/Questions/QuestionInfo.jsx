@@ -59,14 +59,19 @@ function QuestionInfo({ info, setMulti, reset }) {
   };
   useEffect(() => {
   
+  console.log('RENDER TITLE')
+        editValues.title = !QuestionDetail.title ? editValues.title : QuestionDetail.title
+      editValues.question = QuestionDetail.question ? editValues.question : QuestionDetail.question
+
+    
   }, [Dispatch])
   
 
 
     if(QuestionDetail  !== editValues){
       console.log( 'ENTRO AL IF',QuestionDetail)
-        editValues.title = !QuestionDetail.title ? editValues.title: QuestionDetail.title
-      editValues.question = QuestionDetail.question ? QuestionDetail.question : ''
+        editValues.title = !QuestionDetail.title ? editValues.title : QuestionDetail.title
+      editValues.question = QuestionDetail.question ?  QuestionDetail.question : ''
 
     }
   const classes = useStyles();

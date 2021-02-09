@@ -34,11 +34,6 @@ const initialState_School = {
     role: {},
     status: status.idle,
   },
-  QuestionDetail: {
-    data: {},
-    status: status.idle,
-    Answers : [],
-  },
 };
 
 //GET
@@ -187,14 +182,6 @@ const SchoolSlice = createSlice({
     cleanUser: (state, { payload }) => {
       state.UserDetail.status = status.idle;
       state.UserDetail.data = {};
-    },
-    setQuestionDetail: (state, { payload }) => {
-      state.QuestionDetail.data = payload;
-      payload.Answers
-        ? (state.QuestionDetail.Answers = payload.Answers)
-        : (state.QuestionDetail.Answers = []);
-      state.QuestionDetail.status = status.pending;
-      state.QuestionDetail.status = status.success;
     },
   },
   extraReducers: (builder) => {
