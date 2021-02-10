@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   //   padding: theme.spacing(2, 4, 3),
   // },
 }));
-useAuth()
+
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
