@@ -26,6 +26,7 @@ import {
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
+import Teacher from 'components/ProfileDetail/Profiles/Teacher';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -75,13 +76,14 @@ export default function MyProfile(props) {
       } = user;
       content = (
         <div className={classes.container}>
+     
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
                   <img src={photo} alt="..." className={imageClasses} />
                 </div>
-                <Button color="secondary" link component={Link} to="">
+                <Button color="secondary" link component={Link} to="/edit/profile">
                   <EditIcon></EditIcon>
                   Editar perfil
                 </Button>

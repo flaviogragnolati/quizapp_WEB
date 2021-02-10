@@ -22,6 +22,7 @@ import QuizTeacher from 'views/Teacher/QuizTeacher';
 import EnrollTeacher from 'views/Teacher/EnrollTeacher';
 import TeacherDashboard from '../views/Dashboard/TeacherDashboard';
 import TeachersQuiz from 'views/School/TeachersQuiz';
+import Teacher from 'components/ProfileDetail/Profiles/Teacher';
 
 
 /**
@@ -52,6 +53,7 @@ export const routes = [
     access: 'guest',
   },
   { path: '/question-loader/:id', component: QuestionLoader, access: 'user' },
+  { path: '/edit/profile', component: Teacher, access: 'user' },
   { path: '/profile/:id', component: UserProfile, access: 'guest' },
   { path: '/myprofile', component: MyProfile, access: 'guest' },
   { path: '/catalogue', component: Catalogue, access: 'guest' },

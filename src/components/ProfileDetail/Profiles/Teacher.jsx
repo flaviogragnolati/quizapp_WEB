@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 
   CardContent,
@@ -6,52 +6,71 @@ import {
   Divider,
   Grid,
   TextField,
-  makeStyles
+  Container,
+  makeStyles,
+  Button
 } from '@material-ui/core';
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
+import { Formik, Form, Field } from "formik";
+import { useAuth } from 'components/Auth/AuthContext';
+import { authStatusSelector } from 'utils/selectors';
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles(() => ({
   root: {}
 }));
+let initialValues = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  cellphone: '',
+  photo:'',
+}
 
 function Teacher() {
-
-    const handleChange = (event) => {
+  const user = useAuth()
+  const authStatus = useSelector(authStatusSelector)
+  
+  const [values, setValues] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        cellphone: '',
+        photo:'',
+        });
+  useEffect(()=>{
+    
+    if(authStatus === 'success'){
+      console.log('entre')
+    
+      setValues({    
+          firstName: user.firstName,
+         lastName: user.lastName,
+         email: user.email,
+         cellphone: user.cellphone,
+         photo:user.photo,})
+    }
+  },[authStatus])
+  
+  const handleChange = (event) => {
         setValues({
           ...values,
           [event.target.name]: event.target.value
         });
       };
 
-    const [values, setValues] = useState({
-        firstName: 'Katarina',
-        lastName: 'Smith',
-        email: 'demo@devias.io',
-        phone: '',
-        state: 'Alabama',
-        country: 'USA',
-        address: '742 Evergreen Terrace',
-      });
+const handleSubmit = ()=>{
+console.log(values)
+}
 
     return (
-        <>
+        <Container>
+       
+        <Formik onSubmit={handleSubmit} initialValues={ initialValues }>
+          {(formik) => (
+            <Form>
+
         <CardHeader
-          subheader="The information can be edited"
-          title="Teacher"
+          subheader="Puedes editar la tu informacion personal aqui"
+          title="Editar Perfil"
         />
         <Divider />
         <CardContent>
@@ -67,7 +86,7 @@ function Teacher() {
               <TextField
                 fullWidth
                 label="First name"
-                name="name"
+                name="firstName"
                 onChange={handleChange}
                 required
                 value={values.firstName}
@@ -112,10 +131,10 @@ function Teacher() {
               <TextField
                 fullWidth
                 label="Phone Number"
-                name="phone"
+                name="cellphone"
                 onChange={handleChange}
                 type="number"
-                value={values.phone}
+                value={values.cellphone}
                 variant="outlined"
               /> 
             </Grid>
@@ -124,17 +143,14 @@ function Teacher() {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
+          <Field component={TextField}                
+             label="URl"
+             name="photo" 
+             value={values.photo}
               />
+
             </Grid>
-            <Grid
+            {/* <Grid
               item
               md={6}
               xs={12}
@@ -159,7 +175,7 @@ function Teacher() {
                   </option>
                 ))}
               </TextField>
-            </Grid>
+            </Grid> */}
             <Grid
               item
               md={6}
@@ -178,20 +194,25 @@ function Teacher() {
               md={6}
               xs={12}
             >
-              <TextField
+              {/* <TextField
                 fullWidth
                 label="Address"
                 name="address"
                 onChange={handleChange}
                 required
-                value={values.address}
+                DefaultValue={formik.values.address}
                 variant="outlined"
-              />
+              /> */}
             </Grid>
           </Grid>
+          <Button type='submit'> enviar</Button>
         </CardContent> 
-        </>
-    )
+        </Form>
+        )}
+      </Formik>
+    </Container>
+  );
+    
 }
 
 export default Teacher
