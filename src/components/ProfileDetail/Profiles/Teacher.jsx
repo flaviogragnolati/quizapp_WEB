@@ -13,7 +13,8 @@ import {
 import { Formik, Form, Field } from "formik";
 import { useAuth } from 'components/Auth/AuthContext';
 import { authStatusSelector } from 'utils/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userUpdate } from 'views/Profiles/profileSlice';
 const useStyles = makeStyles(() => ({
   root: {}
 }));
@@ -28,6 +29,7 @@ let initialValues = {
 function Teacher() {
   const user = useAuth()
   const authStatus = useSelector(authStatusSelector)
+  const dispatch = useDispatch()
   
   const [values, setValues] = useState({
         firstName: '',
@@ -44,9 +46,11 @@ function Teacher() {
       setValues({    
           firstName: user.firstName,
          lastName: user.lastName,
-         email: user.email,
+          email: user.email,
          cellphone: user.cellphone,
-         photo:user.photo,})
+         photo:user.photo,
+         birthdate:user.birthdate,
+        })
     }
   },[authStatus])
   
@@ -57,8 +61,10 @@ function Teacher() {
         });
       };
 
-const handleSubmit = ()=>{
-console.log(values)
+const handleSubmit = (v,formik)=>{
+  console.log(values)
+  values.cellphone = parseInt(values.cellphone)
+   dispatch(userUpdate({id:user.id, values}))
 }
 
     return (
@@ -70,9 +76,10 @@ console.log(values)
 
         <CardHeader
           subheader="Puedes editar la tu informacion personal aqui"
-          title="Editar Perfil"
+          title="Editar Perfil"          
         />
-        <Divider />
+        <img src={values.photo}/>
+               <Divider />
         <CardContent>
           <Grid
             container
@@ -108,7 +115,7 @@ console.log(values)
                 variant="outlined"
               />
             </Grid>
-            <Grid
+            {/* <Grid
               item
               md={6}
               xs={12}
@@ -122,7 +129,7 @@ console.log(values)
                 value={values.email}
                 variant="outlined"
               />
-            </Grid>
+            </Grid> */}
             <Grid
               item
               md={6}
@@ -143,39 +150,14 @@ console.log(values)
               md={6}
               xs={12}
             >
-          <Field component={TextField}                
-             label="URl"
+          <TextField            
+             label="URl de tu imagen"
              name="photo" 
              value={values.photo}
+             onChange={handleChange}
               />
 
             </Grid>
-            {/* <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid> */}
             <Grid
               item
               md={6}
@@ -183,10 +165,12 @@ console.log(values)
             >
               <TextField
                 fullWidth
-                name="Date"
+                name="birthdate"
                 onChange={handleChange}
                 type="date"
                 variant="outlined"
+                value={values.birthdate}
+
               />
             </Grid>
             <Grid
@@ -194,15 +178,6 @@ console.log(values)
               md={6}
               xs={12}
             >
-              {/* <TextField
-                fullWidth
-                label="Address"
-                name="address"
-                onChange={handleChange}
-                required
-                DefaultValue={formik.values.address}
-                variant="outlined"
-              /> */}
             </Grid>
           </Grid>
           <Button type='submit'> enviar</Button>

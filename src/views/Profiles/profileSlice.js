@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
   isPending,
   isRejected,
+  isFulfilled,
 } from '@reduxjs/toolkit';
 import { status } from 'utils/helpers';
 import axios from 'axios';
@@ -23,6 +24,7 @@ export const getUserData = createAsyncThunk(
     );
     return userData_response.data;
   },
+
   {
     condition: (payload, { getState }) => {
       const {
@@ -38,6 +40,14 @@ export const getUserData = createAsyncThunk(
     },
   }
 );
+export const userUpdate = createAsyncThunk(
+  'profile/userUpdate',
+  async ({id,values}) => {
+    const userUpdate_response = await axios.put( USER_PROFILE_ENDPOINT + '/' + id, values);
+    return userUpdate_response.data;
+  },
+  )
+
 
 export const getSchoolData = createAsyncThunk(
   'profile/getSchoolData',
@@ -63,9 +73,9 @@ export const getSchoolData = createAsyncThunk(
   }
 );
 
-const isRejectedAction = isRejected(getUserData);
-const isPendingAction = isPending(getUserData);
-
+const isRejectedAction = isRejected(getUserData,userUpdate);
+const isPendingAction = isPending(getUserData,userUpdate);
+ const isFulfilledAction = isFulfilled(userUpdate)
 const profileSlice = createSlice({
   name: 'profile',
   initialState: initialState_Profile,
@@ -81,6 +91,9 @@ const profileSlice = createSlice({
     });
     builder.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;
+    });
+    builder.addMatcher(isFulfilledAction, (state, { payload }) => {
+      state.status = status.success;
     });
     builder.addMatcher(isRejectedAction, (state, { payload }) => {
       state.status = status.error;
