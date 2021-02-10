@@ -8,7 +8,8 @@ import {
   TextField,
   Container,
   makeStyles,
-  Button
+  Button,
+  Avatar
 } from '@material-ui/core';
 import { Formik, Form, Field } from "formik";
 import { useAuth } from 'components/Auth/AuthContext';
@@ -16,7 +17,12 @@ import { authStatusSelector } from 'utils/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { userUpdate } from 'views/Profiles/profileSlice';
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
+  avatar:{
+    height:'50%',
+    width:'50%',
+    margin:'auto',
+  },
 }));
 let initialValues = {
   firstName: '',
@@ -30,7 +36,7 @@ function Teacher() {
   const user = useAuth()
   const authStatus = useSelector(authStatusSelector)
   const dispatch = useDispatch()
-  
+  const classes = useStyles()
   const [values, setValues] = useState({
         firstName: '',
         lastName: '',
@@ -76,9 +82,11 @@ const handleSubmit = (v,formik)=>{
 
         <CardHeader
           subheader="Puedes editar la tu informacion personal aqui"
-          title="Editar Perfil"          
+          title="Editar Perfil"   
+             
         />
-        <img src={values.photo}/>
+            <Avatar alt="Remy Sharp" src={values.photo} className={classes.avatar} />
+         
                <Divider />
         <CardContent>
           <Grid
