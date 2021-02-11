@@ -78,12 +78,6 @@ const Catalogue = () => {
   }, [dispatch, page, cachedPages, catStatus]);
 
   let content;
-  // let lodingMore = null;
-  // useEffect(() => {
-  //   if (catStatus === 'pending') {
-  //     lodingMore = <h3>Cargando...</h3>;
-  //   }
-  // }, [catStatus]);
 
   if (catStatus === 'pending') {
     content = <LimitedBackdropLoading />;

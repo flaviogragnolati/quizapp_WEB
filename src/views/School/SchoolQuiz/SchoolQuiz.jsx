@@ -28,7 +28,7 @@ const SchoolQuiz = () => {
   const classes = useStyles();
   const history = useHistory()
 
-  let columnName = ['Name of Quiz', 'Subject', 'Description' ,'TRASH','TEACHER','TEACHER'];
+  let columnName = ['Nombre del Quiz', 'Materia', 'Descripción' ,'Eliminar','Profesores','Profesores'];
   let propsNames = ['name', 'Subject', 'description', 'delete', 'add', 'ver'];
   
   const handleDelete = (e)=>{
