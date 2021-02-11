@@ -40,7 +40,7 @@ function App(props) {
           <NavBar toggleTheme={toggleTheme} theme={theme} checked={theme} />
           <SideBar />
         </SideBarContext.Provider>
-        <div Style="padding-top: 64px">
+        <div Style="padding-top: 64px;min-height: 89vh;">
           <AppRoutes />
         </div>
         <hr></hr>
