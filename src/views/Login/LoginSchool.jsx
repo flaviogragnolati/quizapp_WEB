@@ -70,7 +70,7 @@ function LoginSchool(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
@@ -102,6 +102,7 @@ function LoginSchool(props) {
                           component={TextField}
                           name={password.name}
                           label={password.label}
+                          type='password'
                           fullWidth
                           InputProps={{
                             endAdornment: (

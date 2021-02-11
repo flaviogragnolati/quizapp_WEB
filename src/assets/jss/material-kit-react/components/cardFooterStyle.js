@@ -1,9 +1,10 @@
 const cardFooterStyle = {
   cardFooter: {
-    display: "flex",
+    display: "grid",
     alignItems: "center",
     backgroundColor: "transparent",
     padding: "0.9375rem 1.875rem"
+
   }
 };
 
