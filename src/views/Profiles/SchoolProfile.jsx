@@ -114,7 +114,7 @@ export default function ProfilePage(props) {
         </GridContainer>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={6}>
-            <h2>Listado de Quizzes</h2>
+            <h2 Style="text-align: center;">Listado de Quizzes</h2>
             <br></br>
           </GridItem>
           <GridContainer justify="center">

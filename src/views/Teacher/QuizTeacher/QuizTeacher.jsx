@@ -12,7 +12,7 @@ import {
 import { getQuizesTeacher } from 'views/Teacher/TeacherSlice';
 import { activationQuiz } from 'views/Teacher/TeacherSlice';
 import { useHistory } from 'react-router-dom';
-
+import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +67,7 @@ function QuizTeacher() {
             User={user}
           />
         ) : (
-            <h1>Cargando</h1>
+            <BackdropLoading/>
           )}
       </Box>
     </Container>

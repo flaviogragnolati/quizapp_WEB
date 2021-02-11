@@ -115,11 +115,11 @@ function SideBar() {
               link="/quiz-list"
               icon={<FormatListNumberedIcon />}
             />
-            <SidebarItem
+            {/* <SidebarItem
               label="Teacher Dashboard"
               link="/teacher-dashboard"
               icon={<FormatListNumberedIcon />}
-            />
+            /> */}
           </div>
         ) : null}
         <Divider />

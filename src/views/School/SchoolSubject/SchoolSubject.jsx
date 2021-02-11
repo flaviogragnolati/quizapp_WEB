@@ -13,6 +13,7 @@ import { SchoolSubjectSelector,SchoolStatusSelector } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
 import { deleteSubject } from 'views/School/SchoolSlice'
 import { Link, useHistory, useParams } from "react-router-dom";
+import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ const SchoolSubject = () => {
         <h1>Lista de Materias de la Escuela</h1>
         <Box mt={3}>
           {subjectsStatus === 'success' ? <List 
-          customers={subjects} propsNames={propsNames} columnName={columnName} actions={actions}/> : null}
+          customers={subjects} propsNames={propsNames} columnName={columnName} actions={actions}/> : <BackdropLoading/>}
         </Box>
         <Button component={Link} to='/subject-loader'>
           agregar Materia

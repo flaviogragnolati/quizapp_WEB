@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, makeStyles } from '@material-ui/core';
+import { Box, Container, Link, makeStyles } from '@material-ui/core';
 import List from 'components/List';
 import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { SchoolQuizSelector, SchoolStatusSelector, } from 'utils/selectors';
 import { userSelector } from 'utils/selectors';
 import ModalTeacher from 'components/List/Modal';
 import { useHistory } from 'react-router-dom';
+import BackdropLoading from 'components/Loading/BackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,10 @@ const SchoolQuiz = () => {
     history.push('/quiz-teacher/')
   }
 
+  const handleAddQuiz = (e)=>{
+    history.push('/quiz-loader/')
+  }
+
   let actions = {
     Borrar: handleDelete,
     Añadir:handleAdd,
@@ -68,10 +73,10 @@ const SchoolQuiz = () => {
             actions={actions}
           />
         ) : (
-          <h1>Cargando</h1>
+          <BackdropLoading/>
         )}
       </Box>
-      <Button>Agregar + </Button>
+      <Button onClick={() =>handleAddQuiz()}>Agregars + </Button>
       <ModalTeacher Id={QuizId} open={open} setOpen={setOpen}></ModalTeacher>
     </Container>
   );

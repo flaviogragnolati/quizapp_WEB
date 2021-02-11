@@ -64,7 +64,7 @@ export const routes = [
   { path: '/school-quiz', component: SchoolQuiz, access: 'guest' },
   { path: '/quiz-list', component: QuizTeacher, access: 'guest' },
   { path: '/enroll-list/:id', component: EnrollTeacher, access: 'guest' },
-  { path: '/teacher-dashboard', component: TeacherDashboard, access: 'tea' },
+  // { path: '/teacher-dashboard', component: TeacherDashboard, access: 'tea' },
   { path: '/404', component: NotFound, access: 'guest' },
 ];
 
