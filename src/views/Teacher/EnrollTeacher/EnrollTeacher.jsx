@@ -32,7 +32,7 @@ function EnrollTeacher() {
   
     const classes = useStyles();
     let columnName = ['Nombre Alumno' , 'Email Alumno', 'Aceptar','Aceptar alumnos'];
-  let propsNames = ['name', 'email', 'accept', 'reject']
+  let propsNames = ['name', 'email', 'Aceptar', 'Rechazar']
 
   
   const handleAccept = (e)=>{
@@ -44,8 +44,8 @@ function EnrollTeacher() {
     dispatch(enrollToSudent({ QuizId: params.id, UserId: e, accepted: false }))
   }
   const actions = {
-    accept: handleAccept,
-    reject: handleReject,
+    Aceptar: handleAccept,
+    Rechazar: handleReject,
   }
     useEffect(() => {
       dispatch(getToEnrollList(params.id));

@@ -84,7 +84,7 @@ const signupPageStyle = (theme) => ({
     padding: '0',
   },
   inputIconsColor: {
-    color: '#495057',
+    color: '#6f6f6f',
   },
   Register__School: {
     marginInline: 'auto',

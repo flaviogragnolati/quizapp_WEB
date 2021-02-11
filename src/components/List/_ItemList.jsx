@@ -59,14 +59,14 @@ const Results = ({
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   let btnProps = [
-    'add',
-    'edit',
-    'delete',
-    'activate',
-    'enroll',
-    'accept',
-    'reject',
-    'ver',
+    'Añadir',
+    'Editar',
+    'Borrar',
+    'Activar',
+    'Enrollar',
+    'Aceptar',
+    'Rechazar',
+    'Ver',
   ];
 
   if (propsNames.length !== columnName.length) {
@@ -129,6 +129,7 @@ const Results = ({
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
+
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>

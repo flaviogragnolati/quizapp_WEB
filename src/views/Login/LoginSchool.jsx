@@ -13,9 +13,9 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import LoginHeader from 'components/Form/LoginHeader';
-
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
-
+import { IconButton } from "@material-ui/core";
 import {
   registerModel,
   initialState_Login,
@@ -38,24 +38,28 @@ function LoginSchool(props) {
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const user = useSelector(userSelector)
-  const History =   useHistory()
-
+  const History = useHistory()
+  const [viewPassword, setViewPassword] = useState(false);
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
 
 
-  useEffect(()=>{
-    if(user.id){
+  useEffect(() => {
+    if (user.id) {
       History.push(`/catalogue`)
     }
-  },[user])
+  }, [user])
 
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
     // console.log('va;ies', values);
     dispatch(localOrgLogin(values));
+  };
+
+  const handleClickShowPassword = () => {
+    setViewPassword(!viewPassword);
   };
 
   return (
@@ -88,11 +92,17 @@ function LoginSchool(props) {
                           name={email.name}
                           label={email.label}
                           fullWidth
-                          color="secondary"
+
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <Email className={classes.inputIconsColor} />
+                                <IconButton
+
+                                  Style="padding: 0px;"
+
+                                >
+                                  <Email className={classes.inputIconsColor} />
+                                </IconButton>
                               </InputAdornment>
                             ),
                           }}
@@ -106,13 +116,22 @@ function LoginSchool(props) {
                           fullWidth
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
-                                <Icon className={classes.inputIconsColor}>
-                                  lock_outline
-                                </Icon>
+                              <InputAdornment
+                                position="end"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                              >
+                                <IconButton Style="padding: 0px;" >
+
+                                  {viewPassword ? (
+                                    <Visibility className={classes.inputIconsColor}/>
+                                  ) : (
+                                      <VisibilityOff className={classes.inputIconsColor}/>
+                                    )}
+                                </IconButton>
                               </InputAdornment>
                             ),
-                            autoComplete: 'off',
+                            autoComplete: "off",
                           }}
                         />
                       </CardBody>

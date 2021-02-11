@@ -1,53 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import { makeStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
-import Icon from '@material-ui/core/Icon';
-import Email from '@material-ui/icons/Email';
+import Icon from "@material-ui/core/Icon";
+import Email from "@material-ui/icons/Email";
 // core components
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
-import Button from 'components/CustomButtons/Button.js';
-import Card from 'components/Card/Card.js';
-import CardBody from 'components/Card/CardBody.js';
-import CardFooter from 'components/Card/CardFooter.js';
-import LoginHeader from 'components/Form/LoginHeader';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-import styles from 'assets/jss/material-kit-react/views/loginPage.js';
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import Button from "components/CustomButtons/Button.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardFooter from "components/Card/CardFooter.js";
+import LoginHeader from "components/Form/LoginHeader";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import {
   registerModel,
   initialState_Login,
   loginValidationSchema,
-} from 'utils/forms/register';
-import { TextField } from 'formik-material-ui';
-import { Formik, Form, Field } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { ACTIONS } from 'store/rootReducer';
-import { localLogin } from 'components/Auth/authSlice';
-import { userSelector } from 'utils/selectors';
-import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import { IconButton } from '@material-ui/core';
+} from "utils/forms/register";
+import { TextField } from "formik-material-ui";
+import { Formik, Form, Field } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTIONS } from "store/rootReducer";
+import { localLogin } from "components/Auth/authSlice";
+import { userSelector } from "utils/selectors";
+import styled from "styled-components";
+import { Link, useHistory } from "react-router-dom";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 const image =
-  'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
+  "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
 
-  const GreyText = styled(Link)`
+const GreyText = styled(Link)`
   color: ${(p) => p.theme.grey};
 `;
 
 function Login(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
-  const [cardAnimaton, setCardAnimation] = useState('cardHidden');
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const user = useSelector(userSelector);
   const History = useHistory();
   const [viewPassword, setViewPassword] = useState(false);
   setTimeout(function () {
-    setCardAnimation('');
+    setCardAnimation("");
   }, 700);
 
   useEffect(() => {
@@ -71,9 +71,9 @@ function Login(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: 'url(' + image + ')',
-          backgroundSize: 'cover',
-          backgroundPosition: 'top center',
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
@@ -96,11 +96,15 @@ function Login(props) {
                           name={email.name}
                           label={email.label}
                           fullWidth
-                          color="secondary"
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <Email className={classes.inputIconsColor} />
+                                <IconButton
+                                  disabled="true"
+                                  Style="padding: 0px;"
+                                >
+                                  <Email className={classes.inputIconsColor}/>
+                                </IconButton>
                               </InputAdornment>
                             ),
                           }}
@@ -111,17 +115,24 @@ function Login(props) {
                           name={password.name}
                           label={password.label}
                           fullWidth
-                          type={viewPassword ? 'text' : 'password'}
+                          type={viewPassword ? "text" : "password"}
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end" aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}>
-
-                                {viewPassword ? <Visibility /> : <VisibilityOff />}
-
-                            </InputAdornment>
+                              <InputAdornment
+                                position="end"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                              >
+                                <IconButton Style="padding: 0px;">
+                                  {viewPassword ? (
+                                    <Visibility className={classes.inputIconsColor}/>
+                                  ) : (
+                                    <VisibilityOff className={classes.inputIconsColor}/>
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
                             ),
-                            autoComplete: 'off',
+                            autoComplete: "off",
                           }}
                         />
                       </CardBody>
@@ -129,17 +140,18 @@ function Login(props) {
                         <Button color="primary" size="lg" type="submit">
                           Login
                         </Button>
-                        <Button
-                      
-                      to="/loginSchool"
-                      color="primary"
-                      className={classes.Register__School}
-                      onClick={() => History.push(`/loginSchool`)}
-                    >
-                      Login como escuela
-                    </Button>
-                      </CardFooter>
 
+                        <Button
+                          to="/loginSchool"
+                          className={classes.Register__School}
+                          className={classes.inputIconsColor}
+                          onClick={() => History.push(`/loginSchool`)}
+                        >
+                          <span Style="color: #1e1e1e;">
+                          Login como escuela
+                          </span>
+                        </Button>
+                      </CardFooter>
                     </Form>
                   )}
                 </Formik>

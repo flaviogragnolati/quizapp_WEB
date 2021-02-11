@@ -49,11 +49,11 @@ const SchoolSubject = () => {
     });
   }  
 
-  let columnName = ['Nombre', 'Description', 'Borrar','Editar']
-  let propsNames = ['name','description','delete','edit']
+  let columnName = ['Nombre', 'Description', 'Borrar','Editar Materia']
+  let propsNames = ['name','description','Borrar','Editar']
   let actions = {
-    delete: handlerDelete,
-    edit: handlerEdit,
+    Borrar: handlerDelete,
+    Editar: handlerEdit,
   }
 
   return (

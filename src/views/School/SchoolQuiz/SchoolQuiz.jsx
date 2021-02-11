@@ -29,7 +29,7 @@ const SchoolQuiz = () => {
   const history = useHistory()
 
   let columnName = ['Nombre del Quiz', 'Materia', 'Descripción' ,'Eliminar','Profesores','Profesores'];
-  let propsNames = ['name', 'Subject', 'description', 'delete', 'add', 'ver'];
+  let propsNames = ['name', 'Subject', 'description', 'Borrar', 'Añadir', 'Ver'];
   
   const handleDelete = (e)=>{
     dispatch(delateQuiz(e));
@@ -46,9 +46,9 @@ const SchoolQuiz = () => {
   }
 
   let actions = {
-    delete: handleDelete,
-    add:handleAdd,
-    ver:handleSee,
+    Borrar: handleDelete,
+    Añadir:handleAdd,
+    Ver:handleSee,
   }
   
   useEffect(() => {

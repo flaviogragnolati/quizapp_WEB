@@ -45,11 +45,11 @@ function QuizTeacher() {
 
   const classes = useStyles();
   let columnName = ['Nombre del Quiz', 'Description', 'Estado', 'Activar Quiz', 'Preguntas', 'Aceptar alumnos'];
-  let propsNames = ['name', 'description', 'active', 'activate', 'edit', 'enroll']
+  let propsNames = ['name', 'description', 'active', 'Activar', 'Editar', 'Enrollar']
   let actions = {
-    activate: handlerActivation,
-    edit: handlerQuestions,
-    enroll: handlerEnroll,
+    Activar: handlerActivation,
+    Editar: handlerQuestions,
+    Enrollar: handlerEnroll,
   }
 
   useEffect(() => {
