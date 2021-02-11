@@ -96,7 +96,7 @@ export default function DatosQuiz() {
   // } = req.body;
 
   return (
-    <Container>
+    <Container Style="margin-top: 8vh;border: 1px solid #464646;padding: 24px;">
       <Typography variant="h6" gutterBottom>
         Informacion general Quizz
       </Typography>

@@ -224,7 +224,7 @@ const SchoolSlice = createSlice({
     });
     builder.addCase(delateQuiz.fulfilled, (state, { payload }) => {
       state.status = status.success;
-      state.SchoolQuizList.QuizList = state.SchoolQuizList.QuizList.filter(
+      state.SchoolQuizList = state.SchoolQuizList.filter(
         (quiz) => {
           return quiz.id !== payload.id;
         }
