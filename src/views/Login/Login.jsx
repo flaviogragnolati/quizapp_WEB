@@ -13,7 +13,7 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import LoginHeader from 'components/Form/LoginHeader';
-
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 
 import {
@@ -29,6 +29,7 @@ import { localLogin } from 'components/Auth/authSlice';
 import { userSelector } from 'utils/selectors';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
+import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 const image =
@@ -44,7 +45,7 @@ function Login(props) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const user = useSelector(userSelector);
   const History = useHistory();
-
+  const [viewPassword, setViewPassword] = useState(false);
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
@@ -61,6 +62,10 @@ function Login(props) {
     dispatch(localLogin(values));
   };
 
+  const handleClickShowPassword = () => {
+    setViewPassword(!viewPassword);
+  };
+
   return (
     <div>
       <div
@@ -73,7 +78,7 @@ function Login(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
@@ -106,13 +111,15 @@ function Login(props) {
                           name={password.name}
                           label={password.label}
                           fullWidth
+                          type={viewPassword ? 'text' : 'password'}
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
-                                <Icon className={classes.inputIconsColor}>
-                                  lock_outline
-                                </Icon>
-                              </InputAdornment>
+                              <InputAdornment position="end" aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}>
+
+                                {viewPassword ? <Visibility /> : <VisibilityOff />}
+
+                            </InputAdornment>
                             ),
                             autoComplete: 'off',
                           }}
@@ -122,13 +129,17 @@ function Login(props) {
                         <Button color="primary" size="lg" type="submit">
                           Login
                         </Button>
+                        <Button
+                      
+                      to="/loginSchool"
+                      color="primary"
+                      className={classes.Register__School}
+                      onClick={() => History.push(`/loginSchool`)}
+                    >
+                      Login como escuela
+                    </Button>
                       </CardFooter>
-                      <GreyText
-                  to="/loginSchool"
-                  className={classes.Register__School}
-                >
-                  Login como escuela
-                </GreyText>
+
                     </Form>
                   )}
                 </Formik>
