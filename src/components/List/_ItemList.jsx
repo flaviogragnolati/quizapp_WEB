@@ -178,13 +178,13 @@ const Results = ({
                         );
                       }
                       // puse este if porque a la info de subjects la recibe dentro de otro objeto
-                      // if (typeof info[prop] === 'object') {
-                      //   return (
-                      //     <TableCell>
-                      //       {info[prop].name ? info[prop].name : '-'}
-                      //     </TableCell>
-                      //   );
-                      // } else {
+                      if (typeof info[prop] === 'object') {
+                        return (
+                          <TableCell>
+                            {info[prop].name ? info[prop].name : '-'}
+                          </TableCell>
+                        );
+                      } else {
                         return (
                           <TableCell>
                             {info[prop] ||
@@ -195,7 +195,7 @@ const Results = ({
                           </TableCell>
                         );
                       }
-                    // }
+                     }
                     )}
                   </TableRow>
                 ))}
