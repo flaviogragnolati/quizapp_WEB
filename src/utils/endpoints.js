@@ -46,7 +46,11 @@ export const TO_STUDENT = BASE_ENDPOINT + '/roles/student/';
 
 export const TO_ENROLL = BASE_ENDPOINT + '/roles/enroll';
 
+export const USER_ADD_FAVOURITES = BASE_ENDPOINT + '/roles/fan';
+
 export const USER_QUIZ_FAVOURITES = BASE_ENDPOINT + '/roles/favorites/user'
+
+export const USER_DELETE_FAVOURITES = BASE_ENDPOINT + '/roles'
 
 export const USER_ENRROLLED_IN = BASE_ENDPOINT + '/quiz/enrolled/user';
 

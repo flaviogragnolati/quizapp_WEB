@@ -24,6 +24,8 @@ import { quizDetail } from '../../views/Catalogue/quizDetail';
 import { useSelector } from 'react-redux';
 import { catalogueEntitiesSelector } from 'utils/selectors';
 import CatalogueTags from './CatalogueTags';
+import { addToFavorites , removeFromFavorites} from 'slices/actionsSlice';
+import { useAuth } from 'components/Auth/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,14 +67,18 @@ const QuizCard = ({ className, quiz, ...rest }) => {
     Reviews,
     QuizTags,
   } = quiz;
+   const user = useAuth()
 
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleNotifications = (state) => {
     if (state) {
-      dispatch(ACTIONS.actions.addToFavorites());
+      dispatch(addToFavorites({QuizId:id, UserId:user.id}))
+      // dispatch(ACTIONS.actions.addToFavorites());
     } else {
-      dispatch(ACTIONS.actions.removeFromFavorites());
+      // dispatch(ACTIONS.actions.removeFromFavorites());
+      dispatch(removeFromFavorites({QuizId:id, UserId:user.id}))
+
     }
   };
 
