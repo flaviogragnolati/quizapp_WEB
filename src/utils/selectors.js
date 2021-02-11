@@ -81,6 +81,7 @@ export const quizDetailHistorySelector = (state) => state.quizDetail.idHistory;
 export const userProfileSelector = (state) => state.profile.user;
 export const schoolProfileSelector = (state) => state.profile.school;
 export const profileStatusSelector = (state) => state.profile.status;
+export const userQuizSelector= (state)=>state.profile.userEnrroledIn;
 
 //School selectors
 

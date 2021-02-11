@@ -195,7 +195,8 @@ const Results = ({
                           </TableCell>
                         );
                       }
-                    })}
+                     }
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
