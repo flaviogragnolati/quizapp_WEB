@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -17,12 +17,13 @@ import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './profileSlice';
+import { getUserData, userEnrroledIn } from './profileSlice';
 import {
   userProfileSelector,
   schoolProfileSelector,
   profileStatusSelector,
   authStatusSelector,
+  userQuizSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
@@ -38,14 +39,20 @@ const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 export default function MyProfile(props) {
   const history = useHistory();
   const user = useAuth();
+  const dispatch =useDispatch();
   const authStatus = useSelector(authStatusSelector);
-
+  const userQuiz = useSelector(userQuizSelector);
   let showDetails, role;
-
+  const [sync, setSync]=useState(false)
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
   }, [user, authStatus]);
 
+if(authStatus === 'success' && !sync){
+  dispatch(userEnrroledIn(user.id))
+  setSync(true)
+}
+  
   const classes = useStyles();
 
   if (authStatus === 'success') {
@@ -127,12 +134,12 @@ export default function MyProfile(props) {
             <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
               <ProfileTabs
                 activity={activity}
-                courses={courses}
+                courses={userQuiz}
                 favourites={favourites}
                 teacherIn={teacherIn}
                 role={role}
               />
-              ){' '}
+              {' '}
             </GridItem>
           </GridContainer>
         </div>

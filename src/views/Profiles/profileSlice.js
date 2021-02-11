@@ -8,11 +8,13 @@ import {
 import { status } from 'utils/helpers';
 import axios from 'axios';
 import { USER_PROFILE_ENDPOINT, SCHOOL_ENDPOINT } from 'utils/endpoints';
+import { USER_ENRROLLED_IN } from 'utils/endpoints';
 
 const initialState_Profile = {
   status: status.idle,
   error: null,
   user: {},
+  userEnrroledIn:[],
   school: {},
 };
 
@@ -47,6 +49,14 @@ export const userUpdate = createAsyncThunk(
     return userUpdate_response.data;
   },
   )
+  export const userEnrroledIn = createAsyncThunk(
+    'profile/userEnrroledIn',
+    async (id) => {
+      console.log('ssssssssssssssssssssss',USER_ENRROLLED_IN+id)
+      const userEnrroledIn_response = await axios.get( USER_ENRROLLED_IN + '/' + id);
+      return userEnrroledIn_response.data;
+    },
+    )
 
 
 export const getSchoolData = createAsyncThunk(
@@ -73,8 +83,8 @@ export const getSchoolData = createAsyncThunk(
   }
 );
 
-const isRejectedAction = isRejected(getUserData,userUpdate);
-const isPendingAction = isPending(getUserData,userUpdate);
+const isRejectedAction = isRejected(getUserData,userUpdate,userEnrroledIn);
+const isPendingAction = isPending(getUserData,userUpdate,userEnrroledIn);
  const isFulfilledAction = isFulfilled(userUpdate)
 const profileSlice = createSlice({
   name: 'profile',
@@ -88,6 +98,10 @@ const profileSlice = createSlice({
     builder.addCase(getSchoolData.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.school = payload;
+    });
+    builder.addCase(userEnrroledIn.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.userEnrroledIn = payload;
     });
     builder.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;
