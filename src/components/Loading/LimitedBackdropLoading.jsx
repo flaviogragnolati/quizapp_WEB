@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 const LimitedBackdrop = withStyles({
   root: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: '1 !important',
   },
 })(Backdrop);
 

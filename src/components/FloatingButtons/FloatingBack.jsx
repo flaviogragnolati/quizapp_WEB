@@ -32,9 +32,10 @@ function FloatingBack() {
   }, [history.length]);
 
   return (
-    <div>
+    <div >
       {history.length < 1 ? null : (
         <Fab
+        Style="z-index: 3;"
           variant="extended"
           color="primary"
           size="medium"

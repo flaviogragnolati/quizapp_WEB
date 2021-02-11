@@ -91,7 +91,7 @@ function SideBar() {
         {Boolean(user) ? (
           <div>
             <SidebarItem
-              label="Create Quiz"
+              label="Crear Quiz"
               link="/quiz-loader"
               icon={<FormatListNumberedIcon />}
             />
