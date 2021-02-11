@@ -9,12 +9,14 @@ import { status } from 'utils/helpers';
 import axios from 'axios';
 import { USER_PROFILE_ENDPOINT, SCHOOL_ENDPOINT } from 'utils/endpoints';
 import { USER_ENRROLLED_IN } from 'utils/endpoints';
+import { USER_QUIZ_FAVOURITES } from 'utils/endpoints';
 
 const initialState_Profile = {
   status: status.idle,
   error: null,
   user: {},
   userEnrroledIn:[],
+  userQuizFavourites:[],
   school: {},
 };
 
@@ -52,11 +54,19 @@ export const userUpdate = createAsyncThunk(
   export const userEnrroledIn = createAsyncThunk(
     'profile/userEnrroledIn',
     async (id) => {
-      console.log('ssssssssssssssssssssss',USER_ENRROLLED_IN+id)
       const userEnrroledIn_response = await axios.get( USER_ENRROLLED_IN + '/' + id);
       return userEnrroledIn_response.data;
     },
     )
+
+    export const userQuizFavourites = createAsyncThunk(
+      'profile/userQuizFavourites',
+      async (id) => {
+        console.log('ssssssssssssssssssssss',USER_QUIZ_FAVOURITES+id)
+        const userQuizFavourites_response = await axios.get( USER_QUIZ_FAVOURITES + '/' + id);
+        return userQuizFavourites_response.data;
+      },
+      )
 
 
 export const getSchoolData = createAsyncThunk(
@@ -83,8 +93,8 @@ export const getSchoolData = createAsyncThunk(
   }
 );
 
-const isRejectedAction = isRejected(getUserData,userUpdate,userEnrroledIn);
-const isPendingAction = isPending(getUserData,userUpdate,userEnrroledIn);
+const isRejectedAction = isRejected(getUserData,userUpdate,userEnrroledIn,userQuizFavourites);
+const isPendingAction = isPending(getUserData,userUpdate,userEnrroledIn,userQuizFavourites);
  const isFulfilledAction = isFulfilled(userUpdate)
 const profileSlice = createSlice({
   name: 'profile',
@@ -102,6 +112,10 @@ const profileSlice = createSlice({
     builder.addCase(userEnrroledIn.fulfilled, (state, { payload }) => {
       state.status = status.success;
       state.userEnrroledIn = payload;
+    });
+    builder.addCase(userQuizFavourites.fulfilled, (state, { payload }) => {
+      state.status = status.success;
+      state.userQuizFavourites = payload;
     });
     builder.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;

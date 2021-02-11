@@ -17,13 +17,14 @@ import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, userEnrroledIn } from './profileSlice';
+import { getUserData, userEnrroledIn, userQuizFavourites } from './profileSlice';
 import {
   userProfileSelector,
   schoolProfileSelector,
   profileStatusSelector,
   authStatusSelector,
   userQuizSelector,
+  userQuizFavouritesSelector
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
@@ -42,6 +43,7 @@ export default function MyProfile(props) {
   const dispatch =useDispatch();
   const authStatus = useSelector(authStatusSelector);
   const userQuiz = useSelector(userQuizSelector);
+  const QuizFavourites =useSelector(userQuizFavouritesSelector)
   let showDetails, role;
   const [sync, setSync]=useState(false)
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function MyProfile(props) {
   }, [user, authStatus]);
 
 if(authStatus === 'success' && !sync){
+  dispatch(userQuizFavourites(user.id))
   dispatch(userEnrroledIn(user.id))
   setSync(true)
 }
@@ -135,7 +138,7 @@ if(authStatus === 'success' && !sync){
               <ProfileTabs
                 activity={activity}
                 courses={userQuiz}
-                favourites={favourites}
+                favourites={QuizFavourites}
                 teacherIn={teacherIn}
                 role={role}
               />
