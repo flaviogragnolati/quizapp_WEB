@@ -21,6 +21,7 @@ import { questionAnswersSelector } from 'utils/selectors';
 import { v4 as uuid } from 'uuid';
 import { updateQuestion, addAnswer } from 'views/QuizLoader/QuizLoaderSlice';
 import { convertFormikValuesToRedux } from 'utils/helpers';
+import { updateQuestionData, useUpdateQuestion } from './questionHelpers';
 const questionInfo = {
   title: 'QCD - enunciado',
   description:
@@ -53,22 +54,27 @@ const questionInfo = {
 
 function Questions(props, ref) {
   const dispatch = useDispatch();
+
   const { questionId } = useContext(IdsContext);
-  // recibe question que es el estado filtrado sincronamente. contiene el detalle de la pregunta y las respuestas
   const { questionInfoRef, answersContentRef } = ref;
+
   const question = useSelector((state) => QuestionsSelector(state, questionId));
   const answers = question && question.Answers;
 
   const [multi, setMulti] = useState();
 
-  const handleAnsAdd = () => {
-    console.log(`Adding an Answer to question #${questionId}`);
-    const questionData = {
-      info: questionInfoRef.current.values,
-      answers: convertFormikValuesToRedux(answersContentRef.current.values),
-      questionId,
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      //if(!saved){} //agregamos un valor de saved<boolean> en redux para determinar si el usuario grabo o no, en caso quie no si quiere navegar a otra  pagina, recargar, cerrar aparece un modal pidiendo que confirme cerrar o guardar todos los cambios
     };
-    dispatch(updateQuestion(questionData));
+  }, []);
+
+  if (!questionId) return null;
+
+  // recibe question que es el estado filtrado sincronamente. contiene el detalle de la pregunta y las respuestas
+
+  const handleAnsAdd = () => {
+    updateQuestionData(ref, questionId, dispatch);
     dispatch(addAnswer({ id: uuid(), questionId }));
   };
 
@@ -83,11 +89,6 @@ function Questions(props, ref) {
       <QuestionTF answer={questionInfo.answersTF} ref={answersContentRef} />
     );
   }
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      //if(!saved){} //agregamos un valor de saved<boolean> en redux para determinar si el usuario grabo o no, en caso quie no si quiere navegar a otra  pagina, recargar, cerrar aparece un modal pidiendo que confirme cerrar o guardar todos los cambios
-    };
-  }, []);
 
   return (
     <>

@@ -14,7 +14,6 @@ function QuestionMulti({
   answer: { id, text, correct },
   questionNum,
   deleteAns,
-  updateResponses,
 }) {
   return (
     <>

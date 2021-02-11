@@ -11,6 +11,8 @@ import {
   updateQuestion,
   removeQuestion,
 } from 'views/QuizLoader/QuizLoaderSlice';
+import { useUpdateQuestion } from 'views/QuestionLoader/components/questionHelpers';
+import { updateQuestionData } from 'views/QuestionLoader/components/questionHelpers';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -56,16 +58,11 @@ function QuestionItem(props, ref) {
   } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { questionInfoRef, answersContentRef } = ref;
   const { questionId } = useContext(IdsContext);
 
   const handleSetId = (id) => {
-    const questionData = {
-      info: questionInfoRef.current.values,
-      answers: convertFormikValuesToRedux(answersContentRef.current.values),
-      questionId,
-    };
-    dispatch(updateQuestion(questionData));
+    //questionId deberia ser el del contexto, ya que hacemos referencia al questionId anterior, ya que es el cual ncesitamos para `actualizar` sus datos
+    updateQuestionData(ref, questionId, dispatch);
     setQuestionId(id);
   };
 

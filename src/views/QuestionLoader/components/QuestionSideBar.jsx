@@ -18,6 +18,7 @@ import { v4 as uuid } from 'uuid';
 import { removeQuestion } from 'views/QuizLoader/QuizLoaderSlice';
 import { IdsContext } from '../QuestionLoader';
 import { convertFormikValuesToRedux } from 'utils/helpers';
+import { updateQuestionData } from './questionHelpers';
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -37,15 +38,18 @@ const useStyles = makeStyles(() => ({
 
 function QuestionSideBar(props, ref) {
   const { setQuestionId, quizDetail } = props;
-  const classes = useStyles();
+
   const dispatch = useDispatch();
+  const classes = useStyles();
+
   const { questionId, quizId } = useContext(IdsContext);
   const { questionInfoRef, answersContentRef } = ref;
+
   const questions = useSelector(QuestionsSelector);
 
   //recibe setId desde QuestionLoader para guardar el id en su estado local
-
   const handleAddQuestion = () => {
+    updateQuestionData(ref, questionId, dispatch);
     let question = {
       id: uuid(),
       title: '',
@@ -56,25 +60,13 @@ function QuestionSideBar(props, ref) {
       QuizId: quizId,
       type: 1,
     };
-    const questionData = {
-      info: questionInfoRef.current.values,
-      answers: convertFormikValuesToRedux(answersContentRef.current.values),
-      questionId,
-    };
-    dispatch(updateQuestion(questionData));
+    updateQuestionData(ref, questionId, dispatch);
     dispatch(addQuestion({ question }));
-    // dispatch(CreateQuestion(Question));
   };
 
   const handleDeleteQuestion = (id) => {
-    const questionData = {
-      info: questionInfoRef.current.values,
-      answers: convertFormikValuesToRedux(answersContentRef.current.values),
-      questionId,
-    };
-    dispatch(updateQuestion(questionData));
+    updateQuestionData(ref, questionId, dispatch);
     dispatch(removeQuestion(id));
-    // dispatch(deleteQuestion(id));
   };
 
   const updateAll = (questions) => {};

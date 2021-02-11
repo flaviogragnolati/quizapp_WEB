@@ -9,6 +9,7 @@ import { getAllQuestions } from 'views/QuizLoader/QuizLoaderSlice';
 import { quizDetailSelector, quizDetailStatusSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { QuestionStatusSelector } from 'utils/selectors';
+import { QuestionsSelector } from 'utils/selectors';
 
 export const IdsContext = createContext(null);
 
@@ -19,15 +20,13 @@ function QuestionLoader() {
   const questionInfoRef = useRef(null);
   const answersContentRef = useRef(null);
   const formikRefs = { questionInfoRef, answersContentRef };
-  console.log(questionInfoRef);
 
   const quizDetail = useSelector((state) => quizDetailSelector(state, quizId));
   const questionsStatus = useSelector(QuestionStatusSelector);
   const quizDetailStatus = useSelector(quizDetailStatusSelector);
 
-  const [questionId, setQuestionId] = useState(1); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
+  const [questionId, setQuestionId] = useState(null); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
   useEffect(() => {
-    console.log('RENDERIZANDO DE NUEVO');
     dispatch(getAllQuestions(quizId));
   }, [dispatch, quizId]);
 
@@ -38,6 +37,8 @@ function QuestionLoader() {
   //!falta manejar el error
   if (questionsStatus === 'pending' || quizDetailStatus === 'pending') {
     return <BackdropLoading />;
+  } else if (questionsStatus === 'error' || quizDetailStatus === 'error') {
+    return <h1>Ha ocurrido un error, recargue la pagina</h1>;
   } else if (questionsStatus === 'success' || quizDetailStatus === 'success') {
     const IDS = { questionId, quizId };
     return (
