@@ -1,64 +1,82 @@
-import QuestionSideBar from "components/SideBar/QuestionSideBar";
-import React, { useEffect, useState } from "react";
-import { makeStyles, Grid } from "@material-ui/core";
-import Questions from "components/Questions/Questions";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getAllQuestions } from "views/QuizLoader/QuizLoaderSlice";
+import React, { useEffect, useState, createContext, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
+import BackdropLoading from 'components/Loading/BackdropLoading';
+import QuestionSideBar from './components/QuestionSideBar';
+import Questions from './components/Questions';
+import { getAllQuestions } from 'views/QuizLoader/QuizLoaderSlice';
+import { quizDetailSelector, quizDetailStatusSelector } from 'utils/selectors';
+import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
+import { QuestionStatusSelector } from 'utils/selectors';
 
-import { QuestionsSelector } from "utils/selectors";
-import { QuestionStatusSelector, QuestionDetailAnswersSelector} from "utils/selectors";
-const useStyles = makeStyles(() => ({
-  div_Questions: {
-    marginTop: "50px",
-  },
-}));
+export const IdsContext = createContext(null);
 
 function QuestionLoader() {
-  const Dispatch = useDispatch();
-  const questions = useSelector(QuestionsSelector);
+  const dispatch = useDispatch();
+  const quizId = useParams().id;
+
+  const questionInfoRef = useRef(null);
+  const answersContentRef = useRef(null);
+  const formikRefs = { questionInfoRef, answersContentRef };
+  console.log(questionInfoRef);
+
+  const quizDetail = useSelector((state) => quizDetailSelector(state, quizId));
   const questionsStatus = useSelector(QuestionStatusSelector);
-  const Answers = useSelector(QuestionDetailAnswersSelector)
-  const params = useParams();
+  const quizDetailStatus = useSelector(quizDetailStatusSelector);
 
   const [questionId, setQuestionId] = useState(1); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
   useEffect(() => {
-    Dispatch(getAllQuestions(params.id));
-  }, [questionId]);
+    console.log('RENDERIZANDO DE NUEVO');
+    dispatch(getAllQuestions(quizId));
+  }, [dispatch, quizId]);
 
   useEffect(() => {
-    console.log('RENDERIZANDO DE NUEVO')
-    // Dispatch(getAllQuestions(params.id));
+    dispatch(getQuizDetailAsync(quizId));
+  }, [dispatch, quizId]);
 
-  }, [questionId,questionsStatus, Answers]);
-  const classes = useStyles();
-
-
-  return (
-    <Grid
-      container
-      spacing={5}
-      direction="row"
-      justify="center"
-      alignItems="flex-start"
-    >
-      <Grid item sm={2}>
-        {/* se le pasa el setQuestionId para que me cambie el valor del estado por el id de la pregunta clickeada  */}
-        <QuestionSideBar questions={questions} setId={setQuestionId}/>
-      </Grid>
-      <Grid
-        container
-        item
-        sm={8}
-        direction="row"
-        justify="space-between"
-        alignItems="flex-start"
-      >
-        {/* se pasa detalle de la pregunta con sus respuestas */}
-        <Questions question={questions.find((question) => question.id === questionId )} reset={questionId}/>
-      </Grid>
-    </Grid>
-  );
+  //!falta manejar el error
+  if (questionsStatus === 'pending' || quizDetailStatus === 'pending') {
+    return <BackdropLoading />;
+  } else if (questionsStatus === 'success' || quizDetailStatus === 'success') {
+    const IDS = { questionId, quizId };
+    return (
+      <IdsContext.Provider value={IDS}>
+        <Grid
+          container
+          spacing={5}
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+        >
+          <Grid item sm={2}>
+            <QuestionSideBar
+              setQuestionId={setQuestionId}
+              quizDetail={quizDetail}
+              // questionInfoRef={questionInfoRef}
+              // answersContentRef={answersContentRef}
+              ref={formikRefs}
+            />
+          </Grid>
+          <Grid
+            container
+            item
+            sm={8}
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
+          >
+            <Questions
+              // questionInfoRef={questionInfoRef}
+              // answersContentRef={answersContentRef}
+              ref={formikRefs}
+            />
+          </Grid>
+        </Grid>
+      </IdsContext.Provider>
+    );
+  }
+  return null;
 }
 
 export default QuestionLoader;

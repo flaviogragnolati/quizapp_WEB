@@ -5,36 +5,32 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { PropTypes } from 'prop-types';
 
-function AddRemove({ action, respCorrect =false, boolean, ...rest }) {
-  const [correct, setcorrect] = useState(respCorrect);
+function AddRemove({ action, value = false, ansId, ...rest }) {
+  const [correct, setCorrect] = useState(value);
   let content;
-  console.log(' CAMBIANDO',correct)
   if (correct === true) {
     content = <CheckCircleIcon style={{ color: 'green' }} {...rest} />;
   } else {
     content = <CancelIcon style={{ color: 'red' }} {...rest} />;
   }
-
-  const handleClick = (state) => {
-    setcorrect((prevState) => {
+  const handleClick = () => {
+    setCorrect((prevState) => {
       return !prevState;
     });
   };
+  useEffect(() => {
+    setCorrect(value);
+  }, [value]);
 
   useEffect(() => {
-    boolean(correct)
-
     if (typeof action === 'function') {
-      action(correct);
+      console.log('Executing T/F', ansId, correct);
+      action(ansId, correct);
     }
-  }, [correct, action]);
+  }, [correct, ansId]);
 
   return (
-    <IconButton
-      edge="start"
-      color="inherit"
-      onClick={() => handleClick(correct)}
-    >
+    <IconButton edge="start" color="inherit" onClick={handleClick}>
       {content}
     </IconButton>
   );

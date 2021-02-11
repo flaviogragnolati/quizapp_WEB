@@ -85,19 +85,28 @@ export const profileStatusSelector = (state) => state.profile.status;
 //School selectors
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
-export const SchoolQuizSelector = (state) =>state.School.SchoolQuizList;
+export const SchoolQuizSelector = (state) => state.School.SchoolQuizList;
 export const SchoolStatusSelector = (state) => state.School.status;
-export const SchoolSubjectSelector = (state) =>state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectList;
 export const UserDetailSelector = (state) => state.School.UserDetail.data;
 export const UserRoleSelector = (state) => state.School.UserDetail.role;
-export const UserDetailStatusSelector = (state) =>state.School.UserDetail.status;
+export const UserDetailStatusSelector = (state) =>
+  state.School.UserDetail.status;
 
 //Quiz selector
-export const QuestionsSelector = (state) => state.QuizLoader.questions;
-export const QuestionDetailSelector = (state) => state.QuizLoader.questionDetail;
-export const QuestionDetailAnswersSelector = (state) => state.QuizLoader.answers;
+export const QuestionsSelector = (state, id) => {
+  if (!id) return state.QuizLoader.questions;
+  else return state.QuizLoader.questions.find(({ id: qId }) => id === qId);
+};
+export const questionAnswersSelector = (state, id) => {
+  return state.QuizLoader.questions.find(({ id: qId }) => id === qId).Answers;
+};
+export const QuestionDetailSelector = (state) =>
+  state.QuizLoader.questionDetail;
+export const QuestionDetailAnswersSelector = (state) =>
+  state.QuizLoader.answers;
 export const QuestionStatusSelector = (state) => state.QuizLoader.status;
-
 
 //Teacher selectors
 export const TeacherQuizSelector = (state) => state.Teacher.TeacherQuizList;

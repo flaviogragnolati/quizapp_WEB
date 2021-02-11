@@ -15,7 +15,7 @@ import AlumnosQuiz from './AlumnosQuiz';
 import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from 'formik';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { initialState_Quiz } from './quizLoderHelpers';
 
 const useStyles = makeStyles((theme) => ({
@@ -80,20 +80,19 @@ export default function QuizLoader() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  const handleSubmit = (values,formik)=>{
-    if(activeStep === 1){
+  const handleSubmit = (values, formik) => {
+    if (activeStep === 1) {
       // aca despachar la accion a la api
-      localStorage.setItem('form', JSON.stringify(values))
+      localStorage.setItem('form', JSON.stringify(values));
       // return localStorage.removeItem('form')
-    }else{
-
-      localStorage.setItem('form', JSON.stringify(values))
+    } else {
+      localStorage.setItem('form', JSON.stringify(values));
     }
-  }
+  };
 
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
@@ -125,11 +124,10 @@ export default function QuizLoader() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Formik  
-                onSubmit={handleSubmit} 
-                initialValues={ activeStep === 0 ? initialState_Quiz : null}>
-                
-
+                <Formik
+                  onSubmit={handleSubmit}
+                  initialValues={activeStep === 0 ? initialState_Quiz : null}
+                >
                   {(formik) => (
                     <Form>
                       {getStepContent(activeStep)}
@@ -147,7 +145,9 @@ export default function QuizLoader() {
                           color="primary"
                           onClick={handleNext}
                           className={classes.button}
-                          type={activeStep === steps.length - 1 ? 'submit': null}
+                          type={
+                            activeStep === steps.length - 1 ? 'submit' : null
+                          }
                         >
                           {activeStep === steps.length - 1
                             ? 'Submit Quiz'

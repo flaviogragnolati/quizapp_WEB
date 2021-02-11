@@ -43,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const Results = ({
   className,
   customers = [],
@@ -60,7 +58,15 @@ const Results = ({
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  let btnProps = ['add', 'edit', 'delete','activate','enroll', 'accept', 'reject']
+  let btnProps = [
+    'add',
+    'edit',
+    'delete',
+    'activate',
+    'enroll',
+    'accept',
+    'reject',
+  ];
 
   if (propsNames.length !== columnName.length) {
     throw new Error('Las propiedades y las columnas no coinciden');
@@ -88,7 +94,6 @@ const Results = ({
     }
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
-
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);

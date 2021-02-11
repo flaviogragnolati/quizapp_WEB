@@ -26,9 +26,10 @@ export default function ComboFilter({
   name,
   action,
   setFilter,
+  values: propValues,
 }) {
   const classes = useStyles();
-  const [values, setValues] = useState();
+  const [values, setValues] = useState(propValues);
 
   const handleChange = (e, newValue) => {
     const nameSpace = e.target.id.split('-')[0];

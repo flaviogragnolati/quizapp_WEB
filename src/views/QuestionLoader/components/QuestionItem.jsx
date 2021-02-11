@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { forwardRef, useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { IconButton, Button, ListItem, makeStyles } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useDispatch } from 'react-redux';
+import { convertFormikValuesToRedux } from 'utils/helpers';
+import { IdsContext } from '../QuestionLoader';
+import {
+  updateQuestion,
+  removeQuestion,
+} from 'views/QuizLoader/QuizLoaderSlice';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -37,16 +44,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionItem = ({
-  className,
-  icon: Icon,
-  title,
-  handleQuestionDelete,
-  id,
-  setId, // recibe setId de QuestionSidebar
-  ...rest
-}) => {
+function QuestionItem(props, ref) {
+  const {
+    className,
+    icon: Icon,
+    title,
+    handleDeleteQuestion,
+    id,
+    setQuestionId,
+    ...rest // recibe setId de QuestionSidebar
+  } = props;
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const { questionInfoRef, answersContentRef } = ref;
+  const { questionId } = useContext(IdsContext);
+
+  const handleSetId = (id) => {
+    const questionData = {
+      info: questionInfoRef.current.values,
+      answers: convertFormikValuesToRedux(answersContentRef.current.values),
+      questionId,
+    };
+    dispatch(updateQuestion(questionData));
+    setQuestionId(id);
+  };
 
   return (
     <>
@@ -55,23 +76,27 @@ const QuestionItem = ({
         disableGutters
         {...rest}
       >
-      {/* aca setea el id de la pregunta para ser filtrada en QuestionLoader */}
-        <Button activeClassName={classes.active} className={classes.button} onClick={() => setId(id)} > 
+        {/* aca setea el id de la pregunta para ser filtrada en QuestionLoader */}
+        <Button
+          activeClassName={classes.active}
+          className={classes.button}
+          onClick={() => handleSetId(id)}
+        >
           {Icon && <Icon className={classes.icon} size="20" />}
           <span className={classes.title}>{title}</span>
         </Button>
-        <IconButton onClick={() => handleQuestionDelete(id)}>
+        <IconButton onClick={() => handleDeleteQuestion(id)}>
           <DeleteIcon />
         </IconButton>
       </ListItem>
     </>
   );
-};
+}
 
 QuestionItem.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.elementType,
   title: PropTypes.string,
 };
-
+QuestionItem = forwardRef(QuestionItem);
 export default QuestionItem;

@@ -87,9 +87,6 @@ function FilterSidebar() {
     dispatch(ACTIONS.catalogue.filter(filterValues));
     dispatch(ACTIONS.catalogue.setFilter(true));
   };
-  // useEffect(() => {
-  //   setFilter(false);
-  // }, []);
 
   return (
     <SidebarDiv>

@@ -27,3 +27,24 @@ export const formatStateToOptions = (entity) => {
   }
   return responseArray;
 };
+
+export const convertFormikValuesToRedux = (obj) => {
+  const l = Object.keys(obj).length;
+  const idArray = Object.keys(obj).slice(0, l / 2);
+  const correctArray = Object.keys(obj).slice(l / 2);
+  if (idArray.length !== correctArray.length)
+    throw new Error('falta o sobra alguna propiedad');
+  for (const item of correctArray) {
+    if (item.substring(0, 3) !== 'cCc')
+      throw new Error('los valores de la respuesta no esta bien formateados');
+  }
+  let result = [];
+  for (let i = 0; i < idArray.length; i++) {
+    result.push({
+      id: idArray[i],
+      text: obj[idArray[i]],
+      correct: obj[correctArray[i]],
+    });
+  }
+  return result;
+};

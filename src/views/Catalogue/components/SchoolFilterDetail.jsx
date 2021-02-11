@@ -5,7 +5,7 @@ import CountryFilter from './CountryFilter';
 import { useSelector } from 'react-redux';
 import { schoolsSelector } from 'utils/selectors';
 
-function SchoolFilterDetail({ setFilter }) {
+function SchoolFilterDetail({ setFilter, values }) {
   const schools = useSelector(schoolsSelector);
   const schoolOptions = formatStateToOptions(schools);
   // const getFilterValues = (values) => {
@@ -21,6 +21,7 @@ function SchoolFilterDetail({ setFilter }) {
         placeholder="School Name"
         options={schoolOptions || [{ id: '', label: 'NO DATA' }]}
         // action={getFilterValues}
+        values={values}
         setFilter={setFilter}
         name="school"
       />
