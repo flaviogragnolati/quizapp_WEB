@@ -71,7 +71,6 @@ function Login(props) {
   const handleClickShowPassword = () => {
     setViewPassword(!viewPassword);
   };
-  console.log(authState)
   return (
     <div>
       <div

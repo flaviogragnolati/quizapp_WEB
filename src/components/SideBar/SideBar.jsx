@@ -45,7 +45,7 @@ function SideBar() {
   const handleLogout = () => {
     Dispatch(ACTIONS.auth.logout());
   };
-
+  console.log(user)
   const SidebarContent = (
     <SidebarContainer
       role="presentation"
@@ -62,22 +62,11 @@ function SideBar() {
         <Divider />
         <SidebarItem
           label="My Profile"
-          link={{
+          link={user.type === "school" ?
+          {
+            pathname:`/school-profile/${user.id}`,
+          } : {
             pathname: '/myprofile',
-          }}
-          icon={<AccountBoxIcon />}
-        />
-        <SidebarItem
-          label="User Profile"
-          link={{
-            pathname: '/profile/1',
-          }}
-          icon={<AccountBoxIcon />}
-        />
-        <SidebarItem
-          label="School Profile"
-          link={{
-            pathname: '/school-profile/1',
           }}
           icon={<AccountBoxIcon />}
         />
