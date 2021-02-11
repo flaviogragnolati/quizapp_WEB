@@ -13,7 +13,7 @@ function SchoolFilterDetail({ setFilter }) {
     <>
       <ComboFilter
         label="Quiz Name"
-        placeholder="Quiz Name"
+        placeholder="Nombre del Quiz"
         name="quiz"
         options={quizzesOptions || [{ id: '', label: 'NO DATA' }]}
         setFilter={setFilter}
@@ -21,7 +21,7 @@ function SchoolFilterDetail({ setFilter }) {
       <br></br>
       <ComboFilter
         label="Quiz Tags"
-        placeholder="Quiz Tags"
+        placeholder="Tags del Quiz"
         name="tag"
         options={quizTagsOptions || [{ id: '', label: 'NO DATA' }]}
         setFilter={setFilter}

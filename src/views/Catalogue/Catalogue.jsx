@@ -78,12 +78,6 @@ const Catalogue = () => {
   }, [dispatch, page, cachedPages, catStatus]);
 
   let content;
-  // let lodingMore = null;
-  // useEffect(() => {
-  //   if (catStatus === 'pending') {
-  //     lodingMore = <h3>Cargando...</h3>;
-  //   }
-  // }, [catStatus]);
 
   if (catStatus === 'pending') {
     content = <LimitedBackdropLoading />;
@@ -94,7 +88,7 @@ const Catalogue = () => {
       content = quizList
         .slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
         .map((quizId, idx) => (
-          <Grid item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
+          <Grid Style="min-width: 33.333vh;" item key={entities.quizzes[quizId].id} lg={4} md={6} xs={10}>
             <QuizCard
               className={classes.courseCard}
               quiz={entities.quizzes[quizId]}
@@ -116,11 +110,11 @@ const Catalogue = () => {
         alignItems="flex-start"
       >
         <Grid item sm={3}>
-          <FilterSidebar />
+          <FilterSidebar page={setPage} />
         </Grid>
         <Grid container item sm={7}>
           <Box mt={3}>
-            <Grid container spacing={3}>
+            <Grid container spacing={5}>
               {content}
               {catStatus === 'pending' ? <h3>Cargando...</h3> : null}
             </Grid>
