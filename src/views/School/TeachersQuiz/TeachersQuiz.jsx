@@ -6,6 +6,8 @@ import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, SchoolTeachersSelector } from 'utils/selectors';
 import { getTeachersQuiz } from 'views/School/SchoolSlice';
+import { SchoolStatusSelector } from 'utils/selectors';
+import BackdropLoading from 'components/Loading/BackdropLoading';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,19 +30,21 @@ const TeachersQuiz = () => {
   // cantidad de alumnos???
   // reviews???
 
+  const statusSchool = useSelector(SchoolStatusSelector)
   const teachers = useSelector(SchoolTeachersSelector)
   const columnName = ['Name', 'Apellido', 'Correo Electronico', ];
   const propsNames=['firstName','lastName','email']
   const dispatch = useDispatch()
   const school = useSelector(userSelector)
-
+  console.log(statusSchool)
   return (
     <Container maxWidth={false}>
+      {statusSchool === "success" ? 
       <Box mt={3}>
-        <h3>Listado de Teachers de este Quiz</h3>
-        <List customers={teachers} columnName={columnName} propsNames={propsNames} />
-      </Box>
-      <Button>+ Agregar</Button>
+        <h3>Listado de Profesores de este Quiz</h3>
+        {teachers.length === 0 ? <h2>No hay Profesores en este Quiz,puedes cargar profesores en el listado de Quizes</h2> :<List customers={teachers} columnName={columnName} propsNames={propsNames} />}
+      </Box> : <BackdropLoading/>}
+
     </Container>
   );
 };

@@ -66,7 +66,7 @@ function NavBar({ toggleTheme, checked, theme }) {
   };
 
   const handleMenuLogout = () => {
-    // history.push(`/`);
+    history.push(`/`);
     dispatch(ACTIONS.auth.logout());
     handleMenuClose();
   };
