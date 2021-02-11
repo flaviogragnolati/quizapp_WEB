@@ -45,15 +45,19 @@ export default function SubjectLoader() {
 
 
   const handleSubmit = (values, formik) => {
-    console.log(datos.id,school.id)
     if (subjects !== undefined && datos.id) {
       values.id = datos.id
-      dispatch(editSubject(values));
-      History.push('/school-subject')
+      dispatch(editSubject(values))
+      .this(
+        History.push('/school-subject')
+      );
     } else {
       values.SchoolId = school.id
-      dispatch(createSubject(values));
-      History.push('/school-subject')
+      dispatch(createSubject(values))
+      .this(
+        History.push('/school-subject')
+      );
+
     }
   };
 

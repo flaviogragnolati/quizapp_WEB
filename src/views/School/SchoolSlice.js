@@ -140,7 +140,6 @@ export const removeTeacher = createAsyncThunk(
 export const editSubject = createAsyncThunk(
   'school/editSubject',
   async (payload) => {
-    console.log(payload);
     const Subject_response = await axios.put(
       SUBJECT_ENDPOINT + '/' + payload.id,
       payload
