@@ -29,16 +29,17 @@ export const formatStateToOptions = (entity) => {
 };
 
 export const convertFormikValuesToRedux = (obj) => {
-  const l = Object.keys(obj).length;
-  const idArray = Object.keys(obj).slice(0, l / 2);
-  const correctArray = Object.keys(obj).slice(l / 2);
+  const props = Object.keys(obj);
+  let idArray = [];
+  let correctArray = [];
+  for (const key of props) {
+    if (key.substring(0, 3) === 'cCc') correctArray.push(key);
+    else idArray.push(key);
+  }
   if (idArray.length !== correctArray.length)
     throw new Error('falta o sobra alguna propiedad');
-  for (const item of correctArray) {
-    if (item.substring(0, 3) !== 'cCc')
-      throw new Error('los valores de la respuesta no esta bien formateados');
-  }
   let result = [];
+
   for (let i = 0; i < idArray.length; i++) {
     result.push({
       id: idArray[i],

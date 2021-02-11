@@ -59,7 +59,7 @@ function QuestionInfo(props, ref) {
     <Formik
       initialValues={initialValues}
       enableReinitialize={true}
-      innerRef={ref}
+      innerRef={(form) => (ref.current = form)}
     >
       <Form Style="display: contents;">
         <Grid item xs={5}>

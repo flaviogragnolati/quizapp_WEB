@@ -135,9 +135,13 @@ const QuizLoaderSlice = createSlice({
       );
       if (!questionIdx === -1) return;
       let question = state.questions[questionIdx];
-      question.title = info.title;
-      question.question = info.question;
-      question.Answers = answers;
+      if (info) {
+        question.title = info.title;
+        question.question = info.question;
+      }
+      if (answers) {
+        question.Answers = answers;
+      }
     },
     addQuestion: (state, { payload }) => {
       const { question } = payload; //por ahora lo mandamos como obj por si mas adelante hay que pasar algun otro dato

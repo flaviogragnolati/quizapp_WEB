@@ -21,17 +21,6 @@ function QuestionMultiWrapper(props, ref) {
     });
   }, [answers, initialValues]);
 
-  const [responses, setResponses] = useState({});
-
-  const updateResponses = (ansId, correct) => {
-    setResponses((oldResponses) => {
-      return { ...oldResponses, [ansId]: correct };
-    });
-  };
-  useEffect(() => {
-    console.log('RESPONSE', responses);
-  }, [responses]);
-
   const handleAnsDelete = (ansId) => {
     console.log('DELETING', ansId);
     dispatch(removeAnswer({ questionId, ansId }));
@@ -47,7 +36,6 @@ function QuestionMultiWrapper(props, ref) {
           questionNum={idx}
           answer={ans}
           deleteAns={handleAnsDelete}
-          updateResponses={updateResponses}
           checked={ans.correct}
         />
       );
@@ -57,7 +45,7 @@ function QuestionMultiWrapper(props, ref) {
     <Formik
       enableReinitialize={true}
       initialValues={initialValues}
-      innerRef={ref}
+      innerRef={(form) => (ref.current = form)}
     >
       <Form Style="display: contents;">{multiAnsContent}</Form>
     </Formik>
