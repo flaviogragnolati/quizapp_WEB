@@ -128,7 +128,7 @@ const School = styled.div`
   grid-area: school;
   align-self: center;
   justify-self: left;
-  height: 100%;
+  height: 0%;
   width: 100%;
   color: ${(p) => p.theme.palette.primary.contrastText};
 `;
@@ -250,7 +250,7 @@ function QuizProfile(props) {
       quantity,
       description,
       Subject: { name: subjectName },
-      School: { name: schoolName, email: schoolEmail, city: schoolCity, country: schoolCountry },
+      School: { name: schoolName, email: schoolEmail, city: schoolCity, country: schoolCountry, id: schoolId},
       teachers,
       Reviews: reviewList,
       logo,
@@ -276,12 +276,13 @@ function QuizProfile(props) {
         <School>
           <Box display="flex" flexDirection="row" justifyContent="left">
             <Typography
-            Style="color: #333;font-weight: inherit;"
+            Style="color: grey;font-weight: inherit;"
               variant="h2"
               gutterBottom
               paragraph
+              color="contrastText"
               component={CleanLink}
-              to="/school-profile/1"
+              to={`/school-profile/${schoolId}`}
             >
               <Box marginLeft="0.1rem" marginRight="1rem" display="inline-flex">
                 <SchoolIcon color="secondary" fontSize="large" />
@@ -290,7 +291,7 @@ function QuizProfile(props) {
             </Typography>
           </Box>
         </School>
-        <Teacher>
+        {/* <Teacher>
           <Typography variant="body2">Teachers in this course:</Typography>
           <br></br>
           <Box>
@@ -312,7 +313,7 @@ function QuizProfile(props) {
                 );
               })}
           </Box>
-        </Teacher>
+        </Teacher> */}
         <Reviews>
           <Box
             display="flex"
