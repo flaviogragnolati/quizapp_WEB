@@ -46,6 +46,7 @@ const Catalogue = () => {
   );
   const classes = useStyles();
 
+
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setPage(value);
@@ -128,7 +129,7 @@ const Catalogue = () => {
                 size="large"
                 showFirstButton
                 showLastButton
-                count={Math.ceil(total / pageSize)}
+                count={filter ? Math.ceil((quizList.length-1) / pageSize) : Math.ceil(total / pageSize)}
                 page={page}
                 onChange={handleChange}
               />

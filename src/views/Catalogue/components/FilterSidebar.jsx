@@ -87,23 +87,6 @@ function FilterSidebar({page}) {
   return (
     <SidebarDiv>
       <>
-        <Box mt={3}>
-          <div className={c.search}>
-            <div className={c.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Buscar..."
-              classes={{
-                root: c.inputRoot,
-                input: c.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-        </Box>
-      </>
-      <>
         <FilterGroup title="Buscar por Escuela">
           <SchoolFilterDetail setFilter={setFilterValues} />
         </FilterGroup>

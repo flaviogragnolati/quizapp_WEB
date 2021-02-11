@@ -173,6 +173,9 @@ const authSlice = createSlice({
       delete axios.defaults.headers.common.Authorization;
       window.localStorage.setItem('__logout__', Date.now());
     },
+    setStateReset: (state, { payload }) => {
+      state.status = status.idle;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(isPendingAction, (state, { payload }) => {
@@ -190,6 +193,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, logout } = authSlice.actions;
+export const { setToken, logout, setStateReset } = authSlice.actions;
 
 export default authSlice;

@@ -116,11 +116,6 @@ function SideBar() {
               icon={<FormatListNumberedIcon />}
             />
             <SidebarItem
-              label="Cargar Quiz"
-              link="/quiz-loader"
-              icon={<FormatListNumberedIcon />}
-            />
-            <SidebarItem
               label="Teacher Dashboard"
               link="/teacher-dashboard"
               icon={<FormatListNumberedIcon />}

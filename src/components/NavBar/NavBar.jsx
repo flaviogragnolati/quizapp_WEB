@@ -183,18 +183,6 @@ function NavBar({ toggleTheme, checked, theme }) {
             <IconButton>
               <ThemeToggler toggleTheme={toggleTheme} checked={checked} />
             </IconButton>
-
-            {user && (
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="primary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            )}
-
             <IconButton
               edge="end"
               aria-label="account of current user"

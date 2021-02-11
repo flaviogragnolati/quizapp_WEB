@@ -95,6 +95,13 @@ const signupPageStyle = (theme) => ({
   Register__Date: {
     marginTop: '29px',
   },
+  Error__Message: {
+    color:' #b51919',
+    fontWeight: 'bolder',
+    marginTop: '10px',
+    fontSize: '16px',
+    textAlign: 'center',
+  },
 });
 
 export default signupPageStyle;

@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
     height: '100%',
+    display: 'grid',
   },
   media: {
     height: 140,
@@ -57,13 +58,13 @@ export default function SchoolProfileQuizDetail({ quizDetail, ...props }) {
           <Typography gutterBottom variant="h6" component="h4">
             {subjectName}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography  variant="body2" color="textSecondary" component="p">
             {description}{' '}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <Box minWidth display="flex" flexDirection="row" justifyContent="space-between">
           <Button
             size="medium"
             color="secondary"

@@ -26,7 +26,7 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS } from "store/rootReducer";
 import { localLogin } from "components/Auth/authSlice";
-import { userSelector } from "utils/selectors";
+import { userSelector, authStatusSelector } from "utils/selectors";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
@@ -44,6 +44,7 @@ function Login(props) {
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const user = useSelector(userSelector);
+  const authState = useSelector(authStatusSelector);
   const History = useHistory();
   const [viewPassword, setViewPassword] = useState(false);
   setTimeout(function () {
@@ -60,12 +61,17 @@ function Login(props) {
 
   const handleSubmit = (values, formik) => {
     dispatch(localLogin(values));
+    formik.resetForm({values: {
+      email: values.email,
+      password: '',
+    }})
+    
   };
 
   const handleClickShowPassword = () => {
     setViewPassword(!viewPassword);
   };
-
+  console.log(authState)
   return (
     <div>
       <div
@@ -82,6 +88,7 @@ function Login(props) {
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
+                {authState === 'error' ? <p className={classes.divider} className={classes.Error__Message}>El Login fue rechazado, intenta de nuevo</p> : null}
                 <Formik
                   onSubmit={handleSubmit}
                   initialValues={initialState_Login}
@@ -145,7 +152,7 @@ function Login(props) {
                           to="/loginSchool"
                           className={classes.Register__School}
                           className={classes.inputIconsColor}
-                          onClick={() => History.push(`/loginSchool`)}
+                          onClick={() => {History.push(`/loginSchool`); dispatch(ACTIONS.auth.setStateReset());}}
                         >
                           <span Style="color: #1e1e1e;">
                           Login como escuela

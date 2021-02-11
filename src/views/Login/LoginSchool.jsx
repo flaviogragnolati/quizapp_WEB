@@ -26,7 +26,7 @@ import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
 import { localOrgLogin } from 'components/Auth/authSlice';
-import { userSelector } from 'utils/selectors';
+import { userSelector, authStatusSelector } from 'utils/selectors';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
@@ -40,6 +40,8 @@ function LoginSchool(props) {
   const user = useSelector(userSelector)
   const History = useHistory()
   const [viewPassword, setViewPassword] = useState(false);
+  const authState = useSelector(authStatusSelector);
+
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
@@ -54,8 +56,11 @@ function LoginSchool(props) {
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
-    // console.log('va;ies', values);
     dispatch(localOrgLogin(values));
+    formik.resetForm({values: {
+      email: values.email,
+      password: '',
+    }})
   };
 
   const handleClickShowPassword = () => {
@@ -78,6 +83,7 @@ function LoginSchool(props) {
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
+                {authState === 'error' ? <p className={classes.divider} className={classes.Error__Message}>El Login fue rechazado, intenta de nuevo</p> : null}
                 <Formik
                   onSubmit={handleSubmit}
                   initialValues={initialState_Login}
