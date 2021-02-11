@@ -123,16 +123,16 @@ function ProfileTabs({
           <List>
             {favourites.map((fav, idx) => {
               return (
-                <ListItem button key={idx} component={Link} to="/quiz-detail/1">
+                <ListItem button key={idx} component={Link} to={`/quiz-detail/${fav.id}`}>
                   <ListItemIcon>
                     <DescriptionIcon />
                   </ListItemIcon>
-                  <ListItemText primary={fav.title} />
+                  <ListItemText primary={fav.name} />
                   <ListItemSecondaryAction>
                     <Tooltip
                       disableFocusListener
                       placement="right"
-                      title="EL curso todavia no ha comenzado"
+                      title={fav.description}
                     >
                       <IconButton edge="end" aria-label="more info">
                         <InfoIcon />
