@@ -25,6 +25,7 @@ import PromoteToTeacher from "components/List/Modal/Components/PromoteToTeacher"
 import RemoveFromTeacher from "components/List/Modal/Components/RemoveFromTeacher";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 
+
 const useStyles = makeStyles((theme) => ({
   field: {
     padding: "20px",
@@ -68,13 +69,13 @@ const useStyles = makeStyles((theme) => ({
   //   padding: theme.spacing(2, 4, 3),
   // },
 }));
-
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
   const UserDetail = useSelector(UserDetailSelector);
   const role = useSelector(UserRoleSelector);
   const status = useSelector(UserDetailStatusSelector);
+
   // const handleOpen = () => {
   //   setOpen(true);
   // };

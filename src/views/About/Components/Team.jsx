@@ -71,7 +71,7 @@ function ProductValues(props) {
     <section className={classes.root}>
     <div className={classes.Team_Div}>
     <h1 className={classes.Team_H1} >Conoce al Equipo</h1>
-    <h3 className={classes.Team_H3}>Nosotros somos el equipo de desarrolladores que realizó el ecommerce "GamingHub", el cual es un proyecto del bootcamp intensivo "Henry". Conocenos más a fondo en nuestras redes sociales.</h3>
+    <h3 className={classes.Team_H3}>Nosotros somos el equipo de desarrolladores que realizó el ecommerce "WineStore", el cual es un proyecto del bootcamp intensivo "Henry". Conocenos más a fondo en nuestras redes sociales.</h3>
     </div>
       <Container className={classes.container}>
         <Grid container spacing={5}>

@@ -91,18 +91,13 @@ function SideBar() {
         {Boolean(user) ? (
           <div>
             <SidebarItem
-              label="Create Quiz"
+              label="Crear Quiz"
               link="/quiz-loader"
               icon={<FormatListNumberedIcon />}
             />
             <SidebarItem
               label="Quizes de la Escuela"
               link="/school-quiz"
-              icon={<FormatListNumberedIcon />}
-            />
-            <SidebarItem
-              label="Teacher de Escuela"
-              link="/school-teacher"
               icon={<FormatListNumberedIcon />}
             />
             <SidebarItem

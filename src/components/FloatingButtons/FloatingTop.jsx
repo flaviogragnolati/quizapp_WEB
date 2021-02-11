@@ -31,9 +31,9 @@ function FloatingTop(props) {
 
   return (
     <div>
-      <Zoom in={trigger}>
+      <Zoom Style="z-index: 3;" in={trigger}>
         <div onClick={handleClick} role="presentation" className={c.root}>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <Fab  color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </div>

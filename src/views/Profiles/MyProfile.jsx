@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -17,15 +17,18 @@ import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './profileSlice';
+import { getUserData, userEnrroledIn, userQuizFavourites } from './profileSlice';
 import {
   userProfileSelector,
   schoolProfileSelector,
   profileStatusSelector,
   authStatusSelector,
+  userQuizSelector,
+  userQuizFavouritesSelector
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
+import Teacher from 'components/ProfileDetail/Profiles/Teacher';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -37,14 +40,22 @@ const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
 export default function MyProfile(props) {
   const history = useHistory();
   const user = useAuth();
+  const dispatch =useDispatch();
   const authStatus = useSelector(authStatusSelector);
-
+  const userQuiz = useSelector(userQuizSelector);
+  const QuizFavourites =useSelector(userQuizFavouritesSelector)
   let showDetails, role;
-
+  const [sync, setSync]=useState(false)
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
   }, [user, authStatus]);
 
+if(authStatus === 'success' && !sync){
+  dispatch(userQuizFavourites(user.id))
+  dispatch(userEnrroledIn(user.id))
+  setSync(true)
+}
+  
   const classes = useStyles();
 
   if (authStatus === 'success') {
@@ -75,13 +86,14 @@ export default function MyProfile(props) {
       } = user;
       content = (
         <div className={classes.container}>
+     
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
                   <img src={photo} alt="..." className={imageClasses} />
                 </div>
-                <Button color="secondary" link component={Link} to="">
+                <Button color="secondary" link component={Link} to="/edit/profile">
                   <EditIcon></EditIcon>
                   Editar perfil
                 </Button>
@@ -125,12 +137,12 @@ export default function MyProfile(props) {
             <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
               <ProfileTabs
                 activity={activity}
-                courses={courses}
-                favourites={favourites}
+                courses={userQuiz}
+                favourites={QuizFavourites}
                 teacherIn={teacherIn}
                 role={role}
               />
-              ){' '}
+              {' '}
             </GridItem>
           </GridContainer>
         </div>

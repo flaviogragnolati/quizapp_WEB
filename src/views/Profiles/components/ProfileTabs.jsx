@@ -92,16 +92,16 @@ function ProfileTabs({
           <List>
             {courses.map((course, idx) => {
               return (
-                <ListItem button key={idx} component={Link} to="/quiz-detail/1">
+                <ListItem button key={idx} component={Link} to={`/quiz-detail/${course.id}`}>
                   <ListItemIcon>
                     <DescriptionIcon />
                   </ListItemIcon>
-                  <ListItemText primary={course.title} />
+                  <ListItemText primary={course.name} />
                   <ListItemSecondaryAction>
                     <Tooltip
                       disableFocusListener
                       placement="right"
-                      title="Todavia estas a tiempo de finalizar el curso"
+                      title={course.description}
                     >
                       <IconButton edge="end" aria-label="more info">
                         <InfoIcon />

@@ -66,6 +66,7 @@ const Results = ({
     'enroll',
     'accept',
     'reject',
+    'ver',
   ];
 
   if (propsNames.length !== columnName.length) {

@@ -12,7 +12,6 @@ import Catalogue from 'views/Catalogue';
 import Register from 'views/Register/Register';
 import SchoolSubject from 'views/School/SchoolSubject';
 import About from 'views/About/';
-import SchoolTeacher from 'views/School/SchoolTeacher';
 import SchoolQuiz from 'views/School/SchoolQuiz';
 import RegisterSchool from 'views/Register/RegisterSchool';
 import QuestionLoader from 'views/QuestionLoader';
@@ -22,6 +21,9 @@ import LoginSchool from 'views/Login/LoginSchool';
 import QuizTeacher from 'views/Teacher/QuizTeacher';
 import EnrollTeacher from 'views/Teacher/EnrollTeacher';
 import TeacherDashboard from '../views/Dashboard/TeacherDashboard';
+import TeachersQuiz from 'views/School/TeachersQuiz';
+import Teacher from 'components/ProfileDetail/Profiles/Teacher';
+
 
 /**
  * !Definicion de `roles` y niveles de acceso:
@@ -51,13 +53,14 @@ export const routes = [
     access: 'guest',
   },
   { path: '/question-loader/:id', component: QuestionLoader, access: 'user' },
+  { path: '/edit/profile', component: Teacher, access: 'user' },
   { path: '/profile/:id', component: UserProfile, access: 'guest' },
   { path: '/myprofile', component: MyProfile, access: 'guest' },
   { path: '/catalogue', component: Catalogue, access: 'guest' },
   { path: '/school-profile/:id', component: SchoolProfile, access: 'guest' },
   { path: '/quiz-detail/:id', component: QuizProfile, access: 'guest' },
   { path: '/school-subject', component: SchoolSubject, access: 'guest' },
-  { path: '/school-teacher', component: SchoolTeacher, access: 'guest' },
+  { path: '/quiz-teacher', component: TeachersQuiz, access: 'guest' },
   { path: '/school-quiz', component: SchoolQuiz, access: 'guest' },
   { path: '/quiz-list', component: QuizTeacher, access: 'guest' },
   { path: '/enroll-list/:id', component: EnrollTeacher, access: 'guest' },

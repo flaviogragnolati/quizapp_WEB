@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Container,
   Divider,
   makeStyles,
   Box,
   InputBase,
   fade,
   Button,
-  IconButton,
 } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
 import FilterGroup from './FilterGroup';
@@ -20,7 +15,7 @@ import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
-import { useEffect } from 'react';
+
 
 const SidebarDiv = styled.div`
   /* background-color: gray; */
@@ -75,7 +70,7 @@ const initialFilterValues = {
   quiz: null,
   tag: null,
 };
-function FilterSidebar() {
+function FilterSidebar({page}) {
   const c = useStyles();
   const dispatch = useDispatch();
   const [filterValues, setFilterValues] = useState(initialFilterValues);
@@ -86,6 +81,7 @@ function FilterSidebar() {
   const handleFilter = () => {
     dispatch(ACTIONS.catalogue.filter(filterValues));
     dispatch(ACTIONS.catalogue.setFilter(true));
+    page(1)
   };
 
   return (
@@ -108,15 +104,15 @@ function FilterSidebar() {
         </Box>
       </>
       <>
-        <FilterGroup title="School Filter">
+        <FilterGroup title="Buscar por Escuela">
           <SchoolFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
-        <FilterGroup title="Subject Filter">
+        <FilterGroup title="Buscar por Materia">
           <SubjectFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
-        <FilterGroup title="Quiz Filter">
+        <FilterGroup title="Buscar por Quiz">
           <QuizFilterDetail setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
@@ -134,7 +130,7 @@ function FilterSidebar() {
             size="large"
             onClick={handleClear}
           >
-            CLEAR
+            LIMPIAR
           </Button>
           <Button
             color="secondary"
@@ -142,7 +138,7 @@ function FilterSidebar() {
             size="large"
             onClick={handleFilter}
           >
-            FIND!
+            BUSCAR!
           </Button>
         </Box>
       </>

@@ -101,14 +101,14 @@ const MainContainer = styled.div`
     0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 `;
 
-const Picture = styled.div`
+const Picture = styled.img`
   grid-area: picture;
   align-self: center;
   justify-self: center;
-  height: 100%;
+  margin-right: 1vw;
   width: 100%;
+  border: 1px solid #7b7b7b9c;
   /* object-fit: cover; */
-  background: url(${quizDetail.img}) no-repeat;
   background-size: contain;
   background-position: center;
   /* border-color: red;
@@ -169,7 +169,7 @@ const Teacher = styled.div`
 `;
 const DateOpen = styled.div`
   grid-area: date;
-  justify-self: end;
+  font-weight: bolder;
   align-self: center;
 `;
 const ContactInfo = styled.div`
@@ -250,9 +250,11 @@ function QuizProfile(props) {
       quantity,
       description,
       Subject: { name: subjectName },
-      School: { name: schoolName, email: schoolEmail },
+      School: { name: schoolName, email: schoolEmail, city: schoolCity, country: schoolCountry },
       teachers,
       Reviews: reviewList,
+      logo,
+      active,
     } = quizDetail;
   }
 
@@ -260,11 +262,11 @@ function QuizProfile(props) {
     <div>
       <Parallax small filter image={schoolImg} />
       <MainContainer>
-        <Picture />
+        <Picture src={logo}/>
         <QuizName>
           <ShadowBox>
             <Typography variant="h3" color="secondary">
-              {name}
+              {name} 
             </Typography>
             <Typography variant="subtitle1" color="secondary">
               {subjectName}
@@ -274,8 +276,8 @@ function QuizProfile(props) {
         <School>
           <Box display="flex" flexDirection="row" justifyContent="left">
             <Typography
+            Style="color: #333;font-weight: inherit;"
               variant="h2"
-              color="textSecondary"
               gutterBottom
               paragraph
               component={CleanLink}
@@ -395,38 +397,26 @@ function QuizProfile(props) {
           <Typography variant="body1">{description}</Typography>
         </Description>
         {/* <Subject>{subjectName}</Subject> */}
-        <DateOpen>
-          <Box display="flex" flexDirection="row" justifySelf="center">
+        <DateOpen  >
+          <Box display="flex" flexDirection="row" justifySelf="center" Style="width: 100%;" >
             <Typography variant="body1">
-              Avialable from:{' '}
-              <Chip
-                label={openDate}
-                variant="outlined"
-                color="info"
-                size="small"
-              />{' '}
-              to:{' '}
-              <Chip
-                label={closeDate}
-                variant="outlined"
-                color="warning"
-                size="small"
-              />
+              {active ? '<- Esta Quiz Esta disponible' : '<- La Quiz no esta activada'}
             </Typography>
           </Box>
         </DateOpen>
         <ContactInfo>
-          <Typography variant="subtitle1" align="center">
-            School Contact Info
+        <Box display="flex" flexDirection="row" padding="0.2rem">
+              <EmailIcon />
+              <Typography variant="body1" Style="font-weight: bolder;">{schoolEmail}</Typography>
+            </Box>
+        <Box display="flex" flexDirection="row" padding="0.2rem">
+          <Typography variant="subtitle1" >
+           { schoolCity}
           </Typography>
+          </Box>
           <Box display="flex" flexDirection="column">
             <Box display="flex" flexDirection="row" padding="0.2rem">
-              <PhoneIcon />
-              {/* <Typography variant="body1">{schoolContactInfo.phone}</Typography> */}
-            </Box>
-            <Box display="flex" flexDirection="row" padding="0.2rem">
-              <EmailIcon />
-              <Typography variant="body1">{schoolEmail}</Typography>
+            <Typography variant="subtitle1">{schoolCountry}</Typography>
             </Box>
           </Box>
         </ContactInfo>

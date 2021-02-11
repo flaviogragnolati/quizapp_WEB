@@ -11,7 +11,7 @@ function SubjectFilterDetail({ setFilter }) {
     <>
       <ComboFilter
         name="subject"
-        label="Subject Name"
+        label="Materia"
         placeholder="Subject Name"
         options={subjectOptions || [{ id: '', label: 'NO DATA' }]}
         setFilter={setFilter}

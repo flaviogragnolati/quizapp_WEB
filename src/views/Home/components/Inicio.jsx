@@ -12,6 +12,7 @@ import { Grid, Box } from '@material-ui/core';
 import styled from 'styled-components';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useState } from 'react';
+import { useAuth } from 'components/Auth/AuthContext';  
 
 const backgroundImage =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
@@ -70,7 +71,7 @@ function Inicio(props) {
   const handleLoading = () => {
     setLoading((prev) => !prev);
   };
-
+  const user = useAuth();
   return (
     <>
       <InicioBackground backgroundClassName={classes.background}>
@@ -93,8 +94,9 @@ function Inicio(props) {
           justify="center"
           alignItems="space-between"
         >
-          <Grid item xs={3}>
-            <HeroButton
+          {!user ?<Grid item xs={3}>
+            
+              <HeroButton
               color="primary"
               variant="contained"
               size="large"
@@ -102,8 +104,8 @@ function Inicio(props) {
               to="/register"
             >
               Registrarse
-            </HeroButton>
-          </Grid>
+            </HeroButton> 
+          </Grid>: null}
           <Grid item xs={3}>
             <HeroButton
               color="secondary"

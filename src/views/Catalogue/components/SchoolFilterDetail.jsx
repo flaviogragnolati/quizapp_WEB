@@ -17,7 +17,7 @@ function SchoolFilterDetail({ setFilter, values }) {
   return (
     <>
       <ComboFilter
-        label="School Name"
+        label="Nombre de la Escuela"
         placeholder="School Name"
         options={schoolOptions || [{ id: '', label: 'NO DATA' }]}
         // action={getFilterValues}
@@ -26,7 +26,7 @@ function SchoolFilterDetail({ setFilter, values }) {
         name="school"
       />
       <br></br>
-      <CountryFilter label="Country" placeholder="Country" />
+      <CountryFilter label="Pais" placeholder="Country" />
     </>
   );
 }

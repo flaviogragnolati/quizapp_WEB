@@ -81,11 +81,15 @@ export const quizDetailHistorySelector = (state) => state.quizDetail.idHistory;
 export const userProfileSelector = (state) => state.profile.user;
 export const schoolProfileSelector = (state) => state.profile.school;
 export const profileStatusSelector = (state) => state.profile.status;
+export const userQuizSelector = (state) => state.profile.userEnrroledIn;
+export const userQuizFavouritesSelector = (state) =>
+  state.profile.userQuizFavourites;
 
 //School selectors
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
 export const SchoolQuizSelector = (state) => state.School.SchoolQuizList;
+export const SchoolTeachersSelector = (state) => state.School.SchoolTeacherList;
 export const SchoolStatusSelector = (state) => state.School.status;
 export const SchoolSubjectSelector = (state) =>
   state.School.SchoolSubjectList.SubjectList;
