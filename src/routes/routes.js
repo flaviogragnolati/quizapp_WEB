@@ -24,17 +24,16 @@ import TeacherDashboard from '../views/Dashboard/TeacherDashboard';
 import TeachersQuiz from 'views/School/TeachersQuiz';
 import Teacher from 'components/ProfileDetail/Profiles/Teacher';
 
-import TeacherRoute from 'components/Auth/TeacherRoute'
-import UserRoute from 'components/Auth/UserRoute'
-import SchoolRoute from 'components/Auth/SchoolRoute'
-import GuestRoute from 'components/Auth/GuestRoute'
-import AdminRoute from 'components/Auth/AdminRoute'
-
-
+import TeacherRoute from 'components/Auth/TeacherRoute';
+import UserRoute from 'components/Auth/UserRoute';
+import SchoolRoute from 'components/Auth/SchoolRoute';
+import PublicRoute from 'components/Auth/PublicRoute';
+import AdminRoute from 'components/Auth/AdminRoute';
+import UserSchoolRoute from 'components/Auth/UserSchoolRoute';
 
 /**
  * !Definicion de `roles` y niveles de acceso:
- * ?guest: Puede acceder cualquier usuario a esta ruta, inclusive un guest (ej. /catalogue)
+ * ?public: Puede acceder cualquier usuario a esta ruta, inclusive un guest (ej. /catalogue)
  * ?onlyGuest: Solo pueden acceder los usuarios/schools NO logeados (ej. /login)
  * ?user: Es necesario estar logeado para poder acceder, pudiendo ser student o teacher.
  * ?en caso de ser teacher se muestra la info correspondiente
@@ -47,11 +46,11 @@ import AdminRoute from 'components/Auth/AdminRoute'
  * *['guest'|'onlyGuest'|'user'|'teacher'|'school'|'admin',...]
  */
 export const routes = [
-  { path: ['/', '/home'], component: Home, access: 'guest', exact: true },
+  { path: ['/', '/home'], component: Home, access: 'public', exact: true },
   { path: '/login', component: Login, access: 'onlyGuest' },
   { path: '/register', component: Register, access: 'onlyGuest' },
   { path: '/loginSchool', component: LoginSchool, access: 'onlyGuest' },
-  { path: '/about', component: About, access: 'guest' },
+  { path: '/about', component: About, access: 'public' },
   { path: '/registerSchool', component: RegisterSchool, access: 'onlyGuest' },
   { path: '/quiz-loader/', component: DatosQuiz, access: 'school' },
   {
@@ -59,26 +58,39 @@ export const routes = [
     component: SubjectLoader,
     access: 'school',
   },
-  { path: '/question-loader/:id', component: QuestionLoader, access: ['teacher','school'] },
-  { path: '/edit/profile', component: Teacher, access: ['teacher','user'] },
-  { path: '/profile/:id', component: UserProfile, access: 'guest' },
-  { path: '/myprofile', component: MyProfile, access: ['teacher','school','user']},
-  { path: '/catalogue', component: Catalogue, access: ['teacher','school','user','guest'] },
-  { path: '/school-profile/:id', component: SchoolProfile, access: 'guest' },
-  { path: '/quiz-detail/:id', component: QuizProfile, access: 'guest' },
+  {
+    path: '/question-loader/:id',
+    component: QuestionLoader,
+    access: 'user-school',
+  },
+  { path: '/edit/profile', component: Teacher, access: 'user' },
+  { path: '/profile/:id', component: UserProfile, access: 'public' },
+  {
+    path: '/myprofile',
+    component: MyProfile,
+    access: 'user-school',
+  },
+  {
+    path: '/catalogue',
+    component: Catalogue,
+    access: 'public',
+  },
+  { path: '/school-profile/:id', component: SchoolProfile, access: 'public' },
+  { path: '/quiz-detail/:id', component: QuizProfile, access: 'public' },
   { path: '/school-subject', component: SchoolSubject, access: 'school' },
   { path: '/quiz-teacher', component: TeachersQuiz, access: 'school' },
   { path: '/school-quiz', component: SchoolQuiz, access: 'school' },
-  { path: '/quiz-list', component: QuizTeacher, access:['teacher','school'] },
-  { path: '/enroll-list/:id', component: EnrollTeacher, access: ['teacher','school'] },
+  { path: '/quiz-list', component: QuizTeacher, access: 'user-school' },
+  {
+    path: '/enroll-list/:id',
+    component: EnrollTeacher,
+    access: 'user-school',
+  },
   // { path: '/teacher-dashboard', component: TeacherDashboard, access: 'tea' },
-  { path: '/404', component: NotFound, access: 'guest' },
+  { path: '/404', component: NotFound, access: 'public' },
 ];
 
-
-
 export const createRoutes = (routes) => {
-  <TeacherRoute/>
   if (routes.length < 1) return null;
   return (
     <Switch>
@@ -88,9 +100,9 @@ export const createRoutes = (routes) => {
           // return <Redirect to="/404" />;
         }
         switch (route.access) {
-          case 'guest':
+          case 'public':
             return (
-              <GuestRoute
+              <PublicRoute
                 key={route.path + idx}
                 path={route.path}
                 component={route.component}
@@ -115,7 +127,6 @@ export const createRoutes = (routes) => {
                 exact={route.exact}
               />
             );
-
           case 'teacher':
             return (
               <TeacherRoute
@@ -125,26 +136,34 @@ export const createRoutes = (routes) => {
                 exact={route.exact}
               />
             );
+          case 'school':
+            return (
+              <SchoolRoute
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
+          case 'user-school':
+            return (
+              <UserSchoolRoute
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
+          case 'admin':
+            return (
+              <AdminRoute
+                key={route.path + idx}
+                path={route.path}
+                component={route.component}
+                exact={route.exact}
+              />
+            );
 
-            case 'school':
-              return (
-                <SchoolRoute
-                  key={route.path + idx}
-                  path={route.path}
-                  component={route.component}
-                  exact={route.exact}
-                />
-              );
-              case 'admin':
-                return (
-                  <SchoolRoute
-                    key={route.path + idx}
-                    path={route.path}
-                    component={route.component}
-                    exact={route.exact}
-                  />
-                );
-  
           default:
             console.error('ACCESS LEVEL NOT DEFINED');
             return (
