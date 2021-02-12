@@ -105,10 +105,12 @@ export const QuestionsSelector = (state, id) => {
 export const questionAnswersSelector = (state, id) => {
   return state.QuizLoader.questions.find(({ id: qId }) => id === qId).Answers;
 };
-export const QuestionDetailSelector = (state) =>
-  state.QuizLoader.questionDetail;
-export const QuestionDetailAnswersSelector = (state) =>
-  state.QuizLoader.answers;
+export const questionsSavedSelector = (state) => {
+  return {
+    saved: state.QuizLoader.saved,
+    bulkUpdate: state.QuizLoader.bulkUpdate,
+  };
+};
 export const QuestionStatusSelector = (state) => state.QuizLoader.status;
 
 //Teacher selectors

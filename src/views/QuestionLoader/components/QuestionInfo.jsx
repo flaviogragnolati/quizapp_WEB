@@ -1,21 +1,19 @@
 import React, {
   forwardRef,
+  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
 } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button } from '@material-ui/core';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { Field, Form, Formik, useFormikContext } from 'formik';
-import {
-  questionLoaderModel,
-  initialState_questionLoader,
-} from 'utils/forms/questionLoader';
-import { QuestionDetailSelector } from 'utils/selectors';
+import { questionLoaderModel } from 'utils/forms/questionLoader';
 import { useDispatch, useSelector } from 'react-redux';
-import { UpdateQuestion } from 'views/QuizLoader/QuizLoaderSlice';
 import { TextField } from 'formik-material-ui';
-import styled from 'styled-components';
+import { IdsContext } from '../QuestionLoader';
+import { updateQuestionData } from 'views/QuestionLoader/components/questionHelpers';
 
 const { title: titleModel, question: questionModel } = questionLoaderModel;
 
@@ -35,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
 function QuestionInfo(props, ref) {
   const { title, question } = props;
   const dispatch = useDispatch();
+  const { questionId } = useContext(IdsContext);
+
+  const handleSubmit = () => {
+    updateQuestionData(ref, questionId, dispatch);
+  };
+
   // const questionInfoRef = useRef(null);
 
   // useImperativeHandle(
@@ -45,18 +49,13 @@ function QuestionInfo(props, ref) {
   //   [questionInfoRef]
   // );
 
-  // const handleSubmit = (values, formik) => {
-  //   console.log(values);
-  //   values.id = 1; //QuestionDetail.id; hardcodeado por ahora, conviene pasar id por props???
-  //   dispatch(UpdateQuestion(values));
-  // };
-
   const initialValues = {
     title,
     question,
   };
   return (
     <Formik
+      onSubmit={handleSubmit}
       initialValues={initialValues}
       enableReinitialize={true}
       innerRef={(form) => (ref.current = form)}
@@ -81,8 +80,14 @@ function QuestionInfo(props, ref) {
           />
         </Grid>
         <Grid xs={2}>
-          <Button color="primary" variant="contained" type="submit">
-            Editar Info
+          <Button
+            color="default"
+            variant="contained"
+            type="submit"
+            size="small"
+            startIcon={<SaveAltIcon />}
+          >
+            Guardar
           </Button>
         </Grid>
       </Form>

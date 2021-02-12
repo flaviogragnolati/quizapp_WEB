@@ -15,8 +15,8 @@ const initialState_Profile = {
   status: status.idle,
   error: null,
   user: {},
-  userEnrroledIn:[],
-  userQuizFavourites:[],
+  userEnrroledIn: [],
+  userQuizFavourites: [],
   school: {},
 };
 
@@ -46,28 +46,33 @@ export const getUserData = createAsyncThunk(
 );
 export const userUpdate = createAsyncThunk(
   'profile/userUpdate',
-  async ({id,values}) => {
-    const userUpdate_response = await axios.put( USER_PROFILE_ENDPOINT + '/' + id, values);
+  async ({ id, values }) => {
+    const userUpdate_response = await axios.put(
+      USER_PROFILE_ENDPOINT + '/' + id,
+      values
+    );
     return userUpdate_response.data;
-  },
-  )
-  export const userEnrroledIn = createAsyncThunk(
-    'profile/userEnrroledIn',
-    async (id) => {
-      const userEnrroledIn_response = await axios.get( USER_ENRROLLED_IN + '/' + id);
-      return userEnrroledIn_response.data;
-    },
-    )
+  }
+);
+export const userEnrroledIn = createAsyncThunk(
+  'profile/userEnrroledIn',
+  async (id) => {
+    const userEnrroledIn_response = await axios.get(
+      USER_ENRROLLED_IN + '/' + id
+    );
+    return userEnrroledIn_response.data;
+  }
+);
 
-    export const userQuizFavourites = createAsyncThunk(
-      'profile/userQuizFavourites',
-      async (id) => {
-        console.log('ssssssssssssssssssssss',USER_QUIZ_FAVOURITES+id)
-        const userQuizFavourites_response = await axios.get( USER_QUIZ_FAVOURITES + '/' + id);
-        return userQuizFavourites_response.data;
-      },
-      )
-
+export const userQuizFavourites = createAsyncThunk(
+  'profile/userQuizFavourites',
+  async (id) => {
+    const userQuizFavourites_response = await axios.get(
+      USER_QUIZ_FAVOURITES + '/' + id
+    );
+    return userQuizFavourites_response.data;
+  }
+);
 
 export const getSchoolData = createAsyncThunk(
   'profile/getSchoolData',
@@ -93,9 +98,19 @@ export const getSchoolData = createAsyncThunk(
   }
 );
 
-const isRejectedAction = isRejected(getUserData,userUpdate,userEnrroledIn,userQuizFavourites);
-const isPendingAction = isPending(getUserData,userUpdate,userEnrroledIn,userQuizFavourites);
- const isFulfilledAction = isFulfilled(userUpdate)
+const isRejectedAction = isRejected(
+  getUserData,
+  userUpdate,
+  userEnrroledIn,
+  userQuizFavourites
+);
+const isPendingAction = isPending(
+  getUserData,
+  userUpdate,
+  userEnrroledIn,
+  userQuizFavourites
+);
+const isFulfilledAction = isFulfilled(userUpdate);
 const profileSlice = createSlice({
   name: 'profile',
   initialState: initialState_Profile,

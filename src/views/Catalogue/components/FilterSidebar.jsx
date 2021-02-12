@@ -3,11 +3,9 @@ import {
   Divider,
   makeStyles,
   Box,
-  InputBase,
   fade,
   Button,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
 import FilterGroup from './FilterGroup';
 import SchoolFilterDetail from './SchoolFilterDetail';
@@ -15,7 +13,7 @@ import SubjectFilterDetail from './SubjectFilterDetail';
 import QuizFilterDetail from './QuizFilterDetail';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from 'store/rootReducer';
-
+import { useEffect } from 'react';
 
 const SidebarDiv = styled.div`
   /* background-color: gray; */
@@ -71,32 +69,42 @@ const initialFilterValues = {
   tag: null,
 };
 function FilterSidebar({page}) {
-  const c = useStyles();
+  // const c = useStyles();
   const dispatch = useDispatch();
   const [filterValues, setFilterValues] = useState(initialFilterValues);
+  const[clear, setClear] =useState(false)
   const handleClear = () => {
     dispatch(ACTIONS.catalogue.setFilter(false));
     setFilterValues(initialFilterValues);
+    setClear(true)
   };
   const handleFilter = () => {
     dispatch(ACTIONS.catalogue.filter(filterValues));
     dispatch(ACTIONS.catalogue.setFilter(true));
+    setClear(false)
     page(1)
   };
+  useEffect(()=>{
+    // console.log(clear)
+    if(filterValues === initialFilterValues){
+      // console.log('se borro todo');
+      setClear(false)
+    }
 
+  },[clear])
   return (
     <SidebarDiv>
       <>
         <FilterGroup title="Buscar por Escuela">
-          <SchoolFilterDetail setFilter={setFilterValues} />
+          <SchoolFilterDetail clear={clear} setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
         <FilterGroup title="Buscar por Materia">
-          <SubjectFilterDetail setFilter={setFilterValues} />
+          <SubjectFilterDetail clear={clear} setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
         <FilterGroup title="Buscar por Quiz">
-          <QuizFilterDetail setFilter={setFilterValues} />
+          <QuizFilterDetail clear={clear} setFilter={setFilterValues} />
         </FilterGroup>
         <Divider />
       </>

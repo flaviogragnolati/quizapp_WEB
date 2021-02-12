@@ -10,6 +10,7 @@ import { quizDetailSelector, quizDetailStatusSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { QuestionStatusSelector } from 'utils/selectors';
 import { QuestionsSelector } from 'utils/selectors';
+import { questionsSavedSelector } from 'utils/selectors';
 
 export const IdsContext = createContext(null);
 
@@ -24,17 +25,32 @@ function QuestionLoader() {
   const quizDetail = useSelector((state) => quizDetailSelector(state, quizId));
   const questionsStatus = useSelector(QuestionStatusSelector);
   const quizDetailStatus = useSelector(quizDetailStatusSelector);
+  const { saved, bulkUpdate } = useSelector(questionsSavedSelector);
 
-  const [questionId, setQuestionId] = useState(null); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las respuestas
+  const [questionId, setQuestionId] = useState(null); // este estado setea el id de la pregunta para filtrar y obtener el detalle y las
+
+  const handleOnLeave = (e) => {
+    e.preventDefault();
+  };
+  useEffect(() => {
+    if (bulkUpdate && !saved) {
+      dispatch(getAllQuestions(quizId));
+    }
+  }, [bulkUpdate]);
+
   useEffect(() => {
     dispatch(getAllQuestions(quizId));
-  }, [dispatch, quizId]);
-
-  useEffect(() => {
     dispatch(getQuizDetailAsync(quizId));
   }, [dispatch, quizId]);
 
-  //!falta manejar el error
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleOnLeave);
+    //if(!saved){} //agregamos un valor de saved<boolean> en redux para determinar si el usuario grabo o no, en caso quie no si quiere navegar a otra  pagina, recargar, cerrar aparece un modal pidiendo que confirme cerrar o guardar todos los cambios
+    return () => {
+      window.removeEventListener('beforeunload', handleOnLeave);
+    };
+  }, []);
+
   if (questionsStatus === 'pending' || quizDetailStatus === 'pending') {
     return <BackdropLoading />;
   } else if (questionsStatus === 'error' || quizDetailStatus === 'error') {
@@ -54,8 +70,6 @@ function QuestionLoader() {
             <QuestionSideBar
               setQuestionId={setQuestionId}
               quizDetail={quizDetail}
-              // questionInfoRef={questionInfoRef}
-              // answersContentRef={answersContentRef}
               ref={formikRefs}
             />
           </Grid>
@@ -67,11 +81,7 @@ function QuestionLoader() {
             justify="space-between"
             alignItems="flex-start"
           >
-            <Questions
-              // questionInfoRef={questionInfoRef}
-              // answersContentRef={answersContentRef}
-              ref={formikRefs}
-            />
+            <Questions ref={formikRefs} />
           </Grid>
         </Grid>
       </IdsContext.Provider>

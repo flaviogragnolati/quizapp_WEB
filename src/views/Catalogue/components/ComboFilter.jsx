@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useMemo, useEffect } from 'react';
+import React, { useEffect,useRef } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -7,7 +7,6 @@ import { PropTypes } from 'prop-types';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { catalogueFilterSelector } from 'utils/selectors';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -25,12 +24,14 @@ export default function ComboFilter({
   defaultValue,
   name,
   action,
+  clear,
   setFilter,
   values: propValues,
 }) {
   const classes = useStyles();
   const [values, setValues] = useState(propValues);
-
+  const filter = useSelector(catalogueFilterSelector);
+  const autoC = useRef(null);
   const handleChange = (e, newValue) => {
     const nameSpace = e.target.id.split('-')[0];
     setFilter((oldValues) => {
@@ -38,6 +39,14 @@ export default function ComboFilter({
     });
     setValues(newValue);
   };
+  useEffect(()=>{
+    if(!filter && clear){
+      let borrar = autoC.current.getElementsByClassName('MuiAutocomplete-clearIndicator')[0]
+      borrar.click()
+    }
+
+  },[clear])
+
   return (
     <div className={classes.root}>
       <Autocomplete
@@ -48,8 +57,18 @@ export default function ComboFilter({
         options={options}
         getOptionLabel={(option) => option.label}
         value={values}
+        ref={autoC}
+        // renderTags={(value, getTagProps) =>{
+        //    if(!filter && clear) getTagProps(-1); value=[]
+        // return  value.map((op, index) => {
+        //     console.log(op)
+        //    return <Chip variant="outlined" label={op.label} {...getTagProps({ index })} />
+        //   }
+        //   )
+        // }}
         onChange={(event, newValue) => handleChange(event, newValue)}
         renderInput={(params) => (
+          
           <TextField
             {...params}
             variant="outlined"
@@ -58,6 +77,7 @@ export default function ComboFilter({
           />
         )}
       />
+      
     </div>
   );
 }

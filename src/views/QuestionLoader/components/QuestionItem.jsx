@@ -61,7 +61,9 @@ function QuestionItem(props, ref) {
   const { questionId } = useContext(IdsContext);
 
   const handleSetId = (id) => {
-    //questionId deberia ser el del contexto, ya que hacemos referencia al questionId anterior, ya que es el cual ncesitamos para `actualizar` sus datos
+    //questionId deberia ser el del contexto, ya que hacemos referencia al questionId anterior,
+    // por que es el cual ncesitamos para `actualizar` sus datos en el store.
+    //Si pasamos el `id` estariamos pisando la question a la cual queremos ir con la info de la que estamos
     updateQuestionData(ref, questionId, dispatch);
     setQuestionId(id);
   };
