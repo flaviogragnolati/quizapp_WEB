@@ -79,7 +79,7 @@ function QuestionInfo(props, ref) {
             rowsMax={3}
           />
         </Grid>
-        <Grid xs={2}>
+        {/* <Grid xs={2}>
           <Button
             color="default"
             variant="contained"
@@ -89,7 +89,7 @@ function QuestionInfo(props, ref) {
           >
             Guardar
           </Button>
-        </Grid>
+        </Grid> */}
       </Form>
     </Formik>
   );
