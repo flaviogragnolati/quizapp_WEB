@@ -40,7 +40,9 @@ const isRejectedAction = isRejected(getQuizDetailAsync);
 const quizDetailSlice = createSlice({
   name: 'quizDetail',
   initialState: initialState_QuizDetail,
-  reducers: {},
+  reducers: {
+    reset: (state) => (state.status = status.idle),
+  },
   extraReducers: (b) => {
     b.addMatcher(isPendingAction, (state, { payload }) => {
       state.status = status.pending;
@@ -57,4 +59,5 @@ const quizDetailSlice = createSlice({
   },
 });
 
+export const { reset } = quizDetailSlice.actions;
 export default quizDetailSlice;
