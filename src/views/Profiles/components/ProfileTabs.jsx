@@ -45,45 +45,45 @@ function ProfileTabs({
   ...props
 }) {
   const tabs = [
-    {
-      tabButton: 'Actividad',
-      tabIcon: LocalActivityIcon,
-      tabContent: (
-        <GridContainer justify="center">
-          <List>
-            {activity.map((item, idx) => {
-              return (
-                <ListItem key={idx}>
-                  <ListItemIcon>
-                    {item.type === 'success' ? (
-                      <DoneAllIcon color="secondary" />
-                    ) : item.type === 'info' ? (
-                      <InfoIcon color="primary" />
-                    ) : item.type === 'error' ? (
-                      <CancelIcon color="error" />
-                    ) : (
-                      <WarningIcon color="error" />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText primary={item.action} />
-                  <ListItemSecondaryAction>
-                    <Tooltip
-                      disableFocusListener
-                      placement="right"
-                      title="Informacion relacionada a la accion"
-                    >
-                      <IconButton edge="end" aria-label="more info">
-                        <InfoIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-            })}
-          </List>
-        </GridContainer>
-      ),
-    },
+    // {
+    //   tabButton: 'Actividad',
+    //   tabIcon: LocalActivityIcon,
+    //   tabContent: (
+    //     <GridContainer justify="center">
+    //       <List>
+    //         {activity.map((item, idx) => {
+    //           return (
+    //             <ListItem key={idx}>
+    //               <ListItemIcon>
+    //                 {item.type === 'success' ? (
+    //                   <DoneAllIcon color="secondary" />
+    //                 ) : item.type === 'info' ? (
+    //                   <InfoIcon color="primary" />
+    //                 ) : item.type === 'error' ? (
+    //                   <CancelIcon color="error" />
+    //                 ) : (
+    //                   <WarningIcon color="error" />
+    //                 )}
+    //               </ListItemIcon>
+    //               <ListItemText primary={item.action} />
+    //               <ListItemSecondaryAction>
+    //                 <Tooltip
+    //                   disableFocusListener
+    //                   placement="right"
+    //                   title="Informacion relacionada a la accion"
+    //                 >
+    //                   <IconButton edge="end" aria-label="more info">
+    //                     <InfoIcon />
+    //                   </IconButton>
+    //                 </Tooltip>
+    //               </ListItemSecondaryAction>
+    //             </ListItem>
+    //           );
+    //         })}
+    //       </List>
+    //     </GridContainer>
+    //   ),
+    // },
     {
       tabButton: 'Mis Cursos',
       tabIcon: MenuBookIcon,
@@ -92,7 +92,12 @@ function ProfileTabs({
           <List>
             {courses.map((course, idx) => {
               return (
-                <ListItem button key={idx} component={Link} to={`/quiz-detail/${course.id}`}>
+                <ListItem
+                  button
+                  key={idx}
+                  component={Link}
+                  to={`/quiz-detail/${course.id}`}
+                >
                   <ListItemIcon>
                     <DescriptionIcon />
                   </ListItemIcon>
@@ -123,7 +128,12 @@ function ProfileTabs({
           <List>
             {favourites.map((fav, idx) => {
               return (
-                <ListItem button key={idx} component={Link} to={`/quiz-detail/${fav.id}`}>
+                <ListItem
+                  button
+                  key={idx}
+                  component={Link}
+                  to={`/quiz-detail/${fav.id}`}
+                >
                   <ListItemIcon>
                     <DescriptionIcon />
                   </ListItemIcon>
