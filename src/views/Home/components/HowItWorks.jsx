@@ -9,6 +9,7 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import CategoryIcon from '@material-ui/icons/Category';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'components/Auth/AuthContext';
 
 const styles = (theme) => ({
   root: {
@@ -61,6 +62,7 @@ const styles = (theme) => ({
 
 function HowItWorks(props) {
   const { classes } = props;
+  const user = useAuth();
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
@@ -109,7 +111,7 @@ function HowItWorks(props) {
           variant="contained"
           className={classes.button}
           component={Link}
-          to="/quiz-loader"
+          to={Boolean(user) ? '/quiz-loader' : '/register'}
         >
           Comenzar
         </Button>
