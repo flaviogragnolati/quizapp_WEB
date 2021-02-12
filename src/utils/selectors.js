@@ -29,7 +29,8 @@ export const schoolsSelector = (state) => state.catalogue.entities.schools;
 export const subjectsSelector = (state) => state.catalogue.entities.subjects;
 export const catalogueFilterSelector = (state) => state.catalogue.filter;
 
-export const catalogueAllQuizzesIdsSelector = (state) => state.catalogue.allQuizzesIds;
+export const catalogueAllQuizzesIdsSelector = (state) =>
+  state.catalogue.allQuizzesIds;
 
 //Quiz Detail Selectors
 export const quizDetailStatusSelector = (state) => state.quizDetail.status;
@@ -91,13 +92,18 @@ export const userQuizFavouritesSelector = (state) =>
 
 // export const SchoolSubjectDetailSelector = (state) =>state.School.SchoolSubjectList.SubjectDetail;
 export const SchoolQuizSelector = (state) => state.School.SchoolQuizList;
+export const schoolSubjectErrorSelector = (state) =>
+  state.School.SchoolSubjectList.error;
 export const SchoolTeachersSelector = (state) => state.School.SchoolTeacherList;
 export const SchoolStatusSelector = (state) => state.School.status;
-export const SchoolSubjectSelector = (state) => state.School.SchoolSubjectList.SubjectList;
-export const SchoolSubjectStatusSelector = (state) => state.School.SchoolSubjectList.status;
+export const SchoolSubjectSelector = (state) =>
+  state.School.SchoolSubjectList.SubjectList;
+export const SchoolSubjectStatusSelector = (state) =>
+  state.School.SchoolSubjectList.status;
 export const UserDetailSelector = (state) => state.School.UserDetail.data;
 export const UserRoleSelector = (state) => state.School.UserDetail.role;
-export const UserDetailStatusSelector = (state) => state.School.UserDetail.status;
+export const UserDetailStatusSelector = (state) =>
+  state.School.UserDetail.status;
 
 //Quiz selector
 export const QuestionsSelector = (state, id) => {

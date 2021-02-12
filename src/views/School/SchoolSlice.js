@@ -64,7 +64,6 @@ export const getUserEmail = createAsyncThunk(
   }
 );
 
-
 export const getTeachersQuiz = createAsyncThunk(
   'school/getTeachersQuiz',
   async ({ QuizId }) => {
@@ -109,11 +108,33 @@ export const postUserToTeacher = createAsyncThunk(
 
 export const deleteSubject = createAsyncThunk(
   'school/deleteSubject',
-  async (payload) => {
-    const delete_response = await axios.delete(
-      SUBJECT_ENDPOINT + '/' + payload
-    );
-    return delete_response.data;
+  async ({ subjectId, schoolId }, { getState, dispatch, rejectWithValue }) => {
+    //! una crotada no tan crota pero crota igual..... NO COPIAR Y PEGAR ESTA RANCIADA.....
+    const quizList = await dispatch(getQuizList({ id: schoolId }));
+    let shouldDelete = true;
+    const {
+      payload: {
+        quizzes: { allIds, byId },
+      },
+    } = quizList;
+    allIds.forEach((id) => {
+      for (const quiz of byId) {
+        if (quiz.SubjectId === parseInt(subjectId)) {
+          shouldDelete = false;
+          break;
+        }
+      }
+    });
+    if (shouldDelete) {
+      const delete_response = await axios.delete(
+        SUBJECT_ENDPOINT + '/' + subjectId
+      );
+      return delete_response.data;
+    } else {
+      return rejectWithValue({
+        message: 'El subject esta asociado a un quiz activo',
+      });
+    }
   }
 );
 
@@ -155,7 +176,7 @@ const isPendingAction = isPending(
   deleteSubject,
   delateQuiz,
   editSubject,
-  getTeachersQuiz,
+  getTeachersQuiz
 );
 
 const isRejectedAction = isRejected(
@@ -165,7 +186,7 @@ const isRejectedAction = isRejected(
   deleteSubject,
   delateQuiz,
   editSubject,
-  getTeachersQuiz,
+  getTeachersQuiz
 );
 
 const isPendingActionDetail = isPending(
@@ -180,15 +201,9 @@ const isRejectedActionDetail = isRejected(
   removeTeacher
 );
 
-const isPendingActionSubject = isPending(
-  createSubject,
-  editSubject
-);
+const isPendingActionSubject = isPending(createSubject, editSubject);
 
-const isRejectedActionSubject = isRejected(
-  createSubject,
-  editSubject
-);
+const isRejectedActionSubject = isRejected(createSubject, editSubject);
 
 const SchoolSlice = createSlice({
   name: 'school',
@@ -203,32 +218,31 @@ const SchoolSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getQuizList.fulfilled, (state, { payload }) => {
+    builder.addCase(getQuizList.fulfilled.type, (state, { payload }) => {
       state.status = status.success;
       state.SchoolQuizList = payload.quizzes.byId;
     });
-    builder.addCase(getSubjectsList.fulfilled, (state, { payload }) => {
+    builder.addCase(getSubjectsList.fulfilled.type, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = payload;
     });
-    builder.addCase(getUserEmail.fulfilled, (state, { payload }) => {
+    builder.addCase(getUserEmail.fulfilled.type, (state, { payload }) => {
       state.UserDetail.role = payload.role;
       state.UserDetail.data = payload.user;
       state.UserDetail.status = status.success;
     });
-    builder.addCase(getTeachersQuiz.fulfilled, (state, { payload }) => {
+    builder.addCase(getTeachersQuiz.fulfilled.type, (state, { payload }) => {
       state.SchoolTeacherList = payload;
       state.status = status.success;
     });
-    builder.addCase(createSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(createSubject.fulfilled.type, (state, { payload }) => {
       state.SchoolSubjectList.status = status.success;
-      
     });
-    builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
+    builder.addCase(postUserToTeacher.fulfilled.type, (state, { payload }) => {
       state.UserDetail.status = status.success;
       state.UserDetail.role = payload.role;
     });
-    builder.addCase(deleteSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(deleteSubject.fulfilled.type, (state, { payload }) => {
       state.status = status.success;
       state.SchoolSubjectList.SubjectList = state.SchoolSubjectList.SubjectList.filter(
         (subject) => {
@@ -236,20 +250,18 @@ const SchoolSlice = createSlice({
         }
       );
     });
-    builder.addCase(delateQuiz.fulfilled, (state, { payload }) => {
+    builder.addCase(delateQuiz.fulfilled.type, (state, { payload }) => {
       state.status = status.success;
-      state.SchoolQuizList = state.SchoolQuizList.filter(
-        (quiz) => {
-          return quiz.id !== payload.id;
-        }
-      );
+      state.SchoolQuizList = state.SchoolQuizList.filter((quiz) => {
+        return quiz.id !== payload.id;
+      });
     });
-    builder.addCase(removeTeacher.fulfilled, (state, { payload }) => {
+    builder.addCase(removeTeacher.fulfilled.type, (state, { payload }) => {
       state.UserDetail.status = status.idle;
       state.UserDetail.data = {};
       state.UserDetail.role = {};
     });
-    builder.addCase(editSubject.fulfilled, (state, { payload }) => {
+    builder.addCase(editSubject.fulfilled.type, (state, { payload }) => {
       state.SchoolSubjectList.status = status.success;
     });
 
@@ -272,6 +284,11 @@ const SchoolSlice = createSlice({
         //!desprolijo, complejo e innecesario...pero para no cambiar todo lo hacemos asi, para la prox...mejor estrategia de `namespaces`
         state.SchoolQuizList.status = status.error;
         state.SchoolQuizList.error = action.payload;
+      } else if (nameSpace === 'deleteSubject') {
+        if (action.meta.rejectedWithValue) {
+          state.status = status.success;
+          state.SchoolSubjectList.error = action.payload.message;
+        }
       } else {
         state.status = status.error;
         state.error = action.payload;
@@ -289,11 +306,15 @@ const SchoolSlice = createSlice({
     });
     builder.addMatcher(isRejectedActionSubject, (state, { payload }) => {
       state.SchoolSubjectList.status = status.error;
-      state.error = payload
+      state.error = payload;
     });
   },
 });
 
-export const { cleanUser, setQuestionDetail,afterSubject } = SchoolSlice.actions;
+export const {
+  cleanUser,
+  setQuestionDetail,
+  afterSubject,
+} = SchoolSlice.actions;
 
 export default SchoolSlice;
