@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from 'components/Auth/AuthContext';
 
-function GuestRoute({ component: Component, ...rest }) {
+function OnlyGuestRoute({ component: Component, ...rest }) {
   const user = useAuth();
   const REDIRECT = `/myprofile`;
   return (
@@ -16,4 +16,4 @@ function GuestRoute({ component: Component, ...rest }) {
   );
 }
 
-export default GuestRoute;
+export default OnlyGuestRoute;

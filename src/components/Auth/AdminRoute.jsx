@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from 'components/Auth/AuthContext';
 
-function ProtectRoute({ component: Component, ...rest }) {
+function AdminRoute({ component: Component, ...rest }) {
   const user = useAuth();
   //!falta agregar la verificacion del admin contra la DB
   const REDIRECT = '/home';
@@ -21,4 +21,4 @@ function ProtectRoute({ component: Component, ...rest }) {
   );
 }
 
-export default ProtectRoute;
+export default AdminRoute;
