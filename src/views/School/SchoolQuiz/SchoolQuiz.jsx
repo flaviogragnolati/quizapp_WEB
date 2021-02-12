@@ -76,7 +76,7 @@ const SchoolQuiz = () => {
           <BackdropLoading/>
         )}
       </Box>
-      <Button onClick={() =>handleAddQuiz()}>Agregars + </Button>
+      <Button onClick={() =>handleAddQuiz()}>Agregar + </Button>
       <ModalTeacher Id={QuizId} open={open} setOpen={setOpen}></ModalTeacher>
     </Container>
   );
