@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 export const questionLoaderModel = {
   title: {
     name: 'title',
@@ -10,17 +12,20 @@ export const questionLoaderModel = {
     label: 'Question*',
     requiredErrorMsg: 'Question cannot be blank',
   },
-  answer: {
-    name: 'answer',
-    label: 'Answer*',
-    requiredErrorMsg: 'Cannot pass blank answer',
-  },
 };
 
-const { title, question, answer } = questionLoaderModel;
+const { title, question } = questionLoaderModel;
 
 export const initialState_questionLoader = {
   [title.name]: '',
   [question.name]: '',
-  [answer.name]: '',
 };
+
+export const registerValidationSchema = Yup.object().shape({
+  [title.name]: Yup.string()
+    .required(`${title.requiredErrorMsg}`)
+    .min(2, `${title.minErrorMsg}`),
+  [question.name]: Yup.string()
+    .required(`${question.requiredErrorMsg}`)
+    .min(2, `${question.minErrorMsg}`),
+});

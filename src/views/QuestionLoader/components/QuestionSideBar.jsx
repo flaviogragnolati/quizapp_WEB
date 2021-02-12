@@ -19,6 +19,9 @@ import { removeQuestion } from 'views/QuizLoader/QuizLoaderSlice';
 import { IdsContext } from '../QuestionLoader';
 import { convertFormikValuesToRedux } from 'utils/helpers';
 import { updateQuestionData } from './questionHelpers';
+import SaveIcon from '@material-ui/icons/Save';
+import { bulkUpdateQuestions } from '../../QuizLoader/QuizLoaderSlice';
+import { CheckCircleIcon } from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -46,7 +49,7 @@ function QuestionSideBar(props, ref) {
   const { questionInfoRef, answersContentRef } = ref;
 
   const questions = useSelector(QuestionsSelector);
-
+  useEffect(() => {}, [questions]);
   //recibe setId desde QuestionLoader para guardar el id en su estado local
   const handleAddQuestion = () => {
     updateQuestionData(ref, questionId, dispatch);
@@ -65,11 +68,29 @@ function QuestionSideBar(props, ref) {
   };
 
   const handleDeleteQuestion = (id) => {
-    updateQuestionData(ref, questionId, dispatch);
+    console.log('ID', id, questionId);
+    // updateQuestionData(ref, questionId, dispatch);
     dispatch(removeQuestion(id));
   };
 
-  const updateAll = (questions) => {};
+  const handleSaveAll = () => {
+    /**
+     * al guarda en Redux cada vez que se:
+     * 1. cambia de pregunta,
+     * 2. se agrega una nueva pregunta
+     * 3. se borra una pregunta
+     * 4. se agrega una nueva respuesta
+     * 5. [x] se cambio el tipo de pregunta (?)
+     *
+     * No es necesario guardar todos los cambio juntos,
+     * solamente hay que guardar los cambios del form activo
+     * para eso despachamos la accion updateQuestionData con el form activo
+     * Luego despachamos una accion Async con toda la nueva data
+     *
+     */
+    updateQuestionData(ref, questionId, dispatch);
+    dispatch(bulkUpdateQuestions({ quizId }));
+  };
 
   return (
     <Box height="100%" display="flex" flexDirection="column">
@@ -86,17 +107,19 @@ function QuestionSideBar(props, ref) {
       <Box p={2}>
         <List component={'ol'}>
           {questions &&
-            questions.map((question, idx) => (
-              <QuestionItem
-                key={question.title}
-                title={`${idx + 1} ${question.title}`}
-                icon={BallotIcon}
-                ref={ref}
-                setQuestionId={setQuestionId} // se le pasa setId para objener desde dentro el id de la pregunta
-                handleDeleteQuestion={handleDeleteQuestion}
-                id={question.id}
-              />
-            ))}
+            questions.map((question, idx) => {
+              return (
+                <QuestionItem
+                  key={question.title}
+                  title={`${idx + 1} ${question.title}`}
+                  icon={BallotIcon}
+                  ref={ref}
+                  setQuestionId={setQuestionId} // se le pasa setId para objener desde dentro el id de la pregunta
+                  handleDeleteQuestion={handleDeleteQuestion}
+                  id={question.id}
+                />
+              );
+            })}
         </List>
       </Box>
       <Box
@@ -119,7 +142,8 @@ function QuestionSideBar(props, ref) {
           color="secondary"
           size="small"
           variant="contained"
-          onClick={handleAddQuestion}
+          onClick={handleSaveAll}
+          startIcon={<SaveIcon />}
         >
           Guardar Todo
         </Button>
