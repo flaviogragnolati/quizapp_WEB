@@ -30,6 +30,9 @@ import { quizDetailHistorySelector } from 'utils/selectors';
 import { getUserEmail } from 'views/School/SchoolSlice';
 import { userSelector } from 'utils/selectors';
 
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+
 
 const schoolImg =
   'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
@@ -401,7 +404,7 @@ function QuizProfile(props) {
         <DateOpen  >
           <Box display="flex" flexDirection="row" justifySelf="center" Style="width: 100%;" >
             <Typography variant="body1">
-              {active ? '<- Esta Quiz Esta disponible' : '<- La Quiz no esta activada'}
+              {active ? (<p><CheckIcon />El Quiz está disponible</p>) : (<p><ClearIcon />El Quiz no está disponible</p>)}
             </Typography>
           </Box>
         </DateOpen>

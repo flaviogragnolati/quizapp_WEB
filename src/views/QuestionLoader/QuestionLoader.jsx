@@ -54,7 +54,7 @@ function QuestionLoader() {
     return () => {
       window.removeEventListener('beforeunload', handleOnLeave);
     };
-  }, []);
+  }, [saved]);
 
   if (questionsStatus === 'pending' || quizDetailStatus === 'pending') {
     return <BackdropLoading />;
