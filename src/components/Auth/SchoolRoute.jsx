@@ -10,7 +10,7 @@ function SchoolRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        user.type === 'school' ? (
+        Boolean(user) && user.type === 'school' ? (
           <Component {...props} />
         ) : (
           <Redirect to={REDIRECT} />

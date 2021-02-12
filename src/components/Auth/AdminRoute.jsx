@@ -11,7 +11,7 @@ function AdminRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        user.type === 'admin' ? (
+        Boolean(user) && user.type === 'admin' ? (
           <Component {...props} />
         ) : (
           <Redirect to={REDIRECT} />
