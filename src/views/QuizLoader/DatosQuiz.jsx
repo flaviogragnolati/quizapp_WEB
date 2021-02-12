@@ -26,12 +26,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { getSubjectsList } from "views/School/SchoolSlice";
 
 import {SchoolSubjectSelector, SchoolStatusSelector} from "utils/selectors"
+import { useAuth } from 'components/Auth/AuthContext';
 const { nameQuiz, descripcion, Logo, materia } = quizModel;
 export default function DatosQuiz() {
   const Dispatch= useDispatch()
   const subjects = useSelector(SchoolSubjectSelector);
   const subjectsStatus = useSelector(SchoolStatusSelector)
   const [personName, setPersonName] = React.useState('');
+  const school = useAuth()
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -73,12 +75,13 @@ export default function DatosQuiz() {
     'Virginia Andrews',
     'Kelly Snyder',
   ];
-
+  console.log(school.id)
   const handleChange = (event) => {
     setPersonName(event.target.value);
   };
   const handleSubmit = (values, formik) => {
     values.SubjectId = personName
+    values.SchoolId = school.id;
     Dispatch(CreateQuiz(values));
   };
 
