@@ -86,7 +86,7 @@ export default function DatosQuiz() {
   };
 
     useEffect(()=>{
-        Dispatch(getSubjectsList())
+        Dispatch(getSubjectsList({ id: school.id }))
     },[])
     
   // let {
