@@ -13,9 +13,9 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import LoginHeader from 'components/Form/LoginHeader';
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
-import { IconButton } from "@material-ui/core";
+import { IconButton } from '@material-ui/core';
 import {
   registerModel,
   initialState_Login,
@@ -37,8 +37,8 @@ function LoginSchool(props) {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
-  const user = useSelector(userSelector)
-  const History = useHistory()
+  const user = useSelector(userSelector);
+  const History = useHistory();
   const [viewPassword, setViewPassword] = useState(false);
   const authState = useSelector(authStatusSelector);
 
@@ -46,21 +46,22 @@ function LoginSchool(props) {
     setCardAnimation('');
   }, 700);
 
-
   useEffect(() => {
     if (user.id) {
-      History.push(`/catalogue`)
+      History.push(`/catalogue`);
     }
-  }, [user])
+  }, [user]);
 
   const classes = useStyles();
 
   const handleSubmit = (values, formik) => {
     dispatch(localOrgLogin(values));
-    formik.resetForm({values: {
-      email: values.email,
-      password: '',
-    }})
+    formik.resetForm({
+      values: {
+        email: values.email,
+        password: '',
+      },
+    });
   };
 
   const handleClickShowPassword = () => {
@@ -83,7 +84,14 @@ function LoginSchool(props) {
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
-                {authState === 'error' ? <p className={classes.divider} className={classes.Error__Message}>El Login fue rechazado, intenta de nuevo</p> : null}
+                {authState === 'error' ? (
+                  <p
+                    className={classes.divider}
+                    className={classes.Error__Message}
+                  >
+                    El Login fue rechazado, intenta de nuevo
+                  </p>
+                ) : null}
                 <Formik
                   onSubmit={handleSubmit}
                   initialValues={initialState_Login}
@@ -98,15 +106,10 @@ function LoginSchool(props) {
                           name={email.name}
                           label={email.label}
                           fullWidth
-
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <IconButton
-
-                                  Style="padding: 0px;"
-
-                                >
+                                <IconButton Style="padding: 0px;">
                                   <Email className={classes.inputIconsColor} />
                                 </IconButton>
                               </InputAdornment>
@@ -118,7 +121,7 @@ function LoginSchool(props) {
                           component={TextField}
                           name={password.name}
                           label={password.label}
-                          type='password'
+                          type="password"
                           fullWidth
                           InputProps={{
                             endAdornment: (
@@ -127,17 +130,20 @@ function LoginSchool(props) {
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
                               >
-                                <IconButton Style="padding: 0px;" >
-
+                                <IconButton Style="padding: 0px;">
                                   {viewPassword ? (
-                                    <Visibility className={classes.inputIconsColor}/>
+                                    <Visibility
+                                      className={classes.inputIconsColor}
+                                    />
                                   ) : (
-                                      <VisibilityOff className={classes.inputIconsColor}/>
-                                    )}
+                                    <VisibilityOff
+                                      className={classes.inputIconsColor}
+                                    />
+                                  )}
                                 </IconButton>
                               </InputAdornment>
                             ),
-                            autoComplete: "off",
+                            autoComplete: 'off',
                           }}
                         />
                       </CardBody>
