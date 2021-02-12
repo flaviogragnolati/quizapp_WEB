@@ -8,6 +8,7 @@ const initialState_Catalogue = {
   status: status.idle,
   entities: {},
   result: '',
+  allQuizzesIds: '',
   total: '',
   force: false,
   filter: false,
@@ -99,6 +100,7 @@ const catalogueSlice = createSlice({
     },
     [getCatalogue.fulfilled]: (state, { payload }) => {
       state.status = status.success;
+      state.allQuizzesIds = payload.allQuizzesIds;
       const entities = payload.entities;
       Object.keys(entities).forEach((entity) => {
         if (Object.keys(entities[entity])[0] === 'null') {
