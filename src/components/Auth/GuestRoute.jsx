@@ -5,7 +5,7 @@ import { useAuth } from 'components/Auth/AuthContext';
 
 function GuestRoute({ component: Component, ...rest }) {
   const user = useAuth();
-  const REDIRECT = `/profile/${user.id}`;
+  const REDIRECT = `/login`;
   return (
     <Route
       {...rest}
