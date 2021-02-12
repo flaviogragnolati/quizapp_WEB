@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useHistory, useParams } from "react-router-dom";
-import { SchoolSubjectSelector, SchoolStatusSelector } from 'utils/selectors';
-import { editSubject } from "../SchoolSlice";
+import { SchoolSubjectSelector, SchoolStatusSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
+import { editSubject, afterSubject } from "../SchoolSlice";
 import { userSelector } from "utils/selectors";
 
 const { name, description } = subjectModel;
@@ -21,7 +21,8 @@ export default function SubjectLoader() {
   const dispatch = useDispatch();
   const datos = useParams();
   const subjects = useSelector(SchoolSubjectSelector)
-  const subjectsStatus = useSelector(SchoolStatusSelector)
+  const status = useSelector(SchoolStatusSelector)
+  const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
   const school = useSelector(userSelector)
   const History= useHistory()
 
@@ -48,28 +49,29 @@ export default function SubjectLoader() {
     if (subjects !== undefined && datos.id) {
       values.id = datos.id
       dispatch(editSubject(values))
-      .this(
-        History.push('/school-subject')
-      );
     } else {
       values.SchoolId = school.id
       dispatch(createSubject(values))
-      .this(
-        History.push('/school-subject')
-      );
-
     }
   };
 
 
   let editValues = initialState_Subjects
   
-  if (subjectsStatus === 'success' && subjects[0] != undefined && datos.id) {
+  if (status === 'success' && subjects[0] != undefined && datos.id) {
     editValues = {
       [name.name]:subjects.find((e) => e.id == datos.id).name,
       [description.name]: subjects.find((e) => e.id == datos.id).description,
     };
   }
+
+  useEffect(() => {
+    if (subjectsStatus === 'success') {
+      History.push('/school-subject')
+      dispatch(afterSubject())
+    }
+
+  }, [subjectsStatus])
 
   return (
     <Container>

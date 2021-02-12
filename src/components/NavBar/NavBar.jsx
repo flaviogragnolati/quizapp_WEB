@@ -60,11 +60,16 @@ function NavBar({ toggleTheme, checked, theme }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleMenuProfile = () => {
-    history.push(`/myprofile`);
+  const handleMenuProfileSchool = () => {
+    history.push(`/school-profile/${user.id}`)
     handleMenuClose();
   };
-
+  
+  const handleMenuProfile = () => {
+    history.push(`/myprofile`)
+    handleMenuClose();
+  };
+  
   const handleMenuLogout = () => {
     history.push(`/`);
     dispatch(ACTIONS.auth.logout());
@@ -94,7 +99,7 @@ function NavBar({ toggleTheme, checked, theme }) {
     >
       {Boolean(user) ? (
         <>
-          <MenuItem onClick={handleMenuProfile}>Profile</MenuItem>
+          <MenuItem onClick={user.type === "school" ? handleMenuProfileSchool : handleMenuProfile}>Profile</MenuItem>
           <MenuItem onClick={handleMenuLogout}>Logout</MenuItem>
         </>
       ) : (

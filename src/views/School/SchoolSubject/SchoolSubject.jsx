@@ -65,7 +65,7 @@ const SchoolSubject = () => {
           customers={subjects} propsNames={propsNames} columnName={columnName} actions={actions}/> : <BackdropLoading/>}
         </Box>
         <Button component={Link} to='/subject-loader'>
-          agregar Materia
+          Agregar Materia
         </Button>
       </Container>
 
