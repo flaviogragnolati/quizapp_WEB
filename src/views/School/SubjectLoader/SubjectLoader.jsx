@@ -14,8 +14,31 @@ import { SchoolSubjectSelector, SchoolStatusSelector, SchoolSubjectStatusSelecto
 import { editSubject, afterSubject } from "../SchoolSlice";
 import { userSelector } from "utils/selectors";
 
+
 const { name, description } = subjectModel;
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 300,
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  },
+  noLabel: {
+    marginTop: theme.spacing(3),
+  },
+  container_Loader: {
+    margin: '10vh auto',
+    padding: '5vh',
+    border: 'solid #646464 1px',
+  },
+}));
 
 export default function SubjectLoader() {
   const dispatch = useDispatch();
@@ -25,24 +48,8 @@ export default function SubjectLoader() {
   const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
   const school = useSelector(userSelector)
   const History= useHistory()
+  const classes = useStyles();
 
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    chip: {
-      margin: 2,
-    },
-    noLabel: {
-      marginTop: theme.spacing(3),
-    },
-  }));
 
 
   const handleSubmit = (values, formik) => {
@@ -74,7 +81,7 @@ export default function SubjectLoader() {
   }, [subjectsStatus])
 
   return (
-    <Container>
+    <Container className={classes.container_Loader } >
       <Typography variant="h6" gutterBottom>
         Cargar Materias
       </Typography>
