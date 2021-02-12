@@ -5,7 +5,9 @@ import { useAuth } from 'components/Auth/AuthContext';
 
 function OnlyGuestRoute({ component: Component, ...rest }) {
   const user = useAuth();
-  const REDIRECT = `/myprofile`;
+  const REDIRECT =
+    Boolean(user) &&
+    (user.type === 'school' ? `school-profile/${user.id}` : `/myprofile`);
   return (
     <Route
       {...rest}
