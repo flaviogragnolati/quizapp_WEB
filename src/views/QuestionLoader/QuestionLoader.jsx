@@ -48,7 +48,8 @@ function QuestionLoader() {
   }, [dispatch, quizId]);
 
   useEffect(() => {
-    window.addEventListener('beforeunload', handleOnLeave);
+    if (!saved) window.addEventListener('beforeunload', handleOnLeave);
+    if (saved) window.removeEventListener('beforeunload', handleOnLeave);
     //if(!saved){} //agregamos un valor de saved<boolean> en redux para determinar si el usuario grabo o no, en caso quie no si quiere navegar a otra  pagina, recargar, cerrar aparece un modal pidiendo que confirme cerrar o guardar todos los cambios
     return () => {
       window.removeEventListener('beforeunload', handleOnLeave);

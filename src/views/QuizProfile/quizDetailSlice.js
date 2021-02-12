@@ -41,7 +41,9 @@ const quizDetailSlice = createSlice({
   name: 'quizDetail',
   initialState: initialState_QuizDetail,
   reducers: {
-    reset: (state) => (state.status = status.idle),
+    reset: (state) => {
+      state.status = status.idle;
+    },
   },
   extraReducers: (b) => {
     b.addMatcher(isPendingAction, (state, { payload }) => {
