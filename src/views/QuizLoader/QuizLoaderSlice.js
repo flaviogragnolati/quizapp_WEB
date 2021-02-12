@@ -152,6 +152,7 @@ const QuizLoaderSlice = createSlice({
       const { questions } = payload;
       state.questions = questions; //por ahora pisamos directamente el estado,
     },
+    reset: (state) => (state.status = status.idle),
   },
   extraReducers: (builder) => {
     builder.addCase(getAllQuestions.fulfilled.type, (state, { payload }) => {
@@ -187,6 +188,7 @@ export const {
   addQuestion,
   removeQuestion,
   removeAnswer,
+  reset,
 } = QuizLoaderSlice.actions;
 export default QuizLoaderSlice;
 

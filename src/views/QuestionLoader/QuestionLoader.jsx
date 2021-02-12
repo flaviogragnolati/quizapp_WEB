@@ -11,6 +11,7 @@ import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { QuestionStatusSelector } from 'utils/selectors';
 import { QuestionsSelector } from 'utils/selectors';
 import { questionsSavedSelector } from 'utils/selectors';
+import { ACTIONS } from 'store/rootReducer';
 
 export const IdsContext = createContext(null);
 
@@ -41,6 +42,9 @@ function QuestionLoader() {
   useEffect(() => {
     dispatch(getAllQuestions(quizId));
     dispatch(getQuizDetailAsync(quizId));
+    return () => {
+      dispatch(ACTIONS.quizDetail.reset());
+    };
   }, [dispatch, quizId]);
 
   useEffect(() => {
@@ -55,7 +59,7 @@ function QuestionLoader() {
     return <BackdropLoading />;
   } else if (questionsStatus === 'error' || quizDetailStatus === 'error') {
     return <h1>Ha ocurrido un error, recargue la pagina</h1>;
-  } else if (questionsStatus === 'success' || quizDetailStatus === 'success') {
+  } else if (questionsStatus === 'success' && quizDetailStatus === 'success') {
     const IDS = { questionId, quizId };
     return (
       <IdsContext.Provider value={IDS}>
