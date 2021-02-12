@@ -180,6 +180,16 @@ const isRejectedActionDetail = isRejected(
   removeTeacher
 );
 
+const isPendingActionSubject = isPending(
+  createSubject,
+  editSubject
+);
+
+const isRejectedActionSubject = isRejected(
+  createSubject,
+  editSubject
+);
+
 const SchoolSlice = createSlice({
   name: 'school',
   initialState: initialState_School,
@@ -187,6 +197,9 @@ const SchoolSlice = createSlice({
     cleanUser: (state, { payload }) => {
       state.UserDetail.status = status.idle;
       state.UserDetail.data = {};
+    },
+    afterSubject: (state, { payload }) => {
+      state.SchoolSubjectList.status = status.idle;
     },
   },
   extraReducers: (builder) => {
@@ -208,7 +221,8 @@ const SchoolSlice = createSlice({
       state.status = status.success;
     });
     builder.addCase(createSubject.fulfilled, (state, { payload }) => {
-      state.status = status.success;
+      state.SchoolSubjectList.status = status.success;
+      
     });
     builder.addCase(postUserToTeacher.fulfilled, (state, { payload }) => {
       state.UserDetail.status = status.success;
@@ -236,10 +250,11 @@ const SchoolSlice = createSlice({
       state.UserDetail.role = {};
     });
     builder.addCase(editSubject.fulfilled, (state, { payload }) => {
-      state.status = status.success;
+      state.SchoolSubjectList.status = status.success;
     });
 
     ////////////
+
     builder.addMatcher(isPendingAction, (state, action) => {
       const { type } = action;
       const nameSpace = type.split('/')['1'];
@@ -269,9 +284,16 @@ const SchoolSlice = createSlice({
       state.UserDetail.status = status.error;
       state.UserDetail.data = payload;
     });
+    builder.addMatcher(isPendingActionSubject, (state, { payload }) => {
+      state.SchoolSubjectList.status = status.pending;
+    });
+    builder.addMatcher(isRejectedActionSubject, (state, { payload }) => {
+      state.SchoolSubjectList.status = status.error;
+      state.error = payload
+    });
   },
 });
 
-export const { cleanUser, setQuestionDetail } = SchoolSlice.actions;
+export const { cleanUser, setQuestionDetail,afterSubject } = SchoolSlice.actions;
 
 export default SchoolSlice;
