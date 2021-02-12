@@ -39,7 +39,6 @@ const listenArray = [
   ACTIONS.auth.logout.type,
   ACTIONS.catalogue.filter.type, //'catalogue/filter'
   ...allTypesAsync(contactSchool),
-  ...allTypesAsync(getCatalogue),
   ...allTypesAsync(postUserToTeacher),
   ...allTypesAsync(removeTeacher),
   ...allTypesAsync(enrollUser),
@@ -102,19 +101,21 @@ const notificationMiddleware = (store) => (next) => (action) => {
     //   snackbar.message = `Se elimino el curso de favoritos`;
     //   snackbar.options.variant = 'warning';
     // } else
-     if (action.type.includes('actions/enroll')) {
+    if (action.type.includes('actions/enroll')) {
       snackbar.message = `Te pedido ha sido enviado, recibiras una notificacion`;
       snackbar.options.variant = 'info';
-    } else if (action.type.split('/')[1] === 'filter') {
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
-      snackbar.message = `Estas filtrando el catalogo`;
-      snackbar.options.variant = 'success';
-    } else if (action.type === 'auth/logout') {
-      console.log('entre a la notificacion');
-      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
-      snackbar.message = `se cerro la sesion correctamente`;
-      snackbar.options.variant = 'success';
-    } else if (action.type.includes('contactSchool')) {
+    }
+    // else if (action.type.split('/')[1] === 'filter') {
+    //   //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
+    //   snackbar.message = `Estas filtrando el catalogo`;
+    //   snackbar.options.variant = 'success';
+    // } else if (action.type === 'auth/logout') {
+    //   console.log('entre a la notificacion');
+    //   //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
+    //   snackbar.message = `se cerro la sesion correctamente`;
+    //   snackbar.options.variant = 'success';
+    // }
+    else if (action.type.includes('contactSchool')) {
       allNotificationAsync(
         'Nos pondremos en contacto en breve',
         null,
