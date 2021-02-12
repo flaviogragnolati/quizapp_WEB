@@ -13,6 +13,7 @@ import {
   catalogueResultSelector,
   catalogueFilterSelector,
   totalCatalogueSelector,
+  catalogueAllQuizzesIdsSelector,
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { forceCatalogueSelector } from 'utils/selectors';
@@ -40,6 +41,7 @@ const Catalogue = () => {
   const filter = useSelector(catalogueFilterSelector);
   const total = useSelector(totalCatalogueSelector);
   const force = useSelector(forceCatalogueSelector);
+  const allQuizzesIds = useSelector(catalogueAllQuizzesIdsSelector);
 
   const quizList = useSelector((state) =>
     catalogueResultSelector(state, filter)
@@ -51,13 +53,14 @@ const Catalogue = () => {
     setPage(value);
   };
   const [cachedPages, setCachedPages] = useState([]);
+
   useEffect(() => {
     if (!cachedPages.includes(page)) {
       const params = {
         page: (page - 1) / 2,
         pageSize: pageSize * 2,
       };
-      console.log('PARAMS', page, params);
+      //console.log('PARAMS', page, params);
       dispatch(getCatalogue(params));
       if (cachedPages.length > 15) {
         setCachedPages((oldCachedPages) => [
@@ -85,10 +88,11 @@ const Catalogue = () => {
   } else if (catStatus === 'success') {
     if (quizList.length < 1) {
       content = <h3>No hay cursos que se ajusten a ese criterio</h3>;
-    } else {
+    } else if(cachedPages.includes(page)) {
       let start = (page - 1) * pageSize;
       let end = (page - 1) * pageSize + pageSize;
-      content = quizList.slice(start, end).map((quizId, idx) => (
+      let QuizzesList = filter ? quizList : allQuizzesIds;
+      content = QuizzesList.slice(start, end).map((quizId, idx) => (
         <Grid
           Style="min-width: 33.333vh;"
           item
@@ -123,8 +127,8 @@ const Catalogue = () => {
         <Grid container item sm={7}>
           <Box mt={3}>
             <Grid container spacing={5}>
-              {content}
-              {catStatus === 'pending' ? <h3>Cargando...</h3> : null}
+{/*               {catStatus === 'success' ? content : null} */}
+              {catStatus === 'pending' ? <h3>Cargando...</h3> : catStatus === 'success' ? content : null}
             </Grid>
           </Box>
           <Grid item container>

@@ -29,6 +29,8 @@ export const schoolsSelector = (state) => state.catalogue.entities.schools;
 export const subjectsSelector = (state) => state.catalogue.entities.subjects;
 export const catalogueFilterSelector = (state) => state.catalogue.filter;
 
+export const catalogueAllQuizzesIdsSelector = (state) => state.catalogue.allQuizzesIds;
+
 //Quiz Detail Selectors
 export const quizDetailStatusSelector = (state) => state.quizDetail.status;
 export const quizDetailSelector = (state, id) => state.quizDetail.detail[id];
