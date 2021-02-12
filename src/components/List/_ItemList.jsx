@@ -179,7 +179,7 @@ const Results = ({
                               id={info.id}
                               onClick={() => actions[prop](info.id)}
                             >
-                              {prop === 'Activar' ? info.active ? 'Activar' : 'Desactivar' : prop}
+                              {prop === 'Activar' ? info.active ? 'Desactivar' : 'Activar' : prop}
                             </Button>
                           </TableCell>
                         );
