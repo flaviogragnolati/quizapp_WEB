@@ -1,8 +1,10 @@
 /* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
+import { catalogueFilterSelector } from 'utils/selectors';
+import { useSelector } from 'react-redux';
 
 // ISO 3166-1 alpha-2
 function countryToFlag(isoCode) {
@@ -26,9 +28,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CountrySelect() {
+export default function CountrySelect(clear) {
   const classes = useStyles();
+  const filter = useSelector(catalogueFilterSelector);
+  const autoC = useRef(null);
 
+  useEffect(()=>{
+    if(!filter && clear){
+      let borrar = autoC.current.getElementsByClassName('MuiAutocomplete-clearIndicator')[0]
+      console.log('clear',borrar)
+      borrar.click()
+    }
+
+  },[clear])
   return (
     <Autocomplete
       id="country-select-demo"
@@ -36,6 +48,7 @@ export default function CountrySelect() {
       classes={{
         option: classes.option,
       }}
+      ref={autoC}
       autoHighlight
       getOptionLabel={(option) => option.label}
       renderOption={(option) => (
