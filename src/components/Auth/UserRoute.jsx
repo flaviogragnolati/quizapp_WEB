@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from 'components/Auth/AuthContext';
 
-function ProtectRoute({ component: Component, ...rest }) {
+function UserRoute({ component: Component, ...rest }) {
   const user = useAuth();
   const REDIRECT = '/login';
   return (
@@ -16,4 +16,4 @@ function ProtectRoute({ component: Component, ...rest }) {
   );
 }
 
-export default ProtectRoute;
+export default UserRoute;

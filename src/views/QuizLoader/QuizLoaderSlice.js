@@ -19,6 +19,10 @@ const initialState_QuizLoader = {
   saved: false,
   bulkUpdate: false,
   questions: [],
+  toDelete: {
+    questions: [],
+    answers: {},
+  },
   error: '',
 };
 
@@ -42,7 +46,7 @@ export const getAllQuestions = createAsyncThunk(
   {
     condition: (payload, { getState }) => {
       const { QuizLoader } = getState();
-      if ((QuizLoader.state = 'pending')) return false;
+      if (QuizLoader.state === status.pending) return false;
     },
   }
 );
@@ -52,9 +56,11 @@ export const bulkUpdateQuestions = createAsyncThunk(
   async ({ quizId }, { getState }) => {
     const state = getState();
     const questions = state.QuizLoader.questions;
+    const toDelete = state.QuizLoader.toDelete;
     const payload = {
       quizId,
       questions,
+      toDelete,
     };
     const bulkUpdate_response = await axios.post(
       QUESTIONS_BULKUPDATE_ENDPOINT,
@@ -104,10 +110,15 @@ const QuizLoaderSlice = createSlice({
     },
     removeAnswer: (state, { payload }) => {
       const { questionId, ansId } = payload;
+      const toDeleteAnswers = state.toDelete.answers;
+
       const questionIdx = state.questions.findIndex(
         ({ id }) => String(id) === String(questionId)
       );
       if (questionIdx === -1) return;
+      if (!Array.isArray(toDeleteAnswers[questionId]))
+        toDeleteAnswers[questionId] = [];
+      toDeleteAnswers[questionId].push(ansId);
       const question = state.questions[questionIdx];
       const filteredAns = question.Answers.filter(
         ({ id }) => String(id) !== String(ansId)
@@ -134,6 +145,7 @@ const QuizLoaderSlice = createSlice({
       state.questions.push(question);
     },
     removeQuestion: (state, { payload }) => {
+      state.toDelete.questions.push(payload);
       state.questions = state.questions.filter(
         ({ id }) => String(id) !== String(payload)
       );
