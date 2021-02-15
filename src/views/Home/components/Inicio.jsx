@@ -34,7 +34,9 @@ const styles = (theme) => ({
     },
   },
   more: {
-    marginTop: theme.spacing(2),
+  marginTop: '20px',
+  fontWeight: 'bold',
+  fontSize: '20px',
   },
 });
 

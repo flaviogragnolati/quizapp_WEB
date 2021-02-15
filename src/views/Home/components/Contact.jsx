@@ -93,10 +93,10 @@ function Contact(props) {
           <div className={classes.card}>
             <form onSubmit={handleSubmit} className={classes.cardContent}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Mas Informacion
+                Estoy Interesado
               </Typography>
               <Typography variant="h5">
-                Nos pondremos en contacto para satisfacer tus dudas.
+                Nos pondremos en contacto para realizar el registro de la escuela.
               </Typography>
               <TextField
                 noBorder
