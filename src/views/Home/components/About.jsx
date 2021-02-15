@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(30),
+    marginBottom: theme.spacing(23),
     display: 'flex',
     position: 'relative',
   },

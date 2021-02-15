@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '../../../components/Home_MUI/Typography';
+import { useHistory } from 'react-router-dom';
+
+
 
 const styles = (theme) => ({
   root: {
@@ -34,11 +37,11 @@ const styles = (theme) => ({
 
 function Goodbye(props) {
   const { classes } = props;
-
+  const history = useHistory()
   return (
     <Container className={classes.root} component="section">
       <Button className={classes.button}>
-        <Typography  className={classes.typography_PSH} variant="h4" component="span">
+        <Typography onClick={() => {history.push('/QandA')}} className={classes.typography_PSH} variant="h4" component="span">
           Tienes preguntas? Necesitas ayuda?
         </Typography>
       </Button>

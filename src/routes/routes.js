@@ -23,13 +23,15 @@ import EnrollTeacher from 'views/Teacher/EnrollTeacher';
 import TeacherDashboard from '../views/Dashboard/TeacherDashboard';
 import TeachersQuiz from 'views/School/TeachersQuiz';
 import Teacher from 'components/ProfileDetail/Profiles/Teacher';
-
 import TeacherRoute from 'components/Auth/TeacherRoute';
 import UserRoute from 'components/Auth/UserRoute';
 import SchoolRoute from 'components/Auth/SchoolRoute';
 import PublicRoute from 'components/Auth/PublicRoute';
 import AdminRoute from 'components/Auth/AdminRoute';
 import UserSchoolRoute from 'components/Auth/UserSchoolRoute';
+import QandA from 'views/QandA';
+
+
 
 /**
  * !Definicion de `roles` y niveles de acceso:
@@ -53,6 +55,7 @@ export const routes = [
   { path: '/about', component: About, access: 'public' },
   { path: '/registerSchool', component: RegisterSchool, access: 'onlyGuest' },
   { path: '/quiz-loader/', component: DatosQuiz, access: 'school' },
+  { path: '/QandA/', component: QandA, access: 'public' },
   {
     path: ['/subject-loader/:id', '/subject-loader'],
     component: SubjectLoader,
