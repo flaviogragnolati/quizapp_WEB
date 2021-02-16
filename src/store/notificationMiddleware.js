@@ -157,7 +157,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
         'Enviando solicitud de ingreso',
         'Ocurrio un error intente de nuevo'
       );
-    } else if (action.type.includes('Delate_Quiz')) {
+    } else if (action.type.includes('delateQuiz')) {
       allNotificationAsync(
         'Se elimino exitosamente',
         'cargando',
@@ -169,7 +169,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
         'cargando',
         'Ocurrio un error intente de nuevo'
       );
-    } else if (action.type.includes('Edit_Subject')) {
+    } else if (action.type.includes('editSubject')) {
       allNotificationAsync(
         'Se modifico exitosamente',
         'cargando',
