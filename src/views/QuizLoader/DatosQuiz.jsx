@@ -20,14 +20,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CreateQuiz } from './QuizLoaderSlice';
 import { makeStyles } from '@material-ui/core/styles';
 import { getSubjectsList } from "views/School/SchoolSlice";
-
-import {SchoolSubjectSelector } from "utils/selectors"
+import { afterQuiz } from 'views/QuizLoader/QuizLoaderSlice';
+import { SchoolSubjectSelector } from "utils/selectors"
 import { useAuth } from 'components/Auth/AuthContext';
-const  { nameQuiz, descripcion } = quizModel;
+import { useHistory } from 'react-router-dom';
+import { QuestionStatusSelector } from 'utils/selectors';
+const { nameQuiz, descripcion } = quizModel;
 
 export default function DatosQuiz() {
-  const Dispatch= useDispatch()
+  const dispatch = useDispatch()
+  const history = useHistory()
   const subjects = useSelector(SchoolSubjectSelector);
+  const status = useSelector(QuestionStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const school = useAuth()
   const ITEM_HEIGHT = 48;
@@ -41,20 +45,28 @@ export default function DatosQuiz() {
     },
   };
 
-  console.log(school.id)
+
   const handleChange = (event) => {
     setPersonName(event.target.value);
   };
-  const handleSubmit = (values, ) => {
+
+  const handleSubmit = (values,) => {
     values.SubjectId = personName
     values.SchoolId = school.id;
-    Dispatch(CreateQuiz(values));
+    dispatch(CreateQuiz(values));
   };
 
-    useEffect(()=>{
-        Dispatch(getSubjectsList({ id: school.id }))
-    },[])
-    
+  useEffect(() => {
+    dispatch(getSubjectsList({ id: school.id }))
+  }, [])
+
+  useEffect(() => {
+    if (status === 'success') {
+      history.push('/school-quiz')
+      dispatch(afterQuiz())
+    }
+  }, [status])
+
   return (
     <Container Style="margin-top: 8vh;border: 1px solid #464646;padding: 24px;">
       <Typography variant="h6" gutterBottom>
@@ -89,7 +101,7 @@ export default function DatosQuiz() {
                     Selecciona una Materia
                   </InputLabel>
                   <Select
-                  Style="min-width: 180px;"
+                    Style="min-width: 180px;"
                     labelId="demo-mutiple-chip-label"
                     id="demo-mutiple-chip"
                     value={personName}
