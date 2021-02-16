@@ -106,12 +106,12 @@ const notificationMiddleware = (store) => (next) => (action) => {
     //   //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
     //   snackbar.message = `Estas filtrando el catalogo`;
     //   snackbar.options.variant = 'success';
-    // } else if (action.type === 'auth/logout') {
-    //   console.log('entre a la notificacion');
-    //   //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
-    //   snackbar.message = `se cerro la sesion correctamente`;
-    //   snackbar.options.variant = 'success';
-    // }
+    // } else 
+    if (action.type.includes('logout')) {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
+      snackbar.message = `se cerro la sesion correctamente`;
+      snackbar.options.variant = 'success';
+    }
     else if (action.type.includes('contactSchool')) {
       allNotificationAsync(
         'Nos pondremos en contacto en breve',
