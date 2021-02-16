@@ -164,7 +164,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
       allNotificationAsync(
         'Se elimino exitosamente',
         'cargando',
-        'Ocurrio un error intente de nuevo'
+        'Ocurrio un error, es posible que la materia este asociada a un quiz activo'
       );
     } else if (action.type.includes('editSubject')) {
       allNotificationAsync(

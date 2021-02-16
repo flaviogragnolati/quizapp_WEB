@@ -130,9 +130,10 @@ export const deleteSubject = createAsyncThunk(
         SUBJECT_ENDPOINT + '/' + subjectId
       );
       return delete_response.data;
-    } else {
+    }
+     else {
       return rejectWithValue({
-        message: 'El subject esta asociado a un quiz activo',
+        // message: 'El subject esta asociado a un quiz activo',
       });
     }
   }
