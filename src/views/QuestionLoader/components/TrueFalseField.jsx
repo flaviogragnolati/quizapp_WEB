@@ -4,14 +4,14 @@ import { IconButton } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { PropTypes } from 'prop-types';
-import { Field, useField, useFormikContext } from 'formik';
+import { useField, useFormikContext } from 'formik';
 import styled from 'styled-components';
 
 const HiddenCheck = styled.input`
   display: none;
 `;
 function TrueFalseField({ name, ...rest }) {
-  const [field, meta, helpers] = useField({ name, type: 'checkbox' });
+  const [field, helpers] = useField({ name, type: 'checkbox' });
 
   const { values } = useFormikContext();
 

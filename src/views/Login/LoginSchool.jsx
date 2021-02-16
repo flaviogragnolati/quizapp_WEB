@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 // @material-ui/icons
-import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 // core components
 import GridContainer from 'components/Grid/GridContainer.jsx';
@@ -24,7 +23,6 @@ import {
 import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { ACTIONS } from 'store/rootReducer';
 import { localOrgLogin } from 'components/Auth/authSlice';
 import { userSelector, authStatusSelector } from 'utils/selectors';
 import { useHistory } from 'react-router-dom';
@@ -33,7 +31,7 @@ const useStyles = makeStyles(styles);
 const image =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
-function LoginSchool(props) {
+function LoginSchool() {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
@@ -85,10 +83,7 @@ function LoginSchool(props) {
                 <LoginHeader />
                 <p className={classes.divider}>Or Be Classical</p>
                 {authState === 'error' ? (
-                  <p
-                    className={classes.divider}
-                    className={classes.Error__Message}
-                  >
+                  <p  className={classes.divider, classes.Error__Message}>
                     El Login fue rechazado, intenta de nuevo
                   </p>
                 ) : null}

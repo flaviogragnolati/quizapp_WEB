@@ -1,20 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { Field, Form, Formik } from "formik";
-import { Button, Card, Grid, TextField } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector, UserDetailStatusSelector } from "utils/selectors";
-import {
-  getUserEmail,
-  cleanUser,
-  postUserToTeacher,
-} from "views/School/SchoolSlice";
+import { Field } from "formik";
+import { Button, Grid } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { UserDetailStatusSelector } from "utils/selectors";
 import { Alert } from "@material-ui/lab";
-import Typography from "components/Home_MUI/Typography";
-import { ACTIONS } from "store/rootReducer";
+
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -51,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 
 function SearchUser() {
   const classes = useStyles();
-  const UserDetail = useSelector(UserDetailSelector);
   const status = useSelector(UserDetailStatusSelector);
 
   return (

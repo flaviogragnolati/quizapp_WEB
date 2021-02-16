@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Box,
   Grid,
@@ -11,7 +11,7 @@ import { TextField } from 'formik-material-ui';
 import TrueFalseField from './TrueFalseField';
 
 function QuestionMulti({
-  answer: { id, text, correct },
+  answer: { id },
   questionNum,
   deleteAns,
 }) {

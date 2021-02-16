@@ -62,13 +62,8 @@ const catalogueSlice = createSlice({
         subject && subject.length && subject.map((subject) => subject.id);
       let quizResult = quiz && quiz.length && quiz.map((quiz) => quiz.id);
       let tagResult = tag && tag.length && tag.map((tag) => tag.id);
-      // console.log('schoolResult', schoolResult);
-      // console.log('subjectResult', subjectResult);
-      // console.log('quizResult', quizResult);
-      // console.log('tagResult', tagResult);
       state.result.forEach((id, idx) => {
         let entity = state.entities.quizzes[id];
-        // console.log('ENTITY', entity, typeof entity.QuizTags);
         if (
           (schoolResult && schoolResult.includes(entity.School)) ||
           (subjectResult && subjectResult.includes(entity.Subject)) ||

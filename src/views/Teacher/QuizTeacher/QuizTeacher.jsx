@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { Box, Container, makeStyles } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import List from 'components/List';
-import Button from 'components/Home_MUI/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuizList } from 'views/School/SchoolSlice';
 import {
   TeacherQuizSelector,
   TeacherQuizStatusSelector,
@@ -13,16 +11,6 @@ import { getQuizesTeacher } from 'views/Teacher/TeacherSlice';
 import { activationQuiz } from 'views/Teacher/TeacherSlice';
 import { useHistory } from 'react-router-dom';
 import BackdropLoading from 'components/Loading/BackdropLoading';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.dark,
-    minHeight: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3),
-  },
-}));
-
 
 function QuizTeacher() {
   const dispatch = useDispatch();
@@ -43,7 +31,6 @@ function QuizTeacher() {
     History.push(`/enroll-list/${e}`);
   }
 
-  const classes = useStyles();
   let columnName = ['Nombre del Quiz', 'Description', 'Estado', 'Activar Quiz', 'Preguntas', 'Aceptar alumnos'];
   let propsNames = ['name', 'description', 'active', 'Activar', 'Editar', 'Enrollar']
   let actions = {

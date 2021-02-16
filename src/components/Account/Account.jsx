@@ -43,7 +43,6 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({ className, quiz, ...rest }) => {
   const classes = useStyles();
-  const location = useLocation();
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>

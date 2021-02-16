@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
 // @material-ui/core
@@ -17,34 +17,30 @@ import ProfileTabs from './components/ProfileTabs';
 import { useAuth } from 'components/Auth/AuthContext';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, userEnrroledIn, userQuizFavourites } from './profileSlice';
+import { userEnrroledIn, userQuizFavourites } from './profileSlice';
 import {
-  userProfileSelector,
-  schoolProfileSelector,
-  profileStatusSelector,
   authStatusSelector,
   userQuizSelector,
   userQuizFavouritesSelector
 } from 'utils/selectors';
 import BackdropLoading from 'components/Loading/BackdropLoading';
 import { useHistory } from 'react-router-dom';
-import Teacher from 'components/ProfileDetail/Profiles/Teacher';
 
 const bg_img =
   'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 const useStyles = makeStyles(styles);
 
-const { img, social, courses, favourites, activity, teacherIn } = fakeUser;
+const { social, activity, teacherIn } = fakeUser;
 
-export default function MyProfile(props) {
+export default function MyProfile() {
   const history = useHistory();
   const user = useAuth();
   const dispatch =useDispatch();
   const authStatus = useSelector(authStatusSelector);
   const userQuiz = useSelector(userQuizSelector);
   const QuizFavourites =useSelector(userQuizFavouritesSelector)
-  let showDetails, role;
+  let role
   const [sync, setSync]=useState(false)
   useEffect(() => {
     if (!user && authStatus !== 'error') return <BackdropLoading />;
@@ -76,12 +72,9 @@ if(authStatus === 'success' && !sync){
     if (role === 'school') {
     } else {
       const {
-        id,
         firstName,
         lastName,
-        email,
         birthdate,
-        cellphone,
         photo,
       } = user;
       content = (

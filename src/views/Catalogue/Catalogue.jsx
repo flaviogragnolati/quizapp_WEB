@@ -15,8 +15,6 @@ import {
   totalCatalogueSelector,
   catalogueAllQuizzesIdsSelector,
 } from 'utils/selectors';
-import BackdropLoading from 'components/Loading/BackdropLoading';
-import { forceCatalogueSelector } from 'utils/selectors';
 import LimitedBackdropLoading from 'components/Loading/LimitedBackdropLoading';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +38,6 @@ const Catalogue = () => {
   const entities = useSelector(catalogueEntitiesSelector);
   const filter = useSelector(catalogueFilterSelector);
   const total = useSelector(totalCatalogueSelector);
-  const force = useSelector(forceCatalogueSelector);
   const allQuizzesIds = useSelector(catalogueAllQuizzesIdsSelector);
 
   const quizList = useSelector((state) =>

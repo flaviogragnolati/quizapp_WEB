@@ -21,9 +21,7 @@ export default function ComboFilter({
   placeholder,
   options,
   limitTags,
-  defaultValue,
   name,
-  action,
   clear,
   setFilter,
   values: propValues,
@@ -58,14 +56,6 @@ export default function ComboFilter({
         getOptionLabel={(option) => option.label}
         value={values}
         ref={autoC}
-        // renderTags={(value, getTagProps) =>{
-        //    if(!filter && clear) getTagProps(-1); value=[]
-        // return  value.map((op, index) => {
-        //     console.log(op)
-        //    return <Chip variant="outlined" label={op.label} {...getTagProps({ index })} />
-        //   }
-        //   )
-        // }}
         onChange={(event, newValue) => handleChange(event, newValue)}
         renderInput={(params) => (
           
@@ -77,7 +67,6 @@ export default function ComboFilter({
           />
         )}
       />
-      
     </div>
   );
 }

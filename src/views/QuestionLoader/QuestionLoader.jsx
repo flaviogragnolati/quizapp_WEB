@@ -9,7 +9,6 @@ import { getAllQuestions } from 'views/QuizLoader/QuizLoaderSlice';
 import { quizDetailSelector, quizDetailStatusSelector } from 'utils/selectors';
 import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
 import { QuestionStatusSelector } from 'utils/selectors';
-import { QuestionsSelector } from 'utils/selectors';
 import { questionsSavedSelector } from 'utils/selectors';
 import { ACTIONS } from 'store/rootReducer';
 

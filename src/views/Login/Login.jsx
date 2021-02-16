@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
-import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -27,19 +26,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS } from "store/rootReducer";
 import { localLogin } from "components/Auth/authSlice";
 import { userSelector, authStatusSelector } from "utils/selectors";
-import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 const image =
   "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
 
-const GreyText = styled(Link)`
-  color: ${(p) => p.theme.grey};
-`;
 
-function Login(props) {
+
+function Login() {
   const { email, password } = registerModel;
   const dispatch = useDispatch();
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");

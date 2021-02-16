@@ -1,5 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit';
-
 //General or Global selectors
 export const notificationSelector = (state) => state.notifications.list;
 

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
+
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
@@ -73,10 +74,7 @@ function QandA() {
   const handleOpen = (id) => {
     if (open === id) {setOpen(0)}
     if (open !== id) {setOpen(id)}
-
   }
-
-
 
   return (
     <div className={classes.div_QandA}>
@@ -87,10 +85,19 @@ function QandA() {
             <>
                 <StyledTableRow className={classes.arrow_center} key={row.name}>
                     <StyledTableCell align="left">
+
+
+
                         <Button onClick={(e) => handleOpen(row.id)}><ArrowDownwardIcon /></Button>
+
+
+
+
+
                         {row.question}
                     </StyledTableCell>
                 </StyledTableRow>
+
                 {open === row.id ?
                 <StyledTableRow id={row.id} key={row.name}>
                     <StyledTableCell Style="padding: 22px 45px;" >{row.answer}</StyledTableCell>

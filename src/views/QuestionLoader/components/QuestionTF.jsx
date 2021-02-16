@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Button,
-  Grid,
-  TextField,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormHelperText,
   FormLabel,
   FormControl,
 } from "@material-ui/core";
@@ -22,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function QuestionTF(props) {
-  let answer = props.answer;
   const classes = useStyles();
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState(false);

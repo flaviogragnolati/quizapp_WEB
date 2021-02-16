@@ -1,5 +1,3 @@
-const contrastThreshold = 3;
-
 export const muiTheme = {
   light: {
     themeName: 'light',

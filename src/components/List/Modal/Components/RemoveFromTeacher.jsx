@@ -1,13 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Field, Form, Formik } from "formik";
-import { Button, Card, Grid, TextField, Typography } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector, UserDetailStatusSelector } from "utils/selectors";
+import { Button, Grid, Typography } from "@material-ui/core";
+import {  useSelector } from "react-redux";
+import { UserDetailSelector } from "utils/selectors";
 
-import { Alert } from "@material-ui/lab";
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles(() => ({
   field: {
     padding: "20px",
     fontSize: "16px",
@@ -48,16 +47,12 @@ const useStyles = makeStyles((theme) => ({
 function RemoveFromTeacher() {
   const classes = useStyles();
   const UserDetail = useSelector(UserDetailSelector);
-  const status = useSelector(UserDetailStatusSelector);
+
 
   return (
 <>
-
-
-
-
       <Grid className={classes.user_data} xs={12}>
-        <img className={classes.photo} src={UserDetail.photo} />
+        <img className={classes.photo} src={UserDetail.photo} alt='teacher'/>
         <Typography variant="button" display="block">
           {`${UserDetail.firstName} ${UserDetail.lastName}`}
         </Typography>

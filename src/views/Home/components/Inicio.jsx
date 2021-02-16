@@ -5,13 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import Typography from '../../../components/Home_MUI/Typography';
 import InicioBackground from './InicioBackground';
-import { useHistory, Link } from 'react-router-dom';
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem';
-import { Grid, Box } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import BackdropLoading from 'components/Loading/BackdropLoading';
-import { useState } from 'react';
 import { useAuth } from 'components/Auth/AuthContext';  
 
 const backgroundImage =
@@ -69,10 +65,6 @@ const HeroButton = styled(Button)`
 
 function Inicio(props) {
   const { classes } = props;
-  const [loading, setLoading] = useState(false);
-  const handleLoading = () => {
-    setLoading((prev) => !prev);
-  };
   const user = useAuth();
   return (
     <>
@@ -124,7 +116,6 @@ function Inicio(props) {
           Descubre la Experiencia
         </Typography>
       </InicioBackground>
-      {loading && <BackdropLoading color="secondary" />}
     </>
   );
 }

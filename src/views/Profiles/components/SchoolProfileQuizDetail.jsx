@@ -31,7 +31,6 @@ export default function SchoolProfileQuizDetail({ quizDetail, ...props }) {
     id,
     logo,
     name,
-    quantity,
     description,
     Subject: { name: subjectName },
   } = quizDetail;

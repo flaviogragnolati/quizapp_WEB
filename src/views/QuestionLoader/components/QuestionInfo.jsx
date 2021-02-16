@@ -1,16 +1,12 @@
 import React, {
   forwardRef,
   useContext,
-  useEffect,
-  useImperativeHandle,
-  useRef,
 } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button } from '@material-ui/core';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import { Field, Form, Formik, useFormikContext } from 'formik';
+import { Grid} from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
 import { questionLoaderModel } from 'utils/forms/questionLoader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { TextField } from 'formik-material-ui';
 import { IdsContext } from '../QuestionLoader';
 import { updateQuestionData } from 'views/QuestionLoader/components/questionHelpers';
@@ -38,16 +34,6 @@ function QuestionInfo(props, ref) {
   const handleSubmit = () => {
     updateQuestionData(ref, questionId, dispatch);
   };
-
-  // const questionInfoRef = useRef(null);
-
-  // useImperativeHandle(
-  //   ref,
-  //   () => {
-  //     return questionInfoRef.current.values;
-  //   },
-  //   [questionInfoRef]
-  // );
 
   const initialValues = {
     title,
@@ -79,17 +65,6 @@ function QuestionInfo(props, ref) {
             rowsMax={3}
           />
         </Grid>
-        {/* <Grid xs={2}>
-          <Button
-            color="default"
-            variant="contained"
-            type="submit"
-            size="small"
-            startIcon={<SaveAltIcon />}
-          >
-            Guardar
-          </Button>
-        </Grid> */}
       </Form>
     </Formik>
   );

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { Field } from "formik";
-import { SimpleFileUpload, TextField } from "formik-material-ui";
+import {  TextField } from "formik-material-ui";
 import { subjectModel } from "./quizLoderHelpers";
 import { Typography, Button, Container, FormControl } from "@material-ui/core";
 import { Formik, Form } from "formik";
 import { initialState_Subjects } from "./quizLoderHelpers";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { createSubject } from "../SchoolSlice";
 import { useHistory, useParams } from "react-router-dom";
 import { SchoolSubjectSelector, SchoolStatusSelector, SchoolSubjectStatusSelector } from 'utils/selectors';
@@ -52,7 +52,7 @@ export default function SubjectLoader() {
 
 
 
-  const handleSubmit = (values, formik) => {
+  const handleSubmit = (values) => {
     if (subjects !== undefined && datos.id) {
       values.id = datos.id
       dispatch(editSubject(values))
@@ -65,10 +65,10 @@ export default function SubjectLoader() {
 
   let editValues = initialState_Subjects
   
-  if (status === 'success' && subjects[0] != undefined && datos.id) {
+  if (status === 'success' && subjects[0] !== undefined && datos.id) {
     editValues = {
-      [name.name]:subjects.find((e) => e.id == datos.id).name,
-      [description.name]: subjects.find((e) => e.id == datos.id).description,
+      [name.name]:subjects.find((e) => e.id === datos.id).name,
+      [description.name]: subjects.find((e) => e.id === datos.id).description,
     };
   }
 

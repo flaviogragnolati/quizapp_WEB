@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState, forwardRef } from 'react';
+import React, { useEffect, useContext, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,15 +13,13 @@ import {
 import BallotIcon from '@material-ui/icons/Ballot';
 import QuestionItem from './QuestionItem';
 import { QuestionsSelector } from 'utils/selectors';
-import { addQuestion, updateQuestion } from 'views/QuizLoader/QuizLoaderSlice';
+import { addQuestion } from 'views/QuizLoader/QuizLoaderSlice';
 import { v4 as uuid } from 'uuid';
 import { removeQuestion } from 'views/QuizLoader/QuizLoaderSlice';
 import { IdsContext } from '../QuestionLoader';
-import { convertFormikValuesToRedux } from 'utils/helpers';
 import { updateQuestionData } from './questionHelpers';
 import SaveIcon from '@material-ui/icons/Save';
 import { bulkUpdateQuestions } from '../../QuizLoader/QuizLoaderSlice';
-import { CheckCircleIcon } from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -46,7 +44,6 @@ function QuestionSideBar(props, ref) {
   const classes = useStyles();
 
   const { questionId, quizId } = useContext(IdsContext);
-  const { questionInfoRef, answersContentRef } = ref;
 
   const questions = useSelector(QuestionsSelector);
   useEffect(() => {}, [questions]);

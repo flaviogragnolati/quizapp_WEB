@@ -1,7 +1,6 @@
 import {
   createAsyncThunk,
   createSlice,
-  current,
   isPending,
   isFulfilled,
   isRejected,
@@ -9,8 +8,7 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { QUESTIONS_BULKUPDATE_ENDPOINT } from 'utils/endpoints';
-import { QUESTIONS_ENDPOINT } from 'utils/endpoints';
-import { QUIZ_ENDPOINT, ANSWERS_ENDPOINT } from 'utils/endpoints';
+import { QUIZ_ENDPOINT } from 'utils/endpoints';
 import { status } from 'utils/helpers';
 
 const initialState_QuizLoader = {
@@ -191,130 +189,3 @@ export const {
   reset,
 } = QuizLoaderSlice.actions;
 export default QuizLoaderSlice;
-
-// export const CreateQuestion = createAsyncThunk(
-//   'Quiz/CreateQuestion',
-//   async (payload) => {
-//     payload.modifiedBy = 1;
-//     payload.createdBy = 1;
-//     const QuestionCreate_response = await axios.post(
-//       QUESTIONS_ENDPOINT,
-//       payload
-//     );
-//     const { quiz } = QuestionCreate_response;
-//     return quiz;
-//   }
-// );
-
-// export const UpdateQuestion = createAsyncThunk(
-//   'Quiz/UpdateQuestion',
-//   async (payload) => {
-//     payload.modifiedBy = 1;
-//     payload.createdBy = 1;
-//     const UpdateQuestion_response = await axios.put(
-//       QUESTIONS_ENDPOINT + '/' + payload.id,
-//       payload
-//     );
-//     return UpdateQuestion_response.data;
-//   }
-// );
-// export const UpdateAnswers = createAsyncThunk(
-//   'Quiz/UpdateAnswers',
-//   async (payload) => {
-//     console.log('ESTO LE MANDO', payload);
-//     const UpdateAnswers_response = await axios.put(
-//       ANSWERS_ENDPOINT + '/' + payload.id,
-//       payload
-//     );
-//     return UpdateAnswers_response.data;
-//   }
-// );
-
-// export const DeleteAnswers = createAsyncThunk(
-//   'Quiz/DeleteAnswers',
-//   async (id) => {
-//     console.log('ESTO LE MANDO', id);
-//     const DeleteAnswers_response = await axios.delete(
-//       ANSWERS_ENDPOINT + '/' + id
-//     );
-//     return DeleteAnswers_response.data;
-//   }
-// );
-
-// export const CreateAnswers = createAsyncThunk(
-//   'Quiz/CreateAnswers',
-//   async (payload) => {
-//     const CreateAnswers_response = await axios.post(ANSWERS_ENDPOINT, payload);
-//     return CreateAnswers_response.data;
-//   }
-// );
-// export const deleteQuestion = createAsyncThunk(
-//   'Quiz/deleteQuestion',
-//   async (payload) => {
-//     const Questions_response = await axios.delete(
-//       QUESTIONS_ENDPOINT + '/' + payload
-//     );
-//     return Questions_response.data;
-//   }
-// );
-
-// [CreateQuestion.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [CreateQuestion.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [CreateQuestion.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },
-//     [deleteQuestion.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [deleteQuestion.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [deleteQuestion.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },
-//     [UpdateQuestion.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [UpdateQuestion.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [UpdateQuestion.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },
-//     [UpdateAnswers.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [UpdateAnswers.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [UpdateAnswers.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },
-//     [DeleteAnswers.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [DeleteAnswers.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [DeleteAnswers.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },
-//     [CreateAnswers.pending]: (state, { payload }) => {
-//       state.status = status.pending;
-//     },
-//     [CreateAnswers.fulfilled]: (state, { payload }) => {
-//       state.status = status.success;
-//     },
-//     [CreateAnswers.rejected]: (state, { payload }) => {
-//       state.status = status.error;
-//       state.error = payload;
-//     },

@@ -23,9 +23,6 @@ const states = [
   }
 ];
 
-const useStyles = makeStyles(() => ({
-  root: {}
-}));
 
 function School () {
 

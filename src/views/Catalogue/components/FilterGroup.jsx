@@ -1,10 +1,8 @@
 import React from 'react';
-import { Box, TextField } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import { Box } from '@material-ui/core';
+import { useState } from 'react';
 import styled from 'styled-components';
 import AddRemove from 'components/AddRemove';
-import ComboFilter from './ComboFilter';
-import CountryFilter from './CountryFilter';
 import { PropTypes } from 'prop-types';
 import { capitalize } from '../../../utils/helpers';
 

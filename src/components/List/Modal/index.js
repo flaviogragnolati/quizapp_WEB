@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { Field, Form, Formik } from "formik";
-import { Button, Card, Grid, IconButton, TextField } from "@material-ui/core";
+import { Form, Formik } from "formik";
+import {  Card, IconButton } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   UserDetailSelector,
@@ -17,9 +17,6 @@ import {
   postUserToTeacher,
   removeTeacher,
 } from "views/School/SchoolSlice";
-import { Alert } from "@material-ui/lab";
-import Typography from "components/Home_MUI/Typography";
-import { ACTIONS } from "store/rootReducer";
 import SearchUser from "components/List/Modal/Components/SearchUser";
 import PromoteToTeacher from "components/List/Modal/Components/PromoteToTeacher";
 import RemoveFromTeacher from "components/List/Modal/Components/RemoveFromTeacher";
@@ -61,13 +58,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'end',
     padding: '2px',
   },
-
-  // paper: {
-  //   backgroundColor: theme.palette.background.paper,
-  //   border: "2px solid #000",
-  //   boxShadow: theme.shadows[5],
-  //   padding: theme.spacing(2, 4, 3),
-  // },
 }));
 function ModalTeacher({ Id, open, setOpen }) {
   const classes = useStyles();
@@ -76,14 +66,10 @@ function ModalTeacher({ Id, open, setOpen }) {
   const role = useSelector(UserRoleSelector);
   const status = useSelector(UserDetailStatusSelector);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = () => {
     setOpen(false);
     Dispatch(cleanUser());
-    // Dispatch(ACTIONS.School.cleanUser())
   };
   const handleSubmit = (values) => {
     if (status === "idle" || status === "error") {
@@ -100,6 +86,7 @@ function ModalTeacher({ Id, open, setOpen }) {
       Dispatch(removeTeacher({ QuizId: Id, UserId: UserDetail.id }));
     }
   };
+  
   return (
     <Modal
       aria-labelledby="transition-modal-title"

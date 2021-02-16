@@ -1,26 +1,19 @@
 import React, {
-  useEffect,
   useState,
-  useRef,
   useContext,
   forwardRef,
 } from 'react';
 import { Grid, Typography, IconButton } from '@material-ui/core';
 import AddCircleOutlineTwoToneIcon from '@material-ui/icons/AddCircleOutlineTwoTone';
-
 import QuestionInfo from './QuestionInfo';
 import QuestionTF from './QuestionTF';
 import QuestionType from './QuestionType';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { QuestionsSelector } from 'utils/selectors';
 import QuestionMultiWrapper from './QuestionMultiWrapper';
 import { IdsContext } from '../QuestionLoader';
-import { questionAnswersSelector } from 'utils/selectors';
 import { v4 as uuid } from 'uuid';
-import { updateQuestion, addAnswer } from 'views/QuizLoader/QuizLoaderSlice';
-import { convertFormikValuesToRedux } from 'utils/helpers';
+import { addAnswer } from 'views/QuizLoader/QuizLoaderSlice';
 import { updateQuestionData, useUpdateQuestion } from './questionHelpers';
 const questionInfo = {
   title: 'QCD - enunciado',

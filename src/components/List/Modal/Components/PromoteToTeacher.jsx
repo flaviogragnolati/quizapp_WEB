@@ -1,22 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { Field, Form, Formik } from "formik";
-import { Button, Card, Grid, TextField } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { UserDetailSelector, UserDetailStatusSelector } from "utils/selectors";
-import {
-  getUserEmail,
-  cleanUser,
-  postUserToTeacher,
-} from "views/School/SchoolSlice";
-import { Alert } from "@material-ui/lab";
+import { Button, Grid } from "@material-ui/core";
+import {  useSelector } from "react-redux";
+import { UserDetailSelector } from "utils/selectors";
 import Typography from "components/Home_MUI/Typography";
-import { ACTIONS } from "store/rootReducer";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   field: {
     padding: "20px",
     fontSize: "16px",
@@ -57,12 +46,11 @@ const useStyles = makeStyles((theme) => ({
 function PromoteToTeacher() {
   const classes = useStyles();
   const UserDetail = useSelector(UserDetailSelector);
-  const status = useSelector(UserDetailStatusSelector);
   
   return (
 <>
       <Grid className={classes.user_data} xs={12}>
-        <img className={classes.photo} src={UserDetail.photo} />
+        <img alt='teacher' className={classes.photo} src={UserDetail.photo} />
         <Typography variant="button" display="block">
           {`${UserDetail.firstName} ${UserDetail.lastName}`}
         </Typography>

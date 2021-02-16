@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useContext, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import QuestionMulti from './QuestionMulti';
@@ -7,7 +7,7 @@ import { removeAnswer } from 'views/QuizLoader/QuizLoaderSlice';
 import { useDispatch } from 'react-redux';
 
 function QuestionMultiWrapper(props, ref) {
-  const { answers, handlers, answersContentRef } = props;
+  const { answers } = props;
   const dispatch = useDispatch();
   let multiAnsContent;
   let initialValues = {};
@@ -24,7 +24,6 @@ function QuestionMultiWrapper(props, ref) {
   const handleAnsDelete = (ansId) => {
     console.log('DELETING', ansId);
     dispatch(removeAnswer({ questionId, ansId }));
-    // dispatch(DeleteAnswers(id));
   };
 
   if (answers.length < 1) return null;

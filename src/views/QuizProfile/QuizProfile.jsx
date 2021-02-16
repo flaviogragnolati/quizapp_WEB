@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Parallax from 'components/Parallax/Parallax.js';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Parallax from "components/Parallax/Parallax.js";
+import styled from "styled-components";
 import {
   Button,
   Typography,
@@ -10,66 +10,25 @@ import {
   Chip,
   Tooltip,
   Zoom,
-} from '@material-ui/core';
-import PeopleIcon from '@material-ui/icons/People';
-import SchoolIcon from '@material-ui/icons/School';
-import { Rating } from '@material-ui/lab';
-import Badge from 'components/Badge/Badge';
-import PhoneIcon from '@material-ui/icons/Phone';
-import EmailIcon from '@material-ui/icons/Email';
-import { ACTIONS } from 'store/rootReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectQuizDetailById, catalogueStatusSelector, UserRoleSelector } from 'utils/selectors';
-import { getCatalogue } from 'views/Catalogue/catalogueSlice';
-import { quizDetailStatusSelector } from 'utils/selectors';
-import { quizDetailSelector } from 'utils/selectors';
-import { getQuizDetailAsync } from 'views/QuizProfile/quizDetailSlice';
-import { enrollUser } from 'views/Teacher/TeacherSlice';
-import BackdropLoading from 'components/Loading/BackdropLoading';
-import { quizDetailHistorySelector } from 'utils/selectors';
-import { getUserEmail } from 'views/School/SchoolSlice';
-import { userSelector } from 'utils/selectors';
+} from "@material-ui/core";
+import PeopleIcon from "@material-ui/icons/People";
+import SchoolIcon from "@material-ui/icons/School";
+import { Rating } from "@material-ui/lab";
+import EmailIcon from "@material-ui/icons/Email";
+import { useDispatch, useSelector } from "react-redux";
+import { quizDetailStatusSelector } from "utils/selectors";
+import { quizDetailSelector } from "utils/selectors";
+import { getQuizDetailAsync } from "views/QuizProfile/quizDetailSlice";
+import { enrollUser } from "views/Teacher/TeacherSlice";
+import BackdropLoading from "components/Loading/BackdropLoading";
+import { quizDetailHistorySelector } from "utils/selectors";
+import { userSelector } from "utils/selectors";
 
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const schoolImg =
-  'https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg';
-
-const quizDetail = {
-  img:
-    'https://upload.wikimedia.org/wikipedia/commons/a/a8/Intro_to_QM_Griffiths_cover_3rd_ed.jpg',
-  schoolName: 'Universidad Tecnologica Nacional',
-  subjectName: 'Fisica III',
-  quizName: 'Los gatos y la mecanica cuantica',
-  totalStudents: 4242,
-  openDate: new Date().toISOString().split('T')[0],
-  closeDate: new Date('2021-03-22').toISOString().split('T')[0],
-  quizDescription: `In quantum mechanics, Schrödinger's cat is a thought experiment that illustrates an apparent paradox of quantum superposition. In the thought experiment, a hypothetical cat may be considered simultaneously both alive and dead as a result of being linked to a random subatomic event that may or may not occur.
-  This thought experiment was devised by Austrian-Irish physicist Erwin Schrödinger in 1935, in a discussion with Albert Einstein, to illustrate what Schrödinger saw as the problems of the Copenhagen interpretation of quantum mechanics. The scenario is often featured in theoretical discussions of the interpretations of quantum mechanics, particularly in situations involving the measurement problem. Schrödinger intended his thought experiment as a discussion of the EPR article—named after its authors Einstein, Podolsky, and Rosen—in 1935.[4] The EPR article highlighted the counterintuitive nature of quantum superpositions, in which a quantum system such as an atom or photon can exist as a combination of multiple states corresponding to different possible outcomes.
-
-The prevailing theory, called the Copenhagen interpretation, says that a quantum system remains in superposition until it interacts with, or is observed by the external world. When this happens, the superposition collapses into one or another of the possible definite states. The EPR experiment shows that a system with multiple particles separated by large distances can be in such a superposition. Schrödinger and Einstein exchanged letters about Einstein's EPR article, in the course of which Einstein pointed out that the state of an unstable keg of gunpowder will, after a while, contain a superposition of both exploded and unexploded states.
-To further illustrate, Schrödinger described how one could, in principle, create a superposition in a large-scale system by making it dependent on a quantum particle that was in a superposition. He proposed a scenario with a cat in a locked steel chamber, wherein the cat's life or death depended on the state of a radioactive atom, whether it had decayed and emitted radiation or not. According to Schrödinger, the Copenhagen interpretation implies that the cat remains both alive and dead until the state has been observed. Schrödinger did not wish to promote the idea of dead-and-live cats as a serious possibility; on the contrary, he intended the example to illustrate the absurdity of the existing view of quantum mechanics. `,
-  quizReviews: [
-    {
-      id: 1,
-      user: 'Erwin Schrodinger',
-      text:
-        'If a man never contradicts himself, the reason must be that he virtually never says anything at all.',
-      score: 5,
-    },
-  ],
-  schoolContactInfo: {
-    phone: '+54 9 2964 407079',
-    email: 'dearoralive@quantum.com',
-  },
-  teachers: [
-    { id: 1, name: 'Niels Bohr', school: 'University of Copenhagen' },
-    { id: 2, name: 'Werner Heisenberg', school: 'University of Munich' },
-    { id: 3, name: 'Paul Dirac', school: 'University of Cambridge' },
-  ],
-};
+  "https://media.glassdoor.com/l/0d/b2/15/11/beautiful-campus.jpg";
 
 const MainContainer = styled.div`
   display: grid;
@@ -85,12 +44,12 @@ const MainContainer = styled.div`
     auto auto;
   grid-gap: 0.2rem;
   grid-template-areas:
-    '. school school'
-    'picture quiz date'
-    'picture description teacher'
-    'picture description contactinfo'
-    'reviews  . .'
-    'reviews  . actions';
+    ". school school"
+    "picture quiz date"
+    "picture description teacher"
+    "picture description contactinfo"
+    "reviews  . ."
+    "reviews  . actions";
   /* align-items: stretch;
   justify-items: stretch; */
   /* justify-content: stretch;
@@ -155,21 +114,7 @@ const Description = styled.div`
   padding: 0.2rem;
   overflow: scroll;
 `;
-// const Subject = styled.div`
-//   grid-area: subject;
-//   align-self: center;
-//   justify-self: center;
-//   height: 100%;
-//   width: 100%;
-// `;
 
-const Teacher = styled.div`
-  grid-area: teacher;
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  width: 100%;
-`;
 const DateOpen = styled.div`
   grid-area: date;
   font-weight: bolder;
@@ -218,11 +163,8 @@ const CleanLink = styled(Link)`
 `;
 
 const handleClick = () => {
-  console.info('Accessing the profile of the user that made the review');
+  console.info("Accessing the profile of the user that made the review");
 };
-
-const openDate = new Date().toISOString().split('T')[0];
-const closeDate = new Date('2021-03-22').toISOString().split('T');
 
 function QuizProfile(props) {
   const dispatch = useDispatch();
@@ -232,7 +174,7 @@ function QuizProfile(props) {
   const quizDetailHistory = useSelector(quizDetailHistorySelector);
   const user = useSelector(userSelector);
 
-  const handleEnroll = (values) => {
+  const handleEnroll = () => {
     dispatch(enrollUser({ UserId: user.id, QuizId: quizDetail.id }));
   };
 
@@ -242,19 +184,23 @@ function QuizProfile(props) {
     }
   }, [dispatch, quizDetailStatus, quizDetailHistory, id]);
 
-
-  if (quizDetailStatus === 'pending') {
+  if (quizDetailStatus === "pending") {
     return <BackdropLoading />;
-  } else if (quizDetailStatus === 'error') {
+  } else if (quizDetailStatus === "error") {
     return <h1>Ha ocurrido un error metele F5</h1>;
-  } else if (quizDetailStatus === 'success' && !!quizDetail) {
+  } else if (quizDetailStatus === "success" && !!quizDetail) {
     var {
       name,
       quantity,
       description,
       Subject: { name: subjectName },
-      School: { name: schoolName, email: schoolEmail, city: schoolCity, country: schoolCountry, id: schoolId},
-      teachers,
+      School: {
+        name: schoolName,
+        email: schoolEmail,
+        city: schoolCity,
+        country: schoolCountry,
+        id: schoolId,
+      },
       Reviews: reviewList,
       logo,
       active,
@@ -265,11 +211,11 @@ function QuizProfile(props) {
     <div>
       <Parallax small filter image={schoolImg} />
       <MainContainer>
-        <Picture src={logo}/>
+        <Picture src={logo} />
         <QuizName>
           <ShadowBox>
             <Typography variant="h3" color="secondary">
-              {name} 
+              {name}
             </Typography>
             <Typography variant="subtitle1" color="secondary">
               {subjectName}
@@ -279,7 +225,7 @@ function QuizProfile(props) {
         <School>
           <Box display="flex" flexDirection="row" justifyContent="left">
             <Typography
-            Style="color: grey;font-weight: inherit;"
+              Style="color: grey;font-weight: inherit;"
               variant="h2"
               gutterBottom
               paragraph
@@ -294,29 +240,6 @@ function QuizProfile(props) {
             </Typography>
           </Box>
         </School>
-        {/* <Teacher>
-          <Typography variant="body2">Teachers in this course:</Typography>
-          <br></br>
-          <Box>
-            {teachers &&
-              teachers.map((teacher, idx) => {
-                return (
-                  <Link
-                    to={{
-                      pathname: `/profile/${teacher.userId}`,
-                      state: {
-                        owner: false,
-                      },
-                    }}
-                  >
-                    <Badge key={idx} color={idx % 2 === 0 ? 'primary' : 'info'}>
-                      {teacher.name}
-                    </Badge>
-                  </Link>
-                );
-              })}
-          </Box>
-        </Teacher> */}
         <Reviews>
           <Box
             display="flex"
@@ -368,7 +291,7 @@ function QuizProfile(props) {
                   <>
                     <Grid item>
                       <Typography variant="body1">
-                        Student:{' '}
+                        Student:{" "}
                         <Link
                           to={{
                             pathname: `/profile/${review.UserId}`,
@@ -400,27 +323,41 @@ function QuizProfile(props) {
         <Description>
           <Typography variant="body1">{description}</Typography>
         </Description>
-        {/* <Subject>{subjectName}</Subject> */}
-        <DateOpen  >
-          <Box display="flex" flexDirection="row" justifySelf="center" Style="width: 100%;" >
+        <DateOpen>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifySelf="center"
+            Style="width: 100%;"
+          >
             <Typography variant="body1">
-              {active ? (<p><CheckIcon />El Quiz está disponible</p>) : (<p><ClearIcon />El Quiz no está disponible</p>)}
+              {active ? (
+                <p>
+                  <CheckIcon />
+                  El Quiz está disponible
+                </p>
+              ) : (
+                <p>
+                  <ClearIcon />
+                  El Quiz no está disponible
+                </p>
+              )}
             </Typography>
           </Box>
         </DateOpen>
         <ContactInfo>
-        <Box display="flex" flexDirection="row" padding="0.2rem">
-              <EmailIcon />
-              <Typography variant="body1" Style="font-weight: bolder;">{schoolEmail}</Typography>
-            </Box>
-        <Box display="flex" flexDirection="row" padding="0.2rem">
-          <Typography variant="subtitle1" >
-           { schoolCity}
-          </Typography>
+          <Box display="flex" flexDirection="row" padding="0.2rem">
+            <EmailIcon />
+            <Typography variant="body1" Style="font-weight: bolder;">
+              {schoolEmail}
+            </Typography>
+          </Box>
+          <Box display="flex" flexDirection="row" padding="0.2rem">
+            <Typography variant="subtitle1">{schoolCity}</Typography>
           </Box>
           <Box display="flex" flexDirection="column">
             <Box display="flex" flexDirection="row" padding="0.2rem">
-            <Typography variant="subtitle1">{schoolCountry}</Typography>
+              <Typography variant="subtitle1">{schoolCountry}</Typography>
             </Box>
           </Box>
         </ContactInfo>
@@ -430,10 +367,7 @@ function QuizProfile(props) {
             flexDirection="row"
             justifyContent="space-between"
           >
-            {/* <Button color="info" variant="contained" size="large">
-            Contact
-          </Button> */}
- <Button
+            <Button
               color="primary"
               variant="contained"
               size="large"
@@ -441,7 +375,6 @@ function QuizProfile(props) {
             >
               Enroll
             </Button>
-          
           </Box>
         </Actions>
       </MainContainer>

@@ -15,12 +15,9 @@ import {
 import InfoIcon from '@material-ui/icons/Info';
 import PeopleIcon from '@material-ui/icons/People';
 import Bookmark from '../Bookmark';
-import { ACTIONS } from 'store/rootReducer';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { quizDetail } from '../../views/Catalogue/quizDetail';
 import { useSelector } from 'react-redux';
 import { catalogueEntitiesSelector } from 'utils/selectors';
 import CatalogueTags from './CatalogueTags';
@@ -61,10 +58,8 @@ const QuizCard = ({ className, quiz, ...rest }) => {
     name,
     description,
     logo,
-    active,
     Subject,
     School,
-    Reviews,
     QuizTags,
   } = quiz;
    const user = useAuth()
@@ -74,9 +69,7 @@ const QuizCard = ({ className, quiz, ...rest }) => {
   const handleNotifications = (state) => {
     if (state) {
       dispatch(addToFavorites({QuizId:id, UserId:user.id}))
-      // dispatch(ACTIONS.actions.addToFavorites());
     } else {
-      // dispatch(ACTIONS.actions.removeFromFavorites());
       dispatch(removeFromFavorites({QuizId:id, UserId:user.id}))
 
     }

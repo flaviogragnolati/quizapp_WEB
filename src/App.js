@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 //Utils
 import { ThemeWrapper } from './styles/ThemeWrapper';
 import { useThemeMode } from './styles/ThemeWrapper/useThemeMode';

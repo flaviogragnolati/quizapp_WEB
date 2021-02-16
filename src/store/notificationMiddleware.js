@@ -1,5 +1,4 @@
 import { ACTIONS } from './rootReducer';
-import { getCatalogue } from 'views/Catalogue/catalogueSlice';
 import {
   postUserToTeacher,
   removeTeacher,
@@ -10,8 +9,6 @@ import {
 } from 'views/School/SchoolSlice';
 import {
   enrollUser,
-  enrollToSudent,
-  getQuizesTeacher,
 } from 'views/Teacher/TeacherSlice';
 import {
   localLogin,

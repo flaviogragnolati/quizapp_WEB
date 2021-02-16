@@ -2,16 +2,9 @@ import React, { forwardRef, useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { IconButton, Button, ListItem, makeStyles } from '@material-ui/core';
-
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
-import { convertFormikValuesToRedux } from 'utils/helpers';
 import { IdsContext } from '../QuestionLoader';
-import {
-  updateQuestion,
-  removeQuestion,
-} from 'views/QuizLoader/QuizLoaderSlice';
-import { useUpdateQuestion } from 'views/QuestionLoader/components/questionHelpers';
 import { updateQuestionData } from 'views/QuestionLoader/components/questionHelpers';
 
 const useStyles = makeStyles((theme) => ({

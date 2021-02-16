@@ -1,7 +1,7 @@
 import React from 'react';
 import { Backdrop, CircularProgress } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -18,17 +18,11 @@ export default function BackdropLoading({
   ...props
 }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+
   return (
     <div>
-      <Backdrop className={classes.backdrop} open={true} onClick={handleClose}>
+      <Backdrop className={classes.backdrop} open={true}>
         <CircularProgress color={color} size={size} thickness={thickness} />
       </Backdrop>
     </div>

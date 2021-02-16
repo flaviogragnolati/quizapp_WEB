@@ -1,9 +1,8 @@
 import { useSnackbar } from 'notistack';
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { notificationSelector } from 'utils/selectors';
 import { removeSnackbar } from 'views/Notifier/notificationSlice';
-import notificationsStyles from '../../assets/jss/material-kit-react/views/componentsSections/notificationsStyles';
 
 //? Array para guardar las notificaciones
 let displayed = [];

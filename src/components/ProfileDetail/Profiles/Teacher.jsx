@@ -11,11 +11,12 @@ import {
   Button,
   Avatar
 } from '@material-ui/core';
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { useAuth } from 'components/Auth/AuthContext';
 import { authStatusSelector } from 'utils/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { userUpdate } from 'views/Profiles/profileSlice';
+
 const useStyles = makeStyles(() => ({
   root: {},
   avatar:{
@@ -50,12 +51,12 @@ function Teacher() {
       console.log('entre')
     
       setValues({    
-          firstName: user.firstName,
-         lastName: user.lastName,
-          email: user.email,
-         cellphone: user.cellphone,
-         photo:user.photo,
-         birthdate:user.birthdate,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        cellphone: user.cellphone,
+        photo:user.photo,
+        birthdate:user.birthdate,
         })
     }
   },[authStatus])

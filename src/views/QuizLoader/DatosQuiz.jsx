@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Field } from 'formik';
-import { SimpleFileUpload, TextField } from 'formik-material-ui';
+import { TextField } from 'formik-material-ui';
 import { quizModel } from './quizLoderHelpers';
 import {
   Typography,
@@ -11,7 +11,6 @@ import {
   InputLabel,
   Select,
   Input,
-  Chip,
   MenuItem,
 } from '@material-ui/core';
 // import { quizModel } from './quizLoderHelpers';
@@ -19,19 +18,16 @@ import { Formik, Form } from 'formik';
 import { initialState_Quiz } from './quizLoderHelpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateQuiz } from './QuizLoaderSlice';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/core/styles';
 import { getSubjectsList } from "views/School/SchoolSlice";
 
-import {SchoolSubjectSelector, SchoolStatusSelector} from "utils/selectors"
+import {SchoolSubjectSelector } from "utils/selectors"
 import { useAuth } from 'components/Auth/AuthContext';
-const { nameQuiz, descripcion, Logo, materia } = quizModel;
+const  { nameQuiz, descripcion } = quizModel;
+
 export default function DatosQuiz() {
   const Dispatch= useDispatch()
   const subjects = useSelector(SchoolSubjectSelector);
-  const subjectsStatus = useSelector(SchoolStatusSelector)
   const [personName, setPersonName] = React.useState('');
   const school = useAuth()
   const ITEM_HEIGHT = 48;
@@ -45,41 +41,11 @@ export default function DatosQuiz() {
     },
   };
 
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    chip: {
-      margin: 2,
-    },
-    noLabel: {
-      marginTop: theme.spacing(3),
-    },
-  }));
-
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
   console.log(school.id)
   const handleChange = (event) => {
     setPersonName(event.target.value);
   };
-  const handleSubmit = (values, formik) => {
+  const handleSubmit = (values, ) => {
     values.SubjectId = personName
     values.SchoolId = school.id;
     Dispatch(CreateQuiz(values));
@@ -89,15 +55,6 @@ export default function DatosQuiz() {
         Dispatch(getSubjectsList({ id: school.id }))
     },[])
     
-  // let {
-  //   name,
-  //   description,
-  // URL,
-  //userId,
-  //   SubjectId,
-  //   SchoolId,
-  // } = req.body;
-
   return (
     <Container Style="margin-top: 8vh;border: 1px solid #464646;padding: 24px;">
       <Typography variant="h6" gutterBottom>
@@ -123,13 +80,6 @@ export default function DatosQuiz() {
                   fullWidth
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <Field
-                  component={SimpleFileUpload}
-                  name={Logo.name}
-                  label={Logo.label}
-                />
-              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <Field component={TextField} name="logo" label="URl" />
               </Grid>
@@ -145,13 +95,6 @@ export default function DatosQuiz() {
                     value={personName}
                     onChange={handleChange}
                     input={<Input id="select-multiple-chip" />}
-                    // renderValue={(selected) => (
-                    //   <div >
-                    //     {selected.map((value) => (
-                    //       <Chip key={value} label={value}  />
-                    //     ))}
-                    //   </div>
-                    // )}
                     MenuProps={MenuProps}
                   >
                     {!!subjects &&

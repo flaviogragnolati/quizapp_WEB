@@ -19,7 +19,6 @@ const notificationSlice = createSlice({
       state.list.push({ key, message, options });
     },
     closeSnackbar: (state, { payload }) => {
-      const { key, dismissAll } = payload;
       state.list = state.list.filter((notification) => {
         if (notification.key === payload)
           return (notification.dismissed = true);

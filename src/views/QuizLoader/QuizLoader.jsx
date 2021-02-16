@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   Typography,
   StepLabel,
@@ -11,8 +10,6 @@ import {
   Button,
 } from '@material-ui/core';
 import DatosQuiz from './DatosQuiz';
-import AlumnosQuiz from './AlumnosQuiz';
-import Review from './Review';
 // import { quizModel } from './quizLoderHelpers';
 import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
@@ -61,10 +58,6 @@ function getStepContent(step) {
   switch (step) {
     case 0:
       return <DatosQuiz />;
-    // case 1:
-    //   return <AlumnosQuiz />;
-    // case 1:
-    //   return <Review />;
     default:
       throw new Error('Unknown step');
   }

@@ -1,9 +1,5 @@
 import { convertFormikValuesToRedux } from 'utils/helpers';
 import { updateQuestion } from 'views/QuizLoader/QuizLoaderSlice';
-import React, { useContext, useEffect } from 'react';
-import { IdsContext } from 'views/QuestionLoader/QuestionLoader';
-import { useDispatch } from 'react-redux';
-import QuizLoader from '../../QuizLoader/QuizLoader';
 
 export const updateQuestionData = (ref, questionId, dispatch) => {
   const noop = () => null;
