@@ -163,7 +163,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
         'cargando',
         'Ocurrio un error intente de nuevo'
       );
-    } else if (action.type.includes('Delate_Subject')) {
+    } else if (action.type.includes('deleteSubject')) {
       allNotificationAsync(
         'Se elimino exitosamente',
         'cargando',
@@ -175,7 +175,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
         'cargando',
         'Ocurrio un error intente de nuevo'
       );
-    } else if (action.type.includes('Create_Subject')) {
+    } else if (action.type.includes('createSubject')) {
       allNotificationAsync(
         'Se creo exitosamente',
         'cargando',
