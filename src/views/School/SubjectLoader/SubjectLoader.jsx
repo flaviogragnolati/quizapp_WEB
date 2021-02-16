@@ -47,7 +47,7 @@ export default function SubjectLoader() {
   const status = useSelector(SchoolStatusSelector)
   const subjectsStatus = useSelector(SchoolSubjectStatusSelector)
   const school = useSelector(userSelector)
-  const History= useHistory()
+  const history= useHistory()
   const classes = useStyles();
 
 
@@ -74,7 +74,7 @@ export default function SubjectLoader() {
 
   useEffect(() => {
     if (subjectsStatus === 'success') {
-      History.push('/school-subject')
+      history.push('/school-subject')
       dispatch(afterSubject())
     }
 

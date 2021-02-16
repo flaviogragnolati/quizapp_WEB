@@ -96,6 +96,9 @@ const QuizLoaderSlice = createSlice({
   name: 'Quiz',
   initialState: initialState_QuizLoader,
   reducers: {
+    afterQuiz: (state, { payload }) => {
+      state.status = status.idle;
+    },
     addAnswer: (state, { payload }) => {
       const { id, questionId } = payload;
       const question = state.questions.find(
@@ -181,6 +184,7 @@ const QuizLoaderSlice = createSlice({
   },
 });
 export const {
+  afterQuiz,
   addAnswer,
   updateQuestion,
   addQuestion,
