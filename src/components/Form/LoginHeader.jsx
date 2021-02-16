@@ -39,35 +39,8 @@ function LoginHeader() {
   const c = useStyles();
   return (
     <CardHeader color="primary" className={c.cardHeader}>
-      <h4>Login with:</h4>
+      <h4>Login</h4>
       <div className={c.socialLine}>
-        <Button
-          justIcon
-          href="#pablo"
-          target="_blank"
-          color="transparent"
-          onClick={(e) => e.preventDefault()}
-        >
-          <i className={'fab fa-twitter'} />
-        </Button>
-        <Button
-          justIcon
-          href="#pablo"
-          target="_blank"
-          color="transparent"
-          onClick={(e) => e.preventDefault()}
-        >
-          <i className={'fab fa-facebook'} />
-        </Button>
-        <Button
-          justIcon
-          href="#pablo"
-          target="_blank"
-          color="transparent"
-          onClick={(e) => e.preventDefault()}
-        >
-          <i className={'fab fa-google-plus-g'} />
-        </Button>
       </div>
     </CardHeader>
   );

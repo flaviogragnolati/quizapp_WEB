@@ -83,7 +83,7 @@ function Login() {
             <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <LoginHeader />
-                <p className={classes.divider}>Or Be Classical</p>
+
                 {authState === 'error' ? <p className={classes.divider} className={classes.Error__Message}>El Login fue rechazado, intenta de nuevo</p> : null}
                 <Formik
                   onSubmit={handleSubmit}

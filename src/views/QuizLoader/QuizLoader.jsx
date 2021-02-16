@@ -73,6 +73,7 @@ export default function QuizLoader() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+  
   const handleSubmit = (values, formik) => {
     if (activeStep === 1) {
       // aca despachar la accion a la api
