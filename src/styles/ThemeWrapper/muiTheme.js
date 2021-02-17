@@ -81,7 +81,7 @@ export const muiTheme = {
         dark: '#000000',
       },
       secondary: {
-        main: '#78909c',
+        main: '#121415',
         light: '#a7c0cd',
         dark: '#4b636e',
       },

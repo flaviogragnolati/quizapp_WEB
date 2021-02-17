@@ -34,9 +34,9 @@ const StyledTableRow = withStyles((theme) => ({
 const rows = [
   { question: "Soy una Escuela ¿Como me Registro?", answer: `Puedes contactarnos para registrarte llenando el formulario "Estoy interesado"
    que se encuentra en la pagina de inicio`, id: 1,},
-  { question: "2 + 2", answer: "4", id: 2 },
-  { question: "3 + 3", answer: "6", id: 3 },
-  { question: "4 + 4", answer: "8", id: 4 },
+  { question: "¿Como se Crean los Quiz/Pruebas?", answer: "La escuela debe crear el quiz, en la barra lateral seleccione la opción Crear Quiz y llene el formulario, posteriormente añada los profesores que estarán autorizados a administrar ese Quiz", id: 2 },
+  { question: "¿Como se crean las preguntas de un Quiz/Pruebas?", answer: "El profesor puede crear preguntas con sus respuestas luego de que una escuela lo añada como administrador de ese quiz, puede ver la lista de quizes en los que es administrador pulsando en el botón Lista Quizes que se encuentra en la barra lateral, luego en la tabla busque la columna PREGUNTAS y pulse el botón EDITAR en el quiz que busque editar las preguntas", id: 3 },
+  { question: "Soy alumno ¿Donde puedo realizar las Quiz/Pruebas?", answer: "Las pruebas se pueden realizar desde la app, puedes encontrar los links de descarga en la pagina de inicio, luego de logearte en la app con el usuario que utilizaste para registrarte, debes enrolarte a los quizes que deseas realizar, para eso el profesor debe dar aprovacion a tu solicitud, puedes buscar el quiz filtrado por organizaciones pulsando en el botón con ese nombre en la barra lateral, allí selecciona tu escuela y enrólate en el quiz que deseas realizar. Finalmente en la barra lateral podrás ver pulsando el botón mis quizes, los quizes a los cuales has sido aprobado.", id: 4 },
 ];
 
 const useStyles = makeStyles({
