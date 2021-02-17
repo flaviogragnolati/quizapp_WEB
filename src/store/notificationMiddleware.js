@@ -16,7 +16,7 @@ import {
   localOrgLogin,
 } from 'components/Auth/authSlice';
 import { contactSchool } from 'components/Auth/authSlice';
-
+import { bulkUpdateQuestions } from 'views/QuizLoader/QuizLoaderSlice';
 //?Array para guardar todas las acciones que requiren de notificacion
 const PENDING = 'pending';
 const REJECTED = 'rejected';
@@ -46,6 +46,8 @@ const listenArray = [
   ...allTypesAsync(deleteSubject),
   ...allTypesAsync(editSubject),
   ...allTypesAsync(createSubject),
+  ...allTypesAsync(bulkUpdateQuestions),
+
 ];
 
 const notificationMiddleware = (store) => (next) => (action) => {
@@ -175,6 +177,13 @@ const notificationMiddleware = (store) => (next) => (action) => {
     } else if (action.type.includes('createSubject')) {
       allNotificationAsync(
         'Se creo exitosamente',
+        'cargando',
+        'Ocurrio un error intente de nuevo'
+      );
+    }
+    else if (action.type.includes('bulkUpdateQuestions')) {
+      allNotificationAsync(
+        'Se creo guardo exitosamente',
         'cargando',
         'Ocurrio un error intente de nuevo'
       );
