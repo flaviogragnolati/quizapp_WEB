@@ -11,7 +11,7 @@ const HiddenCheck = styled.input`
   display: none;
 `;
 function TrueFalseField({ name, ...rest }) {
-  const [field, helpers] = useField({ name, type: 'checkbox' });
+  const [field, meta,helpers] = useField({ name, type: 'checkbox' });
 
   const { values } = useFormikContext();
 
@@ -19,6 +19,7 @@ function TrueFalseField({ name, ...rest }) {
 
   useEffect(() => {
     setCorrect(values[name]);
+    console.log('es correcta???', correct)
   }, [values, name]);
 
   const handleClick = () => {
