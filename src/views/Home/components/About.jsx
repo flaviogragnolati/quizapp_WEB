@@ -51,7 +51,7 @@ function About(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <div className={classes.item}>
               <InfoIcon className={classes.Icon__Values} />
               <Typography variant="h4" className={classes.title}>
@@ -65,7 +65,7 @@ function About(props) {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <div className={classes.item}>
               <LanguageIcon className={classes.Icon__Values} />
               <Typography variant="h4" className={classes.title}>
@@ -76,20 +76,6 @@ function About(props) {
                 Laudantium, quo perspiciatis at velit fugiat magni quidem quia
                 accusantium saepe voluptas assumenda quaerat amet, a fugit.
                 Similique ad tempora repellat recusandae.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.item}>
-              <ContactsIcon className={classes.Icon__Values} />
-              <Typography variant="h4" className={classes.title}>
-                Contacto
-              </Typography>
-              <Typography variant="h5">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Cupiditate eos obcaecati at possimus enim architecto fugit
-                nostrum! Rerum provident magnam, quod cum a architecto quae
-                facere laudantium excepturi voluptatum tenetur!
               </Typography>
             </div>
           </Grid>
