@@ -12,34 +12,39 @@ const HiddenCheck = styled.input`
 `;
 function TrueFalseField({ name, ...rest }) {
   const [field, meta,helpers] = useField({ name, type: 'checkbox' });
-
   const { values } = useFormikContext();
 
-  const [correct, setCorrect] = useState(values[name]);
+  const [correct, setCorrect] = useState(false);
 
   useEffect(() => {
-    setCorrect(values[name]);
-    console.log('es correcta???', correct)
-  }, [values, name]);
+      setCorrect(values[name]);
+  }, [values, name,correct]);
 
+  
   const handleClick = () => {
     setCorrect((prevState) => {
       helpers.setValue(!prevState, false);
       return !prevState;
     });
   };
-  return (
-    <>
-      <HiddenCheck name={name} type="checkbox" {...field} {...rest} />
-      <IconButton edge="start" color="inherit" onClick={handleClick}>
-        {correct ? (
-          <CheckCircleIcon style={{ color: 'green' }} {...rest} />
-        ) : (
-          <CancelIcon style={{ color: 'red' }} {...rest} />
-        )}
-      </IconButton>
-    </>
-  );
+  if(typeof correct !== 'boolean'){
+    console.log('Cargando..???')
+   return  <h1>cargando..</h1>
+  }else{
+
+    return (
+      <>
+        <HiddenCheck name={name} type="checkbox" {...field} {...rest} />
+        <IconButton edge="start" color="inherit" onClick={handleClick}>
+          {correct ? (
+            <CheckCircleIcon style={{ color: 'green' }} {...rest} />
+          ) : (
+            <CancelIcon style={{ color: 'red' }} {...rest} />
+          )}
+        </IconButton>
+      </>
+    );
+  }
 }
 
 TrueFalseField.propTypes = {
