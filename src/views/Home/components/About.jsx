@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(23),
+    marginBottom: '7vh',
     display: 'flex',
     position: 'relative',
   },
@@ -51,31 +51,26 @@ function About(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={5}>
             <div className={classes.item}>
               <InfoIcon className={classes.Icon__Values} />
               <Typography variant="h4" className={classes.title}>
                 Sobre Nosotros
               </Typography>
-              <Typography variant="h5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus facilis ad eum. Repellat ad ipsum dicta ullam,
-                suscipit ut saepe ex consectetur non repudiandae aperiam harum
-                voluptate minima vitae quisquam!
-              </Typography>
+              <Typography variant="h5" Style="text-align: justify;">
+              Somos una organización cuyo foco está en la educación virtual. A través de nuestra plataforma, queremos darle la posibilidad a las organizaciones educativas de que puedan gestionar de una manera sencilla la evaluación de los conocimientos adquiridos en sus actividades curriculares por medio de quizzes, mientras que les facilitamos a sus alumnos el ingreso a los mismos              </Typography>
             </div>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={2}>
+          </Grid>
+          <Grid item xs={12} md={5}>
             <div className={classes.item}>
               <LanguageIcon className={classes.Icon__Values} />
               <Typography variant="h4" className={classes.title}>
                 Proyecto
               </Typography>
-              <Typography color="primary.contrastText" variant="h5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laudantium, quo perspiciatis at velit fugiat magni quidem quia
-                accusantium saepe voluptas assumenda quaerat amet, a fugit.
-                Similique ad tempora repellat recusandae.
+              <Typography color="primary.contrastText" variant="h5" Style="text-align: justify;">
+              Con el inicio de la pandemia COVID-19, afloró el boom de los cursos a distancia, lo cual implica innovar en el sistema de calificación y de examinar los conocimientos adquiridos por los alumnos. Nuestro proyecto apunta a canalizar esa necesidad y a generar una forma mucho más sencilla de gestionar los exámenes, a la vez que brindamos la posibilidad de llegar a todos los alumnos de una manera ágil y rápida. Asimismo, les permitimos tanto a los alumnos como a las organizaciones poder gestionar las estadísticas con los resultados obtenidos.
               </Typography>
             </div>
           </Grid>
