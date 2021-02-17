@@ -105,7 +105,7 @@ function SideBar() {
               icon={<FormatListNumberedIcon />}
             />
             <SidebarItem
-              label="Lista Quiz Teacher"
+              label="Lista Quizes"
               link="/quiz-list"
               icon={<FormatListNumberedIcon />}
             />
