@@ -179,7 +179,10 @@ const Results = ({
                               id={info.id}
                               onClick={() => actions[prop](info.id)}
                             >
-                              {prop === 'Activar' ? info.active ? 'Desactivar' : 'Activar' : prop}
+                              {/* {prop === 'Activar' ? info.active ? 'Desactivar' : 'Activar' : prop} */}
+                              {prop === 'Activar' ? info.active  ? 'Desactivar' : 'Activar' : prop}
+
+
                             </Button>
                           </TableCell>
                         );
@@ -197,7 +200,7 @@ const Results = ({
                             {info[prop] ||
                             typeof info[prop] === 'boolean' ||
                             info[prop] === 0
-                              ? info[prop] + ''
+                              ?  typeof info[prop] === 'boolean' ? info[prop] === false ? 'Deshabilitado' : 'Habilitado': info[prop] + ''
                               : '-'}
                           </TableCell>
                         );
