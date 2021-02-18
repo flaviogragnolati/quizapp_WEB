@@ -104,11 +104,11 @@ const notificationMiddleware = (store) => (next) => (action) => {
       snackbar.message = `Te pedido ha sido enviado, recibiras una notificacion`;
       snackbar.options.variant = 'info';
     }
-    // else if (action.type.split('/')[1] === 'filter') {
-    //   //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
-    //   snackbar.message = `Estas filtrando el catalogo`;
-    //   snackbar.options.variant = 'success';
-    // } else 
+    else if (action.type.split('/')[1] === 'filter') {
+      //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
+      snackbar.message = `Estas filtrando el catalogo`;
+      snackbar.options.variant = 'success';
+    } else 
     if (action.type.includes('logout')) {
       //! EJEMPLOS DE NOTIFICACIONES EN ACCIONES SINCRONIAS
       snackbar.message = `se cerro la sesion correctamente`;
@@ -117,7 +117,7 @@ const notificationMiddleware = (store) => (next) => (action) => {
     else if (action.type.includes('contactSchool')) {
       allNotificationAsync(
         'Nos pondremos en contacto en breve',
-        null,
+        'Enviando ',
         'Ha ocurrido un error intente nuevamente'
       );
     } else if (action.type.includes('postUserToTeacher')) {
